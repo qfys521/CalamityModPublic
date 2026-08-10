@@ -499,10 +499,9 @@ namespace CalamityMod.Schematics
                     bool isChest = worldTile.TileType == TileID.Containers || TileID.Sets.BasicChest[worldTile.TileType];
                     if (!smt.keepTile && isChest && worldTile.TileFrameX % 36 == 0 && worldTile.TileFrameY == 0)
                     {
-                        // If a chest already exists "near" this position, then the corner was likely already defined.
-                        // Do not do anything if a chest was already defined.
-                        // FindChestByGuessing checks a 2x2 space starting in the given position, so nudge it up and left by 1.
-                        int chestIndex = Chest.FindChestByGuessing(x + cornerX - 1, y + cornerY - 1);
+                        // Do not do anything if a chest was already defined at this multitile's top-left corner.
+                        Point16 topLeft = TileObjectData.TopLeft(x + cornerX, y + cornerY);
+                        int chestIndex = Chest.FindChest(topLeft.X, topLeft.Y);
                         if (chestIndex == -1)
                         {
                             chestIndex = Chest.CreateChest(x + cornerX, y + cornerY, -1);
