@@ -139,7 +139,7 @@ namespace CalamityMod.World.Planets
             return true;
         }
 
-        public override bool Place(Point origin, StructureMap structures)
+        public override bool Place(Point origin, StructureMap structures, GenerationProgress progress)
         {
             structures.AddStructure(_area);
 
