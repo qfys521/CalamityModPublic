@@ -166,7 +166,7 @@ namespace CalamityMod.DataStructures
         public static SummonTag DarkHarvest = new SummonTag(ItemID.ScytheWhip)
         {
             FlatTagDamage = 10,
-            UnlistedTagDamage = -10, //Negative value cancels out vanilla tag damage
+            UnlistedTagDamage = -15, // Negative value cancels 1.4.5's vanilla tag damage.
             //This has a unique on hit effect from vanilla.
         };
         public static SummonTag Kaleidoscope = new SummonTag(ItemID.RainbowWhip)

@@ -7,6 +7,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.GameContent.Items;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -702,7 +703,7 @@ namespace CalamityMod.ILEditing
         #endregion
 
         #region Make GFB Nurse Meteor Undodgeable
-        private static bool GFBNurseMeteorUndodgeable(On_Projectile.orig_IsDamageDodgable orig, Projectile self)
+        private static bool GFBNurseMeteorUndodgeable(On_Projectile.orig_IsDamageDodgeable orig, Projectile self)
         {
             // Make the Leviathan meteor that spawns when talking to the Nurse in GFB undodgeable
             // Unfortunately the Dodgeable value in HurtModifiers cannot be set in the hook, thus On editing a vanilla function
@@ -731,7 +732,7 @@ namespace CalamityMod.ILEditing
             var owner = Main.player[self.owner];
             HealingMultiplier -= self.numHits * 0.05f;
             int AmountToHeal = (int)Math.Round(dmg * HealingMultiplier);
-            if (!self.magic || AmountToHeal <= 0 || Main.player[Main.myPlayer].lifeSteal <= 0f)
+            if (!self.CountsAsClass(DamageClass.Magic) || AmountToHeal <= 0 || Main.player[Main.myPlayer].lifeSteal <= 0f)
             {
                 return;
             }
@@ -852,36 +853,16 @@ namespace CalamityMod.ILEditing
         #endregion
 
         #region Remove Vanilla Whip Tag Crits
-        // Code written by Habble
         /// <summary>
-        /// IL edits both vanilla whip crit tags' crit bool set calls to ensure they're never assigned a new value
+        /// Removes vanilla crit chance from tags whose crit behavior is replaced by Calamity.
         /// </summary>
-        /// <param name="context"></param>
-        private static void PreventVanillaWhipTagCrits(ILContext context)
+        private static void PreventVanillaWhipTagCrits()
         {
-            ILCursor cursor = new(context);
-            #region Morning Star
-            // Go to the unique instructions nearest to the Morning Star tag's crit roll and then stand before the crit bool set call
-            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdloc(59)) || !cursor.TryGotoNext(MoveType.Before, i => i.MatchStloc(30)))
-            {
-                LogFailure("Removing vanilla whip tag crits", "Could not locate the crit bool set call under Morning Star tag");
-                return;
-            }
-            // Put the previous value of the crit bool on the stack to then return that instead of the supplied value by "consuming" them as parameters, so as to not overwrite it
-            // This is more ideal than modifying label conditions because it is likelier for the latter to change over time
-            cursor.Emit(OpCodes.Ldloc, 30);
-            cursor.EmitDelegate((int input, bool originalValue) => originalValue.ToInt());
-            #endregion Morning Star
-            #region Kaleidoscope
-            // Similar deal for Kaleidoscope as well
-            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchStloc(30)) || !cursor.TryGotoNext(MoveType.Before, i => i.MatchStloc(30)))
-            {
-                LogFailure("Removing vanilla whip tag crits", "Could not locate the crit bool set call under Kaleidoscope tag");
-                return;
-            }
-            cursor.Emit(OpCodes.Ldloc, 30);
-            cursor.EmitDelegate((int input, bool originalValue) => originalValue.ToInt());
-            #endregion Kaleidoscope
+            if (ItemID.Sets.UniqueTagEffects[ItemID.MaceWhip] is WhipTagEffect morningStarEffect)
+                morningStarEffect.CritChance = 0;
+
+            if (ItemID.Sets.UniqueTagEffects[ItemID.RainbowWhip] is WhipTagEffect kaleidoscopeEffect)
+                kaleidoscopeEffect.CritChance = 0;
         }
         #endregion
     }

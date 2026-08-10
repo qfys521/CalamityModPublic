@@ -18,20 +18,12 @@ namespace CalamityMod.Buffs.Summon.Whips
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            var whipBuffs = new int[]
+            // Vanilla whip tags are player-owned state in 1.4.5 instead of NPC buffs.
+            for (int playerIndex = 0; playerIndex < Main.maxPlayers; playerIndex++)
             {
-                BuffID.BlandWhipEnemyDebuff, BuffID.FlameWhipEnemyDebuff, BuffID.BoneWhipNPCDebuff,
-                BuffID.ScytheWhipEnemyDebuff, BuffID.CoolWhipNPCDebuff, BuffID.MaceWhipNPCDebuff,
-                BuffID.RainbowWhipNPCDebuff, BuffID.SwordWhipNPCDebuff, BuffID.ThornWhipNPCDebuff
-            };
-
-            //kill whip stacking for psc purposes
-            // 29SEP2023: Ozzatron: this won't kill stacking with other mod whips. need a generalized system for this
-            for (int buff = 0; buff < NPC.maxBuffs; buff++)
-            {
-                int buffID = npc.buffType[buff];
-                if (npc.buffTime[buff] > 0 && whipBuffs.Contains(buffID) && npc.buffType[buff] != Type)
-                    npc.RequestBuffRemoval(npc.buffType[buff]);
+                Player player = Main.player[playerIndex];
+                if (player.active && player.TagEffectState.IsNPCTagged(npc.whoAmI))
+                    player.TagEffectState.ResetNPCSlotData(npc.whoAmI);
             }
         }
     }
