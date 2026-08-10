@@ -1,9 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\tModLoader.targets" />
+  <Import Project="..\tModLoader.targets" Condition="Exists('..\tModLoader.targets')" />
+  <Import Project="..\tModLoader\tModLoader.targets" Condition="!Exists('..\tModLoader.targets')" />
 
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
+    <AssemblyName>CalamityMod</AssemblyName>
+    <ExpectedModSourceDirectoryName>CalamityMod</ExpectedModSourceDirectoryName>
+    <ActualModSourceDirectoryName>$([System.IO.Path]::GetFileName('$(MSBuildProjectDirectory)'))</ActualModSourceDirectoryName>
   </PropertyGroup>
 
 
@@ -30,4 +34,30 @@
     <Publicize Include="FNA" IncludeCompilerGeneratedMembers="false" IncludeVirtualMembers="false" />
     <Publicize Include="ReLogic" IncludeCompilerGeneratedMembers="false" IncludeVirtualMembers="false" />
   </ItemGroup>
+
+  <!-- .NET 10 project references retain their original ref assembly after
+       Publicizer replaces ReferencePath. Force the compiler to consume the
+       rewritten implementation assembly for publicized references. -->
+  <Target Name="UsePublicizedImplementationAssemblies" AfterTargets="PublicizeAssemblies">
+    <ItemGroup>
+      <ReferencePath Update="@(ReferencePath)" Condition="$([System.String]::Copy('%(ReferencePath.Identity)').Contains('PublicizedAssemblies'))">
+        <ReferenceAssembly></ReferenceAssembly>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
+
+  <!-- tML derives a mod's internal ID from the source directory name. Avoid
+       producing a second CalamityModPublic package from this checkout. -->
+  <Target Name="BuildMod" AfterTargets="Build" Condition="'$(BuildMod)' == 'true'">
+    <Warning
+      Condition="'$(ActualModSourceDirectoryName)' != '$(ExpectedModSourceDirectoryName)'"
+      Text="Skipped .tmod packaging because source directory '$(ActualModSourceDirectoryName)' would create the wrong mod ID. Run tModLoader's -build command with a source path ending in '$(ExpectedModSourceDirectoryName)'."
+    />
+    <Exec
+      Condition="'$(ActualModSourceDirectoryName)' == '$(ExpectedModSourceDirectoryName)'"
+      Command="$(BuildLaunch) $(tMLServerPath) -build $(ProjectDir) -eac $(TargetPath) -define &quot;$(DefineConstants)&quot; -unsafe $(AllowUnsafeBlocks) $(ExtraBuildModFlags)"
+      WorkingDirectory="$(tModLoaderSteamPath)"
+      EnvironmentVariables="$(BuildEnvVars)"
+    />
+  </Target>
 </Project>
