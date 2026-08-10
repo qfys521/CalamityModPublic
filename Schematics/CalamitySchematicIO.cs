@@ -17,8 +17,8 @@ namespace CalamityMod.Schematics
     [DebuggerDisplay("Tile ID = {TileType}, Wall ID = {WallType}")]
     public struct SchematicMetaTile
     {
-        // If TileType >= TileID.Count, is a modded tile type; consult mod tile name array
-        // If WallType >= WallID.Count, is a modded wall type; consule mod wall name array
+        // Types at or above the vanilla ID count for the schematic's format are
+        // indices into its mod tile and wall name arrays.
         internal ushort TileType;
         internal ushort WallType;
         internal byte LiquidAmount;
@@ -269,13 +269,14 @@ namespace CalamityMod.Schematics
 
     public static class CalamitySchematicIO
     {
-        // TileID.Count from TML 1.4
-        // In 1.4.4, it's 693, but this can be acquired the normal way.
+        // Vanilla ID counts are part of the serialized schematic format. They
+        // must not be replaced with the counts from the currently running TML.
         public const ushort TML_14_TileID_Count = 625;
-
-        // WallID.Count from TML 1.4
-        // In 1.4.4, it's 347, but this can be acquired the normal way.
         public const ushort TML_14_WallID_Count = 316;
+        public const ushort TML_144_TileID_Count = 693;
+        public const ushort TML_144_WallID_Count = 347;
+        public const ushort TML_145_TileID_Count = 753;
+        public const ushort TML_145_WallID_Count = 367;
 
         // A buffer of 16 kilobytes is the default for schematics. If this isn't big enough, they can get bigger.
         private const int SchematicBufferStartingSize = 1024 * 16;
@@ -316,12 +317,21 @@ namespace CalamityMod.Schematics
 
         // This is a 3-byte magic number header for Calamity Schematic Files created with TML 1.4.4, which uses Tile structs.
         // The Infernum "size expansion" for extra-large schematics also applies to this format.
-        // This is the up-to-date format and is the only one supported for export.
         // CA445C = "CAlamity 1-44 5CHEMATIC"
         private static readonly byte[] SchematicMagicNumberHeader_TML144 = new byte[]
         {
             0xCA,
             0x44,
+            0x5C
+        };
+
+        // TML 1.4.5 added vanilla tiles and walls, so it needs a distinct
+        // header to keep the mod-name index bases unambiguous.
+        // CA455C = "CAlamity 1-45 5CHEMATIC"
+        private static readonly byte[] SchematicMagicNumberHeader_TML145 = new byte[]
+        {
+            0xCA,
+            0x45,
             0x5C
         };
 
@@ -580,10 +590,11 @@ PostAreaIteration:
 
             byte[] renderedStream;
 
-            // There is no longer an "extra large" parameter. All TML 1.4.4 schematics use four-byte indices like the 1.4 Infernum format.
+            // There is no longer an "extra large" parameter. All TML 1.4.4+
+            // schematics use four-byte indices like the 1.4 Infernum format.
             // byte[] magicHeader = fourByteIndices ? SchematicMagicNumberHeader_Infernum14 : SchematicMagicNumberHeader_TML14;
             bool fourByteIndices = true;
-            byte[] magicHeader = SchematicMagicNumberHeader_TML144;
+            byte[] magicHeader = SchematicMagicNumberHeader_TML145;
 
             using (MemoryStream stream = new MemoryStream(SchematicBufferStartingSize))
             using (BinaryWriter writer = new BinaryWriter(stream, Encoding.UTF8))
@@ -749,6 +760,7 @@ PostAreaIteration:
             bool isTML14Schematic = true;
             bool isInfernumSchematic = true;
             bool isTML144Schematic = true;
+            bool isTML145Schematic = true;
             for (int i = 0; i < SchematicMagicNumberHeader_TML14.Length; ++i)
             {
                 if (header[i] != SchematicMagicNumberHeader_TML13[i])
@@ -762,10 +774,13 @@ PostAreaIteration:
 
                 if (header[i] != SchematicMagicNumberHeader_TML144[i])
                     isTML144Schematic = false;
+
+                if (header[i] != SchematicMagicNumberHeader_TML145[i])
+                    isTML145Schematic = false;
             }
 
             // If the schematic's signature does not match any magic number, then it's crap. Throw.
-            if (!isTML13Schematic && !isTML14Schematic && !isInfernumSchematic && !isTML144Schematic)
+            if (!isTML13Schematic && !isTML14Schematic && !isInfernumSchematic && !isTML144Schematic && !isTML145Schematic)
                 throw new InvalidDataException($"{InvalidFormatString} The magic number signature is invalid.");
 
             // Schematics from TML 1.3 are recognized, but cannot be used. An error and an empty schematic are all you get.
@@ -777,15 +792,17 @@ PostAreaIteration:
                 return empty;
             }
 
-            // Declare the TileID Count to use.
-            // Schematics from the 1.4 era recorded modded tiles at lower indices.
-            // These will be incorrectly interpreted as vanilla tiles in 1.4.4 unless this precaution is taken.
-            ushort TileIDCount = isTML14Schematic || isInfernumSchematic ? TML_14_TileID_Count : TileID.Count;
-            ushort WallIDCount = isTML14Schematic || isInfernumSchematic ? TML_14_WallID_Count : WallID.Count;
+            // Modded types are offset by the vanilla ID counts from the TML
+            // version that wrote the file. Later vanilla additions can occupy
+            // those old offsets, so select the counts from the format header.
+            ushort TileIDCount = isTML14Schematic || isInfernumSchematic ? TML_14_TileID_Count :
+                isTML144Schematic ? TML_144_TileID_Count : TML_145_TileID_Count;
+            ushort WallIDCount = isTML14Schematic || isInfernumSchematic ? TML_14_WallID_Count :
+                isTML144Schematic ? TML_144_WallID_Count : TML_145_WallID_Count;
 
             // Declare schematic size.
-            // "Large" schematics (Infernum 1.4 and all 1.4.4 schematics) use 4 bytes instead of 2 for all lookup indices.
-            bool useFourByteLookupIndices = isInfernumSchematic || isTML144Schematic;
+            // "Large" schematics (Infernum 1.4 and all 1.4.4+ schematics) use 4 bytes instead of 2 for all lookup indices.
+            bool useFourByteLookupIndices = isInfernumSchematic || isTML144Schematic || isTML145Schematic;
 
             // Check whether compression is enabled.
             bool compression = false;
@@ -847,7 +864,7 @@ PostAreaIteration:
                 // 7: List of definitions of unique tiles. For modded tiles, their types are lookup indices to the mod tile and mod wall name arrays.
                 for (int i = 0; i < numUniqueTiles; ++i)
                 {
-                    SchematicMetaTile smt = reader.ReadSchematicMetaTile(isTML144Schematic);
+                    SchematicMetaTile smt = reader.ReadSchematicMetaTile(isTML144Schematic || isTML145Schematic);
                     ReplaceMetaIndicesWithLoadedIDs(ref smt, modTileNames, modWallNames, TileIDCount, WallIDCount);
                     uniqueTiles[i] = smt;
                 }
