@@ -42,6 +42,7 @@ namespace CalamityMod.Systems
         {
             Abyss.TotalPlacedIslandsSoFar = 0;
             DungeonArchivePos = Point.Zero;
+            AstralChestGeneration.ResetDungeonBounds();
             //roxShrinePlaced = false;
 
             // This will only be applied at world-gen time to new worlds.
@@ -51,7 +52,7 @@ namespace CalamityMod.Systems
         #endregion
 
         #region ModifyWorldGenTasks
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks)
         {
             // Better Underworld structures after the world has been smoothed
             int underworldStructuresIndex = tasks.FindIndex(genpass => genpass.Name.Equals("Smooth World"));
@@ -165,7 +166,7 @@ namespace CalamityMod.Systems
             {
                 tasks.Insert(spawnPointIndex + 1, new PassLegacy("Fix Tenth Anniversary Spawn", (progress, config) =>
                 {
-                    if ((Main.spawnTileX < Main.maxTilesX / 2 && GenVars.dungeonSide == -1) || (Main.spawnTileX > Main.maxTilesX / 2 && GenVars.dungeonSide == 1))
+                    if ((Main.spawnTileX < Main.maxTilesX / 2 && GenVars.CurrentDungeonGenVars.dungeonSide == -1) || (Main.spawnTileX > Main.maxTilesX / 2 && GenVars.CurrentDungeonGenVars.dungeonSide == 1))
                     {
                         // Flip the side of the world you spawn on if it's the Dungeon side
                         Main.spawnTileX = Main.maxTilesX - Main.spawnTileX;

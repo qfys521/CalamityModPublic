@@ -4,7 +4,9 @@ using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Terraria;
+using Terraria.GameContent.Generation.Dungeon;
 using Terraria.GameContent.UI.States;
+using Terraria.ID;
 using Terraria.WorldBuilding;
 
 namespace CalamityMod.ILEditing
@@ -159,7 +161,7 @@ namespace CalamityMod.ILEditing
 
         #region Prevent Abyss/Dungeon Interactions
 
-        private static void LimitDungeonEntranceXPosition(On_WorldGen.orig_MakeDungeon orig, int x, int y)
+        private static void LimitDungeonEntranceXPosition(On_DungeonCrawler.orig_MakeDungeon orig, int x, int y, GenerationProgress progress)
         {
             // Ensure that the base X position stays within its required bounds.
             x = Utils.Clamp(x, DungeonBaseXLimit, Main.maxTilesX - DungeonBaseXLimit);
@@ -172,7 +174,12 @@ namespace CalamityMod.ILEditing
             if (betterPointFound)
                 y = result.Y - 10;
 
-            orig(x, y);
+            orig(x, y, progress);
+
+            // Vanilla clears DungeonCrawler.dungeonData before its generation pass
+            // returns. Preserve the primary dungeon bounds for Calamity's later pass.
+            if (GenVars.CurrentDungeon == 0)
+                AstralChestGeneration.CaptureDungeonBounds(DungeonCrawler.CurrentDungeonData.dungeonBounds);
         }
 
         /// <summary>
@@ -191,7 +198,7 @@ namespace CalamityMod.ILEditing
              * The object is to to change the vector2D.X = (double)i; line to actually provide i but clamped.
              */
 
-            if (!c.TryGotoNext(MoveType.After, x => x.MatchLdarg0()))
+            if (!c.TryGotoNext(MoveType.After, x => x.MatchLdarg(2)))
             {
                 LogFailure("Limit Dungeon Hall X Positions", "Could not match the load of argument 0.");
                 return;
@@ -210,69 +217,64 @@ namespace CalamityMod.ILEditing
         #endregion Prevent Abyss/Dungeon Interactions
 
         #region Fledgling Wings Loot Changes
+        [ThreadStatic]
+        private static int? floatingIslandPrimaryLoot;
+
         /// <summary>
         /// Changes the primary loot of Floating Island chests to include Fledging Wings
         /// </summary>
-        private static void MakeFledgingWingsMoreCommon(ILContext il)
+        private static void MakeFledglingWingsMoreCommon(On_WorldGen.orig_IslandHouse orig, int i, int j, int islandStyle)
         {
-            var cursor = new ILCursor(il);
+            int island = GenVars.skyIslandHouseCount;
+            if (island > 4)
+                island = WorldGen.genRand.Next(5);
 
-            // How the code we are moving to works:
-            // Set num13 equal to the number of islands generated. If greater than 3, set to a random number between 0-3 inclusive. Then use that value in a 4-branch switch statement.
-            // This makes num13 always be a value between 0-3, for the 4 primary items in island loot.
-            // To accomodate for Fledgling Wings, we must change this to check for being greater than 4, then to set to a random number between 0-4 inclusive, then make the switch have 5 branches.
-            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchStloc(13)))
+            int? previousLoot = floatingIslandPrimaryLoot;
+            floatingIslandPrimaryLoot = island switch
             {
-                LogFailure("Fledgling Wings", "Could not move to the location of determining Floating Island primary loot 1.");
-                return;
+                1 => ItemID.Starfury,
+                2 => ItemID.LuckyHorseshoe,
+                3 => ItemID.CelestialMagnet,
+                4 => ItemID.CreativeWings,
+                _ => ItemID.ShinyRedBalloon,
+            };
+
+            try
+            {
+                orig(i, j, islandStyle);
             }
-
-            // Emit a delegate which reimplements the logic for choosing the primary loot of floating islands with Fledgling Wings, then return the ID of the item.
-            var label = il.DefineLabel();
-            cursor.EmitDelegate<Func<int>>(() =>
+            finally
             {
-                int island = GenVars.skyIslandHouseCount;
-                if (island > 4)
-                    island = Main.rand.Next(5);
-
-                return island switch
-                {
-                    1 => 65, // Starfury
-                    2 => 158, // Lucky Horseshoe
-                    3 => 2219, // Celestial Magnet
-                    4 => 4978, // Fledgling Wings
-                    _ => 159, // Shiny Red Balloon
-                };
-            });
-
-            // Store this value in the variable which holds the ID of the item, then branch past the original logic.
-            cursor.Emit(OpCodes.Stloc, 13);
-            cursor.Emit(OpCodes.Br, label);
-
-            if (!cursor.TryGotoNext(MoveType.AfterLabel, i => i.MatchLdsfld<WorldGen>("getGoodWorldGen")))
-            {
-                LogFailure("Fledgling Wings", "Could not move after the switch statement.");
-                return;
+                floatingIslandPrimaryLoot = previousLoot;
             }
-            cursor.MarkLabel(label);
         }
 
         /// <summary>
-        /// Disables Fledgling Wings being added as secondary loot in floating island chests
+        /// Applies Calamity's primary loot choice and removes vanilla's duplicate secondary Fledgling Wings roll.
         /// </summary>
-        private static void DisableFledglingWingsSecondary(ILContext il)
+        private static bool ApplyFloatingIslandChestLoot(On_WorldGen.orig_AddBuriedChest_int_int_refPoint_int_bool_int_bool_ushort orig,
+            int i, int j, out Point chestLocation, int mainItemInChest, bool notNearOtherChests, int chestStyle, bool trySlope, ushort chestTileType)
         {
-            var cursor = new ILCursor(il);
+            bool floatingIslandChest = floatingIslandPrimaryLoot.HasValue && chestTileType == 0 && (chestStyle == 2 || chestStyle == 13);
+            if (floatingIslandChest)
+                mainItemInChest = floatingIslandPrimaryLoot.Value;
 
-            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchLdloc(9)))
+            bool placed = orig(i, j, out chestLocation, mainItemInChest, notNearOtherChests, chestStyle, trySlope, chestTileType);
+            if (!placed || !floatingIslandChest)
+                return placed;
+
+            int chestIndex = Chest.FindChest(chestLocation.X, chestLocation.Y);
+            if (chestIndex < 0)
+                return placed;
+
+            Chest chest = Main.chest[chestIndex];
+            for (int slot = 1; slot < chest.item.Length; slot++)
             {
-                LogFailure("Fledgling Wings", "Could not move to the code adding Fledgling Wings as secondary loot.");
-                return;
+                if (chest.item[slot].type == ItemID.CreativeWings)
+                    chest.item[slot].TurnToAir();
             }
 
-            // AND with 0 (false) so that the code to add Fledgling Wings as secondary loot never runs.
-            cursor.Emit(OpCodes.Ldc_I4_0);
-            cursor.Emit(OpCodes.And);
+            return placed;
         }
         #endregion
     }

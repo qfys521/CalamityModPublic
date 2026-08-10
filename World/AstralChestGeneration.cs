@@ -1,6 +1,7 @@
 ﻿using CalamityMod.Items.Weapons.Rogue;
 using CalamityMod.Tiles.Astral;
 using Terraria;
+using Terraria.GameContent.Generation.Dungeon;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 
@@ -8,13 +9,34 @@ namespace CalamityMod.World
 {
     public class AstralChestGeneration
     {
+        private static DungeonBounds mainDungeonBounds;
+
+        internal static void ResetDungeonBounds() => mainDungeonBounds = null;
+
+        internal static void CaptureDungeonBounds(DungeonBounds bounds)
+        {
+            if (bounds is null || !bounds.HasHitbox())
+                return;
+
+            mainDungeonBounds = new DungeonBounds();
+            mainDungeonBounds.SetBounds(bounds.Left, bounds.Top, bounds.Right, bounds.Bottom);
+        }
+
         public static void PlaceAstralChest()
         {
-            // Get dungeon area information.
-            int left = GenVars.dMinX + 25;
-            int right = GenVars.dMaxX - 25;
+            // 1.4.5 clears DungeonCrawler.dungeonData before the Dungeon pass returns,
+            // so use the bounds captured by the MakeDungeon hook while they still exist.
+            DungeonBounds dungeonBounds = mainDungeonBounds;
+            if (dungeonBounds is null)
+            {
+                CalamityMod.Log.Warn("The generated dungeon bounds were unavailable. As a result, the astral chest could not be generated.");
+                return;
+            }
+
+            int left = dungeonBounds.Left + 25;
+            int right = dungeonBounds.Right - 25;
             int top = (int)Main.worldSurface;
-            int bottom = GenVars.dMaxY - 25;
+            int bottom = dungeonBounds.Bottom - 25;
 
             // Sanity check: If the dungeon area information is somehow irrevocably broken in a way that will guarantee a crash, terminate this
             // method immediately and leave a log message.
