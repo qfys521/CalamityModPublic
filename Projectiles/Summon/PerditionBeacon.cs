@@ -23,7 +23,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 16;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -131,7 +131,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public override bool? CanDamage() => false;
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Target is null)
                 return;

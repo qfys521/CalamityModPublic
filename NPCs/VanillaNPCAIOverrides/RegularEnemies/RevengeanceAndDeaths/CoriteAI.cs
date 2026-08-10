@@ -182,7 +182,7 @@ public static partial class RevengeanceAndDeathAI
                 if (NPC.type == NPCID.SolarCorite)
                 {
                     decelerate = NPC.velocity.Length() > 2f;
-                    if (!decelerate && NPC.target >= 0 && !Main.player[NPC.target].DeadOrGhost)
+                    if (!decelerate && NPC.target >= 0 && !Main.player[NPC.target].dead && !Main.player[NPC.target].ghost)
                     {
                         Vector2 maxVelocity = (Main.player[NPC.target].Center - NPC.Center).SafeNormalize(Vector2.Zero) * 0.1f;
                         NPC.velocity = Vector2.Lerp(NPC.velocity, maxVelocity, 0.25f);

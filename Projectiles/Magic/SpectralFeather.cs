@@ -70,6 +70,7 @@ namespace CalamityMod.Projectiles.Magic
             Projectile.Center += vector;
             Vector2 vector2 = f.ToRotationVector2();
             Projectile.localAI[0] = vector2.Y;
+            Projectile.drawLayer = Projectile.localAI[0] < 0f ? Terraria.ID.ProjectileDrawLayerID.OverPlayers : Terraria.ID.ProjectileDrawLayerID.None;
             Vector2 value = (player.Center + new Vector2(0f, -25f)) + vector2 * new Vector2(1f, 0.05f) * num;
             Projectile.Center = value;
 
@@ -148,15 +149,8 @@ namespace CalamityMod.Projectiles.Magic
                 SoundEngine.PlaySound(shed with { Volume = 1f, Pitch = 0 }, Projectile.Center);
             }
         }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            if (Projectile.localAI[0] < 0)
-            {
-                overPlayers.Add(index);
-            }
-        }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player renderingPlayer, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             Player player = Main.player[Projectile.owner];

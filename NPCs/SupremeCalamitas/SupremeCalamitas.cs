@@ -3436,7 +3436,7 @@ namespace CalamityMod.NPCs.SupremeCalamitas
         }
 
         #region Loot
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<OmegaHealingPotion>();
         }
@@ -3557,7 +3557,7 @@ namespace CalamityMod.NPCs.SupremeCalamitas
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
 
             Vector2 shieldCenter = NPC.Center + shieldRotation.ToRotationVector2() * 24f;
             Vector2 shieldTop = shieldCenter - (shieldRotation + MathHelper.PiOver2).ToRotationVector2() * 61f;

@@ -530,7 +530,7 @@ public static partial class RevengeanceAndDeathAI
                                     }
                                     if (((player.Center.X < NPC.Center.X && NPC.direction < 0 && player.direction > 0) || (player.Center.X > NPC.Center.X && NPC.direction > 0 && player.direction < 0)) && canTurnPlayerToStone && (Collision.CanHitLine(NPC.Center, 1, 1, player.Center, 1, 1) || Collision.CanHitLine(NPC.Center - Vector2.UnitY * 16f, 1, 1, player.Center, 1, 1) || Collision.CanHitLine(NPC.Center + Vector2.UnitY * 8f, 1, 1, player.Center, 1, 1)))
                                     {
-                                        player.AddBuff(BuffID.Stoned, debuffTime + (int)NPC.ai[2] * -1, true);
+                                        player.AddBuff(BuffID.Stoned, debuffTime + (int)NPC.ai[2] * -1);
                                     }
                                 }
                             }

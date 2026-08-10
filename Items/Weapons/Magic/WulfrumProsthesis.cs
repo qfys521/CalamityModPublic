@@ -128,14 +128,14 @@ namespace CalamityMod.Items.Weapons.Magic
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             if (RealSprite == null)
                 RealSprite = ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Magic/WulfrumProsthesis");
 
             Texture2D properSprite = RealSprite.Value;
 
-            spriteBatch.Draw(properSprite, Item.Center - Main.screenPosition, null, lightColor, rotation, properSprite.Size() / 2f, scale, 0, 0);
+            spriteBatch.Draw(properSprite, item.Center - Main.screenPosition, null, lightColor, rotation, properSprite.Size() / 2f, scale, 0, 0);
 
             return false;
         }

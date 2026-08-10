@@ -81,7 +81,7 @@ namespace CalamityMod
                 if (gis == GeneralImmunityStatus.ImmuneToRegularBuffs)
                     NPCID.Sets.ImmuneToRegularBuffs[npc.type] = true;
                 else if (gis == GeneralImmunityStatus.ImmuneToAllBuffs)
-                    NPCID.Sets.ImmuneToAllBuffs[npc.type] = true;
+                    NPCID.Sets.ImmuneToRegularBuffs[npc.type]/* tModPorter NPCID.Sets.ImmuneToAllBuffs was removed. If immunity to whip tag effects are desired, also set NPCID.Sets.ImmuneToWhipTags to true. */ = true;
 
                 // From here on out, all listed buff IDs are treated differently depending on what the General Immunity Status was.
                 // If it was None, then the listed buffs are buffs that the NPC should be immune to.

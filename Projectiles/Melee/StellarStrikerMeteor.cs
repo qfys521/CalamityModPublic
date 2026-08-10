@@ -85,7 +85,7 @@ namespace CalamityMod.Projectiles.Melee
             dust.color = Main.rand.NextBool(3) ? Color.PaleTurquoise : Color.Turquoise;
             dust.fadeIn = Projectile.scale * 1.25f;
             dust.noLight = true;
-            dust.noLightEmittence = true;
+            dust.noLightEmittance = true;
             
             
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
@@ -100,7 +100,7 @@ namespace CalamityMod.Projectiles.Melee
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
 

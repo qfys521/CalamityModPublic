@@ -103,7 +103,7 @@ namespace CalamityMod.Items.Fishing.BrimstoneCragCatches
                         SoundStyle roar = Sunskater.DeathSound;
                         SoundEngine.PlaySound(roar with { Pitch = -0.3f }, player.Center);
                         if (MADFISH)
-                            player.AddBuff(ModContent.BuffType<Dragonfire>(), 240, true);
+                            player.AddBuff(ModContent.BuffType<Dragonfire>(), 240);
                         return false;
                     }
                 }

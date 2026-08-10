@@ -138,9 +138,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPC.StepUpBlocks();
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || spawnInfo.Player.Calamity().ZoneSulphur || (!spawnInfo.Player.ZoneOverworldHeight && !Main.remixWorld) || (!spawnInfo.Player.ZoneNormalCaverns && spawnInfo.Player.ZoneGlowshroom && Main.remixWorld))
+            if (spawner.noWorms || spawner.Player.Calamity().ZoneSulphur || (!spawner.Player.ZoneOverworldHeight && !Main.remixWorld) || (!spawner.Player.ZoneNormalCaverns && spawner.Player.ZoneGlowshroom && Main.remixWorld))
                 return 0f;
 
             return (Main.remixWorld ? SpawnCondition.Cavern.Chance : SpawnCondition.OverworldDaySlime.Chance) * (Main.hardMode ? 0.055f : 0.135f) * (NPC.AnyNPCs(ModContent.NPCType<WulfrumAmplifier>()) ? 5.5f : 1f);

@@ -14,7 +14,7 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<AquaticScourgeHead>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("AquaticScourge");
         public override int VanillaMusic => MusicID.Boss2;
-        public override int OtherworldMusic => MusicID.OtherworldlyBoss2;
+        public override int OtherworldMusic => MusicID.OtherworldBoss2;
 
         public override bool AdditionalCheck()
         {

@@ -222,7 +222,7 @@ namespace CalamityMod.Projectiles.Melee
             modifiers.SourceDamage *= (FourSeasonsGalaxia.AndromedaAttunement_FullChargeMult * (float)Math.Pow(Charge / MaxCharge, 2));
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D sword = Request<Texture2D>("CalamityMod/Items/Weapons/Melee/GalaxiaExtra").Value;
 

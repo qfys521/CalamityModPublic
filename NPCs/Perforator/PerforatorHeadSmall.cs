@@ -507,7 +507,7 @@ namespace CalamityMod.NPCs.Perforator
         }
 
         public override LocalizedText DeathMessage => CalamityUtils.GetText("NPCs.PerforatorSmall");
-        public override void BossLoot(ref int potionType) => potionType = ItemID.HealingPotion;
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack) => potionType = ItemID.HealingPotion;
 
         public override bool SpecialOnKill()
         {

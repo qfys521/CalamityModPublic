@@ -38,7 +38,7 @@ namespace CalamityMod.Tiles.Abyss
             }
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             int vineLength = WorldGen.genRand.Next((int)Main.rockLayer, (int)(Main.rockLayer + (double)Main.maxTilesY * 0.143));
             int nearbyVineCount = 0;

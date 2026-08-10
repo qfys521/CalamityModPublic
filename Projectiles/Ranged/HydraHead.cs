@@ -187,7 +187,7 @@ namespace CalamityMod.Projectiles.Ranged
                 Dust.NewDustPerfect(Projectile.Center, DustID.Venom, Main.rand.NextVector2CircularEdge(4f, 4f)).noGravity = true;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D chain = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Ranged/HydraHeadChain").Value;
             Vector2 end = Projectile.Center + (Projectile.spriteDirection == 1).ToInt() * 10 * Vector2.UnitX;

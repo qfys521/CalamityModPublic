@@ -96,13 +96,13 @@ namespace CalamityMod.NPCs.Abyss
                 target.AddBuff(BuffID.Venom, 120);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || spawnInfo.Player.Calamity().ZoneSulphur)
+            if (spawner.noWorms || spawner.Player.Calamity().ZoneSulphur)
             {
                 return 0f;
             }
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer1 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer1 && spawner.waterTile)
             {
                 return SpawnCondition.CaveJellyfish.Chance * 2.2f;
             }

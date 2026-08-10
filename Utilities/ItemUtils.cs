@@ -231,7 +231,7 @@ namespace CalamityMod
         /// <param name="item">The item to possibly relocate.</param>
         /// <param name="dist">The minimum distance in pixels the item can be from the world boundary.</param>
         /// <returns>Whether the item was relocated.</returns>
-        public static bool ForceItemIntoWorld(Item item, float desiredDist = WorldInsertionOffset)
+        public static bool ForceItemIntoWorld(WorldItem item, float desiredDist = WorldInsertionOffset)
         {
             if (item is null || !item.active)
                 return false;
@@ -547,7 +547,7 @@ namespace CalamityMod
                     player.statLife = player.statLifeMax2;
                 }
                 if (item.healMana > 0)
-                    player.AddBuff(BuffID.ManaSickness, Player.manaSickTime, true);
+                    player.AddBuff(BuffID.ManaSickness, Player.manaSickTime);
                 if (Main.myPlayer == player.whoAmI)
                 {
                     if (item.healMana > 0)
@@ -566,11 +566,10 @@ namespace CalamityMod
                 --item.stack;
                 if (item.stack <= 0)
                     item.TurnToAir();
-                Recipe.FindRecipes();
             }
         }
 
-        public static void TreasureBagLightAndDust(this Item item)
+        public static void TreasureBagLightAndDust(this WorldItem item)
         {
             // Spawn some light and dust when dropped in the world
             Lighting.AddLight(item.Center, Color.White.ToVector3() * 0.4f);

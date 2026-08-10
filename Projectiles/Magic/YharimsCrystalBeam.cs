@@ -219,7 +219,7 @@ namespace CalamityMod.Projectiles.Magic
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + Projectile.velocity * Projectile.localAI[1], BeamHitboxCollisionWidth * Projectile.scale, ref _);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // If the beam doesn't have a defined direction, don't draw anything.
             if (Projectile.velocity == Vector2.Zero)

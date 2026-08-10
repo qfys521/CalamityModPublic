@@ -50,10 +50,10 @@ namespace CalamityMod.NPCs.NormalNPCs
             });
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !spawnInfo.Player.ZoneSnow || !DownedBossSystem.downedCryogen || (!NPC.downedMechBoss1 && !NPC.downedMechBoss2) || (!NPC.downedMechBoss2 && !NPC.downedMechBoss3) || (!NPC.downedMechBoss3 && !NPC.downedMechBoss1) || spawnInfo.Player.Calamity().ZoneAbyss ||
-                spawnInfo.Player.Calamity().ZoneSunkenSea)
+            if (spawner.noWorms || !spawner.Player.ZoneSnow || !DownedBossSystem.downedCryogen || (!NPC.downedMechBoss1 && !NPC.downedMechBoss2) || (!NPC.downedMechBoss2 && !NPC.downedMechBoss3) || (!NPC.downedMechBoss3 && !NPC.downedMechBoss1) || spawner.Player.Calamity().ZoneAbyss ||
+                spawner.Player.Calamity().ZoneSunkenSea)
             {
                 return 0f;
             }

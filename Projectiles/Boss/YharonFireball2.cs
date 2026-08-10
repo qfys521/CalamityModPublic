@@ -36,7 +36,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.alpha = 255;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 3600;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void SendExtraAI(BinaryWriter writer)
@@ -123,7 +123,7 @@ namespace CalamityMod.Projectiles.Boss
         public override bool CanHitPlayer(Player target) => Projectile.velocity.Y >= -16f;
         public override Color? GetAlpha(Color lightColor) => new Color(200, 200, 200, Projectile.alpha);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor, 1);
             return false;

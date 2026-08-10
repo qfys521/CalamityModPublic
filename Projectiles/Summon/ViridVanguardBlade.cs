@@ -102,7 +102,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 45;
         }
@@ -590,7 +590,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public float TrailWidthFunction(float completionRatio) => Projectile.height * (1f - completionRatio) * (DrawAsAxe ? 0.6f : 0.8f);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frame = texture.Frame(2, 1, DrawAsAxe ? 0 : 1, 0);

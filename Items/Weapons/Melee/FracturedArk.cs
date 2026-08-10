@@ -35,8 +35,8 @@ namespace CalamityMod.Items.Weapons.Melee
             var tooltip = tooltips.FirstOrDefault(x => x.Text.Contains("[PARRY]") && x.Mod == "Terraria");
             if (tooltip != null)
             {
-                tooltip.Text = Lang.SupportGlyphs(this.GetLocalizedValue("ParryInfo"));
-                tooltip.OverrideColor = Color.CornflowerBlue;
+                tooltip.Text = this.GetLocalizedValue("ParryInfo");
+                tooltip.Color = Color.CornflowerBlue;
             }
         }
 

@@ -61,7 +61,7 @@ namespace CalamityMod.Projectiles.Melee
             modifiers.SetCrit();
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             for (int i = 0; i < 6; i++)
             {

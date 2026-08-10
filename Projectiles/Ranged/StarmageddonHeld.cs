@@ -151,7 +151,7 @@ namespace CalamityMod.Projectiles.Ranged
             player.itemRotation = (float)Math.Atan2(Projectile.velocity.Y * Projectile.direction, Projectile.velocity.X * Projectile.direction);
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int height = texture.Height / Main.projFrames[Type];

@@ -328,7 +328,7 @@ namespace CalamityMod
         /// <param name="rotation">The rotation of the item.</param>
         /// <param name="scale">The scale of the item.</param>
         /// <param name="whoAmI">Index reference for <see cref="Main.itemFrameCounter"/>.</param>
-        public static bool DrawTreasureBagInWorld(Item item, SpriteBatch spriteBatch, ref float rotation, ref float scale, int whoAmI)
+        public static bool DrawTreasureBagInWorld(WorldItem item, SpriteBatch spriteBatch, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D texture = TextureAssets.Item[item.type].Value;
             Rectangle frame = texture.Frame();
@@ -464,7 +464,7 @@ namespace CalamityMod
             DynamicSpriteFontExtensionMethods.DrawString(sb, font, text, baseDrawPosition, main, 0f, default, scale, SpriteEffects.None, 0f);
         }
 
-        public static void DrawItemGlowmaskSingleFrame(this Item item, SpriteBatch spriteBatch, float rotation, Texture2D glowmaskTexture)
+        public static void DrawItemGlowmaskSingleFrame(this WorldItem item, SpriteBatch spriteBatch, float rotation, Texture2D glowmaskTexture)
         {
             Vector2 origin = new Vector2(glowmaskTexture.Width / 2f, glowmaskTexture.Height / 2f);
 

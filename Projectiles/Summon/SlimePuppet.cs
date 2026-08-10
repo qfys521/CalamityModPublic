@@ -15,7 +15,7 @@ namespace CalamityMod.Projectiles.Summon
         {
             ProjectileID.Sets.CultistIsResistantTo[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.TrailCacheLength[Type] = 1;
             ProjectileID.Sets.TrailingMode[Type] = 0;
         }
@@ -98,7 +98,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public override bool OnTileCollide(Vector2 oldVelocity) => false;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             var dye = Owner?.cMinion ?? 0;
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor, armorShaderToUse: dye);

@@ -20,13 +20,14 @@ namespace CalamityMod.Projectiles.Summon.Umbrella
         {
             Main.projPet[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.TrailCacheLength[Type] = 8;
             ProjectileID.Sets.TrailingMode[Type] = 1;
         }
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = Projectile.height = 30;
             Projectile.netImportant = true;
             Projectile.friendly = true;
@@ -117,9 +118,8 @@ namespace CalamityMod.Projectiles.Summon.Umbrella
         public override Color? GetAlpha(Color lightColor) => new Color(200, 200, 200, 200);
 
         // Draw over players
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI) => overPlayers.Add(index);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player renderingPlayer, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Player player = Main.player[Projectile.owner];
 

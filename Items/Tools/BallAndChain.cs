@@ -70,11 +70,11 @@ namespace CalamityMod.Items.Tools
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D tex = Enabled ? TextureAssets.Item[Type].Value : DisabledSprite.Value;
             Vector2 origin = tex.Size() / 2f;
-            spriteBatch.Draw(tex, Item.Bottom - Main.screenPosition - Vector2.UnitY * origin.Y, null, lightColor, rotation, origin, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(tex, item.Bottom - Main.screenPosition - Vector2.UnitY * origin.Y, null, lightColor, rotation, origin, scale, SpriteEffects.None, 0f);
             return false;
         }
 

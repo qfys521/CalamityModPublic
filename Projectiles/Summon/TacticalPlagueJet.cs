@@ -22,7 +22,7 @@ namespace CalamityMod.Projectiles.Summon
             Main.projFrames[Type] = 3;
             Main.projPet[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -49,8 +49,8 @@ namespace CalamityMod.Projectiles.Summon
             int TPEID = ModContent.ItemType<TacticalPlagueEngine>();
             FalseGun = new Item();
             PlagueEngine = new Item();
-            FalseGun.SetDefaults(p90ID, true);
-            PlagueEngine.SetDefaults(TPEID, true);
+            FalseGun.SetDefaults(p90ID);
+            PlagueEngine.SetDefaults(TPEID);
             FalseGun.damage = baseDamage;
             FalseGun.knockBack = PlagueEngine.knockBack;
             FalseGun.shootSpeed = PlagueEngine.shootSpeed;

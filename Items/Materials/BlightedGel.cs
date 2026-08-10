@@ -33,12 +33,12 @@ namespace CalamityMod.Items.Materials
             return !Item.notAmmo;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             if (Item.notAmmo)
             {
                 Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Items/Materials/BlightedGelRed").Value;
-                spriteBatch.Draw(texture, Item.position - Main.screenPosition, new Rectangle(0, 0, Item.width, Item.height), lightColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                spriteBatch.Draw(texture, item.position - Main.screenPosition, new Rectangle(0, 0, Item.width, Item.height), lightColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
             return !Item.notAmmo;
         }

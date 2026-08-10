@@ -16,7 +16,7 @@ namespace CalamityMod.Items.SummonItems
 
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 1; // Suspicious Looking Eye
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 1; // Suspicious Looking Eye
         }
 
         public override void SetDefaults()

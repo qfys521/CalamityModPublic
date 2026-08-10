@@ -44,6 +44,7 @@ namespace CalamityMod.Projectiles.Rogue
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = 32;
             Projectile.height = 40;
             Projectile.friendly = true;
@@ -288,12 +289,8 @@ namespace CalamityMod.Projectiles.Rogue
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 21, targetHitbox);
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
-        }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (beginStretchAnim)
             {

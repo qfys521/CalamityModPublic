@@ -63,13 +63,13 @@ namespace CalamityMod.NPCs.Crags
             NPC.damage = (NPC.velocity.Y == 0f || NPC.velocity.Length() < 3f) ? 0 : NPC.defDamage;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
             if (!DownedBossSystem.downedBrimstoneElemental)
             {
                 return 0f;
             }
-            return spawnInfo.Player.Calamity().ZoneCalamity ? 0.08f : 0f;
+            return spawner.Player.Calamity().ZoneCalamity ? 0.08f : 0f;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)

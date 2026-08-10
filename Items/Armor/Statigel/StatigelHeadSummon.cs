@@ -48,7 +48,7 @@ namespace CalamityMod.Items.Armor.Statigel
             {
                 var source = player.GetSource_Accessory(Item);
                 if (player.FindBuffIndex(ModContent.BuffType<BabyPaladinBuff>()) == -1)
-                    player.AddBuff(ModContent.BuffType<BabyPaladinBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<BabyPaladinBuff>(), 3600);
 
                 int minionID = -1;
                 int minionDamage = (int)player.GetTotalDamage<SummonDamageClass>().ApplyTo(SlimeDamage);

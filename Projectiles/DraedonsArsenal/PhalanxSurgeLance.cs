@@ -147,7 +147,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             float _ = float.NaN;
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Owner.Center, Projectile.Center + startVel * 145, Projectile.width * Projectile.scale, ref _);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 1)
                 return false;

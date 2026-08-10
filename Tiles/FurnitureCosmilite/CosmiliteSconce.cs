@@ -30,7 +30,7 @@ namespace CalamityMod.Tiles.FurnitureCosmilite
             AddMapEntry(new Color(253, 221, 3), CalamityUtils.GetText("Tiles.Sconce"));
             TileID.Sets.DisableSmartCursor[Type] = true;
             TileID.Sets.FramesOnKillWall[Type] = true;
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
         }
 
         public override bool CreateDust(int i, int j, ref int type)

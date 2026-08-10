@@ -54,7 +54,7 @@ namespace CalamityMod.Projectiles.Rogue
             return null;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture;
             if (Projectile.localAI[1] == 0f)

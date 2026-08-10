@@ -910,7 +910,7 @@ namespace CalamityMod.NPCs
         public bool SearchForTheMonument(NPC npc)
         {
             Point tileCenter = npc.Center.ToTileCoordinates();
-            Rectangle searchArea = new((int)(tileCenter.X - Main.buffScanAreaWidth / 2), (int)(tileCenter.Y - Main.buffScanAreaHeight / 2), Main.buffScanAreaWidth, Main.buffScanAreaHeight);
+            Rectangle searchArea = Utils.CenteredRectangle(tileCenter, SceneMetrics.ZoneScanSize);
 
             if (TheMonumentTileEntity.IsInArea(searchArea))
             {
@@ -1004,7 +1004,7 @@ namespace CalamityMod.NPCs
             }
         }
 
-        public override void OnChatButtonClicked(NPC npc, bool firstButton)
+        public override void OnChatButtonClicked(NPC npc, NPCInteraction interaction)
         {
             for (int i = 0; i < npcAlertList.Count; i++)
             {
@@ -1292,7 +1292,7 @@ namespace CalamityMod.NPCs
 
         // Does not affect Dryad's Bane
         // See CalamityGlobalNPC: UpdateLifeRegen
-        public override void BuffTownNPC(ref float damageMult, ref int defense)
+        public override void BuffTownNPC(NPC npc, ref float damageMult, ref float attackSpeedMult, ref int defense, ref int maxLife)
         {
             if (NPC.downedMoonlord)
             {
@@ -1344,7 +1344,7 @@ namespace CalamityMod.NPCs
 
             if (type == NPCID.Merchant)
             {
-                shop.InsertAfter(ItemID.ManaPotion, ItemID.WormholePotion, Condition.HappyEnoughToSellPylons)
+                shop.InsertAfter(ItemID.ManaPotion, ItemID.WormholePotion, Condition.CurrentPriceAdjustmentUnder(0.9f))
                 .InsertAfter(ItemID.Safe, ItemID.MusicBox)
                 .InsertAfter(ItemID.Flare, ItemID.Flare, hasFlareGunUpgrade)
                 .InsertAfter(ItemID.BlueFlare, ItemID.BlueFlare, hasFlareGunUpgrade)
@@ -1407,7 +1407,7 @@ namespace CalamityMod.NPCs
 
             if (type == NPCID.Mechanic)
             {
-                shop.AddWithCustomValue(ItemID.BuilderPotion, Item.buyPrice(gold: 2), Condition.HappyEnoughToSellPylons)
+                shop.AddWithCustomValue(ItemID.BuilderPotion, Item.buyPrice(gold: 2), Condition.CurrentPriceAdjustmentUnder(0.9f))
                 .AddWithCustomValue(ItemID.CombatWrench, Item.buyPrice(gold: 15));
             }
 
@@ -1461,22 +1461,24 @@ namespace CalamityMod.NPCs
 
             if (type == NPCID.PartyGirl)
             {
-                shop.Add(ItemID.GenderChangePotion, Condition.HappyEnoughToSellPylons);
+                shop.Add(ItemID.GenderChangePotion, Condition.CurrentPriceAdjustmentUnder(0.9f));
             }
 
             if (type == NPCID.Princess)
             {
-                Mod musicMod = ExternalMods.musicMod;
-                musicMod.TryFind("Interlude1MusicBox", out ModItem interlude1Box);
-                musicMod.TryFind("Interlude2MusicBox", out ModItem interlude2Box);
-                musicMod.TryFind("Interlude3MusicBox", out ModItem interlude3Box);
-                musicMod.TryFind("DevourerofGodsEulogyMusicBox", out ModItem eulogyBox);
+                if (ExternalMods.musicMod is Mod musicMod &&
+                    musicMod.TryFind("Interlude1MusicBox", out ModItem interlude1Box) &&
+                    musicMod.TryFind("Interlude2MusicBox", out ModItem interlude2Box) &&
+                    musicMod.TryFind("Interlude3MusicBox", out ModItem interlude3Box) &&
+                    musicMod.TryFind("DevourerofGodsEulogyMusicBox", out ModItem eulogyBox))
+                {
+                    shop.InsertAfter(ItemID.MusicBoxCredits, interlude1Box.Type, CalamityConditions.DownedCalamitasClone)
+                    .InsertAfter(ItemID.MusicBoxCredits, interlude2Box.Type, Condition.DownedMoonLord)
+                    .InsertAfter(ItemID.MusicBoxCredits, interlude3Box.Type, CalamityConditions.DownedYharon)
+                    .InsertAfter(ItemID.MusicBoxCredits, eulogyBox.Type, CalamityConditions.DownedDevourerOfGods);
+                }
 
-                shop.InsertAfter(ItemID.MusicBoxCredits, interlude1Box.Type, CalamityConditions.DownedCalamitasClone)
-                .InsertAfter(ItemID.MusicBoxCredits, interlude2Box.Type, Condition.DownedMoonLord)
-                .InsertAfter(ItemID.MusicBoxCredits, interlude3Box.Type, CalamityConditions.DownedYharon)
-                .InsertAfter(ItemID.MusicBoxCredits, eulogyBox.Type, CalamityConditions.DownedDevourerOfGods)
-                .AddWithCustomValue(ItemID.PrincessWeapon, Item.buyPrice(platinum: 1), Condition.Hardmode)
+                shop.AddWithCustomValue(ItemID.PrincessWeapon, Item.buyPrice(platinum: 1), Condition.Hardmode)
                 .AddWithCustomValue(ItemType<ForgivenessPainting>(), Item.buyPrice(gold: 15), Condition.NpcIsPresent(NPCType<BrimstoneWitch>()))
                 .Add<LanternCenter>();
             }

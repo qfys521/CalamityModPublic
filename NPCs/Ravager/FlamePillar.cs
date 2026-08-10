@@ -20,7 +20,7 @@ namespace CalamityMod.NPCs.Ravager
         public override void SetStaticDefaults()
         {
             this.HideFromBestiary();
-            NPCID.Sets.ImmuneToAllBuffs[Type] = true;
+            NPCID.Sets.ImmuneToRegularBuffs[Type]/* tModPorter NPCID.Sets.ImmuneToAllBuffs was removed. If immunity to whip tag effects are desired, also set NPCID.Sets.ImmuneToWhipTags to true. */ = true;
             Main.npcFrameCount[Type] = 4;
             if (!Main.dedServ)
             {

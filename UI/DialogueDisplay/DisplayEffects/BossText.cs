@@ -41,7 +41,7 @@ namespace CalamityMod.UI.DialogueDisplay.DisplayEffects
 
         float OffsetDisappearTime(float time, float ratio) => MathHelper.Clamp((time - (ratio * TimeToDisappear / 2f)) / (TimeToDisappear / 2f), 0f, 1f);
 
-        public override Vector2 DisappearPositioning(Vector2 startPos, float time, DialogueCharacterData charData) => Vector2.Lerp(startPos, startPos + (Vector2.unitXVector * 12 * charData.Scale), CalamityUtils.SineOutEasing(OffsetDisappearTime(time, charData.CompletionRatio), 1));
+        public override Vector2 DisappearPositioning(Vector2 startPos, float time, DialogueCharacterData charData) => Vector2.Lerp(startPos, startPos + (Vector2.UnitX * 12 * charData.Scale), CalamityUtils.SineOutEasing(OffsetDisappearTime(time, charData.CompletionRatio), 1));
 
         public override float DisappearOpacity(float startOpacity, float time, DialogueCharacterData charData) => 1 - CalamityUtils.SineOutEasing(OffsetDisappearTime(time, charData.CompletionRatio), 1);
 

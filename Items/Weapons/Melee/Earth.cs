@@ -43,9 +43,9 @@ namespace CalamityMod.Items.Weapons.Melee
             Item.noMelee = true;
             Item.useStyle = ItemUseStyleID.Shoot;
         }
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Melee/EarthGlow").Value);
+            item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Melee/EarthGlow").Value);
         }
         public override void ModifyTooltips(List<TooltipLine> list)
         {
@@ -63,7 +63,7 @@ namespace CalamityMod.Items.Weapons.Melee
 
             TooltipLine line = list.FirstOrDefault(x => x.Mod == "Terraria" && x.Name == "Tooltip3");
             if (line != null)
-                line.OverrideColor = Color.Lerp(earthTooltipColor, Color.White, 0.5f);
+                line.Color = Color.Lerp(earthTooltipColor, Color.White, 0.5f);
         }
         public override bool MeleePrefix() => true;
         public override void AddRecipes()

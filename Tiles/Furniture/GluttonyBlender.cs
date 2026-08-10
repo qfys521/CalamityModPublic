@@ -35,7 +35,7 @@ namespace CalamityMod.Tiles.Furniture
 
         public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
         {
-            if (TileEntity.TryGet<GluttonyBlenderTE>(new(i, j), out var entity))
+            if (TileEntity.TryGet<GluttonyBlenderTE>(new Point16(i, j), out var entity))
             {
                 frameXOffset = 36 * entity.CurrentFrame;
             }
@@ -164,9 +164,9 @@ namespace CalamityMod.Tiles.Furniture
             return false;
         }
 
-        public override bool CanStackInWorld(Item destination, Item source)
+        public override bool CanStackInWorld(WorldItem destination, WorldItem source)
         {
-            return !destination.GetGlobalItem<GluttonyBlenderGlobalItem>().FromGluttonyBlender || !destination.GetGlobalItem<GluttonyBlenderGlobalItem>().FromGluttonyBlender;
+            return !destination.inner.GetGlobalItem<GluttonyBlenderGlobalItem>().FromGluttonyBlender || !source.inner.GetGlobalItem<GluttonyBlenderGlobalItem>().FromGluttonyBlender;
         }
     }
 
@@ -241,12 +241,12 @@ namespace CalamityMod.Tiles.Furniture
 
                 int itemDrop = Main.rand.NextFloat(100f) < goodPercent ? ModContent.ItemType<QualitySlop>() : ModContent.ItemType<DisgustingSlop>();
                 int i = Item.NewItem(Projectile.GetItemSource_DropAsItem(), Projectile.Center, itemDrop);
-                Main.item[i].GetGlobalItem<GluttonyBlenderGlobalItem>().FromGluttonyBlender = true;
+                Main.item[i].inner.GetGlobalItem<GluttonyBlenderGlobalItem>().FromGluttonyBlender = true;
             }
             Timer++;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Timer >= TimeToReachBlender)
                 return false;

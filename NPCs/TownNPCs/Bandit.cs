@@ -284,21 +284,21 @@ namespace CalamityMod.NPCs.TownNPCs
             return false;
         }
 
-        public override void SetChatButtons(ref string button, ref string button2)
+        public override void RegisterChatButtons(NPCInteractionList interactions)
         {
-            button = Language.GetTextValue("LegacyInterface.28");
-            button2 = this.GetLocalizedValue("RefundButton"); ;
+            NPCInteractionList.Entry shop = interactions.InsertBefore(NPCInteractions.Shop(), NPCInteractionDatabase.CloseButton);
+            interactions.InsertAfter(new RefundInteraction(), shop);
         }
 
-        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
+        private sealed class RefundInteraction : NPCInteraction
         {
-            if (firstButton)
+            public override bool Condition() => true;
+            public override string GetText() => Language.GetTextValue("Mods.CalamityMod.NPCs.Bandit.RefundButton");
+
+            public override void Interact()
             {
-                shopName = "Shop";
-            }
-            else
-            {
-                Main.npcChatText = Refund();
+                if (TalkNPC.ModNPC is Bandit bandit)
+                    Main.npcChatText = bandit.Refund();
             }
         }
         public override void AddShops()

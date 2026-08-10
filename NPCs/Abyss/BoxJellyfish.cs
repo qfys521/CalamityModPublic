@@ -184,13 +184,13 @@ namespace CalamityMod.NPCs.Abyss
             NPC.frame.Y = frame * frameHeight;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || spawnInfo.Player.Calamity().ZoneSulphur)
+            if (spawner.noWorms || spawner.Player.Calamity().ZoneSulphur)
             {
                 return 0f;
             }
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer1 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer1 && spawner.waterTile)
             {
                 return SpawnCondition.CaveJellyfish.Chance * 2.5f;
             }
@@ -200,7 +200,7 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.Venom, 120, true);
+                target.AddBuff(BuffID.Venom, 120);
         }
 
         public override void HitEffect(NPC.HitInfo hit)

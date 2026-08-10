@@ -32,11 +32,12 @@ namespace CalamityMod.Projectiles.Summon
         {
             Main.projFrames[Type] = 14;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = 86;
             Projectile.height = 130;
             Projectile.netImportant = true;
@@ -129,10 +130,6 @@ namespace CalamityMod.Projectiles.Summon
         }
 
         // As a means of obscuring contents when they spawn (such as ensuring that the minigun doesn't seem to pop into existence), this projectile draws above most other projectiles.
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
-        }
 
         public override bool? CanDamage() => false;
 
@@ -144,7 +141,7 @@ namespace CalamityMod.Projectiles.Summon
             return true;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Texture2D glowmask = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/AtlasMunitionsDropPodGlow").Value;

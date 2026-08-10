@@ -40,7 +40,7 @@ namespace CalamityMod.Items.Accessories
                 var source = player.GetSource_Accessory(Item);
                 if (player.FindBuffIndex(ModContent.BuffType<WaterElemental>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<WaterElemental>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<WaterElemental>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<WaterElementalMinion>()] < 1)
                 {
@@ -62,7 +62,7 @@ namespace CalamityMod.Items.Accessories
                 var source = player.GetSource_Accessory(Item);
                 if (player.FindBuffIndex(ModContent.BuffType<WaterElemental>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<WaterElemental>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<WaterElemental>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<WaterElementalMinion>()] < 1)
                 {

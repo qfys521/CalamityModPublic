@@ -20,6 +20,7 @@ namespace CalamityMod.Items.Fishing
         {
             Item.ResearchUnlockCount = 2;
             ItemID.Sets.CanBePlacedOnWeaponRacks[Type] = true;
+            ItemID.Sets.IsQuestFish[Type] = true;
         }
 
         public override void SetDefaults()
@@ -27,7 +28,6 @@ namespace CalamityMod.Items.Fishing
             Item.DefaultToQuestFish();
         }
 
-        public override bool IsQuestFish() => true;
         public override bool IsAnglerQuestAvailable() => QuestCondition;
 
         public override void AnglerQuestChat(ref string description, ref string catchLocation)

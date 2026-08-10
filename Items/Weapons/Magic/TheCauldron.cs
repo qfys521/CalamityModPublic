@@ -53,9 +53,9 @@ namespace CalamityMod.Items.Weapons.Magic
                 mult = manaReductionMult;
             }
         }
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, Glow.Value);
+            item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, Glow.Value);
         }
 
         public override bool CanUseItem(Player player) => player.ownedProjectileCounts[Item.shoot] <= 0;

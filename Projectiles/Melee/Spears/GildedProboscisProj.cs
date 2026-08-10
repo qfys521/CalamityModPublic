@@ -314,7 +314,7 @@ namespace CalamityMod.Projectiles.Melee.Spears
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
             => modifiers.ApplyScalingForcedCrit(Projectile);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player renderingPlayer, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
 
             var player = Main.player[Projectile.owner];

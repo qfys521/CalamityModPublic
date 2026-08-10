@@ -12,7 +12,7 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<Leviathan>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("Leviathan");
         public override int VanillaMusic => MusicID.Boss3;
-        public override int OtherworldMusic => MusicID.OtherworldlyBoss2;
+        public override int OtherworldMusic => MusicID.OtherworldBoss2;
         public override int[] AdditionalNPCs => new int[] { ModContent.NPCType<Anahita>() };
 
         public override bool AdditionalCheck() => CalamityGlobalNPC.LeviAndAna != -1;

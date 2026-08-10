@@ -48,7 +48,7 @@ namespace CalamityMod.Projectiles.Melee
                     dust.scale = Main.rand.NextFloat(0.45f, 0.6f);
                     dust.color = Color.Red;
                     dust.alpha = 120;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
             else if (Projectile.timeLeft % 4 == 0 && Projectile.timeLeft > 30)
@@ -58,7 +58,7 @@ namespace CalamityMod.Projectiles.Melee
                 dust.noGravity = !Main.rand.NextBool(3);
                 dust.scale = Main.rand.NextFloat(0.45f, 0.6f);
                 dust.color = Color.Red;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
             if (Projectile.timeLeft > 90 && Projectile.timeLeft < 177 && Projectile.timeLeft % 2 == 0 && Projectile.ai[0] == 0)
             {
@@ -79,7 +79,7 @@ namespace CalamityMod.Projectiles.Melee
                 Projectile.timeLeft = 70;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => (Projectile.ai[0] == 5 || Projectile.numHits >= 2) ? false : CalamityUtils.CircularHitboxCollision(Projectile.Center, 20, targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
             Color drawColor = Color.Red;

@@ -34,9 +34,9 @@ namespace CalamityMod.Systems
 
         private static readonly ThreadLocal<Color[]> ColorSliceBuffer = new(() => new Color[9]);
 
-        private void OnDrawTiles(On_Main.orig_DrawTiles orig, Main self, bool solidLayer, bool forRenderTargets, bool intoRenderTargets, int waterStyleOverride)
+        private void OnDrawTiles(On_Main.orig_DrawTiles orig, Main self, bool solidLayer, bool intoRenderTargets, int waterStyleOverride)
         {
-            orig(self, solidLayer, forRenderTargets, intoRenderTargets, waterStyleOverride);
+            orig(self, solidLayer, intoRenderTargets, waterStyleOverride);
 
             if (!solidLayer || CalamityClientConfig.Instance.TileTextureBlendingQuality == TileBlendingQuality.Disable)
                 return;

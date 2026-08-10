@@ -52,9 +52,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             });
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || (!DownedBossSystem.downedHiveMind && !DownedBossSystem.downedPerforator))
+            if (spawner.noWorms || (!DownedBossSystem.downedHiveMind && !DownedBossSystem.downedPerforator))
             {
                 return 0f;
             }
@@ -80,7 +80,7 @@ namespace CalamityMod.NPCs.NormalNPCs
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<WindChilled>(), 120, true);
+                target.AddBuff(ModContent.BuffType<WindChilled>(), 120);
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot) => npcLoot.Add(ModContent.ItemType<AerialiteOre>(), 1, 10, 26);

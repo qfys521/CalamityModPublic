@@ -30,9 +30,9 @@ namespace CalamityMod.Items.Accessories
             Item.expert = true;
         }
 
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, ModContent.Request<Texture2D>("CalamityMod/Items/Accessories/Affliction").Value);
+            item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, ModContent.Request<Texture2D>("CalamityMod/Items/Accessories/Affliction").Value);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -43,7 +43,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (Main.LocalPlayer.team == player.team && player.team != 0)
                 {
-                    Main.LocalPlayer.AddBuff(ModContent.BuffType<Afflicted>(), 20, true);
+                    Main.LocalPlayer.AddBuff(ModContent.BuffType<Afflicted>(), 20);
                 }
             }
         }

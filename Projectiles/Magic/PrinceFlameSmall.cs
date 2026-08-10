@@ -54,7 +54,7 @@ namespace CalamityMod.Projectiles.Magic
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             lightColor = Color.Lerp(lightColor, Color.White, 0.8f);
             lightColor.A /= 2;
@@ -79,7 +79,7 @@ namespace CalamityMod.Projectiles.Magic
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.8f, 1.5f);
                 dust.color = Main.hslToRgb(Main.rand.NextFloat(0.033f, 0.167f), 1f, 0.66f);
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
     }

@@ -1345,8 +1345,8 @@ namespace CalamityMod.CalPlayer
         #region The Horseman's Blade
         public static void HorsemansBladeOnHit(Player player, int targetIdx, int damage, float knockback, int extraUpdateAmt = 0, int type = ProjectileID.FlamingJack)
         {
-            int logicCheckScreenHeight = Main.LogicCheckScreenHeight;
-            int logicCheckScreenWidth = Main.LogicCheckScreenWidth;
+            int logicCheckScreenHeight = Main.MaxWorldViewSize.Y;
+            int logicCheckScreenWidth = Main.MaxWorldViewSize.X;
             int x = Main.rand.Next(100, 300);
             int y = Main.rand.Next(100, 300);
             switch (Main.rand.Next(4))

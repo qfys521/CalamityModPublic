@@ -135,7 +135,7 @@ namespace CalamityMod.Projectiles.Melee
             return MathHelper.ToRadians(MathHelper.SmoothStep(-swingWidth * 0.5f, swingWidth * 0.5f, SwingCompletion));
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player renderingPlayer, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             var player = Main.player[Projectile.owner];
             var modplayer = player.GetModPlayer<BaseSwordHoldoutPlayer>();

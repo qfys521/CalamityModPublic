@@ -30,7 +30,7 @@ namespace CalamityMod.Walls.UnsafeWalls
             GlowMask = null;
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             if (Main.tile[i, j].LiquidAmount == 0 && j < Main.maxTilesY - 205)
             {

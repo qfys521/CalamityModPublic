@@ -46,7 +46,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                     dust.scale = Main.rand.NextFloat(1.3f, 1.7f);
                     dust.noGravity = true;
                     dust.color = Effects.ArsenalEffects.ArsenalGaussColor;
-                    dust.noLightEmittence = time % 6 != 0;
+                    dust.noLightEmittance = time % 6 != 0;
                     dust.fadeIn = -0.6f;
                 }
 
@@ -105,10 +105,10 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                 dust.scale = Main.rand.NextFloat(0.8f, 1.5f);
                 dust.noGravity = true;
                 dust.color = Effects.ArsenalEffects.ArsenalGaussColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             return false;
         }

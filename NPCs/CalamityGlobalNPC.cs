@@ -2574,7 +2574,7 @@ namespace CalamityMod.NPCs
             if (Main.netMode == NetmodeID.SinglePlayer || numPlayers <= 1)
                 return;
 
-            bool countsAsBoss = npc.boss || NPCID.Sets.ShouldBeCountedAsBoss[npc.type];
+            bool countsAsBoss = npc.boss || NPCID.Sets.ShouldBeCountedAsBossForBestiary[npc.type];
             bool scalesLikeBoss = countsAsBoss || CalamityNPCSets.ScalesHealthLikeBoss[npc.type];
             bool isCalamityNPC = npc.ModNPC != null && npc.ModNPC.Mod == CalamityMod.Instance;
 
@@ -3091,7 +3091,7 @@ namespace CalamityMod.NPCs
                                 Dust lust2 = Dust.NewDustPerfect(sparkPos, DustType<LightDust>(), startVel, Scale: Main.rand.NextFloat(0.5f, 0.9f) * Math.Min(sizeBonus, 1.3f));
                                 lust2.noGravity = true;
                                 lust2.color = color;
-                                lust2.noLightEmittence = true;
+                                lust2.noLightEmittance = true;
                             }
                         }
                     }
@@ -3774,6 +3774,15 @@ namespace CalamityMod.NPCs
             TagDamageMult += modPlayer.bonusMultTag;
             modifiers.FlatBonusDamage += modPlayer.bonusFlatTag;
 
+            int activeTagItem = player.TagEffectState.Type;
+            if (activeTagItem > ItemID.None && player.TagEffectState.IsNPCTagged(npc.whoAmI))
+            {
+                var activeTag = CalamityBuffSets.SummonTagItem[activeTagItem];
+                bool firecrackerCanProc = activeTagItem != ItemID.FireWhip || player.TagEffectState.CanProcOnNPC(npc.whoAmI);
+                if (activeTag is not null && firecrackerCanProc)
+                    activeTag.TagModifyHitEffects(proj, npc, ref modifiers, ref TagDamageMult, ref critChance);
+            }
+
             for (int i = 0; i < NPC.maxBuffs; i++)
             {
                 if (npc.buffTime[i] >= 1)
@@ -3811,6 +3820,14 @@ namespace CalamityMod.NPCs
                 return;
 
             Player player = Main.player[projectile.owner];
+
+            int activeTagItem = player.TagEffectState.Type;
+            if (activeTagItem > ItemID.None && player.TagEffectState.IsNPCTagged(npc.whoAmI))
+            {
+                var activeTag = CalamityBuffSets.SummonTagItem[activeTagItem];
+                if (activeTag is not null)
+                    activeTag.TagOnHit(npc, projectile, hit, damagedone);
+            }
 
             for (int i = 0; i < NPC.maxBuffs; i++)
             {
@@ -4147,7 +4164,7 @@ namespace CalamityMod.NPCs
                 return;
 
             int spawnRate = 400;
-            int maxSpawnCount = NPC.maxSpawns;
+            int maxSpawnCount = NPC.defaultMaxSpawns;
             NPCLoader.EditSpawnRate(player, ref spawnRate, ref maxSpawnCount);
 
             // Enforce a limit on the amount of enemies that can appear.
@@ -4258,16 +4275,16 @@ namespace CalamityMod.NPCs
             }
         }*/
 
-        public override void EditSpawnPool(IDictionary<int, float> pool, NPCSpawnInfo spawnInfo)
+        public override void EditSpawnPool(IDictionary<int, float> pool, NPC.Spawner spawner)
         {
-            bool calamityBiomeZone = spawnInfo.Player.Calamity().ZoneAbyss ||
-                spawnInfo.Player.Calamity().ZoneCalamity ||
-                spawnInfo.Player.Calamity().ZoneSulphur ||
-                spawnInfo.Player.Calamity().ZoneSunkenSea ||
-                (spawnInfo.Player.Calamity().ZoneAstral && !spawnInfo.Player.PillarZone());
+            bool calamityBiomeZone = spawner.Player.Calamity().ZoneAbyss ||
+                spawner.Player.Calamity().ZoneCalamity ||
+                spawner.Player.Calamity().ZoneSulphur ||
+                spawner.Player.Calamity().ZoneSunkenSea ||
+                (spawner.Player.Calamity().ZoneAstral && !spawner.Player.PillarZone());
 
             // Increase Goblin and Wizard spawn rates
-            if (!spawnInfo.Water && spawnInfo.Player.ZoneRockLayerHeight)
+            if (!spawner.waterTile && spawner.Player.ZoneRockLayerHeight)
             {
                 if (NPC.downedGoblins && !NPC.savedGoblin)
                 {
@@ -4283,23 +4300,23 @@ namespace CalamityMod.NPCs
             }
 
             // Overrides the vanilla spawn of Chaos Elementals so they can be AFK farmed once more
-            if (Main.hardMode && spawnInfo.Player.ZoneRockLayerHeight && !calamityBiomeZone)
+            if (Main.hardMode && spawner.Player.ZoneRockLayerHeight && !calamityBiomeZone)
             {
                 // Added more tiles for them to spawn on
                 bool isChaosElementalSpawnTile =
-                    spawnInfo.SpawnTileType == TileID.Pearlstone ||
-                    spawnInfo.SpawnTileType == TileID.Pearlsand ||
-                    spawnInfo.SpawnTileType == TileID.HallowedIce ||
-                    spawnInfo.SpawnTileType == TileID.HallowedGrass ||
-                    spawnInfo.SpawnTileType == TileID.HallowHardenedSand ||
-                    spawnInfo.SpawnTileType == TileID.HallowSandstone;
+                    spawner.SpawnTileType == TileID.Pearlstone ||
+                    spawner.SpawnTileType == TileID.Pearlsand ||
+                    spawner.SpawnTileType == TileID.HallowedIce ||
+                    spawner.SpawnTileType == TileID.HallowedGrass ||
+                    spawner.SpawnTileType == TileID.HallowHardenedSand ||
+                    spawner.SpawnTileType == TileID.HallowSandstone;
 
                 if (isChaosElementalSpawnTile)
                     pool[NPCID.ChaosElemental] = SpawnCondition.Cavern.Chance * 0.125f;
             }
 
             // Spawn Green Jellyfish in prehm and Blue Jellyfish in hardmode
-            if (spawnInfo.Player.ZoneRockLayerHeight && spawnInfo.Water && !calamityBiomeZone)
+            if (spawner.Player.ZoneRockLayerHeight && spawner.waterTile && !calamityBiomeZone)
             {
                 if (!Main.hardMode)
                     pool[NPCID.GreenJellyfish] = SpawnCondition.CaveJellyfish.Chance * 0.5f;
@@ -4308,21 +4325,21 @@ namespace CalamityMod.NPCs
             }
 
             // Add Truffle Worm spawns to surface mushroom biome
-            if (spawnInfo.Player.ZoneGlowshroom && Main.hardMode && (spawnInfo.Player.ZoneOverworldHeight || spawnInfo.Player.ZoneSkyHeight))
+            if (spawner.Player.ZoneGlowshroom && Main.hardMode && (spawner.Player.ZoneOverworldHeight || spawner.Player.ZoneSkyHeight))
             {
                 if (NPC.CountNPCS(NPCID.TruffleWorm) < 2)
                     pool[NPCID.TruffleWorm] = SpawnCondition.OverworldMushroom.Chance * 0.5f;
             }
 
             // Add Prismatic Lacewing spawns to surface hallow from dusk to midnight
-            if (!Main.dayTime && Main.time < 16200D && Main.hardMode && (spawnInfo.Player.ZoneOverworldHeight || spawnInfo.Player.ZoneSkyHeight))
+            if (!Main.dayTime && Main.time < 16200D && Main.hardMode && (spawner.Player.ZoneOverworldHeight || spawner.Player.ZoneSkyHeight))
             {
                 if (!NPC.AnyNPCs(NPCID.EmpressButterfly))
                     pool[NPCID.EmpressButterfly] = SpawnCondition.OverworldHallow.Chance * 0.1f;
             }
 
             // Increase fairy spawn rates while wearing Fairy Boots
-            if (spawnInfo.Player.Calamity().fairyBoots)
+            if (spawner.Player.Calamity().fairyBoots)
             {
                 int maxFairies = 5;
                 if ((NPC.CountNPCS(NPCID.FairyCritterBlue) + NPC.CountNPCS(NPCID.FairyCritterGreen) + NPC.CountNPCS(NPCID.FairyCritterPink)) < maxFairies)
@@ -4337,7 +4354,7 @@ namespace CalamityMod.NPCs
             }
 
             // Increased Maggot Zombie,the Groom, and the Bride spawn rates in a Graveyard
-            if (spawnInfo.Player.ZoneGraveyard)
+            if (spawner.Player.ZoneGraveyard)
             {
                 pool[NPCID.MaggotZombie] = SpawnCondition.OverworldNightMonster.Chance * 0.2f;
                 pool[NPCID.TheGroom] = SpawnCondition.OverworldNightMonster.Chance * 0.035f;
@@ -4349,10 +4366,10 @@ namespace CalamityMod.NPCs
                 pool[0] = 0f;
 
             // Add Enchanted Nightcrawlers as a critter to the Astral Infection
-            if (!AnyEvents(spawnInfo.Player) && spawnInfo.Player.InAstral())
+            if (!AnyEvents(spawner.Player) && spawner.Player.InAstral())
                 pool[NPCID.EnchantedNightcrawler] = SpawnCondition.TownCritter.Chance;
 
-            if (spawnInfo.Player.Calamity().ZoneSulphur && !spawnInfo.Player.Calamity().ZoneAbyss && AcidRainEvent.AcidRainEventIsOngoing)
+            if (spawner.Player.Calamity().ZoneSulphur && !spawner.Player.Calamity().ZoneAbyss && AcidRainEvent.AcidRainEventIsOngoing)
             {
                 pool.Clear();
 
@@ -4382,10 +4399,10 @@ namespace CalamityMod.NPCs
                             case AcidRainSpawnRequirement.Anywhere:
                                 break;
                             case AcidRainSpawnRequirement.Land:
-                                canSpawn = !spawnInfo.Water;
+                                canSpawn = !spawner.waterTile;
                                 break;
                             case AcidRainSpawnRequirement.Water:
-                                canSpawn = spawnInfo.Water;
+                                canSpawn = spawner.waterTile;
                                 break;
                         }
                         if (canSpawn)
@@ -4406,10 +4423,10 @@ namespace CalamityMod.NPCs
                                 case AcidRainSpawnRequirement.Anywhere:
                                     break;
                                 case AcidRainSpawnRequirement.Land:
-                                    canSpawn = !spawnInfo.Water;
+                                    canSpawn = !spawner.waterTile;
                                     break;
                                 case AcidRainSpawnRequirement.Water:
-                                    canSpawn = spawnInfo.Water;
+                                    canSpawn = spawner.waterTile;
                                     break;
                             }
                             if (canSpawn)
@@ -4423,11 +4440,11 @@ namespace CalamityMod.NPCs
                 }
             }
 
-            if (spawnInfo.PlayerSafe)
+            if (spawner.noWorms)
                 return;
 
             // Voodoo Demon changes (including partial Voodoo Demon Voodoo Doll implementation)
-            bool voodooDemonDollActive = spawnInfo.Player.Calamity().disableVoodooSpawns;
+            bool voodooDemonDollActive = spawner.Player.Calamity().disableVoodooSpawns;
             // If the doll is active, Voodoo Demons cannot spawn (via modded means).
             if (voodooDemonDollActive)
                 pool.Remove(NPCID.VoodooDemon);
@@ -5388,7 +5405,7 @@ namespace CalamityMod.NPCs
                                 player.inventory[item].stack--;
                                 if (player.inventory[item].stack <= 0)
                                 {
-                                    player.inventory[item].SetDefaults(ItemID.None, false);
+                                    player.inventory[item].SetDefaults(ItemID.None);
                                 }
                                 break;
                             }

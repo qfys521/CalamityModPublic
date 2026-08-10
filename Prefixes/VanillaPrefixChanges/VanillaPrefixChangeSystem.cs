@@ -16,7 +16,7 @@ namespace CalamityMod.Prefixes.VanillaPrefixChanges
         public override void Load()
         {
             On_Player.GrantPrefixBenefits += OnGrantBenefits;
-            IL_Item.Prefix += VanillaPrefixValueOverride;
+            IL_Item.Prefix_int_refBoolean += VanillaPrefixValueOverride;
         }
 
         public override void Unload()

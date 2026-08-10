@@ -208,7 +208,7 @@ namespace CalamityMod.Projectiles.Melee.Yoyos
             counter++;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor, 1);
             return false;
@@ -267,7 +267,7 @@ namespace CalamityMod.Projectiles.Melee.Yoyos
                     Main.dust[idx].noLight = true;
                     Main.dust[idx].velocity = dustyVel.RotatedByRandom(0.3f) * Main.rand.NextFloat(0.2f, 0.75f);
                     Main.dust[idx].scale = scale;
-                    Main.dust[idx].noLightEmittence = true;
+                    Main.dust[idx].noLightEmittance = true;
                 }
             }
 

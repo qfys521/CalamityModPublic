@@ -3565,7 +3565,7 @@ namespace CalamityMod.CalPlayer
                             SoundEngine.PlaySound(NormalityRelocator.TeleportSound, Player.Center);
 
                             int duration = areThereAnyDamnBosses ? chaosStateDuration_NR : 360;
-                            Player.AddBuff(BuffID.ChaosState, duration, true);
+                            Player.AddBuff(BuffID.ChaosState, duration);
                             // Add a cooldown here so it can have the custom NR icon
                             Player.AddCooldown(ChaosState.ID, duration, true, "normalityrelocator");
                         }
@@ -3574,7 +3574,7 @@ namespace CalamityMod.CalPlayer
             }
             if (angelicAlliance && Main.myPlayer == Player.whoAmI && FindAccessory<AngelicAlliance>().JustPressedKeybind() && !divineBless && !Player.HasCooldown(Cooldowns.DivineBless.ID))
             {
-                Player.AddBuff(BuffType<Buffs.StatBuffs.DivineBless>(), AngelicAlliance.DivineBlessDuration, false);
+                Player.AddBuff(BuffType<Buffs.StatBuffs.DivineBless>(), AngelicAlliance.DivineBlessDuration);
                 SoundEngine.PlaySound(AngelicAlliance.ActivationSound, Player.Center);
 
                 // Spawn an archangel for every minion you have
@@ -3628,7 +3628,7 @@ namespace CalamityMod.CalPlayer
                             NetMessage.SendData(MessageID.TeleportEntity, -1, -1, null, 0, (float)Player.whoAmI, teleportLocation.X, teleportLocation.Y, 1, 0, 0);
 
                             int duration = areThereAnyDamnBosses ? chaosStateDuration : 360;
-                            Player.AddBuff(BuffID.ChaosState, duration, true);
+                            Player.AddBuff(BuffID.ChaosState, duration);
                             Player.AddCooldown(ChaosState.ID, duration, true, "spectralveil");
 
                             int numDust = 40;
@@ -3969,7 +3969,7 @@ namespace CalamityMod.CalPlayer
                     }
                     else
                     {
-                        Player.AddBuff(BuffType<BrimflameFrenzyBuff>(), BrimflameCowl.FrenzyDuration, true);
+                        Player.AddBuff(BuffType<BrimflameFrenzyBuff>(), BrimflameCowl.FrenzyDuration);
                         SoundEngine.PlaySound(BrimflameCowl.ActivationSound, Player.Center);
                         for (int i = 0; i < 36; i++)
                         {
@@ -3995,7 +3995,7 @@ namespace CalamityMod.CalPlayer
             {
                 if (Player.whoAmI == Main.myPlayer)
                 {
-                    Player.AddBuff(BuffType<Buffs.StatBuffs.TarragonCloak>(), TarragonHeadMelee.CloakDuration, false);
+                    Player.AddBuff(BuffType<Buffs.StatBuffs.TarragonCloak>(), TarragonHeadMelee.CloakDuration);
                 }
             }
             if (bloodflareRanged && !Player.HasCooldown(BloodflareRangedSet.ID))
@@ -4040,7 +4040,7 @@ namespace CalamityMod.CalPlayer
             {
                 if (Player.whoAmI == Main.myPlayer)
                 {
-                    Player.AddBuff(BuffType<AbyssalMadness>(), OmegaBlueHelmet.MadnessDuration, false);
+                    Player.AddBuff(BuffType<AbyssalMadness>(), OmegaBlueHelmet.MadnessDuration);
                 }
                 Player.AddCooldown(OmegaBlue.ID, OmegaBlueHelmet.MadnessDuration + OmegaBlueHelmet.MadnessCooldown);
                 SoundEngine.PlaySound(OmegaBlueHelmet.ActivationSound, Player.Center);
@@ -4075,7 +4075,7 @@ namespace CalamityMod.CalPlayer
                 }
                 if (Player.whoAmI == Main.myPlayer)
                 {
-                    Player.AddBuff(BuffType<Enraged>(), DemonshadeHelm.EnrageDuration, false);
+                    Player.AddBuff(BuffType<Enraged>(), DemonshadeHelm.EnrageDuration);
                 }
                 if (Main.netMode != NetmodeID.MultiplayerClient)
                 {
@@ -4194,23 +4194,27 @@ namespace CalamityMod.CalPlayer
             int smallerCheckRadius = 50;
             int teleportStartY = Main.UnderworldLayer + 20;
             int teleportRangeY = 80;
-            Player.RandomTeleportationAttemptSettings settings = new Player.RandomTeleportationAttemptSettings
+            Utils.RandomTeleportationAttemptSettings settings = new Utils.RandomTeleportationAttemptSettings
             {
+                teleporteeSize = player.Size,
+                teleporteeVelocity = player.velocity,
+                teleporteeGravityDirection = player.gravDir,
                 mostlySolidFloor = true,
                 avoidAnyLiquid = true,
                 avoidLava = true,
                 avoidHurtTiles = true,
                 avoidWalls = true,
                 attemptsBeforeGivingUp = 1000,
-                maximumFallDistanceFromOrignalPoint = 30
+                maximumFallDistanceFromOrignalPoint = 30,
+                allowSolidTopFloor = true
             };
 
-            Vector2 vector = player.CheckForGoodTeleportationSpot(ref canSpawn, halfWorldXTiles - smallerCheckRadius, largerCheckRadius, teleportStartY, teleportRangeY, settings);
+            Vector2 vector = Utils.CheckForGoodTeleportationSpot(ref canSpawn, halfWorldXTiles - smallerCheckRadius, largerCheckRadius, teleportStartY, teleportRangeY, settings);
             if (!canSpawn)
-                vector = player.CheckForGoodTeleportationSpot(ref canSpawn, halfWorldXTiles - largerCheckRadius, smallerCheckRadius, teleportStartY, teleportRangeY, settings);
+                vector = Utils.CheckForGoodTeleportationSpot(ref canSpawn, halfWorldXTiles - largerCheckRadius, smallerCheckRadius, teleportStartY, teleportRangeY, settings);
 
             if (!canSpawn)
-                vector = player.CheckForGoodTeleportationSpot(ref canSpawn, halfWorldXTiles + smallerCheckRadius, smallerCheckRadius, teleportStartY, teleportRangeY, settings);
+                vector = Utils.CheckForGoodTeleportationSpot(ref canSpawn, halfWorldXTiles + smallerCheckRadius, smallerCheckRadius, teleportStartY, teleportRangeY, settings);
 
             if (canSpawn)
                 return (Vector2?)vector;
@@ -4584,14 +4588,14 @@ namespace CalamityMod.CalPlayer
             if (Player.Transformation().Type == ItemType<Popo>())
             {
                 if (Player.whoAmI == Main.myPlayer && !snowmanNoseless)
-                    Player.AddBuff(BuffType<PopoBuff>(), 60, true);
+                    Player.AddBuff(BuffType<PopoBuff>(), 60);
             }
 
             if (abyssalDivingSuit)
-                Player.AddBuff(BuffType<AbyssalDivingSuitBuff>(), 60, true);
+                Player.AddBuff(BuffType<AbyssalDivingSuitBuff>(), 60);
 
             if (aquaticHeart)
-                Player.AddBuff(BuffType<AquaticHeartBuff>(), 60, true);
+                Player.AddBuff(BuffType<AquaticHeartBuff>(), 60);
 
             if (aquaticHeart && NPC.downedBoss3)
             {
@@ -4600,7 +4604,7 @@ namespace CalamityMod.CalPlayer
             }
 
             if (profanedCrystal)
-                Player.AddBuff(BuffType<ProfanedCrystalBuff>(), 60, true);
+                Player.AddBuff(BuffType<ProfanedCrystalBuff>(), 60);
 
             if (gSabaton)
             {
@@ -5057,7 +5061,7 @@ namespace CalamityMod.CalPlayer
                 // Gives inverted buffs from well fed
                 Player.statDefense -= 2;
                 Player.GetCritChance<GenericDamageClass>() -= 2;
-                Player.minionKB -= 0.5f;
+                Player.GetKnockback(DamageClass.Summon).Base -= 0.5f;
                 Player.moveSpeed -= 0.05f;
                 // damage nerf/boost happens in PostUpdate
                 Player.pickSpeed += 0.05f;

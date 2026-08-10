@@ -29,7 +29,7 @@ namespace CalamityMod.Tiles.FurnitureWulfrum
             Main.tileFrameImportant[Type] = true;
             Main.tileNoAttach[Type] = true;
             TileID.Sets.MultiTileSway[Type] = true;
-            TileID.Sets.IsAMechanism[Type] = true;
+            TileID.Sets.Wiring.IsAMechanism[Type] = true;
             TileObjectData.newTile.Width = 3;
             TileObjectData.newTile.Height = 2;
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16 };
@@ -40,7 +40,7 @@ namespace CalamityMod.Tiles.FurnitureWulfrum
             TileObjectData.newTile.AnchorTop = new AnchorData(AnchorType.SolidTile, 1, 1);
             TileObjectData.newTile.StyleLineSkip = 2;
             TileObjectData.addTile(Type);
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
             AddMapEntry(new Color(235, 166, 135), Language.GetText("MapObject.Chandelier"));
             AdjTiles = new int[] { TileID.Chandeliers };
         }

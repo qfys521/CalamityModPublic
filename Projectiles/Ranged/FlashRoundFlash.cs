@@ -39,7 +39,7 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.scale = Main.rand.NextFloat(0.45f, 0.75f);
                     dust.noGravity = true;
                     dust.color = Color.White;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
             return false;

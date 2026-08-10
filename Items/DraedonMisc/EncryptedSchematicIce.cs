@@ -48,37 +48,37 @@ namespace CalamityMod.Items.DraedonMisc
                 {
                     int meleeItem = ModContent.ItemType<Phaseslayer>();
                     TooltipLine meleeDisplay = new TooltipLine(this.Mod, "CalamityMod:MeleeDisplay", $"[i:{meleeItem}] {CalamityUtils.GetItemName(meleeItem)}");
-                    meleeDisplay.OverrideColor = new Color(255, 64, 31);
+                    meleeDisplay.Color = new Color(255, 64, 31);
                     list.Insert(insertIndex + 1, meleeDisplay);
 
                     int rangedItem = ModContent.ItemType<PulseRifle>();
                     TooltipLine rangedDisplay = new TooltipLine(this.Mod, "CalamityMod:RangedDisplay", $"[i:{rangedItem}] {CalamityUtils.GetItemName(rangedItem)}");
-                    rangedDisplay.OverrideColor = new Color(201, 41, 255);
+                    rangedDisplay.Color = new Color(201, 41, 255);
                     list.Insert(insertIndex + 2, rangedDisplay);
 
                     int rangedItem2 = ModContent.ItemType<TheAnomalysNanogun>();
                     TooltipLine rangedDisplay2 = new TooltipLine(this.Mod, "CalamityMod:RangedDisplay2", $"[i:{rangedItem2}] {CalamityUtils.GetItemName(rangedItem2)}");
-                    rangedDisplay2.OverrideColor = new Color(255, 64, 31);
+                    rangedDisplay2.Color = new Color(255, 64, 31);
                     list.Insert(insertIndex + 3, rangedDisplay2);
 
                     int mageItem = ModContent.ItemType<TeslaCannon>();
                     TooltipLine mageDisplay = new TooltipLine(this.Mod, "CalamityMod:MageDisplay", $"[i:{mageItem}] {CalamityUtils.GetItemName(mageItem)}");
-                    mageDisplay.OverrideColor = new Color(31, 242, 245);
+                    mageDisplay.Color = new Color(31, 242, 245);
                     list.Insert(insertIndex + 4, mageDisplay);
 
                     int summonItem = ModContent.ItemType<PoleWarper>();
                     TooltipLine summonDisplay = new TooltipLine(this.Mod, "CalamityMod:SummonDisplay", $"[i:{summonItem}] {CalamityUtils.GetItemName(summonItem)}");
-                    summonDisplay.OverrideColor = new Color(236, 255, 31);
+                    summonDisplay.Color = new Color(236, 255, 31);
                     list.Insert(insertIndex + 5, summonDisplay);
 
                     int rogueItem = ModContent.ItemType<PlasmaGrenade>();
                     TooltipLine rogueDisplay = new TooltipLine(this.Mod, "CalamityMod:RogueDisplay", $"[i:{rogueItem}] {CalamityUtils.GetItemName(rogueItem)}");
-                    rogueDisplay.OverrideColor = new Color(149, 243, 43);
+                    rogueDisplay.Color = new Color(149, 243, 43);
                     list.Insert(insertIndex + 6, rogueDisplay);
 
                     int codeItem = ModContent.ItemType<AuricQuantumCoolingCell>();
                     TooltipLine machineDisplay = new TooltipLine(this.Mod, "CalamityMod:CodeDisplay", $"[i:{codeItem}] {CalamityUtils.GetItemName(codeItem)}");
-                    machineDisplay.OverrideColor = new Color(255, 215, 0);
+                    machineDisplay.Color = new Color(255, 215, 0);
                     list.Insert(insertIndex + 7, machineDisplay);
                 }
             }

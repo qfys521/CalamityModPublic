@@ -27,15 +27,15 @@ namespace CalamityMod.Items.Materials
             Item.value = Item.sellPrice(silver: 4);
             Item.rare = ItemRarityID.LightRed;
         }
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, TextureAssets.Item[Type].Value);
+            item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, TextureAssets.Item[Type].Value);
         }
 
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float brightness = Main.essScale * Main.rand.NextFloat(0.9f, 1.1f);
-            Lighting.AddLight(Item.Center, 0.5f * brightness, 0.3f * brightness, 0.05f * brightness);
+            Lighting.AddLight(item.Center, 0.5f * brightness, 0.3f * brightness, 0.05f * brightness);
         }
     }
 }

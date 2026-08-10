@@ -46,7 +46,6 @@ namespace CalamityMod.Backgrounds
 
         public override bool PreDrawCloseBackground(SpriteBatch spriteBatch) //Taken from vanilla to draw the front 3 layers, edited to fit tmod and astral background needs
         {
-            float screenOff = Main.instance.screenOff;
             float scAdj = Main.instance.scAdj;
             Color COSBMAplha = Main.ColorOfSurfaceBackgroundsModified;
             Color ColorOfSurfaceBackgroundsModified = new Color(63, 51, 90, COSBMAplha.A); //Astral Biome Coloration with the alpha as the background fade
@@ -63,8 +62,7 @@ namespace CalamityMod.Backgrounds
             float surfacePosition = (float)Main.worldSurface;
             if (surfacePosition == 0f)
                 surfacePosition = 1f;
-            float screenPosition = Main.screenPosition.Y + (float)(Main.screenHeight / 2) - 600f;
-            double backgroundTopMagicNumber = (0f - screenPosition + screenOff / 2f) / (surfacePosition * 16f);
+            double backgroundTopMagicNumber = -(Main.screenPosition.Y - 300f) / (surfacePosition * 16f);
             float bgGlobalScaleMultiplier = 2f;
             int pushBGTopHack;
             int offset2 = -180;

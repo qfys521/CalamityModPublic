@@ -399,7 +399,7 @@ namespace CalamityMod.Projectiles.Ranged
         }
         public override bool? CanDamage() => canDamage ? null : false;
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 25 * (!spawnPullBlood ? 4 : 1), targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Player Owner = Main.player[Projectile.owner];
             Texture2D chain = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Ranged/SepticChain").Value;

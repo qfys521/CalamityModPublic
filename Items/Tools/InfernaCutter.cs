@@ -135,7 +135,7 @@ namespace CalamityMod.Items.Tools
                 var source = player.GetSource_ItemUse(Item);
                 Projectile.NewProjectile(source, target.Center, Vector2.Zero, ModContent.ProjectileType<FuckYou>(), 0, Item.knockBack, player.whoAmI, 0f, 0.85f + Main.rand.NextFloat() * 1.15f);
                 int onHitDamage = player.CalcIntDamage<MeleeDamageClass>(Item.damage * 0.5f);
-                Projectile blast = Projectile.NewProjectileDirect(Item.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<DirectStrike>(), onHitDamage, 0f, player.whoAmI, target.whoAmI);
+                Projectile blast = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), target.Center, Vector2.Zero, ModContent.ProjectileType<DirectStrike>(), onHitDamage, 0f, player.whoAmI, target.whoAmI);
                 blast.DamageType = Item.DamageType;
             }
             target.AddBuff(BuffID.OnFire3, 300);

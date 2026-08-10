@@ -51,7 +51,7 @@ namespace CalamityMod.Tiles.AstralSnow
             num = fail ? 1 : 3;
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             if (WorldGen.genRand.NextBool(20))
             {

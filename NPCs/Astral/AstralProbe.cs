@@ -332,13 +332,13 @@ namespace CalamityMod.NPCs.Astral
             npcLoot.Add(DropHelper.NormalVsExpertQuantity(ModContent.ItemType<StarblightSoot>(), 2, 1, 2, 1, 3));
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (CalamityGlobalNPC.AnyEvents(spawnInfo.Player))
+            if (CalamityGlobalNPC.AnyEvents(spawner.Player))
             {
                 return 0f;
             }
-            else if (spawnInfo.Player.InAstral())
+            else if (spawner.Player.InAstral())
             {
                 return 0.1f;
             }

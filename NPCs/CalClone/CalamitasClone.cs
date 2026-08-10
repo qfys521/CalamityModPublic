@@ -1095,7 +1095,7 @@ namespace CalamityMod.NPCs.CalClone
             CalamityNetcode.SyncWorld();
         }
 
-        public override void BossLoot(ref int potionType) => potionType = ItemID.GreaterHealingPotion;
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack) => potionType = ItemID.GreaterHealingPotion;
 
         public override void HitEffect(NPC.HitInfo hit)
         {
@@ -1148,7 +1148,7 @@ namespace CalamityMod.NPCs.CalClone
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
             return true;
         }
 

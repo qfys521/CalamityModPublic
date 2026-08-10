@@ -27,7 +27,7 @@ namespace CalamityMod.Projectiles.Summon
             Main.projPet[Type] = true;
             ProjectileID.Sets.NeedsUUID[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -156,7 +156,7 @@ namespace CalamityMod.Projectiles.Summon
 
         #endregion
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D eyeTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frame = eyeTexture.Frame(1, Main.projFrames[Type], 0, Projectile.frame);

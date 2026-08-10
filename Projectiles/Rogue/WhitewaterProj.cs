@@ -213,7 +213,7 @@ namespace CalamityMod.Projectiles.Rogue
             else // if hitting before being empowered it does less damage, otherwise on the empowered hit it does full damage, but both hits are effected by the damageMult
                 modifiers.SourceDamage *= (empowered && !returning) ? damageModifier : damageModifier * 0.5f;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Texture2D rTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;

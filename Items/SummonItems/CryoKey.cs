@@ -15,7 +15,7 @@ namespace CalamityMod.Items.SummonItems
         public new string LocalizationCategory => "Items.SummonItems";
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 7; // Ocram's Razor (1 below Mechanical Eye)
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 7; // Ocram's Razor (1 below Mechanical Eye)
         }
 
         public override void SetDefaults()
@@ -52,11 +52,11 @@ namespace CalamityMod.Items.SummonItems
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Items/SummonItems/CryoKey").Value;
             Color overlay = Main.zenithWorld ? Color.Red : lightColor;
-            spriteBatch.Draw(texture, Item.position - Main.screenPosition, null, overlay, 0f, Vector2.Zero, 1f, 0, 0);
+            spriteBatch.Draw(texture, item.position - Main.screenPosition, null, overlay, 0f, Vector2.Zero, 1f, 0, 0);
             return false;
         }
 

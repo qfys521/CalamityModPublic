@@ -40,7 +40,7 @@ namespace CalamityMod.Tiles.FurnitureExo
             TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
 
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            TileID.Sets.RoomNeeds.CountsAsChair[Type] = true;
 
             AddMapEntry(new Color(71, 95, 114), Language.GetText("MapObject.Chair"));
             TileID.Sets.CanBeSatOnForNPCs[Type] = true;

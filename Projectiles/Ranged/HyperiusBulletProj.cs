@@ -109,7 +109,7 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(1.2f, 1.9f) * timeleftFade;
                     dust.color = currentColor;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     dust.fadeIn = 1.4f;
                 }
             }
@@ -151,7 +151,7 @@ namespace CalamityMod.Projectiles.Ranged
                 }
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> orb = ModContent.Request<Texture2D>("CalamityMod/Particles/GlowSpark");
             int startTime = 9;

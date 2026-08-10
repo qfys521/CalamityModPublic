@@ -83,7 +83,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Projectile.DrawBackglow(PlaguebringerGoliath.BackglowColor, 4f);
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor, 1);
@@ -202,11 +202,11 @@ namespace CalamityMod.Projectiles.Boss
 
             if (Main.zenithWorld) // it is the plague, you get very sick.
             {
-                target.AddBuff(ModContent.BuffType<SulphuricPoisoning>(), 240, true);
-                target.AddBuff(BuffID.Poisoned, 240, true);
-                target.AddBuff(BuffID.Venom, 240, true);
+                target.AddBuff(ModContent.BuffType<SulphuricPoisoning>(), 240);
+                target.AddBuff(BuffID.Poisoned, 240);
+                target.AddBuff(BuffID.Venom, 240);
             }
-            target.AddBuff(ModContent.BuffType<Plague>(), 120, true);
+            target.AddBuff(ModContent.BuffType<Plague>(), 120);
         }
     }
 }

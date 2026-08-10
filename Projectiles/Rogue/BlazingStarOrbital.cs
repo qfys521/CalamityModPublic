@@ -38,7 +38,7 @@ namespace CalamityMod.Projectiles.Rogue
             Projectile.ai[0]++;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float distance = MathHelper.Min(Projectile.ai[0] / 15f, 1f);
             if (Projectile.timeLeft < 15)

@@ -203,7 +203,7 @@ namespace CalamityMod.Projectiles.Melee
                 dust.noGravity = true;
                 dust.color = Main.rand.NextBool() ? Color.MediumOrchid : Color.BlueViolet;
                 dust.noLight = true;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.alpha = 100;
                 dust.velocity += Projectile.velocity;
                 dust.fadeIn = Projectile.scale - 1;
@@ -343,7 +343,7 @@ namespace CalamityMod.Projectiles.Melee
             return base.CanDamage();
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => (Projectile.numHits > 0 && !exitedTarget) ? false : CalamityUtils.CircularHitboxCollision(Projectile.Center, Projectile.width / (exitedTarget ? 0.25f : 1) * Projectile.scale, targetHitbox); // After exiting a target, the hitbox is larger
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D centerTexture = ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Melee/ExaltedOathblade").Value;
             Vector2 generalDrawPos = Projectile.Center - Main.screenPosition;

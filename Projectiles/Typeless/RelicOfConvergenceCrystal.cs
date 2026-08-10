@@ -178,12 +178,12 @@ namespace CalamityMod.Projectiles.Typeless
                     dust.noGravity = !Main.rand.NextBool(5);
                     dust.velocity = Utils.DirectionTo(mousePos, drawPos) * Main.rand.NextFloat(2f, 4f);
                     dust.color = Color.Orchid;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float opacity = time / CrystalsDrawTime;
             Texture2D crystalTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

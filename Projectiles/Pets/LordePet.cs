@@ -56,7 +56,7 @@ namespace CalamityMod.Projectiles.Pets
             }
         }
 
-        public override bool PreDraw(ref Color drawColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             SpriteEffects spriteEffects = SpriteEffects.None;
             if (Projectile.spriteDirection == 1)
@@ -64,7 +64,7 @@ namespace CalamityMod.Projectiles.Pets
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frameUsed = texture.Frame(2, 7, 0, 1);
 
-            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), frameUsed, drawColor, Projectile.rotation, new Vector2(texture.Width / 4f, texture.Height / 14f), Projectile.scale, spriteEffects, 0);
+            Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), frameUsed, lightColor, Projectile.rotation, new Vector2(texture.Width / 4f, texture.Height / 14f), Projectile.scale, spriteEffects, 0);
             return false;
         }
     }

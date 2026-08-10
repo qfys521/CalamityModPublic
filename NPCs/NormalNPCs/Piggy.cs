@@ -501,13 +501,13 @@ namespace CalamityMod.NPCs.NormalNPCs
             return NPC.active;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
             float goldMultiplier = NPC.type == ModContent.NPCType<PiggyGold>() ? 0.0025f : 1f;
-            bool inAtTown = spawnInfo.Player.townNPCs > 2f && (Main.remixWorld ? spawnInfo.Player.ZoneNormalCaverns : spawnInfo.Player.ZoneForest);
+            bool inAtTown = spawner.Player.townNPCs > 2f && (Main.remixWorld ? spawner.Player.ZoneNormalCaverns : spawner.Player.ZoneForest);
             if (inAtTown)
                 return SpawnCondition.TownCritter.Chance * 0.1f * goldMultiplier;
-            else if (spawnInfo.Player.ZonePurity)
+            else if (spawner.Player.ZonePurity)
                 return (Main.remixWorld ? SpawnCondition.Cavern.Chance * 0.005f : SpawnCondition.OverworldDayGrassCritter.Chance * 0.005f) * goldMultiplier;
 
             return 0f;

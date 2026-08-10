@@ -133,7 +133,7 @@ namespace CalamityMod.Projectiles.Rogue
                     chust.noGravity = true;
 
                     if (!Main.rand.NextBool(5))
-                        chust.noLightEmittence = true;
+                        chust.noLightEmittance = true;
                 }
             }
 
@@ -155,7 +155,7 @@ namespace CalamityMod.Projectiles.Rogue
 
                     Dust chust = Dust.NewDustPerfect(dustCenter, DustID.MagicMirror, -Projectile.velocity * Main.rand.NextFloat(0.6f, 1.5f), Scale: Main.rand.NextFloat(1f, 1.4f));
                     chust.noGravity = true;
-                    chust.noLightEmittence = true;
+                    chust.noLightEmittance = true;
                 }
             }
 
@@ -195,7 +195,7 @@ namespace CalamityMod.Projectiles.Rogue
             return 9.4f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
 

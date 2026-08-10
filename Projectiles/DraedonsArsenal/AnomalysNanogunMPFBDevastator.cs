@@ -54,7 +54,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             Projectile.frame = Projectile.frameCounter / 3 % Main.projFrames[Type];
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int yPos = texture.Height / Main.projFrames[Type] * Projectile.frame;

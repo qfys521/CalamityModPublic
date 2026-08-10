@@ -35,7 +35,7 @@ namespace CalamityMod.Tiles.Abyss
 
         public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
         {
-            if (WorldGen.loadSuccess)
+            if (!WorldGen.isGeneratingOrLoadingWorld)
             {
                 Tile tileAbove = Framing.GetTileSafely(i, j - 1);
                 if (!tileAbove.HasTile)
@@ -67,7 +67,7 @@ namespace CalamityMod.Tiles.Abyss
             }
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Tile tileBelow = Framing.GetTileSafely(i, j + 1);
             if (WorldGen.genRand.NextBool(5) && !tileBelow.HasTile && tileBelow.LiquidType != LiquidID.Lava)

@@ -134,7 +134,7 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.Poisoned, 240, true);
+                target.AddBuff(BuffID.Poisoned, 240);
         }
 
         public override void FindFrame(int frameHeight)
@@ -166,13 +166,13 @@ namespace CalamityMod.NPCs.Abyss
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer1 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer1 && spawner.waterTile)
             {
                 return SpawnCondition.OceanMonster.Chance * 1.5f;
             }
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer2 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer2 && spawner.waterTile)
             {
                 return SpawnCondition.CaveJellyfish.Chance * 2.0f;
             }

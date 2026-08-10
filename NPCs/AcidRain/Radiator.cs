@@ -94,12 +94,12 @@ namespace CalamityMod.NPCs.AcidRain
                 Player player = Main.LocalPlayer;
                 if (!player.dead && player.active && (player.Center - NPC.Center).Length() < auraSize && !player.creativeGodMode)
                 {
-                    player.AddBuff(ModContent.BuffType<Irradiated>(), 3, false);
-                    player.AddBuff(BuffID.Poisoned, 2, false);
+                    player.AddBuff(ModContent.BuffType<Irradiated>(), 3);
+                    player.AddBuff(BuffID.Poisoned, 2);
                     if (DownedBossSystem.downedPolterghast)
                     {
-                        player.AddBuff(ModContent.BuffType<SulphuricPoisoning>(), 3, false);
-                        player.AddBuff(BuffID.Venom, 2, false);
+                        player.AddBuff(ModContent.BuffType<SulphuricPoisoning>(), 3);
+                        player.AddBuff(BuffID.Venom, 2);
                     }
                 }
             }

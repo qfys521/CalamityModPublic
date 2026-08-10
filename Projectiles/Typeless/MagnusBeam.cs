@@ -101,7 +101,7 @@ namespace CalamityMod.Projectiles.Typeless
             return Main.hslToRgb(Vector3.Lerp(trailColor, endColor, Utils.GetLerpValue(0f, 0.72f, completionRatio, true))) * Utils.GetLerpValue(0.8f, 0.54f, completionRatio, true) * Projectile.Opacity;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             GameShaders.Misc["CalamityMod:ImpFlameTrail"].SetShaderTexture(ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/Trails/ScarletDevilStreak"));
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, (_,_) => Projectile.Size * 0.5f, shader: GameShaders.Misc["CalamityMod:ImpFlameTrail"]), 30);

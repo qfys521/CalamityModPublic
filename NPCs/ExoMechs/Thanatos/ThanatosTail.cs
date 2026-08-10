@@ -532,7 +532,7 @@ namespace CalamityMod.NPCs.ExoMechs.Thanatos
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
 
             Rectangle targetHitbox = target.Hitbox;
 

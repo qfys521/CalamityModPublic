@@ -75,7 +75,7 @@ namespace CalamityMod.Projectiles.Rogue
                 CalamityUtils.HomeInOnNPC(Projectile, true, 900f, 15f, 20f);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.timeLeft > Lifetime - NoDrawFrames)
                 return false;

@@ -42,7 +42,7 @@ namespace CalamityMod.Projectiles.Rogue
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info) => target.AddBuff(BuffID.Confused, 300);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             string texPath = "CalamityMod/Projectiles/Rogue/InkCloud" + Projectile.ai[0].ToString();
             Texture2D tex = ModContent.Request<Texture2D>(texPath).Value;

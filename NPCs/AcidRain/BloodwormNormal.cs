@@ -108,9 +108,9 @@ namespace CalamityMod.NPCs.AcidRain
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (!spawnInfo.Player.Calamity().ZoneSulphur || AcidRainEvent.AcidRainEventIsOngoing || !NPC.downedMoonlord)
+            if (!spawner.Player.Calamity().ZoneSulphur || AcidRainEvent.AcidRainEventIsOngoing || !NPC.downedMoonlord)
                 return 0f;
 
             // Increase bloodworm spawn rate relative to the number of existing bloodworms, parabolic multiplier ranging from 5x spawn rate with 0 blood worms to 1x with 5 or more
@@ -118,7 +118,7 @@ namespace CalamityMod.NPCs.AcidRain
             float spawnMult = bloodwormAmt > 5 ? 1f : (float)(0.16 * Math.Pow(5 - bloodwormAmt, 2)) + 1f;
             float baseSpawnRate = DownedBossSystem.downedBoomerDuke ? 0.1f : AcidRainEvent.OldDukeHasBeenEncountered ? 0.4f : 0.2f;
 
-            float luck = spawnInfo.Player.luck;
+            float luck = spawner.Player.luck;
             if (luck > 0f && Main.rand.NextFloat() < luck)
                 spawnMult *= Main.rand.NextFloat(1f, 2f);
             if (luck < 0f && Main.rand.NextFloat() < -luck)

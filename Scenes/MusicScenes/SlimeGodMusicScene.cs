@@ -11,6 +11,6 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<SlimeGodCore>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("SlimeGod");
         public override int VanillaMusic => MusicID.Boss1;
-        public override int OtherworldMusic => MusicID.OtherworldlyBoss1;
+        public override int OtherworldMusic => MusicID.OtherworldBoss1;
     }
 }

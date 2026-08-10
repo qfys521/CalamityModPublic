@@ -37,7 +37,7 @@ namespace CalamityMod.Items.Accessories
                 var source = player.GetSource_Accessory(Item);
                 if (player.FindBuffIndex(ModContent.BuffType<BrimstoneElemental>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<BrimstoneElemental>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<BrimstoneElemental>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<BrimstoneElementalMinion>()] < 1)
                 {
@@ -60,7 +60,7 @@ namespace CalamityMod.Items.Accessories
                 var source = player.GetSource_Accessory(Item);
                 if (player.FindBuffIndex(ModContent.BuffType<BrimstoneElemental>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<BrimstoneElemental>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<BrimstoneElemental>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<BrimstoneElementalMinion>()] < 1)
                 {

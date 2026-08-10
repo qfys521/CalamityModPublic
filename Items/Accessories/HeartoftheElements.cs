@@ -75,7 +75,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(BuffType<HotE>()) == -1)
                 {
-                    player.AddBuff(BuffType<HotE>(), 3600, true);
+                    player.AddBuff(BuffType<HotE>(), 3600);
                 }
                 if (player.ownedProjectileCounts[brimmy] < 1)
                 {
@@ -139,7 +139,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(BuffType<HotE>()) == -1)
                 {
-                    player.AddBuff(BuffType<HotE>(), 3600, true);
+                    player.AddBuff(BuffType<HotE>(), 3600);
                 }
                 if (player.ownedProjectileCounts[brimmy] < 1)
                 {

@@ -148,7 +148,7 @@ namespace CalamityMod.Projectiles.Magic
                     Dust dust = Dust.NewDustDirect(dustSpawnPosition, 1, 1, DustID.TintableDustLighted, dustVelocity.X, dustVelocity.Y, 0, SHPB.FindColorForSoul((int)Projectile.ai[0]), dustScale);
                     dust.noGravity = true;
                     dust.noLight = false;
-                    dust.noLightEmittence = false;
+                    dust.noLightEmittance = false;
                 }
             }
 
@@ -180,7 +180,7 @@ namespace CalamityMod.Projectiles.Magic
                 Dust dust = Dust.NewDustDirect(dustSpawnPosition, 1, 1, DustID.TintableDustLighted, dustVelocity.X, dustVelocity.Y, 0, SHPB.FindColorForSoul((int)Projectile.ai[0]), dustScale);
                 dust.noGravity = true;
                 dust.noLight = false;
-                dust.noLightEmittence = false;
+                dust.noLightEmittance = false;
             }
 
             // Spawn a burst of dust at the center.
@@ -191,11 +191,11 @@ namespace CalamityMod.Projectiles.Magic
                 Dust dust = Dust.NewDustDirect(Projectile.Center, 1, 1, DustID.TintableDustLighted, dustVelocity.X, dustVelocity.Y, 0, SHPB.FindColorForSoul((int)Projectile.ai[0]), dustScale);
                 dust.noGravity = true;
                 dust.noLight = false;
-                dust.noLightEmittence = false;
+                dust.noLightEmittance = false;
             }
         }
 
-        public override bool PreDraw(ref Color lightColor) => false;
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => false;
 
         public float SoulWidthFunction(float completion, Vector2 _)
         {

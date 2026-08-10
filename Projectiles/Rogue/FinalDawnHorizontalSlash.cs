@@ -69,7 +69,7 @@ namespace CalamityMod.Projectiles.Rogue
             if (Projectile.ai[1] == 4 || Projectile.ai[1] == 5) player.ChangeDir(-1 * Projectile.spriteDirection);
             else player.ChangeDir(Projectile.spriteDirection);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D scytheTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Texture2D scytheGlowTexture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Rogue/FinalDawnHorizontalSlash_Glow").Value;

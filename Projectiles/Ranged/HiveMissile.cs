@@ -67,7 +67,7 @@ namespace CalamityMod.Projectiles.Ranged
                 Dust trailDust = Dust.NewDustDirect(Projectile.Center, Projectile.width, Projectile.height, Main.rand.NextBool() ? 303 : DustEffectsID, Scale: Main.rand.NextFloat(0.3f, 0.6f));
                 trailDust.noGravity = true;
                 trailDust.noLight = true;
-                trailDust.noLightEmittence = true;
+                trailDust.noLightEmittance = true;
                 trailDust.velocity = -Projectile.velocity * Main.rand.NextFloat(0.2f, 0.8f);
                 if (trailDust.type != DustEffectsID)
                     trailDust.color = Main.rand.NextBool(3) ? EffectsColor : StaticEffectsColor;
@@ -91,7 +91,7 @@ namespace CalamityMod.Projectiles.Ranged
             Lighting.AddLight(Projectile.Center, StaticEffectsColor.ToVector3() * 0.7f);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, tex.Size() / 2f, Projectile.scale, SpriteEffects.None, 0);

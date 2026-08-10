@@ -80,7 +80,7 @@ namespace CalamityMod.Items.Weapons.Melee
                     for (int i = 0; i < 3; i++)
                     {
                         // Stats are set to dynamically update, so damage, kb, crit have to be feeded
-                        Projectile clone = Projectile.NewProjectileDirect(Item.GetSource_FromThis(), player.Center, Vector2.Zero, ModContent.ProjectileType<DarkMasterClone>(), Item.damage, Item.knockBack, player.whoAmI, i);
+                    Projectile clone = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Center, Vector2.Zero, ModContent.ProjectileType<DarkMasterClone>(), Item.damage, Item.knockBack, player.whoAmI, i);
                         clone.OriginalCritChance = Item.crit;
                     }
                 }

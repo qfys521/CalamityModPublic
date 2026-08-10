@@ -84,10 +84,10 @@ namespace CalamityMod.Projectiles.Rogue
             }
         }
 
-        public override bool PreDrawExtras()
+        public override bool PreDrawExtras(Player player)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, 2, Color.Lerp(HighBlueColor, Color.Transparent, 0.8f), texture: ModContent.Request<Texture2D>(Texture).Value);
-            return base.PreDrawExtras();
+            return base.PreDrawExtras(player);
         }
 
         public override void OnKill(int timeLeft)
@@ -139,7 +139,7 @@ namespace CalamityMod.Projectiles.Rogue
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 origin = new Vector2(32f, 33f);
@@ -147,7 +147,7 @@ namespace CalamityMod.Projectiles.Rogue
             return false;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Rogue/ApoctolithGlow").Value;
             Vector2 origin = new Vector2(32f, 33f);

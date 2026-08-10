@@ -97,7 +97,7 @@ namespace CalamityMod.Projectiles.Typeless
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float lerpMult = MathHelper.Lerp(0.5f, 1.5f, Math.Abs((float)Math.Sin(Projectile.localAI[1] / 10f)));
 
@@ -141,7 +141,7 @@ namespace CalamityMod.Projectiles.Typeless
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.95f, 1.45f) * Projectile.scale;
                 dust.color = Main.rand.NextBool(4) ? (reachedMaxDamage ? Color.Orchid : Color.Khaki) : Color.Goldenrod;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
             if (reachedMaxDamage)
             {

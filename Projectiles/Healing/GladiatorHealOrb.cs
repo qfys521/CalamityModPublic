@@ -89,7 +89,7 @@ namespace CalamityMod.Projectiles.Healing
             Projectile.velocity = (playerVector.SafeNormalize(Vector2.UnitY) * 3.5f) + (player.velocity / 4);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D lightTexture = ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/SmallGreyscaleCircle").Value;
             for (int i = 0; i < Projectile.oldPos.Length; i++)

@@ -40,7 +40,7 @@ namespace CalamityMod.Projectiles.Enemy
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 drawOrigin = new(tex.Width * 0.5f, Projectile.height * 0.5f);
@@ -98,7 +98,7 @@ namespace CalamityMod.Projectiles.Enemy
             if (info.Damage <= 0)
                 return;
 
-            target.AddBuff(BuffID.Darkness, 300, true);
+            target.AddBuff(BuffID.Darkness, 300);
             Projectile.Kill();
         }
     }

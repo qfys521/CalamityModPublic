@@ -41,7 +41,7 @@ namespace CalamityMod.Projectiles.Typeless
         }
         public override void NumGrappleHooks(Player player, ref int numHooks) => numHooks = 2;
 
-        public override bool PreDraw(ref Color lightColor) => Projectile.DrawHook(Chain.Value);
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => Projectile.DrawHook(Chain.Value);
 
         public override void AI()
         {

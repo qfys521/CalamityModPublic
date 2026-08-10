@@ -119,7 +119,7 @@ namespace CalamityMod.Projectiles.Melee
             return false;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Melee/FallenPaladinsHammer").Value;
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], Color.DarkRed with { A = 0 } * 0.5f, 1, texture, true, true);

@@ -61,7 +61,7 @@ namespace CalamityMod.Projectiles.Typeless
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector3 lightCol = new(85f / 255f, 151f / 255f, 196f / 255f);
             float brightness = 0.7f;

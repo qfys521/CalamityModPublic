@@ -11,8 +11,8 @@ namespace CalamityMod.Systems
 
         public override int NPCType => ModContent.NPCType<DevourerofGodsHead>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("DevourerofGodsPhase2");
-        public override int VanillaMusic => MusicID.LunarBoss;
-        public override int OtherworldMusic => MusicID.OtherworldlyLunarBoss;
+        public override int VanillaMusic => MusicID.MoonLord;
+        public override int OtherworldMusic => MusicID.OtherworldMoonLord;
         public override int[] AdditionalNPCs => new int[]
         {
             ModContent.NPCType<DevourerofGodsBody>(),

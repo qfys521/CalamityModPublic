@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -163,15 +164,15 @@ namespace CalamityMod.NPCs.Astral
                 spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + new Vector2(0, 4f), NPC.frame, Color.White * 0.75f, NPC.rotation, new Vector2(59f, 28f), NPC.scale, NPC.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (CalamityGlobalNPC.AnyEvents(spawnInfo.Player))
+            if (CalamityGlobalNPC.AnyEvents(spawner.Player))
             {
                 return 0f;
             }
-            else if (spawnInfo.Player.InAstral(1))
+            else if (spawner.Player.InAstral(1))
             {
-                return spawnInfo.Player.ZoneDesert ? 0.14f : 0.17f;
+                return spawner.Player.ZoneDesert ? 0.14f : 0.17f;
             }
             return 0f;
         }
@@ -179,7 +180,7 @@ namespace CalamityMod.NPCs.Astral
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<AstralInfectionDebuff>(), 180, true);
+                target.AddBuff(ModContent.BuffType<AstralInfectionDebuff>(), 180);
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
@@ -251,8 +252,8 @@ namespace CalamityMod.NPCs.Astral
                 int parent = ModContent.NPCType<SightseerSpitter>();
                 if (target.HasNPCBannerBuff(parent))
                 {
-		        	ItemID.BannerEffect effect = ItemID.Sets.BannerStrength[Item.BannerToItem(parent)];
-        			modifiers.IncomingDamageMultiplier *= (Main.expertMode ? effect.ExpertDamageReceived : effect.NormalDamageReceived);
+                    ItemID.BannerEffect effect = ItemID.Sets.BannerStrength[BannerSystem.BannerToItem(parent)];
+                    modifiers.IncomingDamageMultiplier *= effect.DamageReceived.Sample(Main.Difficulty);
                 }
 
                 if (Main.netMode != NetmodeID.MultiplayerClient)

@@ -122,7 +122,7 @@ namespace CalamityMod.Projectiles.Ranged
                         DelegateMethods.f_1 = 10.5f * Utils.Remap(time, 60f, 1f, 1f, 0f, true);
                         if (time == 0)
                         {
-                            Utils.PlotTileArea(center.X * blastRadius, center.Y * blastRadius, DelegateMethods.SpreadDry);
+                            Utils.FloodFillTile(center, DelegateMethods.f_1, DelegateMethods.SpreadDry);
                         }
                     }
                     if (RocketID == ItemID.WetRocket)
@@ -130,7 +130,7 @@ namespace CalamityMod.Projectiles.Ranged
                         DelegateMethods.f_1 = 10.5f * Utils.Remap(time, 60f, 1f, 1f, 0f, true);
                         if (time == 0)
                         {
-                            Utils.PlotTileArea(center.X * blastRadius, center.Y * blastRadius, DelegateMethods.SpreadWater);
+                            Utils.FloodFillTile(center, DelegateMethods.f_1, DelegateMethods.SpreadWater);
                         }
                     }
                     if (RocketID == ItemID.LavaRocket)
@@ -138,7 +138,7 @@ namespace CalamityMod.Projectiles.Ranged
                         DelegateMethods.f_1 = 10.5f * Utils.Remap(time, 60f, 1f, 1f, 0f, true);
                         if (time == 0)
                         {
-                            Utils.PlotTileArea(center.X * blastRadius, center.Y * blastRadius, DelegateMethods.SpreadLava);
+                            Utils.FloodFillTile(center, DelegateMethods.f_1, DelegateMethods.SpreadLava);
                         }
                     }
                     if (RocketID == ItemID.HoneyRocket)
@@ -146,7 +146,7 @@ namespace CalamityMod.Projectiles.Ranged
                         DelegateMethods.f_1 = 10.5f * Utils.Remap(time, 60f, 1f, 1f, 0f, true);
                         if (time == 0)
                         {
-                            Utils.PlotTileArea(center.X * blastRadius, center.Y * blastRadius, DelegateMethods.SpreadHoney);
+                            Utils.FloodFillTile(center, DelegateMethods.f_1, DelegateMethods.SpreadHoney);
                         }
                     }
                 }
@@ -228,7 +228,7 @@ namespace CalamityMod.Projectiles.Ranged
                 }
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 1)
                 return false;

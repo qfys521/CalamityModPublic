@@ -127,7 +127,7 @@ namespace CalamityMod.Projectiles.Pets
             Projectile.frameCounter++;
             Projectile.frame = Projectile.frameCounter / flapRate % Main.projFrames[Type];
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             Texture2D glow = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;

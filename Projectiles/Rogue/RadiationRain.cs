@@ -88,7 +88,7 @@ namespace CalamityMod.Projectiles.Rogue
                     c.noGravity = true;
                     c.color = Color.Lerp(Color.White, Main.rand.NextBool(4) ? Color.Green : Color.Chartreuse, 0.7f);
                     c.noLight = true;
-                    c.noLightEmittence = true;
+                    c.noLightEmittance = true;
                 }
             }
             if (time % 10 * Projectile.MaxUpdates == 0)

@@ -57,7 +57,7 @@ namespace CalamityMod.NPCs.SulphurousSea
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo) => spawnInfo.Player.InSulphur() && spawnInfo.Water ? 0.4f : 0f;
+        public override float SpawnChance(NPC.Spawner spawner) => spawner.Player.InSulphur() && spawner.waterTile ? 0.4f : 0f;
 
         public override void HitEffect(NPC.HitInfo hit)
         {

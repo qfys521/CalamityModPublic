@@ -12,7 +12,7 @@ namespace CalamityMod.Systems
 
         public override void SpecialVisuals(Player player, bool isActive)
         {
-            player.ManageSpecialBiomeVisuals("CalamityMod:PlaguebringerGoliath", isActive);
+            Main.SceneState.ManageSpecialBiomeVisuals("CalamityMod:PlaguebringerGoliath", isActive);
         }
     }
 }

@@ -68,7 +68,7 @@ namespace CalamityMod.Projectiles.Summon
                 c.scale = Main.rand.NextFloat(0.9f, 1.1f);
                 c.noGravity = true;
                 c.color = Main.rand.NextBool() ? Color.Orange : Color.Goldenrod;
-                c.noLightEmittence = true;
+                c.noLightEmittance = true;
             }
         }
     }

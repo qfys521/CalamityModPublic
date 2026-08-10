@@ -12,7 +12,7 @@ namespace CalamityMod.Items.SummonItems.Invasion
         public override void SetStaticDefaults()
         {
             Item.ResearchUnlockCount = 3;
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 4; // Goblin Battle Standard
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 4; // Goblin Battle Standard
         }
 
         public override void SetDefaults()

@@ -11,8 +11,8 @@ namespace CalamityMod.Systems
 
         public override int NPCType => ModContent.NPCType<SupremeCalamitas>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("CalamitasPhase3");
-        public override int VanillaMusic => MusicID.LunarBoss;
-        public override int OtherworldMusic => MusicID.OtherworldlyLunarBoss;
+        public override int VanillaMusic => MusicID.MoonLord;
+        public override int OtherworldMusic => MusicID.OtherworldMoonLord;
 
         public override bool AdditionalCheck() => CalamityGlobalNPC.SCalEpiphany != -1;
     }

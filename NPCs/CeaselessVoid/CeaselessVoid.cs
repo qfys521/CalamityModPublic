@@ -676,7 +676,7 @@ namespace CalamityMod.NPCs.CeaselessVoid
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.VortexDebuff, 60, true);
+                target.AddBuff(BuffID.VortexDebuff, 60);
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -795,7 +795,7 @@ namespace CalamityMod.NPCs.CeaselessVoid
             NPC.lifeMax = (int)(NPC.lifeMax * 0.8f * balance * bossAdjustment);
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ItemType<SupremeHealingPotion>();
         }

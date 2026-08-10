@@ -20,7 +20,7 @@ namespace CalamityMod.Projectiles.Typeless
             Projectile.ArmorPenetration = 100;
         }
 
-        public override bool PreDrawExtras()
+        public override bool PreDrawExtras(Player player)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.ai[2] == 0f)
                 Lighting.AddLight(Projectile.Center, 0.5f, 0.25f, 0f);

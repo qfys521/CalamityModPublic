@@ -4,7 +4,7 @@ namespace CalamityMod
 {
     public sealed class ExternalMods : ModSystem
     {
-        // This is Calamity's official music mod, CalamityModMusic. It is now a hard dependency.
+        // This is Calamity's official music mod, CalamityModMusic. Vanilla music is used when it is unavailable.
         internal static Mod musicMod = null;
         internal static bool MusicAvailable => musicMod is not null;
 

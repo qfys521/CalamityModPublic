@@ -60,7 +60,7 @@ namespace CalamityMod.Projectiles.Pets
 
             for (int itemIndex = 0; itemIndex < Main.maxItems; itemIndex++)
             {
-                Item item = Main.item[itemIndex];
+                WorldItem item = Main.item[itemIndex];
                 if (item.active && ItemID.Sets.CommonCoin[item.type] && item.noGrabDelay == 0 && item.playerIndexTheItemIsReservedFor == Projectile.owner &&
                     ItemLoader.CanPickup(item, Main.player[item.playerIndexTheItemIsReservedFor]) && Main.player[item.playerIndexTheItemIsReservedFor].ItemSpace(item).CanTakeItemToPersonalInventory)
                 {
@@ -77,7 +77,7 @@ namespace CalamityMod.Projectiles.Pets
                     //Pick it up
                     if (Projectile.owner == Main.myPlayer && Projectile.getRect().Intersects(new Rectangle((int)item.position.X, (int)item.position.Y, item.width, item.height)))
                     {
-                        Main.item[itemIndex] = Owner.GetItem(Projectile.owner, item, new GetItemSettings());
+                        item.OverrideWith(Owner.GetItem(item, new GetItemSettings()));
                         if (Main.netMode == NetmodeID.MultiplayerClient)
                         {
                             NetMessage.SendData(MessageID.SyncItem, -1, -1, null, itemIndex, 0f, 0f, 0f, 0, 0, 0);
@@ -146,7 +146,7 @@ namespace CalamityMod.Projectiles.Pets
             return false;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             //Similar coin shining to Midas Prime coins. Thought it'd look pretty neat for a light pet.
             Texture2D shineTex = ModContent.Request<Texture2D>("CalamityMod/Particles/Sparkle").Value;

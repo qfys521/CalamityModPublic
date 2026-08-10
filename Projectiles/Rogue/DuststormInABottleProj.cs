@@ -69,7 +69,7 @@ namespace CalamityMod.Projectiles.Rogue
                 Projectile.timeLeft = lifetime;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 origin = TextureAssets.Projectile[Type].Size() * new Vector2(Projectile.velocity.X < 0f ? 0.4f : 0.6f, 0.5f);
             SpriteEffects sp = Projectile.velocity.X < 0f ? SpriteEffects.FlipHorizontally : SpriteEffects.None;

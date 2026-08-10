@@ -624,19 +624,19 @@ namespace CalamityMod
 
                 case ItemID.DryRocket:
                     DelegateMethods.f_1 = 3.5f;
-                    Utils.PlotTileArea(center.X, center.Y, DelegateMethods.SpreadDry);
+                    Utils.FloodFillTile(center, 3.5f, DelegateMethods.SpreadDry);
                     break;
 
                 case ItemID.WetRocket:
-                    Utils.PlotTileArea(center.X, center.Y, DelegateMethods.SpreadWater);
+                    Utils.FloodFillTile(center, 3f, DelegateMethods.SpreadWater);
                     break;
 
                 case ItemID.LavaRocket:
-                    Utils.PlotTileArea(center.X, center.Y, DelegateMethods.SpreadLava);
+                    Utils.FloodFillTile(center, 3f, DelegateMethods.SpreadLava);
                     break;
 
                 case ItemID.HoneyRocket:
-                    Utils.PlotTileArea(center.X, center.Y, DelegateMethods.SpreadHoney);
+                    Utils.FloodFillTile(center, 3f, DelegateMethods.SpreadHoney);
                     break;
             }
 

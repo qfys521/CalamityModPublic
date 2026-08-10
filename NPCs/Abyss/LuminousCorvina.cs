@@ -121,7 +121,7 @@ namespace CalamityMod.NPCs.Abyss
                             {
                                 if (!Main.player[NPC.target].dead && Main.player[NPC.target].active)
                                 {
-                                    Main.player[NPC.target].AddBuff(ModContent.BuffType<FishAlert>(), 360, true);
+                                    Main.player[NPC.target].AddBuff(ModContent.BuffType<FishAlert>(), 360);
                                 }
                             }
                         }
@@ -296,12 +296,12 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<RiptideDebuff>(), 180, true);
+                target.AddBuff(ModContent.BuffType<RiptideDebuff>(), 180);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer2 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer2 && spawner.waterTile)
             {
                 return SpawnCondition.CaveJellyfish.Chance * 0.6f;
             }

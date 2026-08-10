@@ -33,7 +33,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -109,7 +109,7 @@ namespace CalamityMod.Projectiles.Summon
                         c.scale = Main.rand.NextFloat(0.5f, 0.7f);
                         c.noGravity = true;
                         c.color = Color.Orchid;
-                        c.noLightEmittence = true;
+                        c.noLightEmittance = true;
                     }
                 }
 
@@ -210,7 +210,7 @@ namespace CalamityMod.Projectiles.Summon
                     c.scale = Main.rand.NextFloat(1.3f, 1.6f) * 0.8f * (i % 2 == 0 ? 2.2f : 1.8f);
                     c.noGravity = true;
                     c.color = Color.Goldenrod;
-                    c.noLightEmittence = true;
+                    c.noLightEmittance = true;
                 }
                 count += 1f;
             }

@@ -38,7 +38,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.timeLeft = 120;
             Projectile.Opacity = 0f;
             Projectile.tileCollide = false;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -154,7 +154,7 @@ namespace CalamityMod.Projectiles.Boss
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int frameHeight = texture.Height / Main.projFrames[Type];
@@ -185,7 +185,7 @@ namespace CalamityMod.Projectiles.Boss
             if (info.Damage <= 0 || Projectile.Opacity != 1f)
                 return;
 
-            target.AddBuff(ModContent.BuffType<VulnerabilityHex>(), 300, true);
+            target.AddBuff(ModContent.BuffType<VulnerabilityHex>(), 300);
         }
 
         public override void OnKill(int timeLeft)

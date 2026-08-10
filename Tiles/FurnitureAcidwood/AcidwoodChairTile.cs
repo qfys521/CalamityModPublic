@@ -36,7 +36,7 @@ namespace CalamityMod.Tiles.FurnitureAcidwood
             TileObjectData.addAlternate(1);
             TileObjectData.addTile(Type);
 
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            TileID.Sets.RoomNeeds.CountsAsChair[Type] = true;
 
             AddMapEntry(new Color(191, 142, 111), Language.GetText("MapObject.Chair"));
             TileID.Sets.CanBeSatOnForNPCs[Type] = true;

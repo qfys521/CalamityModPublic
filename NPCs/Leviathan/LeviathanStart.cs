@@ -155,12 +155,12 @@ namespace CalamityMod.NPCs.Leviathan
             return false;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().disableAnahitaSpawns)
+            if (spawner.Player.Calamity().disableAnahitaSpawns)
                 return 0f;
 
-            if (spawnInfo.PlayerSafe || !spawnInfo.Player.ZoneBeach || spawnInfo.Player.Calamity().ZoneSulphur || spawnInfo.Player.PillarZone())
+            if (spawner.noWorms || !spawner.Player.ZoneBeach || spawner.Player.Calamity().ZoneSulphur || spawner.Player.PillarZone())
                 return 0f;
 
             // Keep this as a separate if check, because it's a loop and we don't want to be checking it constantly.

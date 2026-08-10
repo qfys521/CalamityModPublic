@@ -60,9 +60,8 @@ namespace CalamityMod.Tiles
             }
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
-            bool underground = j >= (int)Main.worldSurface - 1 && j < Main.maxTilesY - 20;
             if (underground)
             {
                 int j2 = j - 1;

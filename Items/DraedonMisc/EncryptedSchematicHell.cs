@@ -48,32 +48,32 @@ namespace CalamityMod.Items.DraedonMisc
                 {
                     int meleeItem = ModContent.ItemType<PulseDragon>();
                     TooltipLine meleeDisplay = new TooltipLine(this.Mod, "CalamityMod:MeleeDisplay", $"[i:{meleeItem}] {CalamityUtils.GetItemName(meleeItem)}");
-                    meleeDisplay.OverrideColor = new Color(201, 41, 255);
+                    meleeDisplay.Color = new Color(201, 41, 255);
                     list.Insert(insertIndex + 1, meleeDisplay);
 
                     int rangedItem = ModContent.ItemType<PhalanxSurge>();
                     TooltipLine rangedDisplay = new TooltipLine(this.Mod, "CalamityMod:RangedDisplay", $"[i:{rangedItem}] {CalamityUtils.GetItemName(rangedItem)}");
-                    rangedDisplay.OverrideColor = new Color(255, 64, 31);
+                    rangedDisplay.Color = new Color(255, 64, 31);
                     list.Insert(insertIndex + 2, rangedDisplay);
 
                     int mageItem = ModContent.ItemType<PlasmaCaster>();
                     TooltipLine mageDisplay = new TooltipLine(this.Mod, "CalamityMod:MageDisplay", $"[i:{mageItem}] {CalamityUtils.GetItemName(mageItem)}");
-                    mageDisplay.OverrideColor = new Color(149, 243, 43);
+                    mageDisplay.Color = new Color(149, 243, 43);
                     list.Insert(insertIndex + 3, mageDisplay);
 
                     int summonItem = ModContent.ItemType<SnakeEyes>();
                     TooltipLine summonDisplay = new TooltipLine(this.Mod, "CalamityMod:SummonDisplay", $"[i:{summonItem}] {CalamityUtils.GetItemName(summonItem)}");
-                    summonDisplay.OverrideColor = new Color(31, 242, 245);
+                    summonDisplay.Color = new Color(31, 242, 245);
                     list.Insert(insertIndex + 4, summonDisplay);
 
                     int rogueItem = ModContent.ItemType<WavePounder>();
                     TooltipLine rogueDisplay = new TooltipLine(this.Mod, "CalamityMod:RogueDisplay", $"[i:{rogueItem}] {CalamityUtils.GetItemName(rogueItem)}");
-                    rogueDisplay.OverrideColor = new Color(236, 255, 31);
+                    rogueDisplay.Color = new Color(236, 255, 31);
                     list.Insert(insertIndex + 5, rogueDisplay);
 
                     int codeItem = ModContent.ItemType<VoltageRegulationSystem>();
                     TooltipLine machineDisplay = new TooltipLine(this.Mod, "CalamityMod:CodeDisplay", $"[i:{codeItem}] {CalamityUtils.GetItemName(codeItem)}");
-                    machineDisplay.OverrideColor = new Color(165, 118, 104);
+                    machineDisplay.Color = new Color(165, 118, 104);
                     list.Insert(insertIndex + 6, machineDisplay);
 
                 }

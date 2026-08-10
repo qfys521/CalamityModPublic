@@ -43,7 +43,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (Main.LocalPlayer.team == player.team && player.team != 0)
                 {
-                    Main.LocalPlayer.AddBuff(ModContent.BuffType<ChiRegenBuff>(), 20, true);
+                    Main.LocalPlayer.AddBuff(ModContent.BuffType<ChiRegenBuff>(), 20);
                 }
             }
         }

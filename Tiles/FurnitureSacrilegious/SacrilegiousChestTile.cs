@@ -115,7 +115,7 @@ namespace CalamityMod.Tiles.FurnitureSacrilegious
             if (chest is null)
                 return -1;
             int amt = 0;
-            for (int i = 0; i < Chest.maxItems; i++)
+            for (int i = 0; i < chest.maxItems; i++)
             {
                 if (chest.item[i] is null || chest.item[i].IsAir)
                     continue;

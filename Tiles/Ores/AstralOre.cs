@@ -59,7 +59,7 @@ namespace CalamityMod.Tiles.Ores
             }
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             if (Main.rand.NextBool(4))
             {

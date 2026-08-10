@@ -130,15 +130,15 @@ namespace CalamityMod.NPCs.Astral
             spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + new Vector2(0, 4f), new Rectangle(0, NPC.frame.Y, 80, NPC.frame.Height), Color.White * 0.75f, NPC.rotation, new Vector2(40f, 20f), NPC.scale, NPC.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (CalamityGlobalNPC.AnyEvents(spawnInfo.Player))
+            if (CalamityGlobalNPC.AnyEvents(spawner.Player))
             {
                 return 0f;
             }
-            else if (spawnInfo.Player.InAstral(1))
+            else if (spawner.Player.InAstral(1))
             {
-                return spawnInfo.Player.ZoneDesert ? 0.16f : 0.2f;
+                return spawner.Player.ZoneDesert ? 0.16f : 0.2f;
             }
             return 0f;
         }

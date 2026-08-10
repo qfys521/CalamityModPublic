@@ -201,9 +201,5 @@ namespace CalamityMod.NPCs.TownNPCs
             return chat;
         }
 
-        public override void SetChatButtons(ref string button, ref string button2)
-        {
-            button = Language.GetTextValue("UI.PetTheAnimal");
-        }
     }
 }

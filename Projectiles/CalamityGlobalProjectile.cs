@@ -627,7 +627,7 @@ namespace CalamityMod.Projectiles
                         dust2.alpha = Main.rand.Next(70, 150 + 1);
                         dust2.color = Main.rand.NextBool() ? Color.BlueViolet : Color.SlateBlue;
                         dust2.noLight = true;
-                        dust2.noLightEmittence = true;
+                        dust2.noLightEmittance = true;
                     }
                     
                 }
@@ -3381,9 +3381,9 @@ namespace CalamityMod.Projectiles
                                                 if (projectile.localAI[2] >= 1)
                                                 {
                                                     int customSonarText = (int)(projectile.localAI[2] - 1);
-                                                    if (Main.popupText[customSonarText].sonar)
+                                                    if (PopupText.popupText[customSonarText].sonar)
                                                     {
-                                                        Main.popupText[customSonarText].position = vectorToCheck - FontAssets.MouseText.Value.MeasureString(Main.popupText[customSonarText].name) / 2f;
+                                                        PopupText.popupText[customSonarText].position = vectorToCheck - FontAssets.MouseText.Value.MeasureString(PopupText.popupText[customSonarText].name) / 2f;
                                                     }
                                                 }
                                                 PersistentFishingDataVector2 = vectorToCheck;
@@ -3787,9 +3787,9 @@ namespace CalamityMod.Projectiles
                                             if (projectile.localAI[2] >= 1)
                                             {
                                                 int customSonarText = (int)(projectile.localAI[2] - 1);
-                                                if (Main.popupText[customSonarText].sonar)
+                                                if (PopupText.popupText[customSonarText].sonar)
                                                 {
-                                                    Main.popupText[customSonarText].position = vectorToCheck - FontAssets.MouseText.Value.MeasureString(Main.popupText[customSonarText].name) / 2f;
+                                                    PopupText.popupText[customSonarText].position = vectorToCheck - FontAssets.MouseText.Value.MeasureString(PopupText.popupText[customSonarText].name) / 2f;
                                                 }
                                             }
                                             PersistentFishingDataVector2 = vectorToCheck;
@@ -4742,7 +4742,7 @@ namespace CalamityMod.Projectiles
                     GeneralParticleHandler.SpawnParticle(floweyFromHitGameUndertale);
 
                     Dust pollenDust = Dust.NewDustPerfect(player.Center, DustType<SquashDust>());
-                    pollenDust.noLightEmittence = true;
+                    pollenDust.noLightEmittance = true;
                     pollenDust.noGravity = true;
                     pollenDust.scale = Main.rand.NextFloat(0.9f, 1.4f);
                     pollenDust.color = Main.rand.NextBool() ? Color.Gold : Color.HotPink;
@@ -5292,7 +5292,7 @@ namespace CalamityMod.Projectiles
             return null;
         }
 
-        public override bool PreDraw(Projectile projectile, ref Color lightColor)
+        public override bool PreDraw(Projectile projectile, Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             bool shouldDrawBool = true;
 

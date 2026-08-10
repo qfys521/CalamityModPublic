@@ -13,7 +13,7 @@ namespace CalamityMod.Walls
             AddMapEntry(new Color(65, 64, 68));
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             DrainWater(i - 1, j - 1);
             DrainWater(i - 1, j);

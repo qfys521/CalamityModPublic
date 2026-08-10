@@ -91,7 +91,7 @@ namespace CalamityMod.Items.Weapons.Melee
                 Register();
         }
 
-        public override void Update(ref float gravity, ref float maxFallSpeed) => ScrewStored = false;
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed) => ScrewStored = false;
         public override void UpdateInventory(Player player)
         {
             if (player.HeldItem != Item)

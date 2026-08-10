@@ -105,10 +105,10 @@ namespace CalamityMod.Items.Weapons.Magic
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-            spriteBatch.Draw(texture, Item.position - Main.screenPosition, null, lightColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, item.position - Main.screenPosition, null, lightColor, 0f, Vector2.Zero, scale, SpriteEffects.None, 0);
             return false;
         }
 

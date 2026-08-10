@@ -55,7 +55,7 @@ namespace CalamityMod.Items.Armor.Mollusk
                 var source = player.GetSource_ItemUse(Item);
                 if (player.FindBuffIndex(ModContent.BuffType<ShellfishBuff>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<ShellfishBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<ShellfishBuff>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<Shellfish>()] < 2)
                 {

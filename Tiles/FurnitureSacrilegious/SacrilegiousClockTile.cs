@@ -18,7 +18,7 @@ namespace CalamityMod.Tiles.FurnitureSacrilegious
         {
             // This particular clock emits light
             Main.tileLighted[Type] = true;
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
             this.SetUpClock(ModContent.ItemType<SacrilegiousClock>(), true);
         }
 

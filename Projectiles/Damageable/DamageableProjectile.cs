@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -123,7 +125,7 @@ namespace CalamityMod.Projectiles.Damageable
             SafeSetDefaults();
             Life = LifeMax;
         }
-        public sealed override void PostDraw(Color lightColor)
+        public sealed override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             DrawHealthBar();
             MouseOverText();
@@ -170,17 +172,11 @@ namespace CalamityMod.Projectiles.Damageable
                     if (n.Hitbox.Intersects(Projectile.Hitbox) && !NPCsToIgnore.Contains(n.type))
                     {
                         int damage = Main.DamageVar(n.damage);
-                        int bannerBuffId = Item.NPCtoBanner(n.BannerID());
+                        int bannerBuffId = BannerSystem.NPCtoBanner(n.BannerID());
                         if (bannerBuffId > 0 && player.HasNPCBannerBuff(bannerBuffId))
                         {
-                            if (Main.expertMode)
-                            {
-                                damage = (int)(damage * ItemID.Sets.BannerStrength[Item.BannerToItem(bannerBuffId)].ExpertDamageReceived);
-                            }
-                            else
-                            {
-                                damage = (int)(damage * ItemID.Sets.BannerStrength[Item.BannerToItem(bannerBuffId)].NormalDamageReceived);
-                            }
+                            ItemID.BannerEffect effect = ItemID.Sets.BannerStrength[BannerSystem.BannerToItem(bannerBuffId)];
+                            damage = (int)(damage * effect.DamageReceived.Sample(Main.Difficulty));
                         }
                         CombatText.NewText(new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, Projectile.width, Projectile.height), CombatText.DamagedFriendly, damage);
                         Life -= damage;
@@ -205,7 +201,7 @@ namespace CalamityMod.Projectiles.Damageable
                     if (p.Colliding(p.Hitbox, Projectile.Hitbox))
                     {
                         int damage = Main.DamageVar(p.damage) * 2;
-                        damage = Main.expertMode ? (int)(damage * Main.RegisteredGameModes[GameModeID.Expert].EnemyDamageMultiplier) : damage;
+                        damage = Main.expertMode ? (int)(damage * GameDifficultyData.EnemyDamageMultiplier.Sample(GameDifficultyLevel.Expert)) : damage;
                         CombatText.NewText(new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, Projectile.width, Projectile.height), CombatText.DamagedFriendly, damage);
                         Life -= damage;
                         HitEffectProjectile(damage, p);

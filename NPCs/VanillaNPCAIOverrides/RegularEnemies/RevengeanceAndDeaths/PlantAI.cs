@@ -140,7 +140,7 @@ public static partial class RevengeanceAndDeathAI
                     NPC.velocity.Y = -2f;
             }
 
-            if (NPC.type == NPCID.GiantFungiBulb && !Main.player[NPC.target].DeadOrGhost)
+            if (NPC.type == NPCID.GiantFungiBulb && !Main.player[NPC.target].dead && !Main.player[NPC.target].ghost)
             {
                 if (NPC.localAI[0] > ((NPC.type == NPCID.GiantFungiBulb ? (CalamityWorld.revenge ? GiantFungiBulbSporeShootGateValue_Rev : GiantFungiBulbSporeShootGateValue) : FungiBulbSporeShootGateValue) - FungiBulbSporeTelegraphTime))
                 {
@@ -156,7 +156,7 @@ public static partial class RevengeanceAndDeathAI
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
-                if (NPC.type == NPCID.Clinger && !Main.player[NPC.target].DeadOrGhost)
+                if (NPC.type == NPCID.Clinger && !Main.player[NPC.target].dead && !Main.player[NPC.target].ghost)
                 {
                     if (NPC.justHit)
                         NPC.localAI[0] = 0f;
@@ -179,7 +179,7 @@ public static partial class RevengeanceAndDeathAI
                     }
                 }
 
-                if ((NPC.type == NPCID.GiantFungiBulb || NPC.type == NPCID.FungiBulb) && !Main.player[NPC.target].DeadOrGhost)
+                if ((NPC.type == NPCID.GiantFungiBulb || NPC.type == NPCID.FungiBulb) && !Main.player[NPC.target].dead && !Main.player[NPC.target].ghost)
                 {
                     if (NPC.justHit || Collision.SolidCollision(NPC.position, NPC.width, NPC.height) || !Collision.CanHit(NPC, Main.player[NPC.target]))
                         NPC.localAI[0] = 0f;

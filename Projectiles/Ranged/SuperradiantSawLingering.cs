@@ -139,7 +139,7 @@ namespace CalamityMod.Projectiles.Ranged
 
         public override void ModifyDamageHitbox(ref Rectangle hitbox) => hitbox.Inflate(70, 70);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             LargeSlash ??= ModContent.Request<Texture2D>("CalamityMod/Projectiles/Ranged/SuperradiantSawLargeSlash");
             Texture2D largeSlashTexture = LargeSlash.Value;

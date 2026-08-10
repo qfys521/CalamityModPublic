@@ -99,7 +99,7 @@ namespace CalamityMod.Projectiles.Ranged
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.75f, 0.95f);
                 dust.color = (!ChildSafety.Disabled ? Color.CornflowerBlue : Color.Firebrick);
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.noLight = true;
                 dust.fadeIn = 15;
             }
@@ -122,7 +122,7 @@ namespace CalamityMod.Projectiles.Ranged
             player.SpawnLifeStealProjectile(target, Projectile, ProjectileID.VampireHeal, finalHeal, 0.5f);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], Color.White, 2);
             return false;

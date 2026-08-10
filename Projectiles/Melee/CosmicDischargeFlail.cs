@@ -43,12 +43,12 @@ namespace CalamityMod.Projectiles.Melee
         // All of this wouldnt be here if depthLayer fucking worked, i wanna hit someone - Shucks
         // the hell you mean, depthlayer is a useless fucking variable bro - Iban 2022
         // Not necessarily. Terraria is just made in such a way that we're forced to use sprite batch states that ignore it - Dominic 2022
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 mountedCenter = Main.player[Projectile.owner].MountedCenter;
             Color colorAtCenter = Lighting.GetColor((int)(Projectile.position.X + Projectile.width * 0.5) / 16,
                 (int)((Projectile.position.Y + Projectile.height * 0.5) / 16.0));
-            if (Projectile.hide && !ProjectileID.Sets.DontAttachHideToAlpha[Type])
+            if (Projectile.usesOwnerLight)
             {
                 colorAtCenter = Lighting.GetColor((int)mountedCenter.X / 16, (int)(mountedCenter.Y / 16f));
             }

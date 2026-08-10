@@ -23,10 +23,10 @@ namespace CalamityMod.Items.Materials
             Item.rare = ItemRarityID.Cyan;
             ItemID.Sets.ItemNoGravity[Type] = true;
         }
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float brightness = Main.essScale * Main.rand.NextFloat(0.9f, 1.1f);
-            Lighting.AddLight(Item.Center, 0.5f * brightness, 0.5f * brightness, 0.5f * brightness);
+            Lighting.AddLight(item.Center, 0.5f * brightness, 0.5f * brightness, 0.5f * brightness);
         }
     }
 }

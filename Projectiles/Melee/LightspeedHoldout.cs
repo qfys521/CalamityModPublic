@@ -385,7 +385,7 @@ namespace CalamityMod.Projectiles.Melee
 
         public Color PierceColorFunction(float completionRatio, Vector2 vertexPos) => Color.White * Projectile.Opacity; // The trail color doesnt matter here
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             Rectangle frame = texture.Frame(1, Main.projFrames[Projectile.type], 0, Projectile.frame);

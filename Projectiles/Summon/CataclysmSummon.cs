@@ -21,7 +21,7 @@ namespace CalamityMod.Projectiles.Summon
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.MinionSacrificable[Type] = false;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = false;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = false;
         }
 
         public override void SetDefaults()
@@ -105,7 +105,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) => target.AddBuff(ModContent.BuffType<VulnerabilityHex>(), 180);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frame = texture.Frame(3, 9, Projectile.frame / 9, Projectile.frame % 9);

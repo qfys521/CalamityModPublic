@@ -77,7 +77,7 @@ namespace CalamityMod.Projectiles.Boss
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float shakeAmt = MathHelper.Clamp(MathHelper.Lerp(0f, 8f, (Timer - ShakeThreshold) / (Lifetime - ShakeThreshold)), 0f, 8f);
             Vector2 drawPos = Projectile.Center + Main.rand.NextVector2CircularEdge(shakeAmt, shakeAmt);

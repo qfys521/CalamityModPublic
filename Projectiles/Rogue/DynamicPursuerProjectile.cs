@@ -284,7 +284,7 @@ namespace CalamityMod.Projectiles.Rogue
             return false;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor, ProjectileID.Sets.TrailCacheLength[Type]);
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

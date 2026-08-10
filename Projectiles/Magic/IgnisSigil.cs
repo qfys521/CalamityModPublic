@@ -70,7 +70,7 @@ namespace CalamityMod.Projectiles.Magic
                 Projectile.timeLeft = parent.timeLeft;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Get textures
             Texture2D mainTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

@@ -65,7 +65,7 @@ namespace CalamityMod.Projectiles.Magic
             }
             time++;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time == 0)
                 return false;
@@ -97,7 +97,7 @@ namespace CalamityMod.Projectiles.Magic
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, Main.rand.NextBool(4) ? 264 : 66, (Projectile.velocity.SafeNormalize(Vector2.UnitY) * 15f).RotatedByRandom(MathHelper.ToRadians(15f)) * Main.rand.NextFloat(0.1f, 0.8f), 0, default, Main.rand.NextFloat(1.2f, 1.6f));
                 dust.noGravity = true;
                 dust.color = Main.rand.NextBool() ? Color.Lerp(mainColor, Color.White, 0.5f) : mainColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.noLight = true;
             }
         }

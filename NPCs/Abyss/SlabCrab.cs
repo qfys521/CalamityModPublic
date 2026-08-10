@@ -301,9 +301,9 @@ namespace CalamityMod.NPCs.Abyss
             return null;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer1 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer1 && spawner.waterTile)
             {
                 return SpawnCondition.CaveJellyfish.Chance;
             }
@@ -407,7 +407,7 @@ namespace CalamityMod.NPCs.Abyss
                             // ouch!
                             Item pick = player.HeldItem;
                             int pickDamage = (int)player.GetDamage(pick.DamageType).ApplyTo(pick.damage);
-                            Projectile hit = Projectile.NewProjectileDirect(pick.GetSource_FromThis(), NPC.Center, Vector2.Zero, ModContent.ProjectileType<DirectStrike>(), pickDamage, 0f, player.whoAmI, NPC.whoAmI);
+                            Projectile hit = Projectile.NewProjectileDirect(player.GetSource_ItemUse(pick), NPC.Center, Vector2.Zero, ModContent.ProjectileType<DirectStrike>(), pickDamage, 0f, player.whoAmI, NPC.whoAmI);
                             hit.DamageType = pick.DamageType;
                             SoundEngine.PlaySound(SoundID.Dig, NPC.Center); // this is the dig sound that shale piles use
                             if (CurrentPhase < (int)AIState.Enraged)

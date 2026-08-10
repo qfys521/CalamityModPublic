@@ -116,7 +116,7 @@ namespace CalamityMod.Projectiles.Pets
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Drawing(lightColor,
                 Terraria.GameContent.TextureAssets.Projectile[Type].Value,
@@ -129,7 +129,7 @@ namespace CalamityMod.Projectiles.Pets
             return false;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Drawing(Color.White,
                 ModContent.Request<Texture2D>("CalamityMod/Projectiles/Pets/RotomPetGlow").Value,

@@ -129,9 +129,9 @@ namespace CalamityMod.NPCs.SunkenSea
             NPC.frame.Y = frame * frameHeight;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneSunkenSea && spawnInfo.Water && !spawnInfo.Player.Calamity().clamity)
+            if (spawner.Player.Calamity().ZoneSunkenSea && spawner.waterTile && !spawner.Player.Calamity().clamity)
             {
                 return SpawnCondition.CaveJellyfish.Chance * 0.9f;
             }
@@ -170,7 +170,7 @@ namespace CalamityMod.NPCs.SunkenSea
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.Electrified, 120, true);
+                target.AddBuff(BuffID.Electrified, 120);
         }
 
         public override void HitEffect(NPC.HitInfo hit)

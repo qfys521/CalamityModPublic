@@ -142,7 +142,7 @@ namespace CalamityMod.Projectiles.Magic
             Projectile.timeLeft = 4;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D main = TextureAssets.Projectile[Type].Value;
             Texture2D smol = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Magic/ThaumRingSmall").Value;

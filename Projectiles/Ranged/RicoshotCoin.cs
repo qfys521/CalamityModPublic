@@ -245,7 +245,7 @@ namespace CalamityMod.Projectiles.Ranged
                     _ => ItemID.CopperCoin,
                 };
                 int coin = Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, Vector2.One, itemID, noBroadcast: false);
-                if (Main.item[coin].TryGetGlobalItem<GrabRangeGlobalItem>(out var grabRangeItem))
+                if (Main.item[coin].inner.TryGetGlobalItem<GrabRangeGlobalItem>(out var grabRangeItem))
                     grabRangeItem.grabRangeMultiplier = UsedCoinGrabRangeMultiplier;
 
                 // Sync this dropped coin in multiplayer.
@@ -254,7 +254,7 @@ namespace CalamityMod.Projectiles.Ranged
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int numFrames = Main.projFrames[Type];

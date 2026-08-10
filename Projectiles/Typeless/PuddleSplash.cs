@@ -45,7 +45,7 @@ namespace CalamityMod.Projectiles.Typeless
                     dust.noGravity = false;
                     dust.color = Main.rand.NextBool() ? Color.CornflowerBlue : Color.SkyBlue;
                     dust.noLight = true;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     dust.alpha = 100;
                 }
                 for (int i = 0; i < 2; i++)

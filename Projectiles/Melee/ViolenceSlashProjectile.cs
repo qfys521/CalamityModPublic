@@ -96,7 +96,7 @@ namespace CalamityMod.Projectiles.Melee
 
         internal float PrimitiveWidthFunction(float completionRatio, Vector2 vertexPos) => Projectile.height * 0.48f;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player renderingPlayer, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             GameShaders.Misc["CalamityMod:PhaseslayerRipEffect"].SetShaderTexture(ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/Trails/SwordSlashTexture"));
 

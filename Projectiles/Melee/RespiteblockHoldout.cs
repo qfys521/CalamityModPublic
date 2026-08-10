@@ -37,7 +37,7 @@ namespace CalamityMod.Projectiles.Melee
             Projectile.ArmorPenetration = 15;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;
@@ -76,7 +76,7 @@ namespace CalamityMod.Projectiles.Melee
                 Dust dust = Dust.NewDustPerfect(Projectile.Center + (Projectile.velocity.RotatedBy(MathHelper.ToRadians(45f * Projectile.direction)) * 10) + Main.rand.NextVector2Circular(13, 13), Main.rand.NextBool() ? 89 : 86, (Projectile.velocity * 30).RotatedByRandom(0.3f) * Main.rand.NextFloat(0.05f, 0.9f), 0, default, Main.rand.NextFloat(0.4f, 0.95f));
                 dust.noGravity = true;
                 dust.noLight = true;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.alpha = 90;
             }
             if (Time % 4 == 0)

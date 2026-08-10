@@ -321,9 +321,9 @@ namespace CalamityMod.Items.Weapons.Magic
         public override void ModifyTooltips(List<TooltipLine> list)
         {
             if (Main.zenithWorld)
-                list.FindAndReplace("[GFB]", Lang.SupportGlyphs(this.GetLocalizedValue("TooltipGFB")));
+                list.FindAndReplace("[GFB]", this.GetLocalizedValue("TooltipGFB"));
             else
-                list.FindAndReplace("[GFB]", Lang.SupportGlyphs(this.GetLocalization("TooltipNormal").Format(this.GetLocalizedValue(storedSoulpower == 0 ? "NoSoul" : "SoulDesc" + storedSoulType))));
+                list.FindAndReplace("[GFB]", this.GetLocalization("TooltipNormal").Format(this.GetLocalizedValue(storedSoulpower == 0 ? "NoSoul" : "SoulDesc" + storedSoulType)));
         }
 
         public override void AddRecipes()

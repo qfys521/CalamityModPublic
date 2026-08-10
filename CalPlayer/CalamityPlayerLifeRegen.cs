@@ -236,7 +236,7 @@ namespace CalamityMod.CalPlayer
                 Player.nebulaLevelLife = 0;
 
                 if (Player.whoAmI == Main.myPlayer)
-                    Player.AddBuff(ModContent.BuffType<AlcoholPoisoning>(), 2, false);
+                    Player.AddBuff(ModContent.BuffType<AlcoholPoisoning>(), 2);
 
                 if (Player.lifeRegen > 0)
                     Player.lifeRegen = 0;

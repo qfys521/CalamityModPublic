@@ -14,6 +14,7 @@ using CalamityMod.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Events;
 using Terraria.GameContent.Personalities;
@@ -139,18 +140,8 @@ namespace CalamityMod.NPCs.TownNPCs
 
         public override void PartyHatPosition(ref Vector2 position, ref SpriteEffects spriteEffects) => position.X -= 5f * NPC.direction;
 
-        public override void SetChatButtons(ref string button, ref string button2)
-        {
-            button = Language.GetTextValue("LegacyInterface.28");
-        }
-
-        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
-        {
-            if (firstButton)
-            {
-                shopName = "Shop";
-            }
-        }
+        public override void RegisterChatButtons(NPCInteractionList interactions) =>
+            interactions.InsertBefore(NPCInteractions.Shop(), NPCInteractionDatabase.CloseButton);
 
         public override void AddShops()
         {

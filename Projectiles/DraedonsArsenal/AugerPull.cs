@@ -91,7 +91,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             strongTimer++;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => false;
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float shrinkFade = Math.Min(Utils.GetLerpValue(1, 0.7f, shrink, true), Utils.GetLerpValue(0f, 0.3f, shrink, true));
             float sine = Math.Abs(MathHelper.Lerp((float)Math.Sin(time * 0.1f / MathHelper.Pi), 0.4f, 0.8f));

@@ -167,7 +167,7 @@ namespace CalamityMod.Projectiles.Ranged
             int size = (int)Utils.Remap(Time, 0f, 90, 10f, 95f);
             hitbox.Inflate(size, size);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D splatTex = ModContent.Request<Texture2D>("CalamityMod/Particles/WaterFoam").Value;
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

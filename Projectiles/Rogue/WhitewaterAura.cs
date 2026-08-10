@@ -72,7 +72,7 @@ namespace CalamityMod.Projectiles.Rogue
             Vector2 launchVel = Utils.DirectionTo(Projectile.Center, target.Center);
             target.MoveNPC(launchVel, 9, true, Owner);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = ModContent.Request<Texture2D>("CalamityMod/Particles/HighResFoggyCircleHardEdge").Value;
             Texture2D tex2 = ModContent.Request<Texture2D>("CalamityMod/Particles/SoftRoundExplosion").Value;

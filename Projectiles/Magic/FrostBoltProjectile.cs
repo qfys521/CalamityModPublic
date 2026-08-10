@@ -53,7 +53,7 @@ namespace CalamityMod.Projectiles.Magic
                         dust.noGravity = false;
                         dust.scale = Main.rand.NextFloat(0.65f, 1f);
                         dust.color = bColor;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                     }
                     Projectile.velocity = velocity;
                     launch = false;
@@ -127,7 +127,7 @@ namespace CalamityMod.Projectiles.Magic
                 dust.noGravity = true;
                 dust.scale = 1.3f;
                 dust.color = bColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
 
             if (wallBounces >= 2)
@@ -147,7 +147,7 @@ namespace CalamityMod.Projectiles.Magic
             if (Projectile.damage > 1)
                 Projectile.damage = (int)(Projectile.damage * 0.85f);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Projectile.DrawProjectileWithBackglow(bColor with { A = 0 }, Color.White, 2f * fadeIn);
             return false;

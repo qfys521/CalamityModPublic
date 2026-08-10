@@ -369,10 +369,10 @@ namespace CalamityMod.NPCs.NormalNPCs
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !Main.hardMode || spawnInfo.Player.Calamity().ZoneAbyss ||
-                spawnInfo.Player.Calamity().ZoneSunkenSea)
+            if (spawner.noWorms || !Main.hardMode || spawner.Player.Calamity().ZoneAbyss ||
+                spawner.Player.Calamity().ZoneSunkenSea)
             {
                 return 0f;
             }

@@ -92,7 +92,7 @@ namespace CalamityMod.Items.Accessories
             else if (player.whoAmI == Main.myPlayer)
             {
                 if (player.FindBuffIndex(ModContent.BuffType<ArcherofLunamoon>()) == -1)
-                    player.AddBuff(ModContent.BuffType<ArcherofLunamoon>(), 18000, true);
+                    player.AddBuff(ModContent.BuffType<ArcherofLunamoon>(), 18000);
             }
 
             // Update the current crit boost.
@@ -140,7 +140,7 @@ namespace CalamityMod.Items.Accessories
             if (player.whoAmI == Main.myPlayer)
             {
                 if (player.FindBuffIndex(ModContent.BuffType<ArcherofLunamoon>()) == -1)
-                    player.AddBuff(ModContent.BuffType<ArcherofLunamoon>(), 18000, true);
+                    player.AddBuff(ModContent.BuffType<ArcherofLunamoon>(), 18000);
             }
         }
 

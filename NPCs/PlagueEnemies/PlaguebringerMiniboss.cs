@@ -405,9 +405,9 @@ namespace CalamityMod.NPCs.PlagueEnemies
             return false;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !NPC.downedGolemBoss || !spawnInfo.Player.ZoneJungle)
+            if (spawner.noWorms || !NPC.downedGolemBoss || !spawner.Player.ZoneJungle)
                 return 0f;
 
             // Keep this as a separate if check, because it's a loop and we don't want to be checking it constantly.

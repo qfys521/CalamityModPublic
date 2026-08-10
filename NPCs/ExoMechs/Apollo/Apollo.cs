@@ -1373,7 +1373,7 @@ namespace CalamityMod.NPCs.ExoMechs.Apollo
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
 
             Rectangle targetHitbox = target.Hitbox;
 
@@ -1669,7 +1669,7 @@ namespace CalamityMod.NPCs.ExoMechs.Apollo
             return false;
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<OmegaHealingPotion>();
         }

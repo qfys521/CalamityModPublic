@@ -51,7 +51,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             base.SetStaticDefaults();
         }
 
@@ -494,7 +494,7 @@ namespace CalamityMod.Projectiles.Summon
                 Projectile.NewProjectile(Projectile.GetSource_FromThis(), position, Vector2.Zero, ModContent.ProjectileType<DoGWeaponTeleportRift>(), 0, 0, Projectile.owner,0,0.375f);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             for (int i = Segments.Count - 1; i >= 0; i--)
             {
@@ -549,7 +549,7 @@ namespace CalamityMod.Projectiles.Summon
         private Asset<Texture2D> Jaws;
         private Asset<Texture2D> JawGlow;
         private Asset<Texture2D> DoGJaws;
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             for (int i = Segments.Count - 1; i >= 0; i--)
             {

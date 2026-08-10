@@ -37,7 +37,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.timeLeft = 120;
             Projectile.Opacity = 0f;
             Projectile.tileCollide = false;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void OnSpawn(IEntitySource source)
@@ -160,7 +160,7 @@ namespace CalamityMod.Projectiles.Boss
             p.SizeScaling = 0f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             return false;
         }

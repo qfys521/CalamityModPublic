@@ -362,9 +362,9 @@ namespace CalamityMod.NPCs.Abyss
                 target.AddBuff(BuffID.Darkness, 300);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer2 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer2 && spawner.waterTile)
             {
                 return SpawnCondition.CaveJellyfish.Chance * 0.6f;
             }

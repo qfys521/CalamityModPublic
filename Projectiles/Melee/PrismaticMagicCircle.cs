@@ -66,7 +66,7 @@ namespace CalamityMod.Projectiles.Melee
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Draw the awesome and cool magic circle to hide the fact that the laser gets cut off horribly
             Main.spriteBatch.EnterShaderRegion(BlendState.Additive);

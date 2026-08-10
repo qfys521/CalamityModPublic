@@ -77,7 +77,7 @@ namespace CalamityMod.Items.Weapons.Rogue
                 Main.projectile[proj].Calamity().stealthStrike = player.Calamity().StealthStrikeAvailable();
             return false;
         }
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI) => Item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, ModContent.Request<Texture2D>(Texture + "Glow").Value);
+        public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI) => item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, ModContent.Request<Texture2D>(Texture + "Glow").Value);
 
         public override void AddRecipes()
         {
@@ -214,14 +214,14 @@ namespace CalamityMod.Projectiles.Rogue
 
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = TextureAssets.Projectile[Type].Value;
             Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() * 0.5f, Projectile.scale, SpriteEffects.None);
             return false;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D glow = ModContent.Request<Texture2D>(Texture + "Glow").Value;
             Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, glow.Size() * 0.5f, Projectile.scale, SpriteEffects.None);
@@ -296,7 +296,7 @@ namespace CalamityMod.Projectiles.Rogue
             }
             Projectile.velocity *= 0.9f;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
 
             if (LineWidth > 0)
@@ -459,9 +459,9 @@ namespace CalamityMod.Projectiles.Rogue
             Projectile.Opacity = Utils.GetLerpValue(5f, 36f, Projectile.timeLeft, true);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
-            return base.PreDraw(ref lightColor);
+            return base.PreDraw(player, ref lightColor);
         }
 
         public void AdditiveDraw(SpriteBatch spriteBatch)
@@ -575,7 +575,7 @@ namespace CalamityMod.Projectiles.Rogue
             if (Main.netMode != NetmodeID.MultiplayerClient)
                 Projectile.NewProjectile(Projectile.GetSource_Death(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<EclipsesFall_LightExplosion>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.End(out var ss);
             var device = Main.instance.GraphicsDevice;
@@ -694,7 +694,7 @@ namespace CalamityMod.Projectiles.Rogue
                 Projectile.Kill();
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D glow = ModContent.Request<Texture2D>(Texture + "Glow").Value;
             Rectangle frame = glow.Frame(1, Main.projFrames[Type], 0, Projectile.frame);
@@ -751,7 +751,7 @@ namespace CalamityMod.Projectiles.Rogue
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             color ??= Color.Lerp(Color.OrangeRed, new Color(255, 191, 73), Main.rand.NextFloat(0.25f, 0.5f));
 

@@ -33,9 +33,9 @@ namespace CalamityMod.Items.Placeables.Furniture
             Lighting.AddLight(position, 1.8f, 0f, 0f);
         }
 
-        public override void PostUpdate()
+        public override void PostUpdate(WorldItem item)
         {
-            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1.8f, 0f, 0f);
+            Lighting.AddLight((int)((item.position.X + Item.width / 2) / 16f), (int)((item.position.Y + Item.height / 2) / 16f), 1.8f, 0f, 0f);
         }
 
         public override void AddRecipes()

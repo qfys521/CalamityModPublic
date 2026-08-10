@@ -143,7 +143,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
             // IMPORTANT: Setting Main.projPet disables projectile damage! If you are making a charging minion, be sure to override the MinionContactDamage hook
             Main.projPet[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.TrailingMode[Type] = TrailingMode;
             ProjectileID.Sets.TrailCacheLength[Type] = TrailCacheLength;
             ProjectileID.Sets.DrawScreenCheckFluff[Type] = (int)EnemyDistanceDetection;

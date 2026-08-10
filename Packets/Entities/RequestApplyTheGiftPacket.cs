@@ -10,13 +10,13 @@ namespace CalamityMod.Packets.Entities
     {
         public static RequestApplyTheGiftPacket Instance { get; private set; }
 
-        public static void Send(Item item, NPC npc, int toClient = -1, int ignoreClient = -1)
+        public static void Send(WorldItem item, NPC npc, int toClient = -1, int ignoreClient = -1)
         {
             if (item is null || npc is null)
                 return;
 
             var packet = Instance.CreateBasePacket();
-            packet.Write((short)item.whoAmI);
+            packet.Write((short)item.whoAmI/* tModPorter Note: Removed. Moved to WorldItem */);
             packet.WriteWhoAmI(npc);
             packet.Send(toClient, ignoreClient);
         }
@@ -29,7 +29,7 @@ namespace CalamityMod.Packets.Entities
             if (!Main.dedServ || npc is null || itemWhoAmI < 0 || itemWhoAmI >= Main.maxItems)
                 return;
 
-            Item item = Main.item[itemWhoAmI];
+            WorldItem item = Main.item[itemWhoAmI];
             if (!item.active || item.type != ModContent.ItemType<TheGift>())
                 return;
 

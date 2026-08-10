@@ -30,7 +30,7 @@ namespace CalamityMod.Projectiles.Summon
             ProjectileID.Sets.TrailingMode[Type] = 0;
             ProjectileID.Sets.TrailCacheLength[Type] = 20;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -177,7 +177,7 @@ namespace CalamityMod.Projectiles.Summon
                 Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.IceRod);
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (BodyUUIDIndex < 0 || BodyUUIDIndex >= Main.projectile.Length)
                 return false;

@@ -48,7 +48,7 @@ namespace CalamityMod.Projectiles.Turret
         }
         public override bool? CanDamage() => ableToHit ? (bool?)null : false;
         public override Color? GetAlpha(Color drawColor) => Color.White;
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesFromEdge(Projectile, 0, lightColor);
             return false;

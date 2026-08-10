@@ -10,7 +10,7 @@ namespace CalamityMod.Systems
 
         public override int NPCType => ModContent.NPCType<RavagerBody>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("Ravager");
-        public override int VanillaMusic => MusicID.Boss4;
-        public override int OtherworldMusic => MusicID.OtherworldlyBoss2;
+        public override int VanillaMusic => MusicID.Golem;
+        public override int OtherworldMusic => MusicID.OtherworldBoss2;
     }
 }

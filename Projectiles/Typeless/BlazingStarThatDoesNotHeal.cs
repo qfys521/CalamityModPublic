@@ -57,7 +57,7 @@ namespace CalamityMod.Projectiles.Typeless
             return trailColor * Projectile.Opacity * 0.5f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             GameShaders.Misc["CalamityMod:TrailStreak"].SetShaderTexture(ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/Trails/SylvestaffStreak"));
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, (_,_) => Projectile.Size * 0.5f, shader: GameShaders.Misc["CalamityMod:TrailStreak"]), 8);
@@ -96,7 +96,7 @@ namespace CalamityMod.Projectiles.Typeless
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.8f, 1.5f);
                 dust.color = ColorFunction(0f, Vector2.Zero);
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
 

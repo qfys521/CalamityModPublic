@@ -61,7 +61,7 @@ namespace CalamityMod.Projectiles.Ranged
                 if (isSpark)
                     dust.noGravity = false;
                 else
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
             }
             if (time == 4)
             {
@@ -73,7 +73,7 @@ namespace CalamityMod.Projectiles.Ranged
                         dust.noGravity = true;
                         dust.scale = Main.rand.NextFloat(0.85f, 1.15f);
                         dust.color = Main.rand.NextBool(5) ? Color.Khaki : Color.Goldenrod;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                     }
                     else
                     {
@@ -164,7 +164,7 @@ namespace CalamityMod.Projectiles.Ranged
             return Color.Lerp(startingColor, colorAlt ? (Color.DarkGoldenrod with { A = 0 } * 0.8f) : (Color.Goldenrod * 0.8f), MathHelper.SmoothStep(0f, 1f, Utils.GetLerpValue(0f, endFadeRatio, completionRatio, true)));
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             GameShaders.Misc["CalamityMod:TrailStreak"].SetShaderTexture(ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/Trails/SylvestaffStreak"));
             Vector2 overallOffset = Projectile.Size * 0.5f;

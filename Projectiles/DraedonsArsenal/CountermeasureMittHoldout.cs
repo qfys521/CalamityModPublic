@@ -77,6 +77,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
         public int hitTimer = 0;
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindNPCsAndTiles;
             base.SetDefaults();
             Projectile.penetrate = -1;
             Projectile.friendly = true;
@@ -496,7 +497,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                 modifiers.SourceDamage *= 0.2f;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 handPos = Owner.GetBackHandPosition(CompositeArmStretchAmount.None, Owner.compositeBackArm.rotation) + (Owner.compositeBackArm.rotation + MathHelper.PiOver2).ToRotationVector2() * 9 * Projectile.scale;
             Projectile.Center = handPos;
@@ -576,10 +577,6 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                 Main.EntitySpriteDraw(bloom, palmBlastPos - Main.screenPosition + thrustAddition, null, Effects.ArsenalEffects.ArsenalLaserColor with { A = 0 } * fadeIn * 0.35f, 0, bloom.Size() / 2, new Vector2(1.8f, 0.5f) * Projectile.scale * 0.4f * randSize, SpriteEffects.FlipVertically);
             }
             return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindNPCsAndTiles.Add(index);
         }
     }
 }

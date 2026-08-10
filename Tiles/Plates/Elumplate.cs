@@ -29,7 +29,7 @@ namespace CalamityMod.Tiles.Plates
             return false;
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Dust.NewDust(new Vector2(i, j) * 16f, 16, 16, DustID.PlatinumCoin, 0f, 0f, 1, new Color(255, 255, 255), 1f);
         }

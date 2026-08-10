@@ -114,7 +114,7 @@ namespace CalamityMod.Projectiles.Boss
             return new Color(0, 255, 200, Projectile.alpha);
         }
 
-        public override bool PreDraw(ref Color lightColor) => Projectile.DrawBeam(LaserLength, 2f, lightColor, curve: true);
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => Projectile.DrawBeam(LaserLength, 2f, lightColor, curve: true);
 
         public override void OnKill(int timeLeft)
         {

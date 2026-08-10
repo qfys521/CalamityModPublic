@@ -75,7 +75,7 @@ namespace CalamityMod.Items.Tools
             return null;
         }
 
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
             // Stink particles and flies coming off of the item while it's in the world (yuck!!) ((:sick:))
             if (Main.rand.NextBool(25))
@@ -83,7 +83,7 @@ namespace CalamityMod.Items.Tools
                 int stinkFumesAmt = Main.rand.Next(1, 3);
                 for (int i = 0; i < stinkFumesAmt; i++)
                 {
-                    Vector2 fumesSpawnPosition = Item.Center + Main.rand.NextVector2Circular(Item.width - 8, Item.height - 8);
+                    Vector2 fumesSpawnPosition = item.Center + Main.rand.NextVector2Circular(Item.width - 8, Item.height - 8);
                     Color fumesInitialColor = Color.Lerp(Color.OliveDrab, Color.DarkGreen, Main.rand.NextFloat());
                     Color fumesFadeColor = Color.Lerp(fumesInitialColor, Color.GhostWhite, Main.rand.NextFloat(0.3f, 0.5f));
                     TimedSmokeParticle fumes = new(fumesSpawnPosition, Vector2.Zero, fumesInitialColor, fumesFadeColor, Main.rand.NextFloat(0.15f, 0.2f), Main.rand.NextFloat(0.4f, 0.6f), Main.rand.Next(45, 60), 0.002f * Main.rand.NextBool().ToDirectionInt(), true);
@@ -93,14 +93,14 @@ namespace CalamityMod.Items.Tools
 
             if (Main.rand.NextBool(150))
             {
-                Vector2 flyGroupSpawnPosition = Item.Top + new Vector2(Main.rand.NextFloat(-16f, 16f), Main.rand.NextFloat(-8f, 0f));
+                Vector2 flyGroupSpawnPosition = item.Top + new Vector2(Main.rand.NextFloat(-16f, 16f), Main.rand.NextFloat(-8f, 0f));
                 int fliesAmt = Main.rand.Next(1, 4);
                 for (int i = 0; i < fliesAmt; i++)
                 {
                     Vector2 flySpawnPosition = flyGroupSpawnPosition + Main.rand.NextVector2Circular(8f, 8f);
                     float flyScale = Main.rand.NextFloat(0.8f, 1f);
                     int flyLifetime = Main.rand.Next(360, 480);
-                    FlyParticle fly = new(flySpawnPosition, flyScale, flyLifetime, Item);
+                    FlyParticle fly = new(flySpawnPosition, flyScale, flyLifetime, item);
                     GeneralParticleHandler.QueueParticleForNextFrame(fly);
                 }
             }
@@ -125,7 +125,7 @@ namespace CalamityMod.Items.Tools
                 for (int i = 0; i < stinkLineAmt; i++)
                 {
                     float riseAndFall = MathHelper.Lerp(4f, -4f, MathF.Sin((float)Main.timeForVisualEffects / 120f + whoAmI + (i * 14)) * 0.5f + 0.5f);
-                    Vector2 stinkLineDrawPosition = Item.Bottom + new Vector2(Utils.Remap(i, 0, stinkLineAmt - 1, -8f, 8f, true) - 4f, -24f + riseAndFall);
+                    Vector2 stinkLineDrawPosition = item.Bottom + new Vector2(Utils.Remap(i, 0, stinkLineAmt - 1, -8f, 8f, true) - 4f, -24f + riseAndFall);
                     spriteBatch.Draw(SmallGreyscaleCircle.Value, stinkLineDrawPosition - Main.screenPosition - new Vector2(0f, baseItemDrawOrigin.Y), null, Color.DarkOliveGreen * 0.82f, 0f, SmallGreyscaleCircle.Size() * 0.5f, stinkLineScale * 0.7f * Item.scale, 0, 0f);
                 }
 
@@ -304,7 +304,7 @@ namespace CalamityMod.Items.Tools
                 {
                     for (int i = 0; i < Player.ConsumedLifeFruit; i++)
                     {
-                        int drop = Player.QuickSpawnItem(Player.GetSource_DropAsItem(), ItemID.LifeFruit);
+                        int drop = Item.NewItem(Player.GetSource_DropAsItem(), Player.Hitbox, ItemID.LifeFruit);
                         Main.item[drop].noGrabDelay = 100;
                         Main.item[drop].velocity = new Vector2(Main.rand.NextFloat(3f, 9f) * Player.direction, Main.rand.NextFloat(-6f, -4f));
                     }
@@ -316,7 +316,7 @@ namespace CalamityMod.Items.Tools
                 {
                     for (int j = 0; j < Player.ConsumedLifeCrystals; j++)
                     {
-                        int drop = Player.QuickSpawnItem(Player.GetSource_DropAsItem(), ItemID.LifeCrystal);
+                        int drop = Item.NewItem(Player.GetSource_DropAsItem(), Player.Hitbox, ItemID.LifeCrystal);
                         Main.item[drop].noGrabDelay = 100;
                         Main.item[drop].velocity = new Vector2(Main.rand.NextFloat(3f, 9f) * Player.direction, Main.rand.NextFloat(-6f, -4f));
                     }
@@ -336,7 +336,7 @@ namespace CalamityMod.Items.Tools
                 {
                     for (int k = 0; k < Player.ConsumedManaCrystals; k++)
                     {
-                        int drop = Player.QuickSpawnItem(Player.GetSource_DropAsItem(), ItemID.ManaCrystal);
+                        int drop = Item.NewItem(Player.GetSource_DropAsItem(), Player.Hitbox, ItemID.ManaCrystal);
                         Main.item[drop].noGrabDelay = 100;
                         Main.item[drop].velocity = new Vector2(Main.rand.NextFloat(3f, 9f) * Player.direction, Main.rand.NextFloat(-6f, -4f));
                     }
@@ -356,7 +356,7 @@ namespace CalamityMod.Items.Tools
             if (condition)
             {
                 condition = false;
-                int drop = Player.QuickSpawnItem(Player.GetSource_DropAsItem(), itemType);
+                int drop = Item.NewItem(Player.GetSource_DropAsItem(), Player.Hitbox, itemType);
                 Main.item[drop].noGrabDelay = 100;
                 Main.item[drop].velocity = new Vector2(Main.rand.NextFloat(3f, 9f) * Player.direction, Main.rand.NextFloat(-6f, -4f));
             }

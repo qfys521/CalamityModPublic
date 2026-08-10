@@ -121,7 +121,7 @@ namespace CalamityMod.Projectiles.Boss
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(1f, 1.8f);
                 dust.color = particleColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
 
@@ -185,7 +185,7 @@ namespace CalamityMod.Projectiles.Boss
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Trail drawn by the HolyBurnOrbDrawer system.
             DrawHealOrb();

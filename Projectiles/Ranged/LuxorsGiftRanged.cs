@@ -47,7 +47,7 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.3f, 0.4f);
                     dust.color = Color.Cyan;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
             if (!Collision.SolidCollision(Projectile.Center, 35, 35) || Projectile.timeLeft < 200)
@@ -69,11 +69,11 @@ namespace CalamityMod.Projectiles.Ranged
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.8f, 1.1f);
                 dust.color = Color.Cyan;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 20, targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
             Color drawColor = Color.Cyan;

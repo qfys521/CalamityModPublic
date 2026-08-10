@@ -199,7 +199,7 @@ namespace CalamityMod.Projectiles.Melee
             modifiers.SourceDamage *= damageMult;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Draw the actual sword
             if (useAnim > 0 && Owner.ItemAnimationActive)

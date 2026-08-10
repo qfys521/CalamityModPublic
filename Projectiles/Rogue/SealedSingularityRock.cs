@@ -19,6 +19,7 @@ namespace CalamityMod.Projectiles.Rogue
         public override string Texture => "CalamityMod/Projectiles/InvisibleProj";
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindProjectiles;
             Projectile.width = 40;
             Projectile.height = 40;
             Projectile.friendly = true;
@@ -54,7 +55,7 @@ namespace CalamityMod.Projectiles.Rogue
             set;
         } = null;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             using (Main.spriteBatch.Scope())
             {
@@ -77,10 +78,6 @@ namespace CalamityMod.Projectiles.Rogue
             return false;
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindProjectiles.Add(index);
-        }
 
         Vector2? goaloffset;
         public override void AI()

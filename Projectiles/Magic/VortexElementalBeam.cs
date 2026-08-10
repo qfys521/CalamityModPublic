@@ -115,7 +115,7 @@ namespace CalamityMod.Projectiles.Magic
         }
 
         #region Drawing
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D lightningSegmentTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Projectile.GetAlpha(lightColor);

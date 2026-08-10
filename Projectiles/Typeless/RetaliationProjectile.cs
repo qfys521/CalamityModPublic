@@ -103,7 +103,7 @@ namespace CalamityMod.Projectiles.Typeless
             SoundStyle sound = new("CalamityMod/Sounds/NPCHit/PerfHiveHit", 3);
             SoundEngine.PlaySound(sound with { Volume = 0.3f, Pitch = Main.rand.NextFloat(-0.1f, 0.2f), MaxInstances = 15 }, Projectile.Center);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = ModContent.Request<Texture2D>("CalamityMod/Particles/BigHeart").Value;
             Vector2 squash = new Vector2(Utils.Remap(Projectile.velocity.Length(), 1, 7, 1, 0.5f), Utils.Remap(Projectile.velocity.Length(), 1, 7, 1, 3.2f));

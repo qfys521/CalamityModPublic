@@ -57,7 +57,7 @@ namespace CalamityMod.Items.Weapons.Rogue
                         c.scale = Main.rand.NextFloat(1.3f, 1.6f) * 0.8f * (i % 2 == 0 ? 2.2f : 1.8f);
                         c.noGravity = true;
                         c.color = Color.Goldenrod;
-                        c.noLightEmittence = true;
+                        c.noLightEmittance = true;
                     }
                 }
                 for (int x = 0; x < Main.maxProjectiles; x++)

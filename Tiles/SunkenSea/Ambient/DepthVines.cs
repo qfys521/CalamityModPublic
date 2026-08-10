@@ -41,7 +41,7 @@ namespace CalamityMod.Tiles.SunkenSea.Ambient
 			return true;
 		}
 
-		public override void RandomUpdate(int i, int j)
+		public override void RandomUpdate(int i, int j, bool underground)
 		{
 			Tile tileBelow = Framing.GetTileSafely(i, j + 1);
             Tile tile = Framing.GetTileSafely(i, j);

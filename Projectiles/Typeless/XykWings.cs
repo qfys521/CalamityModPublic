@@ -244,7 +244,7 @@ namespace CalamityMod.Projectiles.Typeless
                             dust.scale = Main.rand.NextFloat(1.3f, 1.4f) * (front ? 1 : 0.6f) * dashfx * (circle ? 0.6f : 1f) * (float)Math.Pow(Projectile.scale, 0.4f);
                             dust.noGravity = true;
                             dust.color = drawColor;
-                            dust.noLightEmittence = true;
+                            dust.noLightEmittance = true;
                             dust.fadeIn = 1.5f * (circle ? 0 : 1f);
                         }
                         else
@@ -254,7 +254,7 @@ namespace CalamityMod.Projectiles.Typeless
                             dust.scale = Main.rand.NextFloat(0.8f, 1f) * (front ? 1 : 0.6f) * dashfx * (square ? 1 : 1.5f) * (float)Math.Pow(Projectile.scale, 0.4f);
                             dust.noGravity = true;
                             dust.color = drawColor;
-                            dust.noLightEmittence = true;
+                            dust.noLightEmittance = true;
                             dust.fadeIn = 0.1f * (square ? 1 : 3f);
                         }
                     }
@@ -263,12 +263,12 @@ namespace CalamityMod.Projectiles.Typeless
                 time++;
             }
         }
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (!BreakApart)
                 lastDir = Owner.direction;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float topWingNum = (checkActiveWings() - 1);
             float width = 1;

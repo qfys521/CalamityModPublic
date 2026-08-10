@@ -110,10 +110,9 @@ namespace CalamityMod.Tiles.DraedonStructures
                 SoundEngine.PlaySound(mp.CurrentlyViewedFactoryID == -1 ? SoundID.MenuOpen : SoundID.MenuTick);
                 mp.CurrentlyViewedFactoryID = thisFactory.ID;
                 Main.playerInventory = true;
-                Main.recBigList = false;
+                Main.PipsUseGrid = false;
             }
 
-            Recipe.FindRecipes();
             return true;
         }
 

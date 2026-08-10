@@ -104,10 +104,9 @@ namespace CalamityMod.Tiles.DraedonStructures
                 SoundEngine.PlaySound(mp.CurrentlyViewedChargerID == -1 ? SoundID.MenuOpen : SoundID.MenuTick);
                 mp.CurrentlyViewedChargerID = thisCharger.ID;
                 Main.playerInventory = true;
-                Main.recBigList = false;
+                Main.PipsUseGrid = false;
             }
 
-            Recipe.FindRecipes();
             return true;
         }
 

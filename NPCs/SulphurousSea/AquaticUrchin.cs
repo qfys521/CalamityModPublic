@@ -133,12 +133,12 @@ namespace CalamityMod.NPCs.SulphurousSea
                 target.AddBuff(ModContent.BuffType<Irradiated>(), 120);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe)
+            if (spawner.noWorms)
                 return 0f;
 
-            if ((spawnInfo.Player.Calamity().ZoneSulphur || spawnInfo.Player.Calamity().ZoneAbyssLayer1) && spawnInfo.Water && NPC.CountNPCS(ModContent.NPCType<AquaticUrchin>()) < 12)
+            if ((spawner.Player.Calamity().ZoneSulphur || spawner.Player.Calamity().ZoneAbyssLayer1) && spawner.waterTile && NPC.CountNPCS(ModContent.NPCType<AquaticUrchin>()) < 12)
                 return 1f;
 
             return 0f;

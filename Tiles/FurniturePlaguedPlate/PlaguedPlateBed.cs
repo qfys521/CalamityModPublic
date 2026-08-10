@@ -15,14 +15,14 @@ namespace CalamityMod.Tiles.FurniturePlaguedPlate
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = false;
             TileID.Sets.HasOutlines[Type] = true;
-            TileID.Sets.InteractibleByNPCs[Type] = true;
+            TileID.Sets.InteractableByNPCs[Type] = true;
             TileID.Sets.DisableSmartCursor[Type] = true;
             TileID.Sets.IsValidSpawnPoint[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4); //This bed has different dimensions to conventional beds, using bookcase dimentions instead
             TileObjectData.newTile.LavaDeath = false;
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16, 16 };
             TileObjectData.addTile(Type);
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            TileID.Sets.RoomNeeds.CountsAsChair[Type] = true;
             AddMapEntry(new Color(191, 142, 111), CreateMapEntryName());
             AdjTiles = new int[] { TileID.Beds };
         }

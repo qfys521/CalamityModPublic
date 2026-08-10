@@ -75,9 +75,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPC.dontTakeDamage = reader.ReadBoolean();
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !Main.hardMode || spawnInfo.Player.Calamity().ZoneAbyss || spawnInfo.Player.Calamity().ZoneSunkenSea || !spawnInfo.Player.ZoneRockLayerHeight)
+            if (spawner.noWorms || !Main.hardMode || spawner.Player.Calamity().ZoneAbyss || spawner.Player.Calamity().ZoneSunkenSea || !spawner.Player.ZoneRockLayerHeight)
                 return 0f;
 
             // Keep this as a separate if check, because it's a loop and we don't want to be checking it constantly.

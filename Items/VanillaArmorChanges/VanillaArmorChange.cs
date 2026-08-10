@@ -37,13 +37,18 @@ namespace CalamityMod.Items.VanillaArmorChanges
 
         public bool IsWearingEntireSet(Player player)
         {
+            return IsArmorSet(player.armor[0], player.armor[1], player.armor[2]);
+        }
+
+        public bool IsArmorSet(Item head, Item body, Item legs)
+        {
             // Check each individual piece of armor on the player with the respective expected item ID.
             // If no ID is applied/it's null, that signals that it doesn't matter, and to just fall through anyway.
-            if ((HeadPieceID ?? player.armor[0].type) != player.armor[0].type && !AlternativeHeadPieceIDs.Contains(player.armor[0].type))
+            if ((HeadPieceID ?? head.type) != head.type && !AlternativeHeadPieceIDs.Contains(head.type))
                 return false;
-            if ((BodyPieceID ?? player.armor[1].type) != player.armor[1].type && !AlternativeBodyPieceIDs.Contains(player.armor[1].type))
+            if ((BodyPieceID ?? body.type) != body.type && !AlternativeBodyPieceIDs.Contains(body.type))
                 return false;
-            if ((LegPieceID ?? player.armor[2].type) != player.armor[2].type && !AlternativeLegPieceIDs.Contains(player.armor[2].type))
+            if ((LegPieceID ?? legs.type) != legs.type && !AlternativeLegPieceIDs.Contains(legs.type))
                 return false;
 
             return true;

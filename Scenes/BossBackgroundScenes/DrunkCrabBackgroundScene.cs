@@ -17,7 +17,7 @@ namespace CalamityMod.Systems
 
         public override void SpecialVisuals(Player player, bool isActive)
         {
-            player.ManageSpecialBiomeVisuals("CalamityMod:DrunkCrabulon", isActive);
+            Main.SceneState.ManageSpecialBiomeVisuals("CalamityMod:DrunkCrabulon", isActive);
         }
     }
 }

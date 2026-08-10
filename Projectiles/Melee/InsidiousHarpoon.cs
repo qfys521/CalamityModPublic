@@ -161,7 +161,7 @@ namespace CalamityMod.Projectiles.Melee
             if (targetedNPC != null && target == targetedNPC)
                 hasHitTarget = true;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 7)
                 return false;

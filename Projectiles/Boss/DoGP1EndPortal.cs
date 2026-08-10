@@ -22,6 +22,7 @@ namespace CalamityMod.Projectiles.Boss
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverWiresUI;
             Projectile.width = Projectile.height = 120;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
@@ -54,12 +55,8 @@ namespace CalamityMod.Projectiles.Boss
                 Projectile.Kill();
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overWiresUI.Add(index);
-        }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.EnterShaderRegion();
 

@@ -115,7 +115,7 @@ namespace CalamityMod.Projectiles.Boss
         // Can hit if white (regardless of condition) or blue only if the player is (close to) still
         public override bool CanHitPlayer(Player target) => (!blue || target.velocity.Length() >= 0.25f) && Projectile.scale >= 0.5f;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // This should never happen, but just in case-
             if (Projectile.velocity == Vector2.Zero)

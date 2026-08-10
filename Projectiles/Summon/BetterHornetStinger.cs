@@ -32,7 +32,7 @@ namespace CalamityMod.Projectiles.Summon
                     Dust trailDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.JungleGrass);
                     trailDust.noGravity = true;
                     trailDust.noLight = true;
-                    trailDust.noLightEmittence = true;
+                    trailDust.noLightEmittance = true;
                 }
 
                 Projectile.alpha = (int)Utils.Remap(Projectile.timeLeft, 30, 0, 0, 255);
@@ -50,14 +50,14 @@ namespace CalamityMod.Projectiles.Summon
                     Dust impactDust = Dust.NewDustPerfect(target.Center, DustID.JungleGrass, Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedByRandom(MathHelper.PiOver4) * Main.rand.NextFloat(3f, 6f));
                     impactDust.noGravity = true;
                     impactDust.noLight = true;
-                    impactDust.noLightEmittence = true;
+                    impactDust.noLightEmittance = true;
                 }
             }
 
             Projectile.ForceNetUpdate(false);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;

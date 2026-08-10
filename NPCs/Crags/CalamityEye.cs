@@ -87,9 +87,9 @@ namespace CalamityMod.NPCs.Crags
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            return spawnInfo.Player.Calamity().ZoneCalamity ? 0.25f : 0f;
+            return spawner.Player.Calamity().ZoneCalamity ? 0.25f : 0f;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)

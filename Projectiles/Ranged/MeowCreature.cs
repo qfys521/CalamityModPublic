@@ -60,7 +60,7 @@ namespace CalamityMod.Projectiles.Ranged
         }
 
         // The creature glows
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, (_,_) => Projectile.Size * 0.5f), 30);
             Texture2D glow = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

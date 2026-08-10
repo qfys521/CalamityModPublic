@@ -89,10 +89,10 @@ namespace CalamityMod.Projectiles.Boss
             if (info.Damage <= 0)
                 return;
 
-            target.AddBuff(BuffID.Frostburn, 120, true);
+            target.AddBuff(BuffID.Frostburn, 120);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Projectile.DrawProjectileWithBackglow(Cryogen.BackglowColor, lightColor, 4f);
             return false;

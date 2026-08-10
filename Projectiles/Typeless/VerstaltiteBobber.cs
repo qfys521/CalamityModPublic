@@ -14,7 +14,7 @@ namespace CalamityMod.Projectiles.Typeless
             Projectile.bobber = true;
         }
 
-        public override bool PreDrawExtras()
+        public override bool PreDrawExtras(Player player)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Lighting.AddLight(Projectile.Center, 0.4f, 0f, 0.4f);
             return true;

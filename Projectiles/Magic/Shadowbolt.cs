@@ -205,7 +205,7 @@ namespace CalamityMod.Projectiles.Magic
             }
         }
         public override bool? CanDamage() => reflecting ? false : null;
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (targetCenter != Vector2.Zero && platFade > 0)
             {

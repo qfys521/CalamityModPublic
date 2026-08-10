@@ -239,9 +239,9 @@ namespace CalamityMod.NPCs.Crags
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            return spawnInfo.Player.Calamity().ZoneCalamity ? 0.125f : 0f;
+            return spawner.Player.Calamity().ZoneCalamity ? 0.125f : 0f;
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot) => Scryllar.DefineScryllarLoot(npcLoot);

@@ -64,12 +64,12 @@ namespace CalamityMod.Prefixes
             if (NPC.AnyNPCs(NPCType<Bandit>()))
             {
                 // Calculate the item's reforge cost.
-                int value = item.value;
+                long value = item.value;
                 Player p = Main.LocalPlayer;
                 ItemLoader.ReforgePrice(item, ref value, ref p.discountAvailable);
 
                 // Steal 20% of that money.
-                int stolen = value / 5;
+                int stolen = (int)(value / 5L);
                 CalamityWorld.MoneyStolenByBandit += stolen;
 
                 // Increment the reforge counter to allow the Bandit to refund

@@ -117,7 +117,7 @@ namespace CalamityMod.Projectiles.Magic
             else
                 return base.Colliding(projHitbox, targetHitbox);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = TextureAssets.Projectile[Type].Value;
             Texture2D tex2 = ModContent.Request<Texture2D>("CalamityMod/Particles/GlowSpark").Value;

@@ -79,7 +79,7 @@ namespace CalamityMod.Tiles.SunkenSea.Ambient
             b *= brightness;
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Tile tileBelow = Framing.GetTileSafely(i, j + 1);
             if (WorldGen.genRand.NextBool(5) && !tileBelow.HasTile && tileBelow.LiquidType != LiquidID.Lava)

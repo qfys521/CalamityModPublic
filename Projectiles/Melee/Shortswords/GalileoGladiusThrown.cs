@@ -248,7 +248,7 @@ namespace CalamityMod.Projectiles.Melee.Shortswords
                 (0.75f,1.1f),
                 (0,0)
             };
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
 
             var point1 = Projectile.Center + new Vector2(-17, 18).RotatedBy(Projectile.rotation);
@@ -268,7 +268,7 @@ namespace CalamityMod.Projectiles.Melee.Shortswords
                 }
                 Main.spriteBatch.End();
             }
-            return base.PreDraw(ref lightColor);
+            return base.PreDraw(player, ref lightColor);
         }
 
     }

@@ -50,15 +50,15 @@ namespace CalamityMod.Items.Weapons.Melee
             var comboTooltip = tooltips.FirstOrDefault(x => x.Text.Contains("[COMBO]") && x.Mod == "Terraria");
             if (comboTooltip != null)
             {
-                comboTooltip.Text = Lang.SupportGlyphs(this.GetLocalizedValue("ComboInfo"));
-                comboTooltip.OverrideColor = Color.Lerp(Color.Gold, Color.Goldenrod, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.5f);
+                comboTooltip.Text = this.GetLocalizedValue("ComboInfo");
+                comboTooltip.Color = Color.Lerp(Color.Gold, Color.Goldenrod, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.5f);
             }
 
             var parryTooltip = tooltips.FirstOrDefault(x => x.Text.Contains("[PARRY]") && x.Mod == "Terraria");
             if (parryTooltip != null)
             {
-                parryTooltip.Text = Lang.SupportGlyphs(this.GetLocalizedValue("ParryInfo"));
-                parryTooltip.OverrideColor = Color.Lerp(Color.Cyan, Color.DeepSkyBlue, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.75f);
+                parryTooltip.Text = this.GetLocalizedValue("ParryInfo");
+                parryTooltip.Color = Color.Lerp(Color.Cyan, Color.DeepSkyBlue, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.75f);
             }
 
             var blastTooltip = tooltips.FirstOrDefault(x => x.Text.Contains("[BLAST]") && x.Mod == "Terraria");
@@ -66,10 +66,10 @@ namespace CalamityMod.Items.Weapons.Melee
             {
                 var key = Item.GetDynamicModHotkey().GetAssignedKeysOrEmpty(PlayerInput.CurrentInputMode);
                 if (key.Count > 0)
-                    blastTooltip.Text = Lang.SupportGlyphs(this.GetLocalizedValue("BlastInfoKeybind"));
+                    blastTooltip.Text = this.GetLocalizedValue("BlastInfoKeybind");
                 else
-                    blastTooltip.Text = Lang.SupportGlyphs(this.GetLocalizedValue("BlastInfo"));
-                blastTooltip.OverrideColor = Color.Lerp(Color.HotPink, Color.Crimson, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.625f);
+                    blastTooltip.Text = this.GetLocalizedValue("BlastInfo");
+                blastTooltip.Color = Color.Lerp(Color.HotPink, Color.Crimson, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.625f);
             }
             tooltips.IntegrateDynamicHotkey(Item);
         }

@@ -13,7 +13,7 @@ namespace CalamityMod.Buffs.StatDebuffs
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = false;
-            BuffID.Sets.LongerExpertDebuff[Type] = true;
+            BuffID.Sets.BuffTimeIsExtendedWithGameDifficulty[Type] = true;
             CalamityBuffSets.DebuffDataset[Type] = debuffData;
         }
         // Purely to make it get electric color in tooltips

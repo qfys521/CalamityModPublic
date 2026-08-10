@@ -217,7 +217,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
 				{
 					CurrentFlailState = FlailState.LaunchingForward;
 					StateTimer = 0f;
-					Projectile.Center = Owner.MountedCenter;
+					Projectile.Center = Owner.RotatedRelativePoint(Owner.MountedCenter);
 					Projectile.velocity = toMouse * launchSpeed;
 					Projectile.netUpdate = true;
 					Projectile.ResetLocalNPCHitImmunity();
@@ -234,7 +234,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
 			if (spinOffset.Y * Owner.gravDir > 0f)
 				spinOffset.Y *= 0.5f;
 
-			Projectile.Center = Owner.MountedCenter + spinOffset * SpinVisualRadius + new Vector2(0, Owner.gfxOffY);
+			Projectile.Center = Owner.RotatedRelativePoint(Owner.MountedCenter + spinOffset * SpinVisualRadius);
 			Projectile.velocity = Vector2.Zero;
 			Projectile.localNPCHitCooldown = SpinIFrames * Projectile.MaxUpdates;
 		}
@@ -340,7 +340,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
 		public virtual void DrawChain()
 		{
 			Texture2D Chain = ModContent.Request<Texture2D>(ChainTexturePath).Value;
-			Vector2 playerArmPosition = Main.GetPlayerArmPosition(Projectile);
+			Vector2 playerArmPosition = Main.GetPlayerArmPosition(Projectile, Owner);
 
 			// This fixes a vanilla GetPlayerArmPosition bug causing the chain to draw incorrectly when stepping up slopes. The flail itself still draws incorrectly due to another similar bug.
 			// This should be removed once the vanilla bug is fixed.
@@ -370,7 +370,6 @@ namespace CalamityMod.Projectiles.BaseProjectiles
 		{
 			ProjectileID.Sets.TrailCacheLength[Type] = AfterimageLength;
 			ProjectileID.Sets.TrailingMode[Type] = 2;
-			ProjectileID.Sets.HeldProjDoesNotUsePlayerGfxOffY[Type] = true;
 		}
 
 		public override void SetDefaults()
@@ -539,7 +538,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
 			modifiers.HitDirectionOverride = (Owner.Center.X < target.Center.X).ToDirectionInt();
 		}
 
-		public override bool PreDraw(ref Color lightColor)
+		public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
 		{
 			if (!String.IsNullOrEmpty(ChainTexturePath))
 				DrawChain();

@@ -14,7 +14,7 @@ namespace CalamityMod.Items.SummonItems
         public static readonly SoundStyle UseSound = new("CalamityMod/Sounds/Custom/ProfanedGuardians/GuardianSpawn");
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 19; // Celestial Sigil
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 19; // Celestial Sigil
         }
 
         public override void SetDefaults()

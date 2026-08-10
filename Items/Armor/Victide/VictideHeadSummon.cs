@@ -41,7 +41,7 @@ namespace CalamityMod.Items.Armor.Victide
             {
                 if (player.FindBuffIndex(ModContent.BuffType<SeaSnailBuff>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<SeaSnailBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<SeaSnailBuff>(), 3600);
                 }
                 var source = player.GetSource_ItemUse(Item);
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<VictideSeaSnail>()] < 1)

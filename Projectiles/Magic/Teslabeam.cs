@@ -148,7 +148,7 @@ namespace CalamityMod.Projectiles.Magic
         {
             return new Color(92, 144, 245) * 0.6f; // directly color picked from the source material
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.EnterShaderRegion();
             GameShaders.Misc["CalamityMod:TeslaTrail"].SetShaderTexture(ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/Trails/ZapTrail"));

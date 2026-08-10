@@ -67,13 +67,13 @@ namespace CalamityMod.Projectiles.Boss
                 Projectile.frame = 0;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor, 1);
             return false;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int height = texture.Height / Main.projFrames[Type];
@@ -94,7 +94,7 @@ namespace CalamityMod.Projectiles.Boss
             if (Projectile.Opacity == 1f)
             {
                 if (Main.zenithWorld)
-                    target.AddBuff(BuffID.Obstructed, 30, true);
+                    target.AddBuff(BuffID.Obstructed, 30);
             }
         }
 

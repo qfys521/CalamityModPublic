@@ -163,7 +163,7 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<CrushDepth>(), 300, true);
+                target.AddBuff(ModContent.BuffType<CrushDepth>(), 300);
         }
 
         public override void FindFrame(int frameHeight)
@@ -179,9 +179,9 @@ namespace CalamityMod.NPCs.Abyss
             NPC.frame.Y = frame * frameHeight;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer4 && spawnInfo.Water && NPC.CountNPCS(ModContent.NPCType<Bloatfish>()) < 3)
+            if (spawner.Player.Calamity().ZoneAbyssLayer4 && spawner.waterTile && NPC.CountNPCS(ModContent.NPCType<Bloatfish>()) < 3)
                 return Main.remixWorld ? 4.5f : SpawnCondition.CaveJellyfish.Chance * 0.5f;
 
             return 0f;

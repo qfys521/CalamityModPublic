@@ -54,7 +54,7 @@ namespace CalamityMod.Items.Weapons.Ranged
 
             TooltipLine line = list.FirstOrDefault(x => x.Mod == "Terraria" && x.Name == "Tooltip7");
             if (line != null)
-                line.OverrideColor = Color.Lerp(eTooltipColor, Color.White, 0.2f);
+                line.Color = Color.Lerp(eTooltipColor, Color.White, 0.2f);
         }
         public override void AddRecipes()
         {

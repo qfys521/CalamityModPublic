@@ -31,7 +31,7 @@ namespace CalamityMod.Tiles.SunkenSea
             AddMapEntry(new Color(27, 112, 68));
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             if (!IsTopmostSegment(i, j))
                 return;

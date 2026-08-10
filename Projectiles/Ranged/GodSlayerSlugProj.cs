@@ -162,7 +162,7 @@ namespace CalamityMod.Projectiles.Ranged
 
         public override Color? GetAlpha(Color lightColor) => new Color(255, 255, 255, 140);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.timeLeft >= Lifetime - NoDrawFrames * Projectile.MaxUpdates)
                 return false;

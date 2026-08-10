@@ -287,10 +287,10 @@ namespace CalamityMod.NPCs.SunkenSea
             NPC.rotation = (float)System.Math.Atan2((double)NPC.velocity.Y, (double)NPC.velocity.X) + 1.57f;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (Main.hardMode && spawnInfo.Player.Calamity().ZoneSunkenSea && spawnInfo.Water &&
-                !NPC.AnyNPCs(ModContent.NPCType<SeaSerpent1>()) && !spawnInfo.Player.Calamity().clamity && !spawnInfo.PlayerSafe)
+            if (Main.hardMode && spawner.Player.Calamity().ZoneSunkenSea && spawner.waterTile &&
+                !NPC.AnyNPCs(ModContent.NPCType<SeaSerpent1>()) && !spawner.Player.Calamity().clamity && !spawner.noWorms)
                 return SpawnCondition.CaveJellyfish.Chance * 0.3f;
 
             return 0f;

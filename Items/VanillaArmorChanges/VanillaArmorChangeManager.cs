@@ -45,9 +45,14 @@ namespace CalamityMod.Items.VanillaArmorChanges
 
         public static string GetSetBonusName(Player player)
         {
+            return GetSetBonusName(player.armor[0], player.armor[1], player.armor[2]);
+        }
+
+        public static string GetSetBonusName(Item head, Item body, Item legs)
+        {
             for (int i = 0; i < ArmorChanges.Count; i++)
             {
-                if (ArmorChanges[i].IsWearingEntireSet(player))
+                if (ArmorChanges[i].IsArmorSet(head, body, legs))
                     return ArmorChanges[i].ArmorSetName;
             }
             return string.Empty;

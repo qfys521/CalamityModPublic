@@ -12,6 +12,7 @@ namespace CalamityMod.Projectiles.Summon
         public new string LocalizationCategory => "Projectiles.Summon";
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindNPCsAndTiles;
             Projectile.width = Projectile.height = 2;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
@@ -27,7 +28,7 @@ namespace CalamityMod.Projectiles.Summon
             Projectile.scale = Utils.GetLerpValue(45f, 5f, Projectile.timeLeft);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D telegraphTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Color telegraphColor = Color.White * Projectile.Opacity * 0.2f;
@@ -60,9 +61,5 @@ namespace CalamityMod.Projectiles.Summon
             }
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindNPCsAndTiles.Add(index);
-        }
     }
 }

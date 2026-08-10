@@ -333,7 +333,7 @@ namespace CalamityMod.Items.Accessories.Wings
                         var shaderSnap = new SpriteBatchSnapshot();
                         shaderSnap.SortMode = SpriteSortMode.Immediate;
                         shaderSnap.SamplerState = SamplerState.PointClamp;
-                        shaderSnap.TransformMatrix = Matrix.identity;
+                        shaderSnap.TransformMatrix = Matrix.Identity;
                         Main.spriteBatch.Begin(shaderSnap);
 
                         MiscShaderData paletteSwap = GameShaders.Misc["CalamityMod:PaletteSwap"];
@@ -350,7 +350,7 @@ namespace CalamityMod.Items.Accessories.Wings
                         var shaderSnap = new SpriteBatchSnapshot();
                         shaderSnap.SortMode = SpriteSortMode.Immediate;
                         shaderSnap.SamplerState = SamplerState.PointClamp;
-                        shaderSnap.TransformMatrix = Matrix.identity;
+                        shaderSnap.TransformMatrix = Matrix.Identity;
                         Main.spriteBatch.Begin(shaderSnap);
 
                         MiscShaderData paletteSwap = GameShaders.Misc["CalamityMod:PaletteSwap"];
@@ -405,6 +405,7 @@ namespace CalamityMod.Items.Accessories.Wings
         public static int displayTimer = 0;
         public override bool UniqueDraw(bool justCheckingString, out Vector2 size, SpriteBatch spriteBatch, Vector2 position = new Vector2(), Color color = new Color(), float scale = 1)
         {
+            displayTimer = 10;
             //size = new Vector2(GetStringLength(FontAssets.MouseText.Value), FontAssets.MouseText.Value.MeasureString(" ").Y * scale);
 
             if (color == default || color == Main.MouseTextColorReal)
@@ -471,14 +472,5 @@ namespace CalamityMod.Items.Accessories.Wings
             return true;
         }
 
-        public override void Update()
-        {
-            displayTimer = 10;
-        }
-        public override float GetStringLength(DynamicSpriteFont font)
-        {
-            float size = font.MeasureString(text).X;
-            return size * Scale;
-        }
     }
 }

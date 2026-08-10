@@ -95,7 +95,7 @@ namespace CalamityMod.NPCs.NormalNPCs
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.Venom, 180, true);
+                target.AddBuff(BuffID.Venom, 180);
         }
 
         public override void FindFrame(int frameHeight)
@@ -111,9 +111,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPC.frame.Y = frame * frameHeight;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || spawnInfo.Player.Calamity().ZoneSulphur)
+            if (spawner.noWorms || spawner.Player.Calamity().ZoneSulphur)
             {
                 return 0f;
             }

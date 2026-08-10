@@ -142,7 +142,7 @@ namespace CalamityMod.Projectiles.Ranged
                             Scale: Main.rand.NextFloat(0.8f, 1f));
                         shootDust.fadeIn = 100f;
                         shootDust.noLight = false;
-                        shootDust.noLightEmittence = false;
+                        shootDust.noLightEmittance = false;
                     }
 
                     SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Item/FlakKrakenShoot") { Pitch = 0.65f, Volume = 0.5f }, GunTipPosition);

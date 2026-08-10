@@ -58,7 +58,7 @@ namespace CalamityMod.Projectiles.Typeless
                     if (!visible)
                     {
                         dust.noLight = true;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                     }
                     Dust dust2 = Dust.NewDustPerfect(slashPos1 - slashDir * 6, dustStyle);
                     dust2.scale = Main.rand.NextFloat(0.8f, 1.7f) * (visible ? 1 : 0.3f) * (Main.rand.NextBool(5) ? 1.5f : 1);
@@ -69,7 +69,7 @@ namespace CalamityMod.Projectiles.Typeless
                     if (!visible)
                     {
                         dust2.noLight = true;
-                        dust2.noLightEmittence = true;
+                        dust2.noLightEmittance = true;
                     }
                     Dust dust3 = Dust.NewDustPerfect(slashPos2 - slashDir * 6, dustStyle);
                     dust3.scale = Main.rand.NextFloat(0.8f, 1.7f) * (visible ? 1 : 0.3f) * (Main.rand.NextBool(5) ? 1.5f : 1);
@@ -80,7 +80,7 @@ namespace CalamityMod.Projectiles.Typeless
                     if (!visible)
                     {
                         dust3.noLight = true;
-                        dust3.noLightEmittence = true;
+                        dust3.noLightEmittance = true;
                     }
                 }
 

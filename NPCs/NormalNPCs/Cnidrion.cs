@@ -58,17 +58,17 @@ namespace CalamityMod.NPCs.NormalNPCs
             });
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.PillarZone() ||
-                spawnInfo.Player.InAstral() ||
-                spawnInfo.Player.ZoneCorrupt ||
-                spawnInfo.Player.ZoneCrimson ||
-                spawnInfo.Player.ZoneOldOneArmy ||
-                spawnInfo.Player.ZoneSkyHeight ||
-                spawnInfo.PlayerSafe ||
-                !spawnInfo.Player.ZoneDesert ||
-                !spawnInfo.Player.ZoneOverworldHeight ||
+            if (spawner.Player.PillarZone() ||
+                spawner.Player.InAstral() ||
+                spawner.Player.ZoneCorrupt ||
+                spawner.Player.ZoneCrimson ||
+                spawner.Player.ZoneOldOneArmy ||
+                spawner.Player.ZoneSkyHeight ||
+                spawner.noWorms ||
+                !spawner.Player.ZoneDesert ||
+                !spawner.Player.ZoneOverworldHeight ||
                 Main.eclipse ||
                 Main.snowMoon ||
                 Main.pumpkinMoon ||

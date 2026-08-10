@@ -12,7 +12,7 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<SupremeCalamitas>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("CalamitasPhase1");
         public override int VanillaMusic => MusicID.Boss2;
-        public override int OtherworldMusic => MusicID.OtherworldlyBoss2;
+        public override int OtherworldMusic => MusicID.OtherworldBoss2;
 
         public override bool AdditionalCheck() => CalamityGlobalNPC.SCalGrief != -1;
     }

@@ -22,7 +22,7 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPCID.Sets.CountsAsCritter[Type] = true;
             NPCID.Sets.CantTakeLunchMoney[Type] = true;
             NPCID.Sets.TakesDamageFromHostilesWithoutBeingFriendly[Type] = true;
-            NPCID.Sets.GoldCrittersCollection.Add(Type);
+            NPCID.Sets.IsGoldCritter[Type] = true;
             NPCID.Sets.NormalGoldCritterBestiaryPriority.Add(Type);
         }
 

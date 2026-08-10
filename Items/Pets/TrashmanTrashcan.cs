@@ -24,7 +24,7 @@ namespace CalamityMod.Items.Pets
         {
             if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
             {
-                player.AddBuff(Item.buffType, 15, true);
+                player.AddBuff(Item.buffType, 15);
             }
         }
     }

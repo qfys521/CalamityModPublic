@@ -28,7 +28,7 @@ namespace CalamityMod.Rarities
         {
             public override bool UniqueDraw(bool justCheckingString, out Vector2 size, SpriteBatch spriteBatch, Vector2 position = new Vector2(), Color color = new Color(), float scale = 1)
             {
-                size = new Vector2(GetStringLength(FontAssets.MouseText.Value), FontAssets.MouseText.Value.MeasureString(" ").Y * scale);
+                size = new Vector2(GetStringLength(FontAssets.MouseText.Value, scale), FontAssets.MouseText.Value.MeasureString(" ").Y * scale);
 
                 if (color == default || color == Main.MouseTextColorReal)
                 {
@@ -90,10 +90,10 @@ namespace CalamityMod.Rarities
                 }
                 return true;
             }
-            public override float GetStringLength(DynamicSpriteFont font)
+            private float GetStringLength(DynamicSpriteFont font, float scale)
             {
                 float size = font.MeasureString(text).X;
-                return size * Scale;
+                return size * scale;
             }
         }
 

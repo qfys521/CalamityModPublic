@@ -444,9 +444,9 @@ namespace CalamityMod.NPCs.NormalNPCs
                 NPC.frame.Y = 0;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !Main.hardMode || (!Main.raining && !Main.remixWorld) || !spawnInfo.Player.ZoneSkyHeight)
+            if (spawner.noWorms || !Main.hardMode || (!Main.raining && !Main.remixWorld) || !spawner.Player.ZoneSkyHeight)
                 return 0f;
 
             // Keep this as a separate if check, because it's a loop and we don't want to be checking it constantly.
@@ -459,7 +459,7 @@ namespace CalamityMod.NPCs.NormalNPCs
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<WindChilled>(), 180, true);
+                target.AddBuff(ModContent.BuffType<WindChilled>(), 180);
         }
 
         public override void HitEffect(NPC.HitInfo hit)

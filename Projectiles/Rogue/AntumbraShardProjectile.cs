@@ -296,7 +296,7 @@ namespace CalamityMod.Projectiles.Rogue
                 SoundEngine.PlaySound(sound2 with { Volume = 0.15f, Pitch = 0.7f }, Projectile.Center);
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Player Owner = Main.player[Projectile.owner];
             if (time <= 4)

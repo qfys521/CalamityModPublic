@@ -95,7 +95,7 @@ namespace CalamityMod.Projectiles.Ranged
         internal float WidthFunction(float completionRatio, Vector2 vertexPos) => (1f - completionRatio) * Projectile.scale * 10f;
         internal Color ColorFunction(float completionRatio, Vector2 vertexPos) => Color.Lerp(Color.Red, Color.Magenta, 0.7f * completionRatio + 0.1f * MathF.Sin(Main.GlobalTimeWrappedHourly * 20f)) * Projectile.Opacity;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (TrailPos == null)
                 return false;

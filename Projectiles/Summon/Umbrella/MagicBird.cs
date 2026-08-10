@@ -126,7 +126,7 @@ namespace CalamityMod.Projectiles.Summon.Umbrella
 
         public override Color? GetAlpha(Color lightColor) => Color.White; // new Color(255, 239, 0, Projectile.alpha);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor, 1);
             return false;

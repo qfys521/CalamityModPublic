@@ -49,7 +49,7 @@ namespace CalamityMod.Projectiles.Magic
                 Projectile.damage = 1;
         }
 
-        public override bool PreDraw(ref Color lightColor) // Photoviscerator ball drawcode, slightly edited.
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ // Photoviscerator ball drawcode, slightly edited.
         {
             Texture2D lightTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             for (int i = 0; i < Projectile.oldPos.Length; i++)

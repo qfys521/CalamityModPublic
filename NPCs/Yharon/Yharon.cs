@@ -3013,7 +3013,7 @@ namespace CalamityMod.NPCs.Yharon
             npcLoot.AddConditionalPerPlayer(() => !DownedBossSystem.downedYharon, ModContent.ItemType<LoreYharon>(), desc: DropHelper.FirstKillText);
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<OmegaHealingPotion>();
         }
@@ -3063,7 +3063,7 @@ namespace CalamityMod.NPCs.Yharon
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
             return true;
         }
 

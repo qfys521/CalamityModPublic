@@ -20,7 +20,7 @@ namespace CalamityMod.Tiles.FurnitureSilva
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(191, 142, 111), CalamityUtils.GetItemName<Items.Placeables.FurnitureSilva.SilvaBasin>());
             AnimationFrameHeight = 54;
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
         }
 
         public override bool CreateDust(int i, int j, ref int type)

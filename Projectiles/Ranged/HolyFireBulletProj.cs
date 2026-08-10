@@ -56,7 +56,7 @@ namespace CalamityMod.Projectiles.Ranged
                     Dust dust = Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2Circular(5, 5), ModContent.DustType<SquashDust>(), -Projectile.velocity.RotatedBy(Main.rand.NextFloat(0.15f, 0.3f) * (Main.rand.NextBool() ? -1 : 1)) * Main.rand.NextFloat(0.2f, 1f));
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.5f, 0.85f);
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     dust.color = col;
                 }
 
@@ -70,7 +70,7 @@ namespace CalamityMod.Projectiles.Ranged
             }
             time++;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time <= 0)
                 return false;
@@ -142,7 +142,7 @@ namespace CalamityMod.Projectiles.Ranged
                     dust2.color = col;
                     dust2.fadeIn = 10f;
                     dust2.noLight = true;
-                    dust2.noLightEmittence = true;
+                    dust2.noLightEmittance = true;
                 }
                 else
                 {
@@ -152,7 +152,7 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.alpha = Main.rand.Next(160, 230 + 1); ;
                     dust.color = Color.White;
                     dust.noLight = true;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
             for (int k = 0; k < 2; k++)

@@ -96,7 +96,7 @@ namespace CalamityMod.Projectiles.Melee
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // make a player visual clone. it inherits the player's hair type and clothes style and is otherwise all black with red pupils
             // Main.playerVisualClone[Projectile.owner] will throw stack trace errors on reloads

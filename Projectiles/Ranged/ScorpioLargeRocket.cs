@@ -84,7 +84,7 @@ namespace CalamityMod.Projectiles.Ranged
             Dust trailDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustEffectsID, Scale: Main.rand.NextFloat(0.8f, 1f));
             trailDust.noGravity = true;
             trailDust.noLight = true;
-            trailDust.noLightEmittence = true;
+            trailDust.noLightEmittance = true;
 
             if (Projectile.timeLeft < Lifetime - 5)
             {
@@ -145,7 +145,7 @@ namespace CalamityMod.Projectiles.Ranged
                 Dust boomDust = Dust.NewDustPerfect(Projectile.Center, DustEffectsID, (MathHelper.TwoPi / dustAmount * i).ToRotationVector2() * Main.rand.NextFloat(4f, 10f), Scale: Main.rand.NextFloat(1.2f, 1.75f));
                 boomDust.noGravity = true;
                 boomDust.noLight = true;
-                boomDust.noLightEmittence = true;
+                boomDust.noLightEmittance = true;
             }
 
             for (int i = 0; i < 40; i++)
@@ -208,7 +208,7 @@ namespace CalamityMod.Projectiles.Ranged
         public float TrailWidthFunction(float completionRatio, Vector2 vertexPos) => Utils.Remap(completionRatio, 0f, 0.8f, 15f, 0f);
         public Color TrailColorFunction(float completionRatio, Vector2 vertexPos) => Color.Lerp(EffectsColor, EffectsColor * 0.3f, Utils.GetLerpValue(0f, 0.8f, completionRatio)) * Utils.GetLerpValue(255f, 0f, Projectile.alpha);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Texture2D glowTexture = Request<Texture2D>("CalamityMod/Projectiles/Ranged/ScorpioLargeRocket_Glow").Value;

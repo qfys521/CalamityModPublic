@@ -14,7 +14,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 2;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public int GFBTimer = 3000;
@@ -79,7 +79,7 @@ namespace CalamityMod.Projectiles.Summon
                             c.scale = Main.rand.NextFloat(0.5f, 0.7f);
                             c.noGravity = true;
                             c.color = Color.Chartreuse;
-                            c.noLightEmittence = true;
+                            c.noLightEmittance = true;
                         }
                         SoundEngine.PlaySound(SoundID.NPCDeath13 with { Volume = 0.85f, MaxInstances = -1 }, Projectile.Center);
                         if (far && Projectile.timeLeft % 30 == 0)

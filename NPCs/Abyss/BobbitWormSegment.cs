@@ -66,9 +66,9 @@ namespace CalamityMod.NPCs.Abyss
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer4 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer4 && spawner.waterTile)
             {
                 if (CalamityGlobalNPC.bobbitWormBottom.Contains(-1))
                     return Main.remixWorld ? 8.25f : SpawnCondition.CaveJellyfish.Chance * 0.85f;

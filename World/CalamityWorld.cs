@@ -55,14 +55,14 @@ namespace CalamityMod.World
         // Therefore gotta reflect!
         public static bool ReflectMasterMode()
         {
-            if (Main.GameModeInfo.IsJourneyMode)
+            if (Main.IsJourneyMode)
             {
                 CreativePowers.DifficultySliderPower power = CreativePowerManager.Instance.GetPower<CreativePowers.DifficultySliderPower>();
                 float level = power._sliderCurrentValueCache;
                 return level == 1f;
             }
 
-            return Main._currentGameModeInfo.IsMasterMode;
+            return Main.GameMode == GameModeID.Master;
         }
 
         // Sunken Sea

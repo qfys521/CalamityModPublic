@@ -57,10 +57,15 @@ namespace CalamityMod
         /// <returns>true if entity is null or inactive, otherwise false</returns>
         public static bool IsNullOrInactive(this Entity entity)
         {
-            if (entity is null) return true;
-            if (!entity.active) return true;
-
-            return false;
+            return entity switch
+            {
+                null => true,
+                NPC npc => !npc.active,
+                Player player => !player.active,
+                Projectile projectile => !projectile.active,
+                WorldItem item => !item.active,
+                _ => false
+            };
         }
 
         #region Fallback Method for IndexInRange

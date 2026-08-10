@@ -51,7 +51,7 @@ namespace CalamityMod.Tiles.Abyss
             }
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             int tileLocationY = j - 1;
             if (Main.tile[i, tileLocationY] != null)

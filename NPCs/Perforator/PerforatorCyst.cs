@@ -89,16 +89,16 @@ namespace CalamityMod.NPCs.Perforator
             return false;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (CalamityGlobalNPC.AnyEvents(spawnInfo.Player) || !spawnInfo.Player.ZoneCrimson)
+            if (CalamityGlobalNPC.AnyEvents(spawner.Player) || !spawner.Player.ZoneCrimson)
                 return 0f;
 
-            if (spawnInfo.Player.Calamity().disablePerfCystSpawns)
+            if (spawner.Player.Calamity().disablePerfCystSpawns)
                 return 0f;
 
-            bool crimson = TileID.Sets.Crimson[spawnInfo.SpawnTileType] || spawnInfo.SpawnTileType == TileID.Crimtane;
-            if (spawnInfo.PlayerSafe || !crimson)
+            bool crimson = TileID.Sets.Crimson[spawner.SpawnTileType] || spawner.SpawnTileType == TileID.Crimtane;
+            if (spawner.noWorms || !crimson)
                 return 0f;
 
             // Keep this as a separate if check, because it's a loop and we don't want to be checking it constantly.

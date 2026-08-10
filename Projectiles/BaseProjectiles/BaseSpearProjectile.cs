@@ -190,7 +190,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (SpearAiType == SpearType.TypicalSpear)
             {
@@ -200,7 +200,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
                 Main.EntitySpriteDraw(texture, drawPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, origin, Projectile.scale, 0, 0);
                 return false;
             }
-            return base.PreDraw(ref lightColor);
+            return base.PreDraw(player, ref lightColor);
         }
 
         #region Virtual Values

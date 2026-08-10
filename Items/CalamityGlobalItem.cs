@@ -549,7 +549,7 @@ namespace CalamityMod.Items
         #endregion
 
         #region Pickup Item Changes
-        public override bool CanPickup(Item item, Player player)
+        public override bool CanPickup(WorldItem item, Player player)
         {
             // Prevent Mana Stars from being picked up while wielding Ion Blaster or Apoctosis Array
             if (item.type == ItemID.Star || item.type == ItemID.SoulCake || item.type == ItemID.SugarPlum)
@@ -560,7 +560,7 @@ namespace CalamityMod.Items
             return base.CanPickup(item, player);
         }
 
-        public override bool OnPickup(Item item, Player player)
+        public override bool OnPickup(WorldItem item, Player player)
         {
             if (item.type == ItemID.Heart || item.type == ItemID.CandyApple || item.type == ItemID.CandyCane) // On heart pickup
             {
@@ -825,7 +825,7 @@ namespace CalamityMod.Items
                     if (templeCheck && !Collision.SolidCollision(teleportLocation, player.width, player.height))
                     {
                         int duration = CalamityPlayer.areThereAnyDamnBosses ? CalamityPlayer.chaosStateDuration : 360;
-                        player.AddBuff(BuffID.ChaosState, duration, true);
+                        player.AddBuff(BuffID.ChaosState, duration);
                     }
                 }
             }
@@ -928,7 +928,7 @@ namespace CalamityMod.Items
         #region Armor Set Changes
         public override string IsArmorSet(Item head, Item body, Item legs)
         {
-            string managedArmorSetName = VanillaArmorChangeManager.GetSetBonusName(Main.player[head.playerIndexTheItemIsReservedFor]);
+            string managedArmorSetName = VanillaArmorChangeManager.GetSetBonusName(head, body, legs);
             if (!string.IsNullOrEmpty(managedArmorSetName))
                 return managedArmorSetName;
 
@@ -1317,10 +1317,10 @@ namespace CalamityMod.Items
         #endregion
 
         #region GrabChanges
-        public override void GrabRange(Item item, Player player, ref int grabRange)
+        public override void GrabRange(WorldItem item, Player player, ref int grabRange)
         {
             // First, apply the grab range multiplier.
-            if (item.TryGetGlobalItem<GrabRangeGlobalItem>(out var grabRangeItem) && grabRangeItem.grabRangeMultiplier > 1f)
+            if (item.inner.TryGetGlobalItem<GrabRangeGlobalItem>(out var grabRangeItem) && grabRangeItem.grabRangeMultiplier > 1f)
                 grabRange = (int)(grabRangeItem.grabRangeMultiplier * grabRange);
 
             // Then, apply flat grab range boosts.
@@ -1415,7 +1415,6 @@ namespace CalamityMod.Items
                 itemAmmo.stack -= ammoConsumed;
                 if (itemAmmo.stack <= 0)
                 {
-                    itemAmmo.active = false;
                     itemAmmo.TurnToAir();
                 }
             }
@@ -1423,7 +1422,7 @@ namespace CalamityMod.Items
         #endregion
 
         #region PostUpdate
-        public override void PostUpdate(Item item)
+        public override void PostUpdate(WorldItem item)
         {
             CalamityUtils.ForceItemIntoWorld(item);
         }

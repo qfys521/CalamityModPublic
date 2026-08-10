@@ -122,9 +122,9 @@ namespace CalamityMod.Projectiles.Summon
                     circlingPlayer = false;
                     float height = target.getRect().Height;
                     float width = target.getRect().Width;
-                    floatyDistance = MathHelper.Min((height > width ? height : width) * 3f, (Main.LogicCheckScreenWidth * Main.LogicCheckScreenHeight) / 2);
-                    if (floatyDistance > Main.LogicCheckScreenWidth / 3)
-                        floatyDistance = Main.LogicCheckScreenWidth / 3;
+                    floatyDistance = MathHelper.Min((height > width ? height : width) * 3f, (Main.MaxWorldViewSize.X * Main.MaxWorldViewSize.Y) / 2);
+                    if (floatyDistance > Main.MaxWorldViewSize.X / 3)
+                        floatyDistance = Main.MaxWorldViewSize.X / 3;
                     Projectile.penetrate = -1;
                     Projectile.usesIDStaticNPCImmunity = true;
                     Projectile.idStaticNPCHitCooldown = 4;
@@ -304,7 +304,7 @@ namespace CalamityMod.Projectiles.Summon
             return new Color(recharging > 0 ? lightColor.R : 53, recharging > 0 ? lightColor.G : Main.DiscoG, recharging > 0 ? lightColor.B : 255, recharging > 200 ? 255 : 255 - recharging);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (!circling || (!circlingPlayer && recharging == 0))
             {

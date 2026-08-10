@@ -430,7 +430,7 @@ namespace CalamityMod.NPCs.StormWeaver
                         if (phase4)
                         {
                             // Lightning strike
-                            if (!Main.DisableIntenseVisualEffects && !CalamityClientConfig.Instance.Photosensitivity)
+                            if (Main.FlashyEffectsWorld && !CalamityClientConfig.Instance.Photosensitivity)
                             {
                                 if (!Main.dedServ)
                                 {
@@ -926,7 +926,7 @@ namespace CalamityMod.NPCs.StormWeaver
             return true;
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<SupremeHealingPotion>();
         }

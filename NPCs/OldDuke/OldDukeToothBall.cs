@@ -218,7 +218,7 @@ namespace CalamityMod.NPCs.OldDuke
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
             return true;
         }
 

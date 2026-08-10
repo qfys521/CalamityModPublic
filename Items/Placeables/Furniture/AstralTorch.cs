@@ -25,7 +25,7 @@ namespace CalamityMod.Items.Placeables.Furniture
 
         public override void HoldItem(Player player)
         {
-            bool killTorch = Collision.DrownCollision(player.position, player.width, player.height, player.gravDir) || Item.wet;
+            bool killTorch = Collision.DrownCollision(player.position, player.width, player.height, player.gravDir);
             if (!killTorch && Main.rand.NextBool(player.itemAnimation > 0 ? 10 : 20))
             {
                 Dust.NewDust(new Vector2(player.itemLocation.X + 16f * player.direction, player.itemLocation.Y - 14f * player.gravDir), 4, 4, ModContent.DustType<AstralOrange>());
@@ -36,10 +36,10 @@ namespace CalamityMod.Items.Placeables.Furniture
                 Lighting.AddLight(position, 1.6f, 0.6f, 0.3f);
         }
 
-        public override void PostUpdate()
+        public override void PostUpdate(WorldItem item)
         {
-            if (!Item.wet)
-                Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1.6f, 0.6f, 0.3f);
+            if (!item.wet)
+                Lighting.AddLight((int)((item.position.X + Item.width / 2) / 16f), (int)((item.position.Y + Item.height / 2) / 16f), 1.6f, 0.6f, 0.3f);
         }
 
         public override void AddRecipes()

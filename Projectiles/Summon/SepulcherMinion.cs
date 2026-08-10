@@ -109,12 +109,13 @@ namespace CalamityMod.Projectiles.Summon
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.DrawScreenCheckFluff[Type] = 12000;
         }
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindProjectiles;
             Projectile.width = 54;
             Projectile.height = 54;
             Projectile.friendly = true;
@@ -546,7 +547,7 @@ namespace CalamityMod.Projectiles.Summon
 
         #region Drawing
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float angerFactor = Utils.GetLerpValue(300f, 280f, HeartAttackCountdown, true) * Utils.GetLerpValue(0f, 30f, HeartAttackCountdown, true);
             float afterimageOutwardness = MathHelper.Lerp(6f, 8f, (float)Math.Cos(Main.GlobalTimeWrappedHourly * 2.3f) * 0.5f + 0.5f) * angerFactor;
@@ -686,10 +687,6 @@ namespace CalamityMod.Projectiles.Summon
             return false;
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindProjectiles.Add(index);
-        }
 
         #endregion
 

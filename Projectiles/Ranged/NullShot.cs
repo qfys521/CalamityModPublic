@@ -251,7 +251,7 @@ namespace CalamityMod.Projectiles.Ranged
             if (Projectile.damage < 1)
                 Projectile.damage = 1;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 18)
                 return false;

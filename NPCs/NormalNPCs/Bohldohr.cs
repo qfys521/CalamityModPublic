@@ -47,9 +47,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             CalamityRegularEnemyAI.UnicornAI(NPC, Mod, true, CalamityWorld.death ? 8f : CalamityWorld.revenge ? 6f : 4f, 5f, 0.2f);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe)
+            if (spawner.noWorms)
             {
                 return 0f;
             }

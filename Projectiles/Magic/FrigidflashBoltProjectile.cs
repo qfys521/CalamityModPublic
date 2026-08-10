@@ -62,7 +62,7 @@ namespace CalamityMod.Projectiles.Magic
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.75f, 1.1f) * fadeIn;
                     dust.color = Main.rand.NextBool() ? iceColor : fireColor;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
                 if (SoundEngine.TryGetActiveSound(chargeSound, out var ChargeSound) && ChargeSound.IsPlaying)
                     ChargeSound.Position = Projectile.Center;
@@ -85,7 +85,7 @@ namespace CalamityMod.Projectiles.Magic
                         dust.noGravity = false;
                         dust.scale = Main.rand.NextFloat(0.65f, 1f) * (bigMagic ? 1.5f : 1);
                         dust.color = Main.rand.NextBool() ? fireColor : iceColor;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
 
                         if (i % 2 == 0)
                         {
@@ -208,7 +208,7 @@ namespace CalamityMod.Projectiles.Magic
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(1.2f, 1.7f);
                     dust.color = iceColor;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
             else
@@ -251,7 +251,7 @@ namespace CalamityMod.Projectiles.Magic
                 dust.noGravity = true;
                 dust.scale = 1.45f;
                 dust.color = fireColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
             for (int i = 0; i < 6; i++)
             {
@@ -263,11 +263,11 @@ namespace CalamityMod.Projectiles.Magic
                 dust.noGravity = true;
                 dust.scale = 1.25f;
                 dust.color = iceColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
 
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Color drawColor = Color.Lerp(fireColor, iceColor, Utils.GetLerpValue(300, 0, Projectile.timeLeft, true));
             Projectile.DrawProjectileWithBackglow(drawColor with { A = 0 }, Color.White, 3f * fadeIn);

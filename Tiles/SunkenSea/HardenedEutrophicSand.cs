@@ -44,7 +44,7 @@ namespace CalamityMod.Tiles.SunkenSea
             return TileFramingSystem.BetterGemsparkFraming(i, j, resetFrame);
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Tile tile = Main.tile[i, j];
             Tile up = Main.tile[i, j - 1];

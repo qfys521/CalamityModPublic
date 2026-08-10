@@ -66,7 +66,7 @@ namespace CalamityMod.Projectiles.Turret
 
         public override bool? CanDamage() => ableToHit ? (bool?)null : false;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float rotation = 0f;
             Texture2D lightTexture = ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/GreyscaleVortex").Value;

@@ -55,7 +55,7 @@ namespace CalamityMod.Projectiles.Melee
             }
             time++;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], Color.Lerp(mainColor, Color.White, 0.3f) with { A = 0 }, 1, null, true, true);
             return false;

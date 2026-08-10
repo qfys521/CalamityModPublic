@@ -30,7 +30,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.penetrate = -1;
             Projectile.alpha = 255;
             Projectile.timeLeft = 720;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void SendExtraAI(BinaryWriter writer)
@@ -142,7 +142,7 @@ namespace CalamityMod.Projectiles.Boss
             return new Color(255, 255, 53, Projectile.alpha);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int framing = Terraria.GameContent.TextureAssets.Projectile[Type].Value.Height / Main.projFrames[Type];

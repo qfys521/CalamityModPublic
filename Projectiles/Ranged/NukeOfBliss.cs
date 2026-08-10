@@ -183,7 +183,7 @@ namespace CalamityMod.Projectiles.Ranged
                 c.scale = Main.rand.NextFloat(0.3f, 0.6f) * blastRadius * 0.3f * (i % 2 == 0 ? 2.2f : 1.8f);
                 c.noGravity = true;
                 c.color = effectsColor;
-                c.noLightEmittence = true;
+                c.noLightEmittance = true;
             }
             for (int i = 0; i < 25; i++)
             {
@@ -216,7 +216,7 @@ namespace CalamityMod.Projectiles.Ranged
             modifiers.SourceDamage *= damageMult * (rainDownTimer <= 0 ? 1 : 0.2f);
         }
         public override bool? CanDamage() => (fade <= 0.2f) ? false : null;
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Ranged/NukeOfBliss").Value;
 

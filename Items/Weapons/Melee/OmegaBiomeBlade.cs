@@ -117,13 +117,13 @@ namespace CalamityMod.Items.Weapons.Melee
             if (effectDescTooltip != null)
             {
                 effectDescTooltip.Text = this.GetLocalizedValue("DefaultFunction");
-                effectDescTooltip.OverrideColor = new Color(163, 163, 163);
+                effectDescTooltip.Color = new Color(163, 163, 163);
             }
 
             if (passiveDescTooltip != null)
             {
                 passiveDescTooltip.Text = this.GetLocalizedValue("DefaultPassive");
-                passiveDescTooltip.OverrideColor = new Color(163, 163, 163);
+                passiveDescTooltip.Color = new Color(163, 163, 163);
             }
 
             //If theres a main attunement
@@ -131,20 +131,20 @@ namespace CalamityMod.Items.Weapons.Melee
             {
                 if (effectDescTooltip != null)
                 {
-                    effectDescTooltip.Text = Lang.SupportGlyphs(mainAttunement.FunctionText.ToString());
-                    effectDescTooltip.OverrideColor = mainAttunement.tooltipColor;
+                    effectDescTooltip.Text = mainAttunement.FunctionText.ToString();
+                    effectDescTooltip.Color = mainAttunement.tooltipColor;
                 }
 
                 if (mainAttunementTooltip != null)
                 {
                     mainAttunementTooltip.Text = mainAttunementTooltip.Text.Replace("ATT1", mainAttunement.AttunementName.ToString());
-                    mainAttunementTooltip.OverrideColor = Color.Lerp(mainAttunement.tooltipColor, mainAttunement.tooltipColor2, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.5f);
+                    mainAttunementTooltip.Color = Color.Lerp(mainAttunement.tooltipColor, mainAttunement.tooltipColor2, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.5f);
                 }
             }
             else if (mainAttunementTooltip != null)
             {
                 mainAttunementTooltip.Text = mainAttunementTooltip.Text.Replace("ATT1", Language.GetTextValue("LegacyInterface.23"));
-                mainAttunementTooltip.OverrideColor = new Color(163, 163, 163);
+                mainAttunementTooltip.Color = new Color(163, 163, 163);
             }
 
             //If theres a secondary attunement
@@ -153,19 +153,19 @@ namespace CalamityMod.Items.Weapons.Melee
                 if (passiveDescTooltip != null)
                 {
                     passiveDescTooltip.Text = secondaryAttunement.PassiveDesc.ToString();
-                    passiveDescTooltip.OverrideColor = secondaryAttunement.tooltipColor;
+                    passiveDescTooltip.Color = secondaryAttunement.tooltipColor;
                 }
 
                 if (secondaryAttunementTooltip != null)
                 {
                     secondaryAttunementTooltip.Text = secondaryAttunementTooltip.Text.Replace("ATT2", secondaryAttunement.AttunementName.ToString());
-                    secondaryAttunementTooltip.OverrideColor = Color.Lerp(Color.Lerp(secondaryAttunement.tooltipColor, secondaryAttunement.tooltipColor2, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.5f), Color.Gray, 0.5f);
+                    secondaryAttunementTooltip.Color = Color.Lerp(Color.Lerp(secondaryAttunement.tooltipColor, secondaryAttunement.tooltipColor2, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.5f), Color.Gray, 0.5f);
                 }
             }
             else if (secondaryAttunementTooltip != null)
             {
                 secondaryAttunementTooltip.Text = secondaryAttunementTooltip.Text.Replace("ATT2", Language.GetTextValue("LegacyInterface.23"));
-                secondaryAttunementTooltip.OverrideColor = new Color(163, 163, 163);
+                secondaryAttunementTooltip.Color = new Color(163, 163, 163);
             }
         }
 
@@ -399,14 +399,14 @@ namespace CalamityMod.Items.Weapons.Melee
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             if (mainAttunement == null)
                 return true;
 
             //Draw the charged version if you can
             Texture2D itemTexture = Request<Texture2D>("CalamityMod/Items/Weapons/Melee/OmegaBiomeBladeExtra").Value;
-            spriteBatch.Draw(itemTexture, Item.Center - Main.screenPosition, null, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(itemTexture, item.Center - Main.screenPosition, null, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
             return false;
         }
 

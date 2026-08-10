@@ -396,9 +396,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !Main.hardMode)
+            if (spawner.noWorms || !Main.hardMode)
             {
                 return 0f;
             }

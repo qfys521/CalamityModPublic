@@ -56,7 +56,7 @@ namespace CalamityMod.Tiles.Abyss
             frameXOffset = animationFrameWidth * TileFramingSystem.GetVariation4x4_01_Low0(i, j);
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Tile tile = Main.tile[i, j];
             Tile up = Main.tile[i, j - 1];

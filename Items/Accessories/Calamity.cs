@@ -70,12 +70,12 @@ namespace CalamityMod.Items.Accessories
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             if (Main.zenithWorld)
             {
                 Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Items/Accessories/Calamity_GFB").Value;
-                spriteBatch.Draw(texture, Item.position - Main.screenPosition, Main.itemAnimations[Type].GetFrame(texture), lightColor, 0f, Vector2.Zero, 1f, 0, 0);
+                spriteBatch.Draw(texture, item.position - Main.screenPosition, Main.itemAnimations[Type].GetFrame(texture), lightColor, 0f, Vector2.Zero, 1f, 0, 0);
                 return false;
             }
             else

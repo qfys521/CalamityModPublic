@@ -162,7 +162,7 @@ namespace CalamityMod.Projectiles.Typeless
             Projectile.Center = Owner.RotatedRelativePoint(Owner.MountedCenter, true) + Vector2.UnitX * Projectile.spriteDirection * 26f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Main.zenithWorld ? ModContent.Request<Texture2D>("CalamityMod/Items/SummonItems/Terminus_GFB").Value : Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 baseDrawPosition = Projectile.Center - Main.screenPosition;
@@ -186,7 +186,7 @@ namespace CalamityMod.Projectiles.Typeless
             return false;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Main.zenithWorld)
                 return;

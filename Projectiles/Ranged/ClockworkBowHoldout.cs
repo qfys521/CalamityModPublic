@@ -186,7 +186,7 @@ namespace CalamityMod.Projectiles.Ranged
             Owner.itemRotation = (Projectile.velocity * Projectile.direction).ToRotation();
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float loops = LoadedBolts + 1;
             if (LoadedBolts == ClockworkBow.MaxBolts) //If the bow is fully loaded, shave off the part where you draw the arrow that's charging currently

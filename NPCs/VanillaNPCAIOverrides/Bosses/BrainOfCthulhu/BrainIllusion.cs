@@ -31,7 +31,7 @@ public class BrainIllusion : ModNPC, ILocalizedModType
 
     ref float TeleportTime => ref NPC.ai[3];
 
-    private Vector2 OldPos = Vector2.zeroVector;
+    private Vector2 OldPos = Vector2.Zero;
 
     public override void SetStaticDefaults()
     {

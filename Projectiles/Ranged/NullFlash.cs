@@ -68,7 +68,7 @@ namespace CalamityMod.Projectiles.Ranged
             Vector2 launchVel = Utils.DirectionTo(Owner.Center, Owner.Calamity().mouseWorld);
             target.MoveNPC(launchVel, 20, true, Owner);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 1)
                 return false;

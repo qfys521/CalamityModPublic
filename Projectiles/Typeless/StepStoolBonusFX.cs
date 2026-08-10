@@ -43,7 +43,7 @@ namespace CalamityMod.Projectiles.Typeless
 
         public override bool? CanDamage() => false;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = TextureAssets.Extra[102].Value;
             Vector2 origin = texture.Size() / 2f;

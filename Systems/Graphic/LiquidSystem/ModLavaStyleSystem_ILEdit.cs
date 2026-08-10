@@ -43,7 +43,7 @@ namespace CalamityMod.Systems.Graphic.LiquidSystem
             IL_TileDrawing.EmitLiquidDrops += LavaDropletReplacer;
             IL_NPC.Collision_WaterCollision += SplashEntityLava;
             IL_Projectile.Update += SplashEntityLava;
-            IL_Item.MoveInWorld += SplashEntityLava;
+            IL_WorldItem.MoveInWorld += SplashEntityLava;
             ctx.PlayerUpdate.Add(SplashEntityLava);
             ctx.PlayerUpdate.Add(PlayerDebuffEdit);
         }

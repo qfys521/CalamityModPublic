@@ -11,6 +11,6 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<Cryogen>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("Cryogen");
         public override int VanillaMusic => MusicID.FrostMoon;
-        public override int OtherworldMusic => MusicID.OtherworldlyIce;
+        public override int OtherworldMusic => MusicID.OtherworldIce;
     }
 }

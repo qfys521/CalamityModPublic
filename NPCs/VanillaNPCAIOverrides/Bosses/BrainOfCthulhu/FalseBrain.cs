@@ -162,7 +162,7 @@ public class FalseBrain : ModNPC, ILocalizedModType
         Rectangle frame;
 
         Vector2 scaleDistort = new Vector2((float)Math.Cos(Main.GlobalTimeWrappedHourly * MathHelper.TwoPi * 2) / 2f, (float)Math.Sin(Main.GlobalTimeWrappedHourly * MathHelper.TwoPi * 2) / 2f);
-        Vector2 scaleAddition = Vector2.zeroVector;
+        Vector2 scaleAddition = Vector2.Zero;
         float endLerp = AttackTime / 60f;
         float startLerp = SpawnTime / 60f;
 

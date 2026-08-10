@@ -386,7 +386,7 @@ namespace CalamityMod.NPCs.Abyss
             }
 
             if (adultWyrmAlive)
-                cooldownSlot = ImmunityCooldownID.Bosses;
+                cooldownSlot = ImmunityCooldownID.BossNoCheese;
 
             Rectangle targetHitbox = target.Hitbox;
 
@@ -443,9 +443,9 @@ namespace CalamityMod.NPCs.Abyss
                 new Microsoft.Xna.Framework.Rectangle?(NPC.frame), color, NPC.rotation, halfSizeTexture, 1f, spriteEffects, 0f);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer4 && spawnInfo.Water && !NPC.AnyNPCs(ModContent.NPCType<EidolonWyrmHead>()))
+            if (spawner.Player.Calamity().ZoneAbyssLayer4 && spawner.waterTile && !NPC.AnyNPCs(ModContent.NPCType<EidolonWyrmHead>()))
                 return Main.remixWorld ? 5.4f : SpawnCondition.CaveJellyfish.Chance * 0.6f;
 
             return 0f;
@@ -509,7 +509,7 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<HadopelagicPressure>(), 300, true);
+                target.AddBuff(ModContent.BuffType<HadopelagicPressure>(), 300);
         }
     }
 }

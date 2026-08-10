@@ -599,7 +599,7 @@ namespace CalamityMod.Projectiles
                 { ProjectileID.WandOfSparkingSpark, defaultIFrames },
                 { ProjectileID.WaterBolt, defaultIFrames },
                 { ProjectileID.WaterStream, defaultIFrames },
-                { ProjectileID.Web, defaultIFrames },
+                { ProjectileID.WebSlingerHook, defaultIFrames },
                 { ProjectileID.WetBomb, defaultIFrames },
                 { ProjectileID.WetMine, defaultIFrames },
                 { ProjectileID.WetRocket, defaultIFrames },

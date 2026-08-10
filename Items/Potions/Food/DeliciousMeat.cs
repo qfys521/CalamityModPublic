@@ -69,7 +69,7 @@ namespace CalamityMod.Items.Potions.Food
             player.GetModPlayer<DeliciousMeatPlayer>().deliciousMeatCooldown = DeliciousMeatCooldown;
             return null;
         }
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             // Spawn some cute sparkles for added effect when dropped in the world.
             if (Main.rand.NextBool(45))
@@ -77,7 +77,7 @@ namespace CalamityMod.Items.Potions.Food
                 int sparkleAmt = Main.rand.Next(1, 3);
                 for (int i = 0; i < sparkleAmt; i++)
                 {
-                    Vector2 spawnPosition = Item.Center + Main.rand.NextVector2Circular(Item.width, Item.height);
+                    Vector2 spawnPosition = item.Center + Main.rand.NextVector2Circular(Item.width, Item.height);
                     Color drawColorBlue = Color.Lerp(new Color(44, 166, 247), new Color(123, 197, 247), Main.rand.NextFloat());
                     Color drawColorYellow = Color.Lerp(new Color(249, 197, 42), new Color(249, 221, 142), Main.rand.NextFloat());
                     Color sparkleColor = Utils.SelectRandom(Main.rand, drawColorBlue, drawColorYellow);
@@ -90,7 +90,7 @@ namespace CalamityMod.Items.Potions.Food
             // Additional glowy effects similar to Divine Swine itself.
             Main.GetItemDrawFrame(Item.type, out _, out Rectangle itemFrame);
             Vector2 origin = itemFrame.Size() * 0.5f;
-            Vector2 drawPosition = Item.Bottom - Main.screenPosition - new Vector2(0f, origin.Y);
+            Vector2 drawPosition = item.Bottom - Main.screenPosition - new Vector2(0f, origin.Y);
             float sineWave = MathF.Sin((float)Main.timeForVisualEffects / 180f) * 0.5f + 0.5f;
             Color drawColor = Color.White * MathHelper.Lerp(0.7f, 0f, sineWave);
 

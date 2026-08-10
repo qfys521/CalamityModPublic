@@ -76,7 +76,7 @@ namespace CalamityMod.Projectiles.Pets
                 Dust dust = Dust.NewDustPerfect(Projectile.Center + vel * 4, ModContent.DustType<SquashDust>(), vel * Main.rand.NextFloat(0.1f, 0.5f) + Projectile.velocity * Main.rand.NextFloat(0.3f, 0.75f), 0, default, Main.rand.NextFloat(0.4f, 0.7f));
                 dust.noGravity = true;
                 dust.color = effectColor;
-                dust.noLightEmittence = false;
+                dust.noLightEmittance = false;
                 dust.fadeIn = -0.95f;
             }
             if (Main.rand.NextBool((int)(10 - 7 * speedMult)) || speedMult >= 1)
@@ -111,7 +111,7 @@ namespace CalamityMod.Projectiles.Pets
             Projectile.frameCounter++;
             Projectile.frame = Projectile.frameCounter / flapRate % Main.projFrames[Type];
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             Texture2D glow = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;

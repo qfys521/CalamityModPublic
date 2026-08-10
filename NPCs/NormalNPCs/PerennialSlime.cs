@@ -53,10 +53,10 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPC.damage = (NPC.velocity.Y == 0f || NPC.velocity.Length() < 3f) ? 0 : NPC.defDamage;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !NPC.downedPlantBoss || spawnInfo.Player.Calamity().ZoneAbyss ||
-                spawnInfo.Player.Calamity().ZoneSunkenSea)
+            if (spawner.noWorms || !NPC.downedPlantBoss || spawner.Player.Calamity().ZoneAbyss ||
+                spawner.Player.Calamity().ZoneSunkenSea)
             {
                 return 0f;
             }

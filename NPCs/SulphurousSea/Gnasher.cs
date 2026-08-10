@@ -112,12 +112,12 @@ namespace CalamityMod.NPCs.SulphurousSea
                 target.AddBuff(ModContent.BuffType<Irradiated>(), 120);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe)
+            if (spawner.noWorms)
                 return 0f;
 
-            if (spawnInfo.Player.Calamity().ZoneSulphur)
+            if (spawner.Player.Calamity().ZoneSulphur)
                 return 0.1f;
 
             return 0f;

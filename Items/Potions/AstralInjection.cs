@@ -32,7 +32,7 @@ namespace CalamityMod.Items.Potions
             Item.rare = ItemRarityID.Lime;
         }
 
-        public override void OnConsumeItem(Player player) => player.AddBuff(BuffID.ManaSickness, Player.manaSickTime, true);
+        public override void OnConsumeItem(Player player) => player.AddBuff(BuffID.ManaSickness, Player.manaSickTime);
 
         public override void AddRecipes()
         {

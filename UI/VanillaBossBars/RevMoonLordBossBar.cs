@@ -32,9 +32,7 @@ namespace CalamityMod.UI.VanillaBossBars
             shield = 0f;
             shieldMax = 0f;
 
-            NPCSpawnParams dummy = default;
-            dummy.strengthMultiplierOverride = target.strengthMultiplier;
-            dummy.playerCountForMultiplayerDifficultyOverride = target.statsAreScaledForThisManyPlayers;
+            NPCSpawnParams dummy = target.GetMatchingSpawnParams();
             _dummy.SetDefaults(NPCID.MoonLordCore, dummy);
             lifeMax += _dummy.lifeMax;
             _dummy.SetDefaults(NPCID.MoonLordHead, dummy);

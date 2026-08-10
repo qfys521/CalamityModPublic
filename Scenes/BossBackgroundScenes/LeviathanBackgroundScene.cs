@@ -12,7 +12,7 @@ namespace CalamityMod.Systems
 
         public override void SpecialVisuals(Player player, bool isActive)
         {
-            player.ManageSpecialBiomeVisuals("CalamityMod:Leviathan", isActive);
+            Main.SceneState.ManageSpecialBiomeVisuals("CalamityMod:Leviathan", isActive);
         }
     }
 }

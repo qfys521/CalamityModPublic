@@ -75,7 +75,7 @@ namespace CalamityMod.Projectiles.Melee
 
         public override Color? GetAlpha(Color drawColor) => Projectile.ai[0] == 1 ? new Color(100, 100, 100, Projectile.alpha) : new Color(255, 255, 255, Projectile.alpha);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor, 1);
             return false;

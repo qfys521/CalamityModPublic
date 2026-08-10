@@ -24,11 +24,11 @@ namespace CalamityMod.Items.Materials
             Item.value = Item.sellPrice(gold: 1, silver: 40);
             Item.rare = ModContent.RarityType<Turquoise>();
         }
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float brightness = (float)Main.rand.Next(90, 111) * 0.01f;
             brightness *= Main.essScale;
-            Lighting.AddLight((int)((Item.position.X + (float)(Item.width / 2)) / 16f), (int)((Item.position.Y + (float)(Item.height / 2)) / 16f), 0.5f * brightness, 0.1f * brightness, 0.7f * brightness);
+            Lighting.AddLight((int)((item.position.X + (float)(Item.width / 2)) / 16f), (int)((item.position.Y + (float)(Item.height / 2)) / 16f), 0.5f * brightness, 0.1f * brightness, 0.7f * brightness);
         }
     }
 }

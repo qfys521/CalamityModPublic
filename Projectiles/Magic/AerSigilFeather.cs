@@ -64,7 +64,7 @@ namespace CalamityMod.Projectiles.Magic
             Projectile.velocity = Vector2.Zero;
             return false;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             lightColor = Color.LightGoldenrodYellow * 0.5f;
             return true;

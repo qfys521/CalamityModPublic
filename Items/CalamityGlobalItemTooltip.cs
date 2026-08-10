@@ -210,7 +210,7 @@ namespace CalamityMod.Items
                     string holdShiftText = holdShiftItem.TooltipExtensionText == LocalizedText.Empty ? item.ModItem.GetLocalizedValue(holdShiftItem.TooltipExtensionKey) : holdShiftItem.TooltipExtensionText.ToString();
                     TooltipLine holdShiftLine = new TooltipLine(Mod, IHoldShiftTooltipItem.ExtensionTooltipID, holdShiftText);
                     if (holdShiftItem.TooltipExtensionColor is not null)
-                        holdShiftLine.OverrideColor = holdShiftItem.TooltipExtensionColor;
+                        holdShiftLine.Color = holdShiftItem.TooltipExtensionColor.Value;
 
                     // If asked to, remove all standard tooltip lines. This moves the last tooltip index.
                     // This only occurs if the standard tooltip lines are ACTUALLY standard tooltips. Otherwise, don't remove anything!
@@ -230,7 +230,7 @@ namespace CalamityMod.Items
                     LocalizedText indicatorText = CalamityUtils.GetText(holdShiftItem.ExtensionIndicatorKey);
                     TooltipLine indicator = new TooltipLine(Mod, IHoldShiftTooltipItem.ExtensionIndicatorTooltipID, indicatorText.Value);
                     if (holdShiftItem.ExtensionIndicatorColor is not null)
-                        indicator.OverrideColor = holdShiftItem.ExtensionIndicatorColor;
+                        indicator.Color = holdShiftItem.ExtensionIndicatorColor.Value;
 
                     // Append the extension indicator tooltip at the end of standard tooltips.
                     tooltips.Insert(++lastTooltipIndex, indicator);
@@ -246,7 +246,7 @@ namespace CalamityMod.Items
                     string flavorText = item.ModItem.GetLocalizedValue(holdShiftItem.FlavorTooltipKey);
                     TooltipLine flavorLine = new TooltipLine(Mod, IHoldShiftTooltipItem.FlavorTooltipID, flavorText);
                     if (holdShiftItem.FlavorTooltipColor is not null)
-                        flavorLine.OverrideColor = holdShiftItem.FlavorTooltipColor;
+                        flavorLine.Color = holdShiftItem.FlavorTooltipColor.Value;
 
                     // Append the flavor tooltip at the end of standard tooltips, after all Hold SHIFT tooltips and reminders.
                     tooltips.Insert(++lastTooltipIndex, flavorLine);
@@ -397,7 +397,7 @@ namespace CalamityMod.Items
                     var bind = PlayerInput.CurrentProfile.InputModes[InputMode.Keyboard].KeyStatus["SmartCursor"];
                     string str = bind.Count == 0 ? GetTextValue("Misc.HotkeyNotBound") : bind.First().ToString();
                     tooltips.Insert(++lastTooltipIndex, (new TooltipLine(Mod, "CalamityMod:AltExpandTooltip", GetTextValue("Misc.AltExpand").Replace("{0}", str))));
-                    tooltips[lastTooltipIndex].OverrideColor = new Color(170, 170, 170);
+                    tooltips[lastTooltipIndex].Color = new Color(170, 170, 170);
                 }
                 else if (foundDebuff)
                 {
@@ -415,7 +415,7 @@ namespace CalamityMod.Items
         private static void ApplyRarityColor(Item item, TooltipLine nameLine)
         {
             if (item.type == ModContent.ItemType<TheCommunity>())
-                nameLine.OverrideColor = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
+                nameLine.Color = new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB);
         }
         #endregion
 
@@ -441,7 +441,7 @@ namespace CalamityMod.Items
             string MultTagTooltip(float mult) => (CalamityUtils.GetText($"Common.SummonTagDamageMult").Format((mult + 1).ToString("0.##")));
             string CritTagTooltip(float crit) => (CalamityUtils.GetText($"Common.SummonTagCrit").Format((crit * 100).ToString("0.#")));
 
-            var tag = CalamityBuffSets.SummonTagDebuff.FirstOrDefault(x => x is not null && x.TagItem == item.type && x.AutoDrawTooltip, null);
+            var tag = CalamityBuffSets.SummonTagItem[item.type];
             if (tag is not null)
             {
                 if (!tag.AutoDrawTooltip) return;
@@ -1550,7 +1550,7 @@ namespace CalamityMod.Items
             // Special enchantment line color.
             if (line.Name == "ItemName" && line.Mod == "Terraria" && item.IsEnchanted())
             {
-                Color rarityColor = line.OverrideColor ?? line.Color;
+                Color rarityColor = line.Color;
                 Vector2 basePosition = new Vector2(line.X, line.Y);
 
                 float backInterpolant = (float)Math.Pow(Main.GlobalTimeWrappedHourly * 0.81f % 1f, 1.5f);
@@ -1701,7 +1701,7 @@ namespace CalamityMod.Items
                     line2 = new TooltipLine(CalamityMod.Instance, "SchematicKnowledge2", CalamityUtils.GetTextValue("Misc.Tier5KnowledgeTooltip"));
                     break;
             }
-            line.OverrideColor = line2.OverrideColor = Color.Cyan;
+            line.Color = line2.Color = Color.Cyan;
 
             bool allowedDueToOldWorld = allowOldWorlds && CalamityWorld.IsWorldAfterDraedonUpdate;
             tooltips.AddWithCondition(line, !ArsenalTierGatedRecipe.HasTierBeenLearned(tier) && !allowedDueToOldWorld);

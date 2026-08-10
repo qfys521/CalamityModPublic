@@ -88,7 +88,7 @@ namespace CalamityMod.Tiles.Abyss
         // Ozzatron 01JUL2022: heavily refactored this code to not suck. also, sulphurous vines won't grow in honey anymore.
         private const int MaxVineHeight = 10;
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Tile below = Main.tile[i, j + 1];
             if (!below.HasTile && below.LiquidType == LiquidID.Water && below.LiquidAmount >= 128)

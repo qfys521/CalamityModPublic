@@ -324,12 +324,12 @@ namespace CalamityMod.NPCs.Abyss
             return null;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer2 && spawnInfo.Water && !NPC.AnyNPCs(ModContent.NPCType<OarfishHead>()))
+            if (spawner.Player.Calamity().ZoneAbyssLayer2 && spawner.waterTile && !NPC.AnyNPCs(ModContent.NPCType<OarfishHead>()))
                 return SpawnCondition.CaveJellyfish.Chance * 0.3f;
 
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer3 && spawnInfo.Water && !NPC.AnyNPCs(ModContent.NPCType<OarfishHead>()))
+            if (spawner.Player.Calamity().ZoneAbyssLayer3 && spawner.waterTile && !NPC.AnyNPCs(ModContent.NPCType<OarfishHead>()))
                 return Main.remixWorld ? 5.4f : SpawnCondition.CaveJellyfish.Chance * 0.6f;
 
             return 0f;

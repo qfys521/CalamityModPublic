@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CalamityMod.Prefixes.VanillaPrefixChanges;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -27,7 +28,7 @@ namespace CalamityMod.Prefixes
         {
             yield return new TooltipLine(Mod, "CalamityMod:PrefixLifeRegenBoost", LifeRegenTooltip.Format(GetPartialLifeRegenAmount.ToRegenPerSecond()))
             {
-                IsModifier = true
+                Color = Colors.PrefixGood
             };
         }
     }
@@ -52,7 +53,7 @@ namespace CalamityMod.Prefixes
         {
             yield return new TooltipLine(Mod, "CalamityMod:PrefixMaxLifeBoost", LifeBoostTooltip.Format(GetHealthBoostAmount()))
             {
-                IsModifier = true
+                Color = Colors.PrefixGood
             };
         }
 
@@ -86,7 +87,7 @@ namespace CalamityMod.Prefixes
         {
             yield return new TooltipLine(Mod, "CalamityMod:PrefixFriendly", FriendlyTooltip.Format(1))
             {
-                IsModifier = true
+                Color = Colors.PrefixGood
             };
         }
     }

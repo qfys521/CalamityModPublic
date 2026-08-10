@@ -69,7 +69,7 @@ namespace CalamityMod.Projectiles.Magic
                 Projectile.timeLeft = parent.timeLeft;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D mainTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Texture2D blankTexture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Magic/BlankSigil").Value;

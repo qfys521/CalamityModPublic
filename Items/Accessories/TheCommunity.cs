@@ -110,7 +110,7 @@ namespace CalamityMod.Items.Accessories
         {
             var ThankYouTooltip = list.FirstOrDefault(x => x.Name == "Tooltip2" && x.Mod == "Terraria");
             if (ThankYouTooltip != null)
-                ThankYouTooltip.OverrideColor = Main.DiscoColor;
+                ThankYouTooltip.Color = Main.DiscoColor;
 
             float power = CalculatePower();
             string statList = this.GetLocalization("StatsList").Format(

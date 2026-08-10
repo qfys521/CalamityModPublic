@@ -63,11 +63,11 @@ namespace CalamityMod.Projectiles.Summon
                 Dust dust = Dust.NewDustDirect(Projectile.Center, 1, 1, DustID.TintableDustLighted, dustVelocity.X, dustVelocity.Y, 0, dustColor, dustScale);
                 dust.noGravity = true;
                 dust.noLight = false;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
 
-        public override bool PreDraw(ref Color lightColor) => false;
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => false;
 
         //Trail based on Fryzahh's work on Faith Incinerator
         public float FireWidthFunction(float completion, Vector2 vertexPos)

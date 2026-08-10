@@ -114,7 +114,7 @@ namespace CalamityMod.Projectiles.Melee
                 dust.scale = 0.7f;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Color drawColor = Color.HotPink;
             Projectile.DrawProjectileWithBackglow(drawColor with { A = 0 }, Color.White, 2.5f * Main.rand.NextFloat(0.8f, 1.3f));

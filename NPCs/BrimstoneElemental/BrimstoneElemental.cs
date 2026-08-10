@@ -808,7 +808,7 @@ namespace CalamityMod.NPCs.BrimstoneElemental
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
             return true;
         }
 
@@ -866,7 +866,7 @@ namespace CalamityMod.NPCs.BrimstoneElemental
             }
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ItemID.GreaterHealingPotion;
         }

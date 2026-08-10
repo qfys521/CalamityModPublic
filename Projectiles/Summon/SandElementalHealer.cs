@@ -202,7 +202,7 @@ namespace CalamityMod.Projectiles.Summon
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = TextureAssets.Projectile[Type].Value;
             Rectangle frame = tex.Frame(1, Main.projFrames[Type], 0, Projectile.frame);

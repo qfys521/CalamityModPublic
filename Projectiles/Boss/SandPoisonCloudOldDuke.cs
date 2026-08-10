@@ -28,7 +28,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.ignoreWater = true;
             Projectile.timeLeft = 1800;
             Projectile.alpha = 80;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void AI()
@@ -71,7 +71,7 @@ namespace CalamityMod.Projectiles.Boss
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             lightColor.R = (byte)(100 * Projectile.Opacity);
             lightColor.G = (byte)(155 * Projectile.Opacity);
@@ -91,7 +91,7 @@ namespace CalamityMod.Projectiles.Boss
             if (info.Damage <= 0)
                 return;
 
-            target.AddBuff(ModContent.BuffType<Irradiated>(), 480, true);
+            target.AddBuff(ModContent.BuffType<Irradiated>(), 480);
         }
     }
 }

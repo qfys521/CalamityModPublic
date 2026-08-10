@@ -19,7 +19,7 @@ namespace CalamityMod.Systems
 
         public override void SpecialVisuals(Player player, bool isActive)
         {
-            player.ManageSpecialBiomeVisuals("CalamityMod:DevourerofGodsHead", isActive);
+            Main.SceneState.ManageSpecialBiomeVisuals("CalamityMod:DevourerofGodsHead", isActive);
             if (isActive)
                 SkyManager.Instance.Activate("CalamityMod:DevourerofGodsHead");
             else

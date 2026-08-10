@@ -134,7 +134,7 @@ namespace CalamityMod.Projectiles.Ranged
             return false;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float sine = (float)Math.Sin(Projectile.timeLeft * 0.175f / MathHelper.Pi);
             float trueSine = MathHelper.Lerp(sine, Math.Sign(sine) * 0.5f, 0.6f);
@@ -172,7 +172,7 @@ namespace CalamityMod.Projectiles.Ranged
                 dust.fadeIn = 1.5f;
                 dust.noGravity = true;
                 dust.color = Color.White;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
             // Doesn't actually do damage, just an aoe for knockback
             if (Main.myPlayer == Projectile.owner)

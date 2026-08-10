@@ -23,17 +23,17 @@ namespace CalamityMod.Items.Placeables.Furniture
 
         public override void HoldItem(Player player)
         {
-            bool killTorch = Collision.DrownCollision(player.position, player.width, player.height, player.gravDir) || Item.wet;
+            bool killTorch = Collision.DrownCollision(player.position, player.width, player.height, player.gravDir);
             Vector2 position = player.RotatedRelativePoint(new Vector2(player.itemLocation.X + 12f * player.direction + player.velocity.X, player.itemLocation.Y - 14f + player.velocity.Y), true);
 
             if (!killTorch)
                 Lighting.AddLight(position, 0.5f, 0.75f, 1.2f);
         }
 
-        public override void PostUpdate()
+        public override void PostUpdate(WorldItem item)
         {
-            if (!Item.wet)
-                Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 0.5f, 0.75f, 1.2f);
+            if (!item.wet)
+                Lighting.AddLight((int)((item.position.X + Item.width / 2) / 16f), (int)((item.position.Y + Item.height / 2) / 16f), 0.5f, 0.75f, 1.2f);
         }
 
         public override void AddRecipes()

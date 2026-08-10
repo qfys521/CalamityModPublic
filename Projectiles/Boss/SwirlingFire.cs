@@ -22,7 +22,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.alpha = 255;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 180;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
             Projectile.ai[0] = MathHelper.ToRadians(Main.rand.NextFloat(-3, 3));
         }
 

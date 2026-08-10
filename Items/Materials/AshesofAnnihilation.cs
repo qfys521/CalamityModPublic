@@ -30,7 +30,7 @@ namespace CalamityMod.Items.Materials
             Item.value = Item.sellPrice(gold: 6, silver: 66, copper: 66);
             Item.rare = ModContent.RarityType<CalamityRed>();
         }
-        public void DrawPulsingAfterimage(SpriteBatch spriteBatch, Vector2 baseDrawPosition, Rectangle frame, float baseScale)
+        public void DrawPulsingAfterimage(SpriteBatch spriteBatch, Vector2 baseDrawPosition, Rectangle frame, float baseScale, float velocityX = 0f)
         {
             float pulse = Main.GlobalTimeWrappedHourly * 0.68f % 1f;
             float outwardness = pulse * baseScale * 8f;
@@ -38,7 +38,7 @@ namespace CalamityMod.Items.Materials
             drawColor.A = 0;
             float scale = baseScale * MathHelper.Lerp(1f, 1.45f, pulse);
             Vector2 drawPositionOffset = Vector2.UnitY * 2f;
-            float velocity = Item.velocity.X * 0.2f;
+            float velocity = velocityX * 0.2f;
             Vector2 origin = frame.Size() * 0.5f;
             for (int i = 0; i < 4; i++)
             {
@@ -53,17 +53,17 @@ namespace CalamityMod.Items.Materials
             return true;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Rectangle frame = Main.itemAnimations[Type].GetFrame(TextureAssets.Item[Type].Value);
-            DrawPulsingAfterimage(spriteBatch, Item.position - Main.screenPosition + frame.Size() * 0.5f, frame, scale);
+            DrawPulsingAfterimage(spriteBatch, item.position - Main.screenPosition + frame.Size() * 0.5f, frame, scale, item.velocity.X);
             return true;
         }
 
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float brightness = Main.essScale * Main.rand.NextFloat(0.9f, 1.1f);
-            Lighting.AddLight(Item.Center, 0.34f * brightness, 0.08f * brightness, 0.155f * brightness);
+            Lighting.AddLight(item.Center, 0.34f * brightness, 0.08f * brightness, 0.155f * brightness);
         }
     }
 }

@@ -214,7 +214,7 @@ namespace CalamityMod.Projectiles.Ranged
             Owner.itemRotation = (Projectile.velocity * Projectile.direction).ToRotation();
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.EnterShaderRegion();
             if (PumpkinsCharge > 0 && !IsOverfilled)

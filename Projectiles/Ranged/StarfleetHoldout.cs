@@ -298,7 +298,7 @@ namespace CalamityMod.Projectiles.Ranged
             };
             return useColor;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             gunBackPosition = Projectile.Center - Projectile.velocity * 22f + Projectile.velocity.RotatedBy(MathHelper.PiOver2 * Projectile.direction) * -2;
             

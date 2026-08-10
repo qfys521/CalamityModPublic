@@ -70,7 +70,7 @@ namespace CalamityMod.Projectiles.Melee
                     dust.velocity = -Projectile.velocity.RotatedByRandom(0.3f) * Main.rand.NextFloat(0.1f, 0.7f);
                     dust.noGravity = true;
                     dust.color = Color.LightGreen;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
             if (time >= 35)
@@ -130,7 +130,7 @@ namespace CalamityMod.Projectiles.Melee
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>("CalamityMod/Particles/WaterFlavored");
             Asset<Texture2D> tex2 = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle");

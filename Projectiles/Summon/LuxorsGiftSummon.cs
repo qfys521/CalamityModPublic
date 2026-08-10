@@ -59,7 +59,7 @@ namespace CalamityMod.Projectiles.Summon
                 dust.noGravity = !sparkly;
                 dust.scale = Main.rand.NextFloat(0.45f, 0.6f) * (sparkly ? 1.6f : 1);
                 dust.color = Color.Lime;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.velocity *= (sparkly ? 1 : 8);
             }
 
@@ -84,14 +84,14 @@ namespace CalamityMod.Projectiles.Summon
                     dust.noGravity = Main.rand.NextBool();
                     dust.scale = Main.rand.NextFloat(0.65f, 1.2f);
                     dust.color = Color.Lime;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
                 Projectile.Kill();
             }
         }
         public override bool? CanHitNPC(NPC target) => (targeted != null && target == targeted && attackTime == 0) ? null : false;
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 8, targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
             Color drawColor = Color.Lime;

@@ -23,7 +23,7 @@ namespace CalamityMod.Tiles.Furniture
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.addTile(Type);
             AdjTiles = new int[] { TileID.Candles };
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
             AddMapEntry(new Color(238, 145, 105), CalamityUtils.GetItemName<WeightlessCandle>());
             TileID.Sets.HasOutlines[Type] = true;
             AnimationFrameHeight = 18;

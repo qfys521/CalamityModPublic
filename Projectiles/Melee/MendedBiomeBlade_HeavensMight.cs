@@ -233,7 +233,7 @@ namespace CalamityMod.Projectiles.Melee
                 smear.Kill();
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D handle = Request<Texture2D>("CalamityMod/Items/Weapons/Melee/TrueBiomeBlade").Value;
             Texture2D blade = Request<Texture2D>("CalamityMod/Projectiles/Melee/MendedBiomeBlade_HeavensMight").Value;

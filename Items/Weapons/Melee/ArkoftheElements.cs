@@ -41,14 +41,14 @@ namespace CalamityMod.Items.Weapons.Melee
             var comboTooltip = tooltips.FirstOrDefault(x => x.Text.Contains("[COMBO]") && x.Mod == "Terraria");
             if (comboTooltip != null)
             {
-                comboTooltip.Text = Lang.SupportGlyphs(this.GetLocalizedValue("ComboInfo"));
-                comboTooltip.OverrideColor = Color.Crimson;
+                comboTooltip.Text = this.GetLocalizedValue("ComboInfo");
+                comboTooltip.Color = Color.Crimson;
             }
             var parryTooltip = tooltips.FirstOrDefault(x => x.Text.Contains("[PARRY]") && x.Mod == "Terraria");
             if (parryTooltip != null)
             {
-                parryTooltip.Text = Lang.SupportGlyphs(this.GetLocalizedValue("ParryInfo"));
-                parryTooltip.OverrideColor = Color.Orange;
+                parryTooltip.Text = this.GetLocalizedValue("ParryInfo");
+                parryTooltip.Color = Color.Orange;
             }
         }
         public override void SetStaticDefaults()
@@ -178,13 +178,13 @@ namespace CalamityMod.Items.Weapons.Melee
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D frontTexture = Request<Texture2D>("CalamityMod/Items/Weapons/Melee/ArkoftheElements").Value;
             Texture2D backTexture = Request<Texture2D>("CalamityMod/Items/Weapons/Melee/ArkoftheElementsBack").Value;
 
-            spriteBatch.Draw(backTexture, Item.Center - Main.screenPosition, null, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(frontTexture, Item.Center - Main.screenPosition, null, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(backTexture, item.Center - Main.screenPosition, null, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(frontTexture, item.Center - Main.screenPosition, null, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
             return false;
         }
 

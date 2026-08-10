@@ -86,10 +86,10 @@ public class BrainOfCthulhuSystem : ModSystem
         // The last part leaves one frame at the end of the spawn animation where the boss music starts playing, so that it can be instantly maxed out
         if (brainAI.AIState < 0 && (brainAI.Time - Math.Abs(brainAI.SpawnTime) < 420))
         {
-            if (Main.newMusic == MusicID.OtherworldlyBoss1)
+            if (Main.newMusic == MusicID.OtherworldBoss1)
                 Main.newMusic = previousMusic;
 
-            if (Main.curMusic == MusicID.OtherworldlyBoss1)
+            if (Main.curMusic == MusicID.OtherworldBoss1)
                 Main.curMusic = previousMusic;
         }
     }
@@ -111,15 +111,15 @@ public class BrainOfCthulhuSystem : ModSystem
         }
     }
 
-    private void SpawnBrainNoMessage(On_NPC.orig_SpawnBoss orig, int spawnPositionX, int spawnPositionY, int Type, int targetPlayerIndex)
+    private void SpawnBrainNoMessage(On_NPC.orig_SpawnBoss orig, int spawnPositionX, int spawnPositionY, int Type, int targetPlayerIndex, float ai0, float ai1, float ai2, float ai3)
     {
         if (Type != NPCID.BrainofCthulhu || !CalamityWorld.revenge)
         {
-            orig(spawnPositionX, spawnPositionY, Type, targetPlayerIndex);
+            orig(spawnPositionX, spawnPositionY, Type, targetPlayerIndex, ai0, ai1, ai2, ai3);
             return;
         }
 
-        int num = NPC.NewNPC(NPC.GetBossSpawnSource(targetPlayerIndex), spawnPositionX, spawnPositionY, Type, 1);
+        int num = NPC.NewNPC(NPC.GetBossSpawnSource(targetPlayerIndex), spawnPositionX, spawnPositionY, Type, 1, ai0, ai1, ai2, ai3);
 
         if (num == 200 || num == -1)
             return;
@@ -291,14 +291,14 @@ public class BrainOfCthulhuSystem : ModSystem
 
                             if (i == MathF.Ceiling(reelRatio))
                             {
-                                seg.position = startPoint - (Vector2.unitYVector * MathHelper.Lerp(0, 16, segmentRatio));
+                                seg.position = startPoint - (Vector2.UnitY * MathHelper.Lerp(0, 16, segmentRatio));
                             }
                             seg.locked = false;
                         }
 
                         if (reelRatio < 0.75f && Main.rand.NextBool(3))
                         {
-                            Vector2 dir = (vTendril[^1].position - vTendril[^2].position).SafeNormalize(Vector2.unitYVector);
+                            Vector2 dir = (vTendril[^1].position - vTendril[^2].position).SafeNormalize(Vector2.UnitY);
                             BloodParticle p = new(vTendril[^2].position, dir.RotatedBy(Main.rand.NextFloat(-MathHelper.Pi / 10f, MathHelper.Pi / 10f)) * Main.rand.NextFloat(4f, 8f), 16, Main.rand.NextFloat(0.5f, 0.75f), Color.Red * 0.75f);
                             GeneralParticleHandler.SpawnParticle(p);
                         }
@@ -416,11 +416,10 @@ public class BrainOfCthulhuSystem : ModSystem
         if (NPC.crimsonBoss != -1 && Main.npc[NPC.crimsonBoss].active && Main.npc[NPC.crimsonBoss].TryGetAIOverride<BrainOfCthulhuAI>(out var brainAI) && brainAI.AIState > BrainOfCthulhuAI.BrainAIState.SurfaceSpawnAnimation)
             allowBossMusic = true;
 
-        if (((Main.curMusic != MusicID.Boss3 && Main.curMusic != MusicID.OtherworldlyBoss1) || allowBossMusic) && Main.curMusic != MusicID.Boss1)
+        if (((Main.curMusic != MusicID.Boss3 && Main.curMusic != MusicID.OtherworldBoss1) || allowBossMusic) && Main.curMusic != MusicID.Boss1)
             previousMusic = Main.curMusic;
 
         if (previousMusic == -1)
             previousMusic = MusicID.Crimson;
     }
 }
-

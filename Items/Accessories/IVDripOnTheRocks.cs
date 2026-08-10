@@ -258,7 +258,7 @@ namespace CalamityMod.Items.Accessories
             spriteBatch.Draw(texture, position, targetFrame, drawColor, 0f, origin, scale, SpriteEffects.None, 0f);
             return false;
         }
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D texture = TextureAssets.Item[Item.type].Value;
 
@@ -267,7 +267,7 @@ namespace CalamityMod.Items.Accessories
 
             Rectangle targetFrame = new Rectangle(0, frameIndex * frameHeight, texture.Width, frameHeight);
 
-            Vector2 drawPosition = Item.position - Main.screenPosition + new Vector2(Item.width / 2, Item.height - frameHeight / 2);
+            Vector2 drawPosition = item.position - Main.screenPosition + new Vector2(Item.width / 2, Item.height - frameHeight / 2);
             Vector2 origin = targetFrame.Size() / 2f;
 
             spriteBatch.Draw(texture, drawPosition, targetFrame, lightColor, rotation, origin, scale, SpriteEffects.None, 0f);

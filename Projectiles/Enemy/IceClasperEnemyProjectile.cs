@@ -49,7 +49,7 @@ namespace CalamityMod.Projectiles.Enemy
                 SoundEngine.PlaySound(SoundID.Item27, Projectile.Center);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (CalamityClientConfig.Instance.Afterimages)
                 CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], lightColor);

@@ -128,7 +128,7 @@ namespace CalamityMod.Projectiles.Summon
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.75f, 1.25f);
                     dust.color = _effectsColor;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
                 else
                 {
@@ -140,7 +140,7 @@ namespace CalamityMod.Projectiles.Summon
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             Rectangle frame = texture.Frame(horizontalFrames: 8, frameX: GuitarSprite);

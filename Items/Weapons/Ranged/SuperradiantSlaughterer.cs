@@ -38,14 +38,14 @@ namespace CalamityMod.Items.Weapons.Ranged
             var mainTooltip = tooltips.FirstOrDefault(x => x.Text.Contains("[MAIN]") && x.Mod == "Terraria");
             if (mainTooltip != null)
             {
-                mainTooltip.Text = Lang.SupportGlyphs(this.GetLocalizedValue("MainInfo"));
-                mainTooltip.OverrideColor = Color.Chartreuse;
+                mainTooltip.Text = this.GetLocalizedValue("MainInfo");
+                mainTooltip.Color = Color.Chartreuse;
             }
             var altTooltip = tooltips.FirstOrDefault(x => x.Text.Contains("[ALT]") && x.Mod == "Terraria");
             if (altTooltip != null)
             {
-                altTooltip.Text = Lang.SupportGlyphs(this.GetLocalization("AltInfo").Format(DashCooldown / 60));
-                altTooltip.OverrideColor = Color.SpringGreen;
+                altTooltip.Text = this.GetLocalization("AltInfo").Format(DashCooldown / 60);
+                altTooltip.Color = Color.SpringGreen;
             }
         }
 
@@ -101,7 +101,7 @@ namespace CalamityMod.Items.Weapons.Ranged
                 float kb = player.GetTotalKnockback<MeleeDamageClass>().ApplyTo(Item.knockBack);
 
                 // 14NOV2024: Ozzatron: clamped mouse position unnecessary, only used for direction
-                Projectile.NewProjectile(Item.GetSource_FromThis(), player.Center, player.SafeDirectionTo(player.Calamity().mouseWorld), Item.shoot, damage * 2, kb, player.whoAmI, ai1: 2f);
+            Projectile.NewProjectile(player.GetSource_ItemUse(Item), player.Center, player.SafeDirectionTo(player.Calamity().mouseWorld), Item.shoot, damage * 2, kb, player.whoAmI, ai1: 2f);
             }
         }
 

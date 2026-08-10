@@ -8,6 +8,7 @@ using CalamityMod.Items.Weapons.Rogue;
 using CalamityMod.Items.Weapons.Summon;
 using CalamityMod.Projectiles.Rogue;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
 using Terraria.ID;
@@ -174,24 +175,25 @@ namespace CalamityMod.NPCs.TownNPCs
             }
         }
 
-        public override void SetChatButtons(ref string button, ref string button2)
+        public override void RegisterChatButtons(NPCInteractionList interactions)
         {
-            button = Language.GetTextValue("LegacyInterface.28");
-            button2 = Language.GetTextValue("LegacyInterface.51");
+            NPCInteractionList.Entry shop = interactions.InsertBefore(NPCInteractions.Shop(), NPCInteractionDatabase.CloseButton);
+            interactions.InsertAfter(new BlessingInteraction(), shop);
         }
 
-        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
+        private sealed class BlessingInteraction : NPCInteraction
         {
-            if (firstButton)
+            public override bool Condition() => true;
+            public override string GetText() => Language.GetTextValue("LegacyInterface.51");
+
+            public override void Interact()
             {
-                shopName = "Shop";
-            }
-            else
-            {
-                Main.npcChatText = Lore();
-                NPC.Calamity().newAI[0]++;
-                Player player = Main.LocalPlayer;
-                player.AddBuff(ModContent.BuffType<AmidiasBlessing>(), 36000);
+                if (TalkNPC.ModNPC is not SeaKing seaKing)
+                    return;
+
+                Main.npcChatText = seaKing.Lore();
+                TalkNPC.Calamity().newAI[0]++;
+                LocalPlayer.AddBuff(ModContent.BuffType<AmidiasBlessing>(), 36000);
             }
         }
         public override void AddShops()

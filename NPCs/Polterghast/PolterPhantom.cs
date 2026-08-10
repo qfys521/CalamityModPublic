@@ -520,12 +520,12 @@ namespace CalamityMod.NPCs.Polterghast
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.MoonLeech, 360, true);
+                target.AddBuff(BuffID.MoonLeech, 360);
         }
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
             return true;
         }
 

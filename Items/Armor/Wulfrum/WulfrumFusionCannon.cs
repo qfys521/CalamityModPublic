@@ -55,7 +55,7 @@ namespace CalamityMod.Items.Armor.Wulfrum
         public override void ModifyTooltips(List<TooltipLine> tooltips)
         {
             var name = tooltips.FirstOrDefault(x => x.Name == "ItemName" && x.Mod == "Terraria");
-            name.OverrideColor = Color.Lerp(new Color(194, 255, 67), new Color(112, 244, 244), 0.5f + 0.5f * (float)Math.Sin(Main.GlobalTimeWrappedHourly * 3f));
+            name.Color = Color.Lerp(new Color(194, 255, 67), new Color(112, 244, 244), 0.5f + 0.5f * (float)Math.Sin(Main.GlobalTimeWrappedHourly * 3f));
         }
 
         public override void HoldItem(Player player)

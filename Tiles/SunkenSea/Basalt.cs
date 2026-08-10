@@ -53,7 +53,7 @@ namespace CalamityMod.Tiles.SunkenSea
         {
             return TileFramingSystem.BetterGemsparkFraming(i, j, resetFrame);
         }
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Dust dust;
             dust = Main.dust[Dust.NewDust(new Vector2(i * 16f, j * 16f), 16, 16, DustID.Smoke, 0f, -1.9069767f, 195, new Color(255, 255, 255), 1f)];

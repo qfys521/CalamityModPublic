@@ -155,7 +155,7 @@ namespace CalamityMod.Projectiles.Ranged
                 hitbox.Inflate(28, 28);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             LargeSlash ??= ModContent.Request<Texture2D>("CalamityMod/Projectiles/Ranged/BuzzkillSawLargeSlash");
             Texture2D largeSlashTexture = LargeSlash.Value;

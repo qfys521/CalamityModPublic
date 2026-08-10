@@ -111,7 +111,7 @@ namespace CalamityMod.Graphics.Metaballs
             metaballShader.Value.Parameters["screenSize"]?.SetValue(screenSize);
             metaballShader.Value.Parameters["layerOffset"]?.SetValue(layerScrollOffset);
             metaballShader.Value.Parameters["edgeColor"]?.SetValue(EdgeColor.ToVector4());
-            metaballShader.Value.Parameters["singleFrameScreenOffset"]?.SetValue((Main.screenLastPosition - Main.screenPosition) / screenSize);
+            metaballShader.Value.Parameters["singleFrameScreenOffset"]?.SetValue(MetaballManager.CameraOffsetSinceLastFrame / screenSize);
             metaballShader.Value.Parameters["layerColor"]?.SetValue(LayerColors.Count() > layerIndex ? LayerColors[layerIndex] : Color.White.ToVector4());
 
             // Supply the metaball's layer texture to the graphics device so that the shader can read it.

@@ -238,7 +238,7 @@ namespace CalamityMod.Projectiles.Summon
             return Color.Lerp(endColor, startingColor, (float)Math.Pow(completionRatio, 1.5D)) * 0.7f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2[] segmentPositions = Segments.Select(x => x.position).ToArray();
 

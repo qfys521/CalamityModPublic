@@ -49,7 +49,7 @@ namespace CalamityMod.Projectiles.Rogue
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.4f, 0.5f);
                 dust.color = Color.Magenta;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
             if (!Collision.SolidCollision(Projectile.Center, 35, 35) || Projectile.timeLeft <= 500)
                 Projectile.tileCollide = true;
@@ -72,7 +72,7 @@ namespace CalamityMod.Projectiles.Rogue
                 c.scale = Main.rand.NextFloat(0.6f, 0.7f) * (i % 2 == 0 ? 2.2f : 1.8f);
                 c.noGravity = true;
                 c.color = Color.Magenta;
-                c.noLightEmittence = true;
+                c.noLightEmittance = true;
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
@@ -93,7 +93,7 @@ namespace CalamityMod.Projectiles.Rogue
             return false;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 30, targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
             Color drawColor = Color.Magenta;

@@ -107,10 +107,10 @@ namespace CalamityMod.Projectiles.Enemy
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<WindChilled>(), 120, true);
+                target.AddBuff(ModContent.BuffType<WindChilled>(), 120);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float aiTrackCheck = Projectile.ai[1] == 1f ? 795f : 600f;
             float expandSizeX2 = Projectile.ai[1] == 1f ? 150f : 15f;

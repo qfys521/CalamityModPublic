@@ -144,11 +144,11 @@ namespace CalamityMod.Items.Weapons.Summon
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D properSprite = Request<Texture2D>("CalamityMod/Items/Weapons/Summon/Cnidarian").Value;
 
-            spriteBatch.Draw(properSprite, Item.position - Main.screenPosition, null, lightColor, rotation, properSprite.Size() / 2f, scale, 0, 0);
+            spriteBatch.Draw(properSprite, item.position - Main.screenPosition, null, lightColor, rotation, properSprite.Size() / 2f, scale, 0, 0);
             return false;
         }
         #endregion

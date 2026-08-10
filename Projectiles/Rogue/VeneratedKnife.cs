@@ -67,7 +67,7 @@ namespace CalamityMod.Projectiles.Rogue
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
 
             if (Projectile.ai[0] == 0f)
@@ -83,7 +83,7 @@ namespace CalamityMod.Projectiles.Rogue
             return false;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
 
             Vector2 origin = new Vector2(Projectile.width / 2, Projectile.height / 2);

@@ -17,7 +17,7 @@ namespace CalamityMod.Items.SummonItems
         public static readonly SoundStyle UseSound = new("CalamityMod/Sounds/Custom/AstrumAureus/AstrumAureusSpawn");
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 12; // Truffle Worm
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 12; // Truffle Worm
         }
 
         public override void SetDefaults()

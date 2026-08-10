@@ -317,7 +317,7 @@ namespace CalamityMod.Projectiles.Typeless
                 dust.noGravity = Main.rand.NextBool(2, 3);
                 dust.scale = Main.rand.NextFloat(0.5f, 0.8f);
                 dust.color = Color.Red;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.fadeIn = -0.4f;
 
                 if (i % 2 == 0)
@@ -337,7 +337,7 @@ namespace CalamityMod.Projectiles.Typeless
             fallThrough = pigGrabbed;
             return true;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frame = texture.Frame(1, 2, 0, Projectile.frame);

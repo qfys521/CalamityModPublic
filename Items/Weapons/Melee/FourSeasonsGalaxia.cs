@@ -92,14 +92,14 @@ namespace CalamityMod.Items.Weapons.Melee
 
             if (effectDescTooltip != null)
             {
-                effectDescTooltip.Text = Lang.SupportGlyphs(mainAttunement.FunctionText.ToString());
-                effectDescTooltip.OverrideColor = mainAttunement.tooltipColor;
+                effectDescTooltip.Text = mainAttunement.FunctionText.ToString();
+                effectDescTooltip.Color = mainAttunement.tooltipColor;
             }
 
             if (mainAttunementTooltip != null)
             {
                 mainAttunementTooltip.Text = mainAttunementTooltip.Text.Replace("ATT", mainAttunement.AttunementName.ToString());
-                mainAttunementTooltip.OverrideColor = Color.Lerp(mainAttunement.tooltipColor, mainAttunement.tooltipColor2, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.5f);
+                mainAttunementTooltip.Color = Color.Lerp(mainAttunement.tooltipColor, mainAttunement.tooltipColor2, 0.5f + (float)Math.Sin(Main.GlobalTimeWrappedHourly) * 0.5f);
             }
         }
         #endregion
@@ -267,7 +267,7 @@ namespace CalamityMod.Items.Weapons.Melee
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             if (mainAttunement == null)
                 mainAttunement = AttunementSystem.FindOrNull(AttunementID.Phoenix);
@@ -281,13 +281,13 @@ namespace CalamityMod.Items.Weapons.Melee
             spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, Main.Transform);
 
-            spriteBatch.Draw(outlineTexture, Item.Center - Main.screenPosition, animFrame, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(outlineTexture, item.Center - Main.screenPosition, animFrame, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
 
             spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Main.Transform);
 
 
-            spriteBatch.Draw(itemTexture, Item.Center - Main.screenPosition, animFrame, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(itemTexture, item.Center - Main.screenPosition, animFrame, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
             return false;
         }
 

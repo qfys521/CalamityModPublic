@@ -118,7 +118,7 @@ namespace CalamityMod.Projectiles.Magic
             return tip * Projectile.Opacity * Projectile.scale * 22f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             MiscShaderData boltShader = GameShaders.Misc["CalamityMod:SylvestaffProjectile"];
 

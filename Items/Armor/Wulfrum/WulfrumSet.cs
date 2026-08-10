@@ -147,14 +147,14 @@ namespace CalamityMod.Items.Armor.Wulfrum
                 {
                     //Drop the player's held item if they were holding something before
                     if (!(Main.mouseItem.type == DummyCannon.type) && !Main.mouseItem.IsAir)
-                        Main.LocalPlayer.QuickSpawnItem(null, Main.mouseItem, Main.mouseItem.stack);
+                        Main.LocalPlayer.QuickSpawnItem(null, Main.mouseItem);
 
                     Main.mouseItem = DummyCannon;
                 }
 
                 //Slot 58 is the "fake" slot thats used for the item the player is holding in their mouse
                 player.inventory[58] = DummyCannon;
-                player.selectedItem = 58;
+                player.selectedItemState.Select(58);
             }
 
             else if (Main.myPlayer == player.whoAmI)

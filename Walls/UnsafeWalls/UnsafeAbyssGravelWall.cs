@@ -16,7 +16,7 @@ namespace CalamityMod.Walls.UnsafeWalls
             AddMapEntry(new Color(6, 10, 54));
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             if (Main.tile[i, j].LiquidAmount == 0 && j < Main.maxTilesY - 205)
             {

@@ -21,7 +21,7 @@ namespace CalamityMod.Projectiles.Magic
             Projectile.idStaticNPCHitCooldown = 10;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             return false;
         }

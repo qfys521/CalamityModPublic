@@ -265,7 +265,7 @@ namespace CalamityMod.Projectiles.Summon
             Projectile.NewProjectile(Projectile.GetSource_FromAI(), CannonCenter + laserSpawnOffset, laserVelocity, laserID, laserDamage, 0f, Projectile.owner);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/AtlasMunitionsAutocannon").Value;
             Texture2D glowmask = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/AtlasMunitionsAutocannonGlow").Value;

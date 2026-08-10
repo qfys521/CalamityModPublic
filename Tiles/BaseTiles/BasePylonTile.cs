@@ -53,7 +53,7 @@ namespace CalamityMod.Tiles.BaseTiles
             TEModdedPylon moddedPylon = ModContent.GetInstance<TECalamityPylon>();
             this.SetUpPylon(moddedPylon, true);
 
-            TileID.Sets.InteractibleByNPCs[Type] = true;
+            TileID.Sets.InteractableByNPCs[Type] = true;
             TileID.Sets.PreventsSandfall[Type] = true;
 
             AddMapEntry(PylonMapColor, CalamityUtils.GetItemName(AssociatedItem));

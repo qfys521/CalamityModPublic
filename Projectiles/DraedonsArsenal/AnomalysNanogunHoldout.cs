@@ -201,7 +201,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                 Projectile.Kill();
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (!UseMPFBAI && AITimer - PlasmaChargeupTimer <= 0)
             {

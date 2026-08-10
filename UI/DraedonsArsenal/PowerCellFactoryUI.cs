@@ -127,7 +127,7 @@ namespace CalamityMod.UI.DraedonsArsenal
         public static int TryGrabCell(ref Item playerHandItem, ref Item cell)
         {
             Main.playerInventory = true;
-            Main.recBigList = false;
+            Main.PipsUseGrid = false;
 
             // You can only grab cells if you're stacking them with other cells or holding nothing.
             if (playerHandItem.IsAir)

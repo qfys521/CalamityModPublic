@@ -26,12 +26,12 @@ public class CrimsonEye : ModProjectile, ILocalizedModType
 
     public override void SetStaticDefaults()
     {
-        ProjectileID.Sets.DontAttachHideToAlpha[Type] = true;
         Main.projFrames[Type] = 5;
     }
 
     public override void SetDefaults()
     {
+        Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindNPCsAndTiles;
         Projectile.width = 100;
         Projectile.height = 36;
         Projectile.penetrate = -1;
@@ -40,7 +40,6 @@ public class CrimsonEye : ModProjectile, ILocalizedModType
         Projectile.timeLeft = 300;
         Projectile.scale = 1;
         Projectile.hostile = false;
-        Projectile.hide = true;
     }
 
     public override void OnSpawn(IEntitySource source)
@@ -96,12 +95,8 @@ public class CrimsonEye : ModProjectile, ILocalizedModType
         Time++;
     }
 
-    public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-    {
-        behindNPCsAndTiles.Add(index);
-    }
 
-    public override bool PreDraw(ref Color lightColor)
+    public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
     {
         if (ExplosionTime >= TimeToExplode)
             return false;
@@ -119,7 +114,7 @@ public class CrimsonEye : ModProjectile, ILocalizedModType
         return true;
     }
 
-    public override void PostDraw(Color lightColor)
+    public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
     {
         if (ExplosionTime >= TimeToExplode)
             return;
@@ -181,4 +176,3 @@ public class CrimsonEye : ModProjectile, ILocalizedModType
         }
     }
 }
-

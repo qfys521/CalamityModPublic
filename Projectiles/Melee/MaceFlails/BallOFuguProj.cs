@@ -100,14 +100,14 @@ namespace CalamityMod.Projectiles.Melee.MaceFlails
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (SpikeTimer > SpikeRate)
             {
                 float power = Utils.GetLerpValue(0f, MaxSpikeTime, SpikeTimer, true);
                 Main.EntitySpriteDraw(ChargeGlow.Value, Projectile.Center - Main.screenPosition, null, SpikeColor * (0.6f + 0.12f * power), 0f, ChargeGlow.Size() * 0.5f, 0.1f + 0.05f * power, SpriteEffects.None);
             }
-            return base.PreDraw(ref lightColor);
+            return base.PreDraw(player, ref lightColor);
         }
     }
 }

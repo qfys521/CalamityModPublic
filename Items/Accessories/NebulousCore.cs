@@ -34,11 +34,11 @@ namespace CalamityMod.Items.Accessories
             Item.expert = true;
         }
 
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float projLighting = Main.rand.Next(90, 111) * 0.01f;
             projLighting *= Main.essScale;
-            Lighting.AddLight((int)((Item.position.X + (float)(Item.width / 2)) / 16f), (int)((Item.position.Y + (float)(Item.height / 2)) / 16f), 0.35f * projLighting, 0.05f * projLighting, 0.35f * projLighting);
+            Lighting.AddLight((int)((item.position.X + (float)(Item.width / 2)) / 16f), (int)((item.position.Y + (float)(Item.height / 2)) / 16f), 0.35f * projLighting, 0.05f * projLighting, 0.35f * projLighting);
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)

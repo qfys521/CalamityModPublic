@@ -68,7 +68,7 @@ namespace CalamityMod.Projectiles.Rogue
             Main.dust[idx].noLight = false;
             Main.dust[idx].scale = 1.0f;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D scytheTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Texture2D scytheGlowTexture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Rogue/FinalDawnThrow_Glow").Value;

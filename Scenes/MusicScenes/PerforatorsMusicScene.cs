@@ -11,6 +11,6 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<PerforatorHive>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("Perforators");
         public override int VanillaMusic => MusicID.Boss2;
-        public override int OtherworldMusic => MusicID.OtherworldlyWoF;
+        public override int OtherworldMusic => MusicID.OtherworldWallOfFlesh;
     }
 }

@@ -56,10 +56,10 @@ namespace CalamityMod.Items.Accessories.Vanity
                 tooltips[3].Text = text;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             var frame = Item.GetFrame(whoAmI);
-            var position = Item.Center - Main.screenPosition + Vector2.UnitY * 4;
+            var position = item.Center - Main.screenPosition + Vector2.UnitY * 4;
             var origin = frame.Size() / 2f;
             spriteBatch.Draw(TextureAssets.Item[Type].Value, position, frame, lightColor, rotation, origin, scale, SpriteEffects.None, 0);
             return false;

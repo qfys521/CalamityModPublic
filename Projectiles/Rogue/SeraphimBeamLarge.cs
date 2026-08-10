@@ -109,7 +109,7 @@ namespace CalamityMod.Projectiles.Rogue
         // Rapidly decrease damage every hit
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) => Projectile.damage = Math.Max(1, (int)(Projectile.damage * 0.3));
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // This should never happen, but just in case-
             if (Projectile.velocity == Vector2.Zero)

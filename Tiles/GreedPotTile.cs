@@ -50,7 +50,7 @@ namespace CalamityMod.Tiles
 
         public override void NearbyEffects(int i, int j, bool closer)
         {
-            if (TileEntity.TryGet<GreedPotTE>(new(i, j), out var greedPotTE) && greedPotTE.Activated && Main.LocalPlayer.miscCounter % 5 == 0)
+            if (TileEntity.TryGet<GreedPotTE>(new Point16(i, j), out var greedPotTE) && greedPotTE.Activated && Main.LocalPlayer.miscCounter % 5 == 0)
             {
                 Tile tile = Main.tile[i, j];
 
@@ -69,7 +69,7 @@ namespace CalamityMod.Tiles
 
         public override void AnimateIndividualTile(int type, int i, int j, ref int frameXOffset, ref int frameYOffset)
         {
-            if (TileEntity.TryGet<GreedPotTE>(new(i, j), out var greedPotTE))
+            if (TileEntity.TryGet<GreedPotTE>(new Point16(i, j), out var greedPotTE))
                 frameXOffset = 18 * 3 * greedPotTE.MyFrame;
         }
     }
@@ -304,14 +304,14 @@ namespace CalamityMod.Tiles
                 int i = Item.NewItem(Projectile.GetItemSource_DropAsItem(), Projectile.Center, Success ? SuccessOutputItemType : ItemID.StoneBlock);
                 if (i >= 0)
                 {
-                    Main.item[i].GetGlobalItem<GreedTransmutationGlobalItem>().FromGreedPot = true;
+                    Main.item[i].inner.GetGlobalItem<GreedTransmutationGlobalItem>().FromGreedPot = true;
                     if (Main.netMode == NetmodeID.MultiplayerClient)
                         NetMessage.SendData(MessageID.SyncItem, -1, -1, null, i);
                 }
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             int animTime = 120 - Projectile.timeLeft;
             bool beforeDarken = animTime < 50;
@@ -438,9 +438,9 @@ namespace CalamityMod.Tiles
             return false;
         }
 
-        public override bool CanStackInWorld(Item destination, Item source)
+        public override bool CanStackInWorld(WorldItem destination, WorldItem source)
         {
-            return !destination.GetGlobalItem<GreedTransmutationGlobalItem>().FromGreedPot && !source.GetGlobalItem<GreedTransmutationGlobalItem>().FromGreedPot;
+            return !destination.inner.GetGlobalItem<GreedTransmutationGlobalItem>().FromGreedPot && !source.inner.GetGlobalItem<GreedTransmutationGlobalItem>().FromGreedPot;
         }
 
         public override void NetSend(Item item, BinaryWriter writer)

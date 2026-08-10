@@ -106,10 +106,10 @@ namespace CalamityMod.Items.Weapons.Summon
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Summon/AresExoskeleton").Value;
-            spriteBatch.Draw(texture, Item.position - Main.screenPosition, Item.GetCurrentFrame(ref Frame, ref FrameCounter, 1, 1), lightColor, 0f, Vector2.Zero, 1f, 0, 0);
+            spriteBatch.Draw(texture, item.position - Main.screenPosition, Item.GetCurrentFrame(ref Frame, ref FrameCounter, 1, 1), lightColor, 0f, Vector2.Zero, 1f, 0, 0);
             return false;
         }
 

@@ -1,6 +1,5 @@
 ﻿using CalamityMod.Systems.Collections;
 using Microsoft.Xna.Framework.Graphics;
-using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using Terraria;
 using Terraria.DataStructures;
@@ -38,49 +37,36 @@ namespace CalamityMod.ILEditing
         #endregion
 
         #region Fix Vanilla Not Accounting For Multiple Bobbers When Fishing With Truffle Worm
-        private static void FixTruffleWormFishing(ILContext il)
+        [System.ThreadStatic]
+        private static bool truffleWormUsedForCurrentPull;
+
+        private static bool FixTruffleWormFishing(On_Player.orig_ItemCheck_PullFishingBobbers orig, Player self, Item sItem)
         {
-            var cursor = new ILCursor(il);
-
-            // Initialize a flag variable whether truffle worm was used.
-            il.Method.Body.Variables.Add(new VariableDefinition(il.Module.TypeSystem.Boolean));
-            byte truffleWormUsed = (byte)(il.Method.Body.Variables.Count - 1);
-            cursor.Emit(OpCodes.Ldc_I4_0);
-            cursor.Emit(OpCodes.Stloc_S, truffleWormUsed);
-
-            // Move after beq.s, which is before Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait gets called
-            if (!cursor.TryGotoNext(MoveType.After, i => i.Match(OpCodes.Beq_S)))
+            bool previousState = truffleWormUsedForCurrentPull;
+            truffleWormUsedForCurrentPull = false;
+            try
             {
-                LogFailure("FixTruffleWormFishing", "Could not locate beq.s before Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait.");
-                return;
+                return orig(self, sItem);
+            }
+            finally
+            {
+                truffleWormUsedForCurrentPull = previousState;
+            }
+        }
+
+        private static bool PreventRepeatedTruffleWormUse(On_Player.orig_ItemCheck_CheckFishingBobber_ConsumeBait orig, Player self, Projectile bobber, out int baitTypeUsed)
+        {
+            if (truffleWormUsedForCurrentPull)
+            {
+                baitTypeUsed = 0;
+                return false;
             }
 
-            // Skip if truffle worm was already used.
-            var loopEnd = il.DefineLabel();
-            cursor.Emit(OpCodes.Ldloc_S, truffleWormUsed);
-            cursor.Emit(OpCodes.Brtrue_S, loopEnd);
+            bool result = orig(self, bobber, out baitTypeUsed);
+            if (result && baitTypeUsed == ItemID.TruffleWorm)
+                truffleWormUsedForCurrentPull = true;
 
-            // Find the call to Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait.
-            if (!cursor.TryGotoNext(MoveType.After, i => i.MatchCall<Player>("ItemCheck_CheckFishingBobber_PickAndConsumeBait")))
-            {
-                LogFailure("FixTruffleWormFishing", "Could not locate the call to Player.ItemCheck_CheckFishingBobber_PickAndConsumeBait.");
-                return;
-            }
-
-            // Retrive baitTypeUsed, compare with truffle worm, and save it.
-            cursor.Emit(OpCodes.Ldloc_S, (byte)4);
-            cursor.Emit(OpCodes.Ldc_I4, ItemID.TruffleWorm);
-            cursor.Emit(OpCodes.Ceq);
-            cursor.Emit(OpCodes.Stloc_S, truffleWormUsed);
-
-            // Move before next ldloc.0, which is the end of the loop
-            if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchLdloc0()))
-            {
-                LogFailure("FixTruffleWormFishing", "Could not find the end of the loop.");
-                return;
-            }
-
-            cursor.MarkLabel(loopEnd);
+            return result;
         }
         #endregion
 

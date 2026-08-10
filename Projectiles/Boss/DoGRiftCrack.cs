@@ -73,7 +73,7 @@ namespace CalamityMod.Projectiles.Boss
 
         public Color CrackColorFunction(float completion, Vector2 vertexPos) => Projectile.GetAlpha(Color.White);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (CrackPoints is not null)
             {

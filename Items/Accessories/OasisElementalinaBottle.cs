@@ -36,7 +36,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(ModContent.BuffType<OasisElementalBuff>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<OasisElementalBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<OasisElementalBuff>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<SandElementalHealer>()] < 1)
                 {
@@ -57,7 +57,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(ModContent.BuffType<OasisElementalBuff>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<OasisElementalBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<OasisElementalBuff>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<SandElementalHealer>()] < 1)
                 {

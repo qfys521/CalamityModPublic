@@ -140,19 +140,19 @@ namespace CalamityMod.NPCs.NormalNPCs
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            return spawnInfo.Player.ZoneSnow &&
-                !spawnInfo.Player.PillarZone() &&
-                !spawnInfo.Player.ZoneDungeon &&
-                !spawnInfo.Player.InSunkenSea() &&
-                !spawnInfo.PlayerInTown && !spawnInfo.Player.ZoneOldOneArmy && !Main.snowMoon && !Main.pumpkinMoon ? 0.03f : 0f;
+            return spawner.Player.ZoneSnow &&
+                !spawner.Player.PillarZone() &&
+                !spawner.Player.ZoneDungeon &&
+                !spawner.Player.InSunkenSea() &&
+                !spawner.spawnFriendly && !spawner.Player.ZoneOldOneArmy && !Main.snowMoon && !Main.pumpkinMoon ? 0.03f : 0f;
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.Frostburn, 120, true);
+                target.AddBuff(BuffID.Frostburn, 120);
         }
 
         public override void HitEffect(NPC.HitInfo hit)

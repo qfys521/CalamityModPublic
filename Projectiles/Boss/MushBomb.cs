@@ -85,7 +85,7 @@ namespace CalamityMod.Projectiles.Boss
 
         public override Color? GetAlpha(Color drawColor) => Main.zenithWorld ? new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB, Projectile.alpha) : new Color(255, 255, 255, Projectile.alpha);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             int height = texture.Height / Main.projFrames[Type];
@@ -95,7 +95,7 @@ namespace CalamityMod.Projectiles.Boss
             return false;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             int height = texture.Height / Main.projFrames[Type];

@@ -58,7 +58,7 @@ namespace CalamityMod.Projectiles.Ranged
                     Dust dust = Dust.NewDustPerfect(Projectile.Center + Projectile.velocity * 2, ModContent.DustType<LightDust>(), -Projectile.velocity * Main.rand.NextFloat(0.1f, 0.55f));
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.35f, 0.85f);
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     dust.color = Color.Lerp(Color.Red, Color.Crimson, Main.rand.NextFloat(0.3f, 0.8f));
                 }
             }
@@ -72,11 +72,11 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.45f, 0.75f);
                     dust.color = Color.Crimson;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     Dust dust2 = Dust.NewDustPerfect(Projectile.Center + Projectile.velocity * 2, ModContent.DustType<LightDust>(), -Projectile.velocity.RotatedBy(-0.45) * velMulti);
                     dust2.noGravity = true;
                     dust2.scale = Main.rand.NextFloat(0.45f, 0.75f);
-                    dust2.noLightEmittence = true;
+                    dust2.noLightEmittance = true;
                     dust2.color = Color.Crimson;
                 }
             }
@@ -119,7 +119,7 @@ namespace CalamityMod.Projectiles.Ranged
         {
             target.AddBuff(ModContent.BuffType<BrimstoneFlames>(), splitShot ? 180 : 90);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (splitShot)
             {

@@ -180,7 +180,7 @@ namespace CalamityMod.Projectiles.Ranged
                     projectileVelocity.RotatedByRandom(MathHelper.PiOver2 - MathHelper.ToRadians(15f)) * Main.rand.NextFloat(6f, 10f));
                 shootDust.noGravity = true;
                 shootDust.noLight = true;
-                shootDust.noLightEmittence = true;
+                shootDust.noLightEmittance = true;
             }
 
             Particle shootPulse = new DirectionalPulseRing(
@@ -195,7 +195,7 @@ namespace CalamityMod.Projectiles.Ranged
             GeneralParticleHandler.SpawnParticle(shootPulse);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Texture2D glowTexture = Request<Texture2D>(GlowTexture).Value;

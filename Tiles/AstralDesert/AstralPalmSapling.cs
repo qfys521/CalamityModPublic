@@ -52,7 +52,7 @@ namespace CalamityMod.Tiles.AstralDesert
         }
 
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             if (WorldGen.genRand.NextBool(20)|| true)
             {

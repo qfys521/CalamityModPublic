@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
@@ -29,7 +30,7 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPC.knockBackResist = 0.45f;
             NPC.npcSlots = 1.15f; // Equal to the strongest variants
             NPC.value = Item.buyPrice(silver: 1);
-            Banner = Item.NPCtoBanner(NPCID.Zombie);
+            Banner = BannerSystem.NPCtoBanner(NPCID.Zombie);
             BannerItem = ItemID.ZombieBanner;
             NPC.Calamity().VulnerableToHeat = true;
             NPC.Calamity().VulnerableToCold = true;
@@ -46,9 +47,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             });
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || spawnInfo.Player.Calamity().ZoneSulphur)
+            if (spawner.noWorms || spawner.Player.Calamity().ZoneSulphur)
             {
                 return 0f;
             }

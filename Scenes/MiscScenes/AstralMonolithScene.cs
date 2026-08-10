@@ -11,7 +11,7 @@ namespace CalamityMod.Systems
 
         public override void SpecialVisuals(Player player, bool isActive)
         {
-            player.ManageSpecialBiomeVisuals("CalamityMod:Astral", isActive);
+            Main.SceneState.ManageSpecialBiomeVisuals("CalamityMod:Astral", isActive);
         }
     }
 }

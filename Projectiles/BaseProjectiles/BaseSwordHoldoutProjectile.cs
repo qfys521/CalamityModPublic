@@ -441,7 +441,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
             player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, armDir.ToRotation() + MathHelper.ToRadians(90));
             oldScale.Insert(0, Projectile.scale);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player renderingPlayer, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
 
             var player = Main.player[Projectile.owner];

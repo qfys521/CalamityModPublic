@@ -116,7 +116,7 @@ namespace CalamityMod
                         Main.dust[dust].noGravity = true;
 
                     // Prevent lag.
-                    Main.dust[dust].noLightEmittence = true;
+                    Main.dust[dust].noLightEmittance = true;
 
                     Main.dust[dust].velocity *= 0.3f;
                     Main.dust[dust].velocity.Y = Main.dust[dust].velocity.Y - 1.5f;
@@ -124,7 +124,7 @@ namespace CalamityMod
             }
         }
 
-        public static void DrawItemFlame(Texture2D flameTexture, Item item)
+        public static void DrawItemFlame(Texture2D flameTexture, WorldItem item)
         {
             int width = flameTexture.Width;
             int height = flameTexture.Height;
@@ -187,7 +187,7 @@ namespace CalamityMod
         /// </summary>
         /// <param name="tile">The tile being checked.</param>
         /// <returns>Whether</returns>
-        public static bool IsTileActuallyInvisible(this Tile tile) => tile.IsTileInvisible && !Main.ShouldShowInvisibleWalls();
+        public static bool IsTileActuallyInvisible(this Tile tile) => tile.IsTileInvisible && !Main.ShouldShowInvisibleBlocksAndWalls();
 
         /// <summary>
         /// Gets the color of a tile/wall after paint is applied

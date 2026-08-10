@@ -84,7 +84,7 @@ namespace CalamityMod.Tiles.BaseTiles
             }
         }
 
-        public static int GetSeed(int x, int y) => unchecked(x * 55867 + y * 49311329 + WorldGen.currentWorldSeed.GetHashCode());
+        public static int GetSeed(int x, int y) => unchecked(x * 55867 + y * 49311329 + (Main.ActiveWorldFileData?.Seed ?? 0));
 
         public Texture2D BarkTexture;
 

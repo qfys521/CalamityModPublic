@@ -100,7 +100,7 @@ namespace CalamityMod.Projectiles.Summon
             Main.projFrames[Type] = 24;
             Main.projPet[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -517,7 +517,7 @@ namespace CalamityMod.Projectiles.Summon
         }
 
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (healedPlayer == null)
                 healedPlayer = Owner;
@@ -544,7 +544,7 @@ namespace CalamityMod.Projectiles.Summon
             return true;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (NuzzleFlashTime > 0)
             {

@@ -36,7 +36,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(ModContent.BuffType<CloudElemental>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<CloudElemental>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<CloudElemental>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<CloudElementalMinion>()] < 1)
                 {
@@ -57,7 +57,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(ModContent.BuffType<CloudElemental>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<CloudElemental>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<CloudElemental>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<CloudElementalMinion>()] < 1)
                 {

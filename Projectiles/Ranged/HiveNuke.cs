@@ -69,7 +69,7 @@ namespace CalamityMod.Projectiles.Ranged
                         DelegateMethods.f_1 = 10.5f * Utils.Remap(Time, 60f, 1f, 1f, 0f, true);
                         if (Time == 0)
                         {
-                            Utils.PlotTileArea(center.X, center.Y, DelegateMethods.SpreadDry);
+                            Utils.FloodFillTile(center, DelegateMethods.f_1, DelegateMethods.SpreadDry);
                         }
                     }
                     if (RocketID == ItemID.WetRocket)
@@ -77,7 +77,7 @@ namespace CalamityMod.Projectiles.Ranged
                         DelegateMethods.f_1 = 10.5f * Utils.Remap(Time, 60f, 1f, 1f, 0f, true);
                         if (Time == 0)
                         {
-                            Utils.PlotTileArea(center.X, center.Y, DelegateMethods.SpreadWater);
+                            Utils.FloodFillTile(center, DelegateMethods.f_1, DelegateMethods.SpreadWater);
                         }
                     }
                     if (RocketID == ItemID.LavaRocket)
@@ -85,7 +85,7 @@ namespace CalamityMod.Projectiles.Ranged
                         DelegateMethods.f_1 = 10.5f * Utils.Remap(Time, 60f, 1f, 1f, 0f, true);
                         if (Time == 0)
                         {
-                            Utils.PlotTileArea(center.X, center.Y, DelegateMethods.SpreadLava);
+                            Utils.FloodFillTile(center, DelegateMethods.f_1, DelegateMethods.SpreadLava);
                         }
                     }
                     if (RocketID == ItemID.HoneyRocket)
@@ -93,7 +93,7 @@ namespace CalamityMod.Projectiles.Ranged
                         DelegateMethods.f_1 = 10.5f * Utils.Remap(Time, 60f, 1f, 1f, 0f, true);
                         if (Time == 0)
                         {
-                            Utils.PlotTileArea(center.X, center.Y, DelegateMethods.SpreadHoney);
+                            Utils.FloodFillTile(center, DelegateMethods.f_1, DelegateMethods.SpreadHoney);
                         }
                     }
                 }
@@ -123,7 +123,7 @@ namespace CalamityMod.Projectiles.Ranged
                     Dust trailDust = Dust.NewDustDirect(Projectile.Center, Projectile.width, Projectile.height, Main.rand.NextBool() ? 303 : DustEffectsID, Scale: Main.rand.NextFloat(0.3f, 0.6f));
                     trailDust.noGravity = true;
                     trailDust.noLight = true;
-                    trailDust.noLightEmittence = true;
+                    trailDust.noLightEmittance = true;
                     trailDust.velocity = -Projectile.velocity.RotatedByRandom(0.5) * Main.rand.NextFloat(0.2f, 0.8f);
                     if (trailDust.type != DustEffectsID)
                         trailDust.color = Main.rand.NextBool(3) ? EffectsColor : StaticEffectsColor;
@@ -145,7 +145,7 @@ namespace CalamityMod.Projectiles.Ranged
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, Projectile.width * 0.4f, targetHitbox);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (BonusEffectMode) { return false; }
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/StarProj").Value;

@@ -639,7 +639,7 @@ namespace CalamityMod.Projectiles.Typeless
             Projectile.soundDelay = 0;
             cryTime = Main.rand.Next(800, 1200 + 1);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time == 0)
                 return false;

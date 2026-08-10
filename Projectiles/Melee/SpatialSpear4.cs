@@ -72,12 +72,12 @@ namespace CalamityMod.Projectiles.Melee
             int dust = Dust.NewDust(Projectile.oldPosition + Projectile.oldVelocity, Projectile.width, Projectile.height, DustID.CopperCoin, 0f, 0f, 100, default, 1.25f);
             Main.dust[dust].noGravity = true;
             Main.dust[dust].velocity *= 0f;
-            Main.dust[dust].noLightEmittence = true;
+            Main.dust[dust].noLightEmittance = true;
         }
 
         public override Color? GetAlpha(Color lightColor) => new Color(byte.MaxValue, byte.MaxValue, 128);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.timeLeft > TimeLeft - 5)
                 return false;
@@ -99,12 +99,12 @@ namespace CalamityMod.Projectiles.Melee
                 float projOldY = Projectile.oldVelocity.Y * (30f / i);
                 int dust = Dust.NewDust(new Vector2(Projectile.oldPosition.X - projOldX, Projectile.oldPosition.Y - projOldY), 8, 8, DustID.CopperCoin, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, default, 1.8f);
                 Main.dust[dust].noGravity = true;
-                Main.dust[dust].noLightEmittence = true;
+                Main.dust[dust].noLightEmittance = true;
 
                 dust = Dust.NewDust(new Vector2(Projectile.oldPosition.X - projOldX, Projectile.oldPosition.Y - projOldY), 8, 8, DustID.CopperCoin, Projectile.oldVelocity.X, Projectile.oldVelocity.Y, 100, default, 1.4f);
                 Main.dust[dust].noGravity = true;
                 Main.dust[dust].velocity *= 0.1f;
-                Main.dust[dust].noLightEmittence = true;
+                Main.dust[dust].noLightEmittance = true;
             }
         }
     }

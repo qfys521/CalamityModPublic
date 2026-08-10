@@ -169,10 +169,10 @@ namespace CalamityMod.Projectiles.Melee
             //Cool particles
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (ChanneledState == 0f && ChannelTimer > 6f)
-                return base.PreDraw(ref lightColor);
+                return base.PreDraw(player, ref lightColor);
 
             else if (ChanneledState == 1f)
             {

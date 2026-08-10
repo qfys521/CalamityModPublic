@@ -120,7 +120,7 @@ namespace CalamityMod.Projectiles.Summon.AndromedaUI
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Should be invisible for players that do not control the UI
             if (Main.myPlayer == Projectile.owner)

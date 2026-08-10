@@ -27,7 +27,7 @@ namespace CalamityMod.Projectiles.Summon.MirrorofKalandraMinions
             ProjectileID.Sets.TrailingMode[Type] = 2;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
             ProjectileID.Sets.DrawScreenCheckFluff[Type] = 12000;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -117,7 +117,7 @@ namespace CalamityMod.Projectiles.Summon.MirrorofKalandraMinions
             GeneralParticleHandler.SpawnParticle(sparkHit);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;

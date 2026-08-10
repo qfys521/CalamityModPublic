@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using CalamityMod.Items;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -178,8 +179,7 @@ namespace CalamityMod.Prefixes
 
             yield return new TooltipLine(Mod, StealthTooltipID, StealthDamageTooltip.Format((stealthDmgMult >= 1f ? "+" : string.Empty) + ((stealthDmgMult * 100) - 100).ToString("N0")))
             {
-                IsModifier = true,
-                IsModifierBad = stealthDmgMult < 1f
+                Color = stealthDmgMult < 1f ? Colors.PrefixBad : Colors.PrefixGood
             };
         }
     }

@@ -184,7 +184,7 @@ namespace CalamityMod.Projectiles.Magic
             Main.spriteBatch.Draw(lightTexture, startingPosition, null, ColorFunction(0f, Vector2.Zero) with { A = 0 }, glowRotation, lightTexture.Size() * 0.5f, glowScale * 0.4f, 0, 0f);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             RenderFrontGlow();
 

@@ -66,6 +66,7 @@ namespace CalamityMod.Projectiles.Enemy
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindNPCsAndTiles;
             Projectile.width = 4;
             Projectile.height = 4;
             Projectile.penetrate = -1;
@@ -170,12 +171,8 @@ namespace CalamityMod.Projectiles.Enemy
             SoundEngine.PlaySound(ZombieEmergeSound, Projectile.Center);
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindNPCsAndTiles.Add(index);
-        }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;
             float scaleX = MathHelper.Lerp(0f, 1f, ZombieArmRiseAnimation);

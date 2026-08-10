@@ -5,6 +5,7 @@ using Terraria.DataStructures;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ObjectData;
 
 namespace CalamityMod.CalPlayer.DrawLayers
 {
@@ -61,7 +62,8 @@ namespace CalamityMod.CalPlayer.DrawLayers
                     if (!tile.HasTile || !TileID.Sets.IsAContainer[tile.TileType] || TileID.Sets.BasicDresser[tile.TileType])
                         continue;
 
-                    int PotentialChest = Chest.FindChestByGuessing(i, j);
+                    Point16 topLeft = TileObjectData.TopLeft(i, j);
+                    int PotentialChest = Chest.FindChest(topLeft.X, topLeft.Y);
                     if (PotentialChest != -1)
                     {
                         // Adjust position to the center of the chest

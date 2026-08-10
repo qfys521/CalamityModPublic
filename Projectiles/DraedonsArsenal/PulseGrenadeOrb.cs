@@ -131,7 +131,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             modifiers.SourceDamage *= (Projectile.Calamity().stealthStrike ? 0.57f : 0.33f) * damageMult;
         }
         public override bool? CanHitNPC(NPC target) => null;
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> orb = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle");
             Vector2 squash = new Vector2(Utils.Remap(Projectile.velocity.Length(), 5, 10, 1, 0.6f), Utils.Remap(Projectile.velocity.Length(), 5, 10, 1, 2f));

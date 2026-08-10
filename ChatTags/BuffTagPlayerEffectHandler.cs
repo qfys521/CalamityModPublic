@@ -21,7 +21,7 @@ namespace CalamityMod.ChatTags
 
             public override bool UniqueDraw(bool justCheckingString, out Vector2 size, SpriteBatch spriteBatch, Vector2 position = default, Color color = default, float scale = 1)
             {
-                size = new Vector2(GetStringLength(FontAssets.MouseText.Value), IconSize);
+                size = new Vector2(GetStringLength(FontAssets.MouseText.Value, scale), IconSize);
 
                 if (!justCheckingString && (color.R != 0 || color.G != 0 || color.B != 0))
                 {
@@ -51,11 +51,11 @@ namespace CalamityMod.ChatTags
                 return true;
             }
 
-            public override float GetStringLength(DynamicSpriteFont font)
+            private float GetStringLength(DynamicSpriteFont font, float scale)
             {
                 float iconSize = !DrawIcon ? 0f : IconSize + font.MeasureString(" ").X;
                 float size = iconSize + font.MeasureString(Lang.GetBuffName(buffId)).X;
-                return size * Scale;
+                return size * scale;
             }
         }
 

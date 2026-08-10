@@ -61,7 +61,7 @@ namespace CalamityMod.Projectiles.Boss
 
         public override Color? GetAlpha(Color lightColor) => new Color(1f, 1f, 1f, 1f) * Projectile.Opacity;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Projectile.DrawProjectileWithBackglow(Cryogen.BackglowColor, lightColor, 4f);
             return false;
@@ -94,7 +94,7 @@ namespace CalamityMod.Projectiles.Boss
             if (info.Damage <= 0)
                 return;
 
-            target.AddBuff(BuffID.Frostburn, 180, true);
+            target.AddBuff(BuffID.Frostburn, 180);
         }
     }
 }

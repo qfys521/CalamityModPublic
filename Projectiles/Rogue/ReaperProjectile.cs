@@ -267,7 +267,7 @@ namespace CalamityMod.Projectiles.Rogue
             if (SoundEngine.TryGetActiveSound(SpinSoundSlot, out var SpinSound))
                 SpinSound?.Stop();
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 drawPos = Projectile.Center - Main.screenPosition + (!spinning ? new Vector2(0, Owner.gfxOffY) : Vector2.Zero);
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);

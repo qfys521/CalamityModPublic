@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CalamityMod.BiomeManagers;
 using CalamityMod.Enums;
+using Terraria;
 using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 
@@ -12,11 +13,11 @@ namespace CalamityMod.Systems.Collections
     /// </summary>
     public sealed class SunkenSeaBiomeCorrespondentDict : ModSystem
     {
-        public static IDictionary<SunkenSeaBiomeFlags, (Func<NPCSpawnInfo, bool> SpawnCondition, int BiomeType)> Dict { get; private set; }
+        public static IDictionary<SunkenSeaBiomeFlags, (Func<NPC.Spawner, bool> SpawnCondition, int BiomeType)> Dict { get; private set; }
 
         public override void OnModLoad()
         {
-            Dict = new Dictionary<SunkenSeaBiomeFlags, (Func<NPCSpawnInfo, bool> SpawnCondition, int BiomeType)>()
+            Dict = new Dictionary<SunkenSeaBiomeFlags, (Func<NPC.Spawner, bool> SpawnCondition, int BiomeType)>()
             {
                 { SunkenSeaBiomeFlags.UndergroundDesert, (spawnInfo => spawnInfo.Player.ZoneDesert, -1 /* None needed. */) },
                 { SunkenSeaBiomeFlags.TimelessShores, (spawnInfo => spawnInfo.Player.Calamity().ZoneTimelessShores, GetInstance<TimelessShoresBiome>().Type) },
@@ -34,7 +35,7 @@ namespace CalamityMod.Systems.Collections
             Dict = null;
         }
 
-        public static bool TryGet(SunkenSeaBiomeFlags flags, out Func<NPCSpawnInfo, bool> spawnCondition, out int biomeType)
+        public static bool TryGet(SunkenSeaBiomeFlags flags, out Func<NPC.Spawner, bool> spawnCondition, out int biomeType)
         {
             if (!Dict.TryGetValue(flags, out var biomeInfoTuple))
             {

@@ -139,7 +139,6 @@ namespace CalamityMod.NPCs.TownNPCs
                         else
                             ChatHelper.BroadcastChatMessage(NetworkText.FromKey("LegacyMisc.35", NPC.GetFullNetName()), new Color(50, 125, 255));
                         NPC.active = false;
-                        NPC.netSkip = -1;
                     }
                     return false;
                 }
@@ -273,18 +272,8 @@ namespace CalamityMod.NPCs.TownNPCs
             return dialogue;
         }
 
-        public override void SetChatButtons(ref string button, ref string button2)
-        {
-            button = Language.GetTextValue("LegacyInterface.28");
-        }
-
-        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
-        {
-            if (firstButton)
-            {
-                shopName = "Shop";
-            }
-        }
+        public override void RegisterChatButtons(NPCInteractionList interactions) =>
+            interactions.InsertBefore(NPCInteractions.Shop(), NPCInteractionDatabase.CloseButton);
 
         public override void AddShops()
         {
@@ -657,13 +646,13 @@ namespace CalamityMod.NPCs.TownNPCs
             ];
         public override void Load()
         {
-            On_ChatManager.DrawColorCodedStringShadow_SpriteBatch_DynamicSpriteFont_TextSnippetArray_Vector2_Color_float_Vector2_Vector2_float_float += HideDefaultShadowForSmallText;
+            On_ChatManager.DrawColorCodedStringShadow_SpriteBatch_DynamicSpriteFont_IEnumerable1_Vector2_Color_float_Vector2_Vector2_float_float += HideDefaultShadowForSmallText;
         }
 
         // Doze May 30 2026
         // Terraria forces drawing the shadow effects for all tooltip texts.
         // This system forces the shadows to be transparent for SmallTextSnippets as it draws the shadows manually
-        private void HideDefaultShadowForSmallText(On_ChatManager.orig_DrawColorCodedStringShadow_SpriteBatch_DynamicSpriteFont_TextSnippetArray_Vector2_Color_float_Vector2_Vector2_float_float orig, SpriteBatch spriteBatch, ReLogic.Graphics.DynamicSpriteFont font, TextSnippet[] snippets, Vector2 position, Color baseColor, float rotation, Vector2 origin, Vector2 baseScale, float maxWidth, float spread)
+        private void HideDefaultShadowForSmallText(On_ChatManager.orig_DrawColorCodedStringShadow_SpriteBatch_DynamicSpriteFont_IEnumerable1_Vector2_Color_float_Vector2_Vector2_float_float orig, SpriteBatch spriteBatch, ReLogic.Graphics.DynamicSpriteFont font, IEnumerable<TextSnippet> snippets, Vector2 position, Color baseColor, float rotation, Vector2 origin, Vector2 baseScale, float maxWidth, float spread)
         {
             List<Color> colorsToRestore = [];
             foreach (var item in snippets)
@@ -705,11 +694,11 @@ namespace CalamityMod.NPCs.TownNPCs
                 {
                     if (placetoMove < 0)
                         placetoMove = i;
-                    TextSnippet[] snippets = ChatManager.ParseMessage(line.Text, Color.White).ToArray();
+                    List<TextSnippet> snippets = ChatManager.ParseMessage(line.Text, Color.White);
                     ChatManager.ConvertNormalSnippets(snippets);
 
                     string lineText = "";
-                    for (int i2 = 0; i2 < snippets.Length; i2++)
+                    for (int i2 = 0; i2 < snippets.Count; i2++)
                     {
                         lineText += snippets[i2].Text;
 
@@ -741,7 +730,7 @@ namespace CalamityMod.NPCs.TownNPCs
                             // Create a distinct TooltipLine for each line of text
                             TooltipLine newLine = new TooltipLine(Mod, $"{line.Name}_{k}", $"[scale/{SmallTextSize}:{lines[k]}]")
                             {
-                                OverrideColor = line.OverrideColor
+                                Color = line.Color
                             };
 
                             // Insert it back into the list at the current position

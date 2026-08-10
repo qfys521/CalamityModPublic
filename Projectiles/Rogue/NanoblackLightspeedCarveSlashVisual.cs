@@ -232,7 +232,7 @@ namespace CalamityMod.Projectiles.Rogue
             return baseWidth * taper * starShape * reveal * retreat;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             int slashCount = IsPerfect ? 12 : 8;
 

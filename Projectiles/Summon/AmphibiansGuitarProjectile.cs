@@ -76,7 +76,7 @@ namespace CalamityMod.Projectiles.Summon
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.85f, 1.35f);
                 dust.color = noteColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
 
             time++;
@@ -94,7 +94,7 @@ namespace CalamityMod.Projectiles.Summon
                 GeneralParticleHandler.SpawnParticle(spark);
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/Evernote");
             Asset<Texture2D> tex2 = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/EvernoteWall");

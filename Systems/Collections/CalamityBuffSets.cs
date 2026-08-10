@@ -20,6 +20,7 @@ namespace CalamityMod.Systems.Collections
     public static class CalamityBuffSets
     {
         private static SetFactory Factory = BuffID.Sets.Factory;
+        private static SetFactory ItemFactory = ItemID.Sets.Factory;
 
         /// <summary>
         /// If <see langword="true"/> for a buff type, then that buff will have its duration extended with The Amalgam equipped.<br/>
@@ -91,19 +92,27 @@ namespace CalamityMod.Systems.Collections
         public static SummonTag[] SummonTagDebuff = Factory.CreateNamedSet("SummonTagDebuff")
             .Description("Associates a buff type with its SummonTag structure. Used for several different effects, such as applying tag effects to NPCs, preventing whip stacking on NPCs, and drawing the tag effect icon below the NPC.")
             .RegisterCustomSet<SummonTag>(null,
-            BuffID.BlandWhipEnemyDebuff, SummonTag.LeatherWhip,
-            BuffID.BoneWhipNPCDebuff, SummonTag.SpinalTap,
-            BuffID.CoolWhipNPCDebuff, SummonTag.CoolWhip,
-            BuffID.FlameWhipEnemyDebuff, SummonTag.Firecracker,
-            BuffID.MaceWhipNPCDebuff, SummonTag.MorningStar,
-            BuffID.RainbowWhipNPCDebuff, SummonTag.Kaleidoscope,
-            BuffID.ScytheWhipEnemyDebuff, SummonTag.DarkHarvest,
-            BuffID.SwordWhipNPCDebuff, SummonTag.Durendal ,
-            BuffID.ThornWhipNPCDebuff, SummonTag.Snapthorn,
             BuffType<CnidarianSummonTagBuff>(), Cnidarian.summonTag,
             BuffType<ForbiddenStealthSummonTagBuff>(), ForbiddenCirclet.summonTag,
             BuffType<ProfanedCrystalWhipDebuff>(), ProfanedSoulCrystal.SummonTag,
             BuffType<VoidConcentrationSummonTagBuff>(), VoidConcentrationStaff.summonTag
+        );
+
+        /// <summary>
+        /// Associates 1.4.5's item-based vanilla whip tag effects with Calamity's balance data.
+        /// </summary>
+        public static SummonTag[] SummonTagItem = ItemFactory.CreateNamedSet("SummonTagItem")
+            .Description("Associates item-based whip tag effects with their Calamity summon tag data.")
+            .RegisterCustomSet<SummonTag>(null,
+            ItemID.BlandWhip, SummonTag.LeatherWhip,
+            ItemID.BoneWhip, SummonTag.SpinalTap,
+            ItemID.CoolWhip, SummonTag.CoolWhip,
+            ItemID.FireWhip, SummonTag.Firecracker,
+            ItemID.MaceWhip, SummonTag.MorningStar,
+            ItemID.RainbowWhip, SummonTag.Kaleidoscope,
+            ItemID.ScytheWhip, SummonTag.DarkHarvest,
+            ItemID.SwordWhip, SummonTag.Durendal,
+            ItemID.ThornWhip, SummonTag.Snapthorn
         );
 
         private static DebuffData Alch(int level) => new DebuffData() { AlcoholLevel = level };

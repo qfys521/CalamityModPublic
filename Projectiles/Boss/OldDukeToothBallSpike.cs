@@ -20,7 +20,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.hostile = true;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void AI()
@@ -41,7 +41,7 @@ namespace CalamityMod.Projectiles.Boss
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // There are two of each draw call because it makes the additive glow a bit brighter
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
@@ -55,7 +55,7 @@ namespace CalamityMod.Projectiles.Boss
 
             Projectile.DrawBackglow(OldDuke.GlowColor, 4f);
 
-            return base.PreDraw(ref lightColor);
+            return base.PreDraw(player, ref lightColor);
         }
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info)

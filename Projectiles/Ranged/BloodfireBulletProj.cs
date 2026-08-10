@@ -68,7 +68,7 @@ namespace CalamityMod.Projectiles.Ranged
         // These bullets glow in the dark.
         public override Color? GetAlpha(Color lightColor) => new Color(255, 255, 255, 100);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.localAI[0] > 6f)
             {
@@ -102,7 +102,7 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.55f, 0.65f);
                     dust.color = !ChildSafety.Disabled ? Color.CornflowerBlue : Color.Firebrick;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     dust.noLight = true;
                     dust.fadeIn = 15;
                 }

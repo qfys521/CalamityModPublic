@@ -174,7 +174,7 @@ namespace CalamityMod.Projectiles.Magic
         }
 
         // Completely custom drawcode because it's a holdout projectile. The projectile is also fullbright.
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             SpriteEffects eff = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

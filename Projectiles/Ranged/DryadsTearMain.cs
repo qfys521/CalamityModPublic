@@ -9,7 +9,6 @@ using CalamityMod.Particles;
 using CalamityMod.Projectiles.Magic;
 using CalamityMod.Projectiles.Typeless;
 using CalamityMod.Systems.Graphic.PixelationSystem;
-using Microsoft.Build.Construction;
 using Microsoft.CodeAnalysis;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -124,7 +123,7 @@ namespace CalamityMod.Projectiles.Ranged
                 dust.scale = Main.rand.NextFloat(0.85f, 1.0f) * finalEffectMult;
                 dust.color = Color.Aquamarine;
                 dust.noLight = true;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.fadeIn = 1;
             }
             
@@ -191,7 +190,7 @@ namespace CalamityMod.Projectiles.Ranged
                             dust.scale = Main.rand.NextFloat(1.45f, 1.55f) * scale;
                             dust.color = t == 0 ? Color.Aquamarine : Color.Lime;
                             dust.noLight = true;
-                            dust.noLightEmittence = true;
+                            dust.noLightEmittance = true;
                             dust.fadeIn = 1 * scale;
                             dust.customData = new Vector2(0.6f, 3.5f);
                         }
@@ -256,7 +255,7 @@ namespace CalamityMod.Projectiles.Ranged
                         dust.velocity = dropletVel.RotatedByRandom(0.2f) * Main.rand.NextFloat(0.3f, 0.9f);
                         dust.color = Main.rand.NextBool() ? Color.Aquamarine : Color.Teal;
                         dust.noLight = true;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                         dust.fadeIn = Math.Max((Main.rand.NextFloat(-0.2f, -0.4f) - (Main.rand.NextBool(5) ? 0.4f : 0)) * visualMult, -0.85f);
                         dust.customData = new Vector2(1, 1);
                     }
@@ -340,7 +339,7 @@ namespace CalamityMod.Projectiles.Ranged
                         dust.scale = Main.rand.NextFloat(1.25f, 1.35f) * scale;
                         dust.color = t == 0 ? Color.Aquamarine : Color.Lime;
                         dust.noLight = true;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                         dust.fadeIn = 1.4f * scale;
                         dust.customData = new Vector2(0.6f, 3.5f);
                     }
@@ -355,7 +354,7 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.scale = Main.rand.NextFloat(0.85f, 0.95f) * scale;
                     dust.color = Main.rand.NextBool() ? Color.Aquamarine : Color.Lime;
                     dust.noLight = true;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     dust.fadeIn = 0.45f * scale;
                     dust.customData = new Vector2(0.8f, 1.3f);
                     if (i == -1)
@@ -400,7 +399,7 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.scale = (Main.rand.NextFloat(2.5f, 2.75f) - Math.Abs(variance)) * damageMult;
                     dust.color = Main.rand.NextBool() ? Color.Aquamarine : Color.Lime;
                     dust.noLight = true;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     dust.fadeIn = 1.25f * damageMult;
                     dust.customData = new Vector2(0.3f, 1.7f);
                     if (i == -1)
@@ -431,7 +430,7 @@ namespace CalamityMod.Projectiles.Ranged
             float hitboxSize = 20 * Projectile.scale * damageMult;
             return CalamityUtils.CircularHitboxCollision(Projectile.Center, hitboxSize, targetHitbox);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 drawPosition = dropletPosition - Main.screenPosition;
 

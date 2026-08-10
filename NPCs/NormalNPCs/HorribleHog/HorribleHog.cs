@@ -821,7 +821,7 @@ namespace CalamityMod.NPCs.NormalNPCs.HorribleHog
             GeneralParticleHandler.SpawnParticle(floorMist);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
             if (Main.bloodMoon && NPC.downedBoss1 && NPC.CountNPCS(Type) < 1)
             {

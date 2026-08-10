@@ -42,7 +42,7 @@ namespace CalamityMod.Dusts
                 dust.scale -= 0.01f;
 
             float light = MathHelper.Clamp(dust.scale * 0.8f, 0f, 1f);
-            if (!dust.noLightEmittence)
+            if (!dust.noLightEmittance)
                 Lighting.AddLight(dust.position, dust.color.ToVector3() * light);
 
             return true;

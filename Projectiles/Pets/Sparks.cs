@@ -38,7 +38,7 @@ namespace CalamityMod.Projectiles.Pets
 
             for (int itemIndex = 0; itemIndex < Main.maxItems; itemIndex++)
             {
-                Item item = Main.item[itemIndex];
+                WorldItem item = Main.item[itemIndex];
                 if (item.active && item.noGrabDelay == 0 && item.playerIndexTheItemIsReservedFor == Projectile.owner && ItemLoader.CanPickup(item, player))
                 {
                     if (new Rectangle((int)Projectile.position.X, (int)Projectile.position.Y, Projectile.width, Projectile.height).Intersects(new Rectangle((int)item.position.X, (int)item.position.Y, item.width, item.height)))
@@ -48,7 +48,7 @@ namespace CalamityMod.Projectiles.Pets
                             // TODO -- fix this maybe? (what is it?)
                             if (!ItemLoader.OnPickup(item, player))
                             {
-                                Main.item[itemIndex] = new Item();
+                                item.ClearOut();
                                 if (Main.netMode == NetmodeID.MultiplayerClient)
                                 {
                                     NetMessage.SendData(MessageID.SyncItem, -1, -1, null, itemIndex, 0f, 0f, 0f, 0, 0, 0);
@@ -104,7 +104,7 @@ namespace CalamityMod.Projectiles.Pets
                             }
                             else
                             {
-                                Main.item[itemIndex] = player.GetItem(Projectile.owner, item, new GetItemSettings());
+                                item.OverrideWith(player.GetItem(item, new GetItemSettings()));
                                 if (Main.netMode == NetmodeID.MultiplayerClient)
                                 {
                                     NetMessage.SendData(MessageID.SyncItem, -1, -1, null, itemIndex, 0f, 0f, 0f, 0, 0, 0);
@@ -350,7 +350,7 @@ namespace CalamityMod.Projectiles.Pets
 
             for (int itemIndex = 0; itemIndex < Main.maxItems; itemIndex++)
             {
-                Item item = Main.item[itemIndex];
+                WorldItem item = Main.item[itemIndex];
                 if (item.active && item.noGrabDelay == 0 && item.playerIndexTheItemIsReservedFor == Projectile.owner &&
                     ItemLoader.CanPickup(item, Main.player[item.playerIndexTheItemIsReservedFor]) && Main.player[item.playerIndexTheItemIsReservedFor].ItemSpace(item).CanTakeItemToPersonalInventory)
                 {
@@ -451,7 +451,7 @@ namespace CalamityMod.Projectiles.Pets
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             if (color == 1)

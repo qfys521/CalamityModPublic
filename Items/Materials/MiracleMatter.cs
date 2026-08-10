@@ -28,9 +28,9 @@ namespace CalamityMod.Items.Materials
             Item.rare = ModContent.RarityType<ExoticRainbow>();
         }
 
-        public void DrawBackAfterimage(SpriteBatch spriteBatch, Vector2 baseDrawPosition, Rectangle frame, Vector2 origin, float baseScale)
+        public void DrawBackAfterimage(SpriteBatch spriteBatch, Vector2 baseDrawPosition, Rectangle frame, Vector2 origin, float baseScale, bool stationary)
         {
-            if (Item.velocity.X != 0f)
+            if (!stationary)
                 return;
 
             float pulse = (float)Math.Cos(1.61803398875f * Main.GlobalTimeWrappedHourly * 2f) + (float)Math.Cos(Math.E * Main.GlobalTimeWrappedHourly * 1.7f);
@@ -52,28 +52,27 @@ namespace CalamityMod.Items.Materials
         }
 
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Rectangle frame = TextureAssets.Item[Type].Value.Frame();
-            DrawBackAfterimage(spriteBatch, Item.position - Main.screenPosition, frame, Vector2.Zero, scale);
+            DrawBackAfterimage(spriteBatch, item.position - Main.screenPosition, frame, Vector2.Zero, scale, item.velocity.X == 0f);
             return true;
         }
 
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
-            Item.velocity.X = 0f;
-            DrawBackAfterimage(spriteBatch, position, frame, origin, scale);
+            DrawBackAfterimage(spriteBatch, position, frame, origin, scale, true);
             return true;
         }
 
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float brightness = Main.essScale * Main.rand.NextFloat(0.9f, 1.1f);
-            Lighting.AddLight(Item.Center, 0.94f * brightness, 0.95f * brightness, 0.56f * brightness);
+            Lighting.AddLight(item.Center, 0.94f * brightness, 0.95f * brightness, 0.56f * brightness);
 
             if (Main.rand.NextBool(3))
             {
-                Dust exoFlame = Dust.NewDustDirect(Item.position, (int)(Item.width * Item.scale), (int)(Item.height * Item.scale * 0.6f), DustID.Torch);
+                Dust exoFlame = Dust.NewDustDirect(item.position, (int)(Item.width * Item.scale), (int)(Item.height * Item.scale * 0.6f), DustID.Torch);
                 exoFlame.velocity = Vector2.Lerp(Main.rand.NextVector2Unit(), -Vector2.UnitY, 0.5f) * Main.rand.NextFloat(1.8f, 2.6f);
                 exoFlame.scale *= Main.rand.NextFloat(0.85f, 1.15f);
                 exoFlame.fadeIn = 0.9f;

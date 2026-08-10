@@ -612,7 +612,7 @@ namespace CalamityMod.Projectiles.Rogue
                             dust.fadeIn = 2.5f;
                             dust.color = clr;
                             dust.noLight = true;
-                            dust.noLightEmittence = true;
+                            dust.noLightEmittance = true;
                         }
                         float speedMult = Main.rand.NextFloat(0, 1f);
 
@@ -688,7 +688,7 @@ namespace CalamityMod.Projectiles.Rogue
             float damageMult = MathHelper.Clamp(Utils.GetLerpValue(8, 1, Projectile.numHits), 0.4f, 1);
             modifiers.SourceDamage *= damageMult;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = doingFireAnimation ? GunFlash : Gun;
             Asset<Texture2D> smear = Smear;

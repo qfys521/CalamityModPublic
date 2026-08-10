@@ -59,7 +59,7 @@ namespace CalamityMod.UI.CalamitasEnchants
                 // If an item was stored, release it back into the world.
                 if (!CurrentlyHeldItem.IsAir)
                 {
-                    Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_Misc(CurrentlyHeldItem.Name), CurrentlyHeldItem, CurrentlyHeldItem.stack);
+                    Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_Misc(CurrentlyHeldItem.Name), CurrentlyHeldItem);
                     CurrentlyHeldItem.TurnToAir();
                 }
 
@@ -77,8 +77,6 @@ namespace CalamityMod.UI.CalamitasEnchants
                 // If they do, drop it onto the ground.
                 Main.LocalPlayer.dropItemCheck();
 
-                // Reload visible recipes in case the dropped item was an ingredient.
-                Recipe.FindRecipes();
                 return;
             }
 

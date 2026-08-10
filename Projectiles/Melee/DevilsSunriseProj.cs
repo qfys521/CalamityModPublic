@@ -140,7 +140,7 @@ namespace CalamityMod.Projectiles.Melee
             Timer += 15;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Player Owner = Main.player[Projectile.owner];
             // Draws 3 slash textures, each one a different size from the previous

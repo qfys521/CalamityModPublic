@@ -975,7 +975,7 @@ namespace CalamityMod
             Item castItem(object o)
             {
                 if (o is int i)
-                    return Main.item[i];
+                    return Main.item[i].inner;
                 else if (o is Item it)
                     return it;
                 return null;

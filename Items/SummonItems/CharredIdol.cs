@@ -15,7 +15,7 @@ namespace CalamityMod.Items.SummonItems
         public static readonly SoundStyle UseSound = new("CalamityMod/Sounds/Custom/BrimstoneElemental/BrimstoneSpawn");
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 10; // Mechanical Skull
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 10; // Mechanical Skull
         }
 
         public override void SetDefaults()

@@ -72,7 +72,7 @@ namespace CalamityMod.Graphics.Metaballs
             metaballShader.Value.Parameters["screenSize"]?.SetValue(screenSize);
             metaballShader.Value.Parameters["layerOffset"]?.SetValue(layerScrollOffset);
             metaballShader.Value.Parameters["edgeColor"]?.SetValue(EdgeColor.ToVector4());
-            metaballShader.Value.Parameters["singleFrameScreenOffset"]?.SetValue((Main.screenLastPosition - Main.screenPosition) / screenSize);
+            metaballShader.Value.Parameters["singleFrameScreenOffset"]?.SetValue(MetaballManager.CameraOffsetSinceLastFrame / screenSize);
 
             gd.Textures[1] = DoGVisualsManager.DistortionForegroundContentsTarget.Target;
             gd.SamplerStates[1] = SamplerState.LinearWrap;
@@ -99,7 +99,7 @@ namespace CalamityMod.Graphics.Metaballs
                 if (proj.type == ModContent.ProjectileType<DoGRiftCrack>())
                 {
                     Color lightColor = Color.White;
-                    proj.ModProjectile.PreDraw(ref lightColor);
+                    proj.ModProjectile.PreDraw(Main.player[proj.owner], ref lightColor);
                 }
             }
         }

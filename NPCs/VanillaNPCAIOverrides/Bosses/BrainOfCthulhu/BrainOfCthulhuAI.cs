@@ -854,7 +854,7 @@ public class BrainOfCthulhuAI : VanillaAIOverride
                             float dirY = dir.Y;
                             dir.Y -= dirY * 0.5f;
                             dir.X += dirY * 0.5f * Math.Sign(dir.X);
-                            dir.SafeNormalize(Vector2.unitXVector * dirSign);
+                            dir.SafeNormalize(Vector2.UnitX * dirSign);
                         }
                         ai.AttackAngle = dir.ToRotation();
                         float rayDist = CalamityUtils.PreciseDistanceToTileCollisionHit(NPC.Center, ai.AttackAngle, 800, 4);
@@ -1282,7 +1282,7 @@ public class BrainOfCthulhuAI : VanillaAIOverride
             fromTarget = NPC.Center - Target.Center;          
         else
         {
-            Vector2 averagePlayerPos = Vector2.zeroVector;
+            Vector2 averagePlayerPos = Vector2.Zero;
             List<int> targets = GetAllValidTargets(NPC.Center);
             foreach (var p in targets)
                 averagePlayerPos += Main.player[p].Center;
@@ -1588,7 +1588,7 @@ public class BrainOfCthulhuAI : VanillaAIOverride
                 for (int j = 0; j < 20; j++)
                 {
                     Vector2 edgeBloodDir = Main.rand.NextVector2CircularEdge(1, 1);
-                    BloodParticle b = new(NPC.Center - (Vector2.unitYVector * 32) + (edgeBloodDir * new Vector2(16, 24)), edgeBloodDir.RotatedBy(Main.rand.NextFloat(-MathHelper.Pi / 10f, MathHelper.Pi / 10f)) * Main.rand.NextFloat(4f, 8f), 24, 0.75f, Color.Red);
+                    BloodParticle b = new(NPC.Center - (Vector2.UnitY * 32) + (edgeBloodDir * new Vector2(16, 24)), edgeBloodDir.RotatedBy(Main.rand.NextFloat(-MathHelper.Pi / 10f, MathHelper.Pi / 10f)) * Main.rand.NextFloat(4f, 8f), 24, 0.75f, Color.Red);
                     GeneralParticleHandler.SpawnParticle(b);
 
                     Dust.NewDustPerfect(Main.rand.NextVector2FromRectangle(NPC.Hitbox), DustID.Blood, Main.rand.NextVector2Circular(6f, 6f));
@@ -1802,7 +1802,7 @@ public class BrainOfCthulhuAI : VanillaAIOverride
             }
 
             if (Time == 30)
-                AttackPosition = Vector2.zeroVector;
+                AttackPosition = Vector2.Zero;
 
             //Make sure we have an accurate view on who the furthest players
             if (Main.netMode != NetmodeID.SinglePlayer && Time % 2 == 0)
@@ -1844,7 +1844,7 @@ public class BrainOfCthulhuAI : VanillaAIOverride
                 float xDist = furthestRight.Center.X - furthestLeft.Center.X;
                 float yDist = hoverCenter.Y - highestUp.Center.Y;
 
-                if (AttackPosition == Vector2.zeroVector)
+                if (AttackPosition == Vector2.Zero)
                     AttackPosition = hoverCenter;
                 else
                     AttackPosition += (hoverCenter - AttackPosition) / 30f;
@@ -2564,7 +2564,7 @@ public class BrainOfCthulhuAI : VanillaAIOverride
                 else
                 {
                     List<int> nearbyPlayers = GetAllValidTargets(NPC.Center);
-                    Vector2 averagePosition = Vector2.zeroVector;
+                    Vector2 averagePosition = Vector2.Zero;
                     foreach(int p in nearbyPlayers)
                     {
                         TargetsSet.Add(p);
@@ -2586,7 +2586,7 @@ public class BrainOfCthulhuAI : VanillaAIOverride
                     goalPos = Target.Center;
                 else
                 {
-                    Vector2 averagePosition = Vector2.zeroVector;
+                    Vector2 averagePosition = Vector2.Zero;
                     foreach (int who in TargetsSet)
                         averagePosition += Main.player[who].Center;
 
@@ -2600,7 +2600,7 @@ public class BrainOfCthulhuAI : VanillaAIOverride
                 if (distSq > 90000) //300^2
                 {
                     float dist = MathF.Sqrt(distSq);
-                    Vector2 dir = (goalPos - AttackPosition).SafeNormalize(Vector2.zeroVector);
+                    Vector2 dir = (goalPos - AttackPosition).SafeNormalize(Vector2.Zero);
                     AttackPosition += dir * (dist - 300) / 60f;
                 }
             }

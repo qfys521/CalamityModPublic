@@ -91,9 +91,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             });
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (!spawnInfo.Player.ZonePurity)
+            if (!spawner.Player.ZonePurity)
             {
                 return 0f;
             }

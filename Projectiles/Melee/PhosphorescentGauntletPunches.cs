@@ -156,7 +156,7 @@ namespace CalamityMod.Projectiles.Melee
         #region Drawing
 
         // Manual drawing is used to correct the origin of the projectile when drawn.
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D punchTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frame = punchTexture.Frame(1, Main.projFrames[Type], 0, Projectile.frame);

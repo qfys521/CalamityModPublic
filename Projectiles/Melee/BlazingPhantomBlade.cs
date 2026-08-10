@@ -151,7 +151,7 @@ namespace CalamityMod.Projectiles.Melee
             Utils.PlotTileLine(Projectile.Center + startPoint, Projectile.Center + endPoint, projectileSize, DelegateMethods.CutTiles);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Defiled Greatsword has three variants for this projectile
             float fullyVisibleDuration = Projectile.ai[1];

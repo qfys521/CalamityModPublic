@@ -784,8 +784,8 @@ namespace CalamityMod.CalPlayer
                 int actualProjDamage = proj.damage;
                 if (!proj.reflected && !ProjectileID.Sets.PlayerHurtDamageIgnoresDifficultyScaling[proj.type])
                 {
-                    float damageMult = Main.GameModeInfo.EnemyDamageMultiplier;
-                    if (Main.GameModeInfo.IsJourneyMode)
+                    float damageMult = GameDifficultyData.EnemyDamageMultiplier.Sample(Main.Difficulty);
+                    if (Main.IsJourneyMode)
                     {
                         var power = CreativePowerManager.Instance.GetPower<CreativePowers.DifficultySliderPower>();
                         if (power.GetIsUnlocked())
@@ -1003,7 +1003,7 @@ namespace CalamityMod.CalPlayer
 
 
             if (NPC.AnyNPCs(ModContent.NPCType<THELORDE>()))
-                Player.AddBuff(ModContent.BuffType<NOU>(), 15, true);
+                Player.AddBuff(ModContent.BuffType<NOU>(), 15);
 
             if (crawCarapace)
             {
@@ -1238,7 +1238,7 @@ namespace CalamityMod.CalPlayer
 
             if (NPC.AnyNPCs(ModContent.NPCType<THELORDE>()))
             {
-                Player.AddBuff(ModContent.BuffType<NOU>(), 15, true);
+                Player.AddBuff(ModContent.BuffType<NOU>(), 15);
             }
 
             OnHitByCombat(hurtInfo);
@@ -1599,7 +1599,7 @@ namespace CalamityMod.CalPlayer
                             if (isSpark)
                                 dust.noGravity = false;
                             else
-                                dust.noLightEmittence = true;
+                                dust.noLightEmittance = true;
                         }
                     }
 
@@ -2330,7 +2330,7 @@ namespace CalamityMod.CalPlayer
 
             //This goes before the canTriggerEffects check on purpose to match Honeycomb
             if (dAmulet)
-                Player.AddBuff(BuffID.Honey, 300, false);
+                Player.AddBuff(BuffID.Honey, 300);
 
             // Handle hit effects from the gem tech armor set.
             Player.Calamity().GemTechState.PlayerOnHitEffects(hurtInfo);
@@ -2572,15 +2572,15 @@ namespace CalamityMod.CalPlayer
             }
             if (Main.myPlayer == Player.whoAmI)
             {
-                Player.trashItem.SetDefaults(ItemID.None, false);
+                Player.trashItem.SetDefaults(ItemID.None);
                 if (Player.difficulty == PlayerDifficultyID.SoftCore || Player.difficulty == PlayerDifficultyID.Creative)
                 {
                     for (int i = 0; i < 59; i++)
                     {
                         if (Player.inventory[i].stack > 0 && ((Player.inventory[i].type >= ItemID.LargeAmethyst && Player.inventory[i].type <= ItemID.LargeDiamond) || Player.inventory[i].type == ItemID.LargeAmber))
                         {
-                            int droppedLargeGem = Item.NewItem(source, (int)Player.position.X, (int)Player.position.Y, Player.width, Player.height, Player.inventory[i].type, 1, false, 0, false, false);
-                            Main.item[droppedLargeGem].netDefaults(Player.inventory[i].netID);
+                            int droppedLargeGem = Item.NewItem(source, (int)Player.position.X, (int)Player.position.Y, Player.width, Player.height, Player.inventory[i].type, 1, false, 0, false);
+                            Main.item[droppedLargeGem].SetDefaults(Player.inventory[i].type);
                             Main.item[droppedLargeGem].Prefix((int)Player.inventory[i].prefix);
                             Main.item[droppedLargeGem].stack = Player.inventory[i].stack;
                             Main.item[droppedLargeGem].velocity.Y = (float)Main.rand.Next(-20, 1) * 0.2f;
@@ -2592,17 +2592,17 @@ namespace CalamityMod.CalPlayer
                             {
                                 NetMessage.SendData(MessageID.SyncItem, -1, -1, null, droppedLargeGem, 0f, 0f, 0f, 0, 0, 0);
                             }
-                            Player.inventory[i].SetDefaults(ItemID.None, false);
+                            Player.inventory[i].SetDefaults(ItemID.None);
                         }
                     }
                 }
                 else if (Player.difficulty == PlayerDifficultyID.MediumCore)
                 {
-                    Player.DropItems();
+                    Player.DropItems(gemsOnly: false);
                 }
                 else if (Player.difficulty == PlayerDifficultyID.Hardcore)
                 {
-                    Player.DropItems();
+                    Player.DropItems(gemsOnly: false);
                     Player.KillMeForGood();
                 }
             }

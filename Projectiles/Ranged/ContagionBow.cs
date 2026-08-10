@@ -142,6 +142,6 @@ namespace CalamityMod.Projectiles.Ranged
 
         public override bool? CanDamage() => false;
 
-        public override bool PreDraw(ref Color lightColor) => Projectile.ai[0] > 0f;
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => Projectile.ai[0] > 0f;
     }
 }

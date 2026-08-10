@@ -60,7 +60,7 @@ namespace CalamityMod.Projectiles.VanillaProjectileOverrides
                             Dust shootDust = Dust.NewDustPerfect(proj.Center + toTargetDirection.SafeNormalize(Vector2.Zero) * proj.Size / 2f, DustID.JungleGrass, toTargetDirection.SafeNormalize(Vector2.Zero).RotatedByRandom(MathHelper.PiOver4) * Main.rand.NextFloat(3f, 6f));
                             shootDust.noGravity = true;
                             shootDust.noLight = true;
-                            shootDust.noLightEmittence = true;
+                            shootDust.noLightEmittance = true;
                         }
 
                         SoundEngine.PlaySound(SoundID.Item17, proj.Center);

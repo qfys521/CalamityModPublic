@@ -172,7 +172,7 @@ namespace CalamityMod.Projectiles.Magic
             return (CalamityUtils.CircularHitboxCollision(TipPosition, Size, targetHitbox) && withinAngle) || targetHitbox.Intersects(extraSafetyHitbox);
         }
         public override bool? CanDamage() => false;
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Draw spiraling smoke particles representing the suction radius
             Vector2 farthestPos = Owner.Center + Utils.DirectionTo(Owner.Center, Owner.Calamity().mouseWorld) * Size;

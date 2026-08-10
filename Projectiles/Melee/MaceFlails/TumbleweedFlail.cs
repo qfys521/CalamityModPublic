@@ -89,7 +89,7 @@ namespace CalamityMod.Projectiles.Melee.MaceFlails
             return true;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (AuraScale > 0f)
             {
@@ -108,7 +108,7 @@ namespace CalamityMod.Projectiles.Melee.MaceFlails
                 return false;
             }
             else
-                return base.PreDraw(ref lightColor);
+                return base.PreDraw(player, ref lightColor);
         }
 
         public override bool? CanDamage()

@@ -11,6 +11,6 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<OldDuke>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("OldDuke");
         public override int VanillaMusic => MusicID.DukeFishron;
-        public override int OtherworldMusic => MusicID.OtherworldlyBoss2;
+        public override int OtherworldMusic => MusicID.OtherworldBoss2;
     }
 }

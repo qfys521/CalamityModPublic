@@ -141,12 +141,12 @@ namespace CalamityMod.Items.Accessories.Wings
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
 
             var tex = TextureAssets.Item[Type].Value;
             var frame = tex.Frame(2, 1, toggleEnabled ? 0 : 1);
-            spriteBatch.Draw(tex, Item.Center - Main.screenPosition, frame, lightColor, rotation, frame.Size() * 0.5f, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(tex, item.Center - Main.screenPosition, frame, lightColor, rotation, frame.Size() * 0.5f, scale, SpriteEffects.None, 0);
             return false;
         }
     }

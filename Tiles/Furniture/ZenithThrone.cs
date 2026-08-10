@@ -33,7 +33,7 @@ namespace CalamityMod.Tiles.Furniture
             TileObjectData.addTile(Type);
 
             // All sofas count as chairs.
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            TileID.Sets.RoomNeeds.CountsAsChair[Type] = true;
             AddMapEntry(new Color(43, 199, 217), Language.GetText("ItemName.Throne"));
         }
 

@@ -125,7 +125,7 @@ namespace CalamityMod.Projectiles.Melee.Spears
             Main.EntitySpriteDraw(portalTexture, drawPosition, null, color with { A = 0 }, rotation * -0.6f, origin, Projectile.scale * 1.2f, SpriteEffects.None, 0);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Draw the spin smear texture.
             if (SpinCompletion >= 0f && SpinCompletion < 1f)

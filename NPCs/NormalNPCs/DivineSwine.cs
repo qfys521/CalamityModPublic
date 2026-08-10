@@ -119,8 +119,8 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPCID.Sets.CountsAsCritter[Type] = true;
             NPCID.Sets.CantTakeLunchMoney[Type] = true;
             NPCID.Sets.NormalGoldCritterBestiaryPriority.Add(Type);
-            NPCID.Sets.ImmuneToAllBuffs[Type] = true;
-            NPCID.Sets.ShimmerImmunity[Type] = true;
+            NPCID.Sets.ImmuneToRegularBuffs[Type]/* tModPorter NPCID.Sets.ImmuneToAllBuffs was removed. If immunity to whip tag effects are desired, also set NPCID.Sets.ImmuneToWhipTags to true. */ = true;
+            NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Shimmer] = true;
         }
 
         public override void SetDefaults()
@@ -666,9 +666,9 @@ namespace CalamityMod.NPCs.NormalNPCs
 
         private bool ShouldAvoidTile(Tile tile) => WorldGen.SolidTile(tile) || (tile.HasUnactuatedTile && Main.tileSolidTop[tile.TileType]) || tile.LiquidAmount >= 255;
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Sky && NPC.CountNPCS(Type) < 1)
+            if (spawner.skyMob && NPC.CountNPCS(Type) < 1)
                 return 0.001f;
             return 0f;
         }
@@ -743,7 +743,6 @@ namespace CalamityMod.NPCs.NormalNPCs
             if (--foundItem.stack <= 0)
                 foundItem.TurnToAir();
 
-            Recipe.FindRecipes();
             return true;
         }
 

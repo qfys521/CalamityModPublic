@@ -25,29 +25,27 @@ namespace CalamityMod.ChatTags
     }
     public sealed class SmallTextSnippet(string text) : TextSnippet
     {
+        private readonly float textScale = 0.5f;
+
         public SmallTextSnippet( string text, Color color, float scale = 0.5f) : this(text)
         {
             textColor = color;
-            Scale = scale;
+            textScale = scale;
         }
 
         Color textColor = Color.White;
         public override bool UniqueDraw(bool justCheckingString, out Vector2 size, SpriteBatch spriteBatch, Vector2 position = new Vector2(), Color color = new Color(), float scale = 1)
         {
             color = textColor;
+            float effectiveScale = scale * textScale;
 
-            size = new Vector2(GetStringLength(FontAssets.MouseText.Value), FontAssets.MouseText.Value.MeasureString(" ").Y * Scale);
+            size = FontAssets.MouseText.Value.MeasureString(text) * effectiveScale;
 
             if (!justCheckingString && (color.R != 0 || color.G != 0 || color.B != 0) && Color != Color.Transparent)
             {
-                ChatManager.DrawColorCodedStringWithShadow(Main.spriteBatch, FontAssets.MouseText.Value, text, position, color, 0, Vector2.Zero, new Vector2(scale));
+                ChatManager.DrawColorCodedStringWithShadow(Main.spriteBatch, FontAssets.MouseText.Value, text, position, color, 0, Vector2.Zero, new Vector2(effectiveScale));
             }
             return true;
-        }
-        public override float GetStringLength(DynamicSpriteFont font)
-        {
-            float size = font.MeasureString(text).X;
-            return size * Scale;
         }
     }
 }

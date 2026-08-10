@@ -100,14 +100,14 @@ namespace CalamityMod.Projectiles.Ranged
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(1f, 2.4f) * Projectile.scale;
                 dust.color = Main.hslToRgb(Main.rand.NextFloat(0.033f, 0.167f), 1f, 0.7f);
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
 
         public Color LaserColor(float completionRatio, Vector2 vertexPos) => Main.hslToRgb(0.08f + 0.05f * completionRatio + 0.05f * MathF.Sin(Main.GlobalTimeWrappedHourly * 5f), 1f, 0.7f) * 0.8f * Projectile.Opacity;
         public float LaserWidth(float completionRatio, Vector2 vertexPos) => 30f * Projectile.Opacity * Projectile.scale;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (TrailPos == null)
                 return false;

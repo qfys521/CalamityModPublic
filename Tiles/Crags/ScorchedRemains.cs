@@ -29,7 +29,7 @@ namespace CalamityMod.Tiles.Crags
             this.RegisterBlendMergeWith(TileID.Ash);
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Tile up = Main.tile[i, j - 1];
             Tile left = Main.tile[i - 1, j];

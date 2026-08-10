@@ -40,7 +40,7 @@ namespace CalamityMod.Tiles.FurnitureAuric
             TileObjectData.addTile(Type);
 
             // Toilets count as chairs
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            TileID.Sets.RoomNeeds.CountsAsChair[Type] = true;
             TileID.Sets.CanBeSatOnForNPCs[Type] = true;
             TileID.Sets.CanBeSatOnForPlayers[Type] = true;
             TileID.Sets.DisableSmartCursor[Type] = true;

@@ -96,7 +96,7 @@ namespace CalamityMod.Projectiles.Typeless
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.7f, 0.9f) * Utils.GetLerpValue(300, 0, Owner.Calamity().rOfResilienceCooldown, true);
                 dust.color = bColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
 
             // 15NOV2024: Ozzatron: clamped mouse position unnecessary, only used for direction
@@ -112,7 +112,7 @@ namespace CalamityMod.Projectiles.Typeless
             }
             time++;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D rTexture = ModContent.Request<Texture2D>("CalamityMod/Items/Tools/RelicOfResilience").Value;
             Texture2D bTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;

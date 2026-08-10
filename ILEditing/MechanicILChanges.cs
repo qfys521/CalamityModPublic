@@ -352,29 +352,21 @@ namespace CalamityMod.ILEditing
         #region Town NPC Spawning Improvements
         private static void PermitNighttimeTownNPCSpawning(ILContext il)
         {
-            // Don't do town NPC spawning at the end (which lies after a !Main.dayTime return).
-            // Do it at the beginning, without the arbitrary time restriction.
+            // Vanilla already performs this check during the day. Run the same check at the
+            // beginning of nighttime updates when the config allows it.
             var cursor = new ILCursor(il);
             cursor.EmitDelegate<Action>(() =>
             {
-                if (Main.dayTime || CalamityServerConfig.Instance.TownNPCsSpawnAtNight)
-                    Main.UpdateTime_SpawnTownNPCs();
+                if (!Main.dayTime && CalamityServerConfig.Instance.TownNPCsSpawnAtNight)
+                    Main.UpdateTime_SpawnTownNPCs(false);
             });
-
-            if (!cursor.TryGotoNext(MoveType.Before, i => i.MatchCallOrCallvirt<Main>(nameof(Main.UpdateTime_SpawnTownNPCs))))
-            {
-                CalamityMod.Log.Warn("Town NPC spawn editing code failed.");
-                return;
-            }
-
-            cursor.Emit(OpCodes.Ret);
         }
 
-        private static void AlterTownNPCSpawnRate(On_Main.orig_UpdateTime_SpawnTownNPCs orig)
+        private static void AlterTownNPCSpawnRate(On_Main.orig_UpdateTime_SpawnTownNPCs orig, bool forceUpdate)
         {
             double oldWorldRate = Main.desiredWorldTilesUpdateRate;
             Main.desiredWorldTilesUpdateRate *= CalamityServerConfig.Instance.TownNPCSpawnRateMultiplier;
-            orig();
+            orig(forceUpdate);
             Main.desiredWorldTilesUpdateRate = oldWorldRate;
         }
         #endregion
@@ -505,11 +497,11 @@ namespace CalamityMod.ILEditing
         #endregion
 
         #region Apply Projectile Variables Upon Creation
-        private static int IncorporateExtraProjectileVariables(On_Projectile.orig_NewProjectile_IEntitySource_float_float_float_float_int_int_float_int_float_float_float orig, IEntitySource spawnSource, float x, float y, float xSpeed, float ySpeed, int type, int damage, float knockback, int owner, float ai0, float ai1, float ai2)
+        private static int IncorporateExtraProjectileVariables(On_Projectile.orig_NewProjectile_IEntitySource_float_float_float_float_int_int_float_int_float_float_float_NewProjectileModifier orig, IEntitySource spawnSource, float x, float y, float xSpeed, float ySpeed, int type, int damage, float knockback, int owner, float ai0, float ai1, float ai2, NewProjectileModifier modifier)
         {
             // This is unfortunately not something that can be done via SetDefaults since owner is set
             // after that method is called. Doing it directly when the projectile is spawned appears to be the only reasonable way.
-            int proj = orig(spawnSource, x, y, xSpeed, ySpeed, type, damage, knockback, owner, ai0, ai1, ai2);
+            int proj = orig(spawnSource, x, y, xSpeed, ySpeed, type, damage, knockback, owner, ai0, ai1, ai2, modifier);
             Projectile projectile = Main.projectile[proj];
 
             Player player = Main.player[projectile.owner];
@@ -925,7 +917,7 @@ namespace CalamityMod.ILEditing
         #endregion
 
         #region Tile ping overlay
-        private static void ClearTilePings(On_TileDrawing.orig_Draw orig, TileDrawing self, bool solidLayer, bool forRenderTargets, bool intoRenderTargets, int waterStyleOverride)
+        private static void ClearTilePings(On_TileDrawing.orig_Draw orig, TileDrawing self, bool solidLayer, bool intoRenderTargets, int waterStyleOverride)
         {
             //Retro & Trippy light modes are fine. Just reset the cache before every time stuff gets drawn.
             if (Lighting.UpdateEveryFrame)
@@ -949,7 +941,7 @@ namespace CalamityMod.ILEditing
                     TilePingerSystem.ClearTiles(solidLayer);
 
             }
-            orig(self, solidLayer, forRenderTargets, intoRenderTargets, waterStyleOverride);
+            orig(self, solidLayer, intoRenderTargets, waterStyleOverride);
         }
         #endregion
 
@@ -1086,7 +1078,7 @@ namespace CalamityMod.ILEditing
         #endregion
 
         #region Shimmer effect edits
-        public static void ShimmerEffectEdits(On_Item.orig_GetShimmered orig, Item self)
+        public static void ShimmerEffectEdits(On_WorldItem.orig_GetShimmered orig, WorldItem self)
         {
             // Make Plagued Containment Bricks turn into Plagued Nanodroids if shimmered before defeating Golem
             if (self.type == ModContent.ItemType<PlaguedContainmentBrick>())
@@ -1111,7 +1103,7 @@ namespace CalamityMod.ILEditing
                     self.velocity *= 0.1f;
                     if (Main.netMode == NetmodeID.SinglePlayer)
                     {
-                        Item.ShimmerEffect(self.Center);
+                        WorldItem.ShimmerEffect(self.Center);
                     }
                     else
                     {
@@ -1247,9 +1239,20 @@ namespace CalamityMod.ILEditing
         #endregion
 
         #region Optimized GlowMask Rendering on Tile
-        private static void GlowMaskTileRender(On_TileDrawing.orig_DrawSingleTile orig, TileDrawing self, TileDrawInfo drawData, bool solidLayer, int waterStyleOverride, Vector2 screenPosition, Vector2 screenOffset, int tileX, int tileY)
+        private static void GlowMaskTileRender(On_TileDrawing.orig_DrawSingleTile orig, TileDrawing self, Vector2 screenPosition, Vector2 screenOffset, int tileX, int tileY)
         {
-            orig(self, drawData, solidLayer, waterStyleOverride, screenPosition, screenOffset, tileX, tileY);
+            orig(self, screenPosition, screenOffset, tileX, tileY);
+
+            TileDrawInfo drawData = new();
+            drawData.tileCache = Main.tile[tileX, tileY];
+            drawData.typeCache = drawData.tileCache.TileType;
+            drawData.tileFrameX = drawData.tileCache.TileFrameX;
+            drawData.tileFrameY = drawData.tileCache.TileFrameY;
+            drawData.tileLight = Lighting.GetColor(tileX, tileY);
+            self.GetTileDrawData(tileX, tileY, drawData.tileCache, drawData.typeCache, ref drawData.tileFrameX, ref drawData.tileFrameY,
+                out drawData.tileWidth, out drawData.tileHeight, out drawData.tileTop, out drawData.halfBrickHeight,
+                out drawData.addFrX, out drawData.addFrY, out drawData.tileSpriteEffect, out drawData.glowTexture,
+                out drawData.glowSourceRect, out drawData.glowColor);
 
             var type = drawData.typeCache;
             if (type >= GlowMaskTile.LookupLength)
@@ -1856,9 +1859,9 @@ namespace CalamityMod.ILEditing
         }
 
 
-        private static Vector2 ArenaCollision_TileCollision(On_Collision.orig_TileCollision orig, Vector2 Position, Vector2 Velocity, int Width, int Height, bool fallThrough, bool fall2, int gravDir)
+        private static Vector2 ArenaCollision_TileCollision(On_Collision.orig_TileCollision orig, Vector2 Position, Vector2 Velocity, int Width, int Height, bool fallThrough, bool fall2, int gravDir, bool ignoreDoors, bool ignoreAetheriumPlatforms, bool hoik)
         {
-            Velocity = orig(Position, Velocity, Width, Height, fallThrough, fall2, gravDir);
+            Velocity = orig(Position, Velocity, Width, Height, fallThrough, fall2, gravDir, ignoreDoors, ignoreAetheriumPlatforms, hoik);
             if (ArenaWallSystem.ActiveBoxes.Count > 0 && Velocity != Vector2.Zero)
             {
                 foreach (var item in ArenaWallSystem.ActiveBoxes)

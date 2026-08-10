@@ -6,36 +6,20 @@ namespace CalamityMod.Systems
 {
     public class NerfExpertDebuffsSystem : ModSystem
     {
-        public override void PostUpdateTime()
+        public override void Load()
         {
-            // Reduce the expert+ debuff time multiplier to the normal mode multiplier
-            if (CalamityServerConfig.Instance.NerfExpertDebuffs)
-            {
-                var copy = Main.RegisteredGameModes[GameModeID.Expert];
-                copy.DebuffTimeMultiplier = 1f;
-                Main.RegisteredGameModes[GameModeID.Expert] = copy;
+            On_Player.AddBuff_DetermineBuffTimeToAdd += DetermineBuffTimeToAdd;
+        }
 
-                copy = Main.RegisteredGameModes[GameModeID.Master];
-                copy.DebuffTimeMultiplier = 1f;
-                Main.RegisteredGameModes[GameModeID.Master] = copy;
+        private static int DetermineBuffTimeToAdd(On_Player.orig_AddBuff_DetermineBuffTimeToAdd orig, Player self, int type, int time)
+        {
+            if (!CalamityServerConfig.Instance.NerfExpertDebuffs || !Main.expertMode || !BuffID.Sets.BuffTimeIsExtendedWithGameDifficulty[type])
+                return orig(self, type, time);
 
-                // NOTE -- While this may seem at a glance to be redundant and nonsensical, the underlying setter for this property is what causes the game mode properties to
-                // be refreshed and copied from RegisteredGameModes. Without this, the above behavior is not reflected ingame, as GameModeData is a value type, not a reference type.
-                Main.GameMode = Main.GameMode;
-            }
-            // If people want to suffer, let them suffer
-            else
-            {
-                var copy = Main.RegisteredGameModes[GameModeID.Expert];
-                copy.DebuffTimeMultiplier = 2f;
-                Main.RegisteredGameModes[GameModeID.Expert] = copy;
+            if (self.deadCellsPotionStation && BuffID.Sets.BuffTimeIsExtendedByDeadCellsPotionStationBuff[type])
+                time = (int)(time * 1.2f);
 
-                copy = Main.RegisteredGameModes[GameModeID.Master];
-                copy.DebuffTimeMultiplier = 2.5f;
-                Main.RegisteredGameModes[GameModeID.Master] = copy;
-
-                Main.GameMode = Main.GameMode;
-            }
+            return time;
         }
     }
 }

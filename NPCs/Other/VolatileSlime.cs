@@ -218,7 +218,7 @@ namespace CalamityMod.NPCs.Other
                     dust2.alpha = Main.rand.Next(70, 150 + 1);
                     dust2.color = Main.rand.NextBool() ? Color.BlueViolet : Color.SlateBlue;
                     dust2.noLight = true;
-                    dust2.noLightEmittence = true;
+                    dust2.noLightEmittance = true;
                 }
             }
             NPC.netUpdate = true;

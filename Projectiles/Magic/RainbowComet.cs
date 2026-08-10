@@ -44,7 +44,7 @@ namespace CalamityMod.Projectiles.Magic
             if (Projectile.frameCounter % 4 == 3)
                 Projectile.frame = (Projectile.frame + 1) % Main.projFrames[Type];
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D cometTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Main.EntitySpriteDraw(cometTexture,

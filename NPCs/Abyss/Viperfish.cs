@@ -134,16 +134,16 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<RiptideDebuff>(), 120, true);
+                target.AddBuff(ModContent.BuffType<RiptideDebuff>(), 120);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer2 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer2 && spawner.waterTile)
             {
                 return SpawnCondition.CaveJellyfish.Chance * 1.2f;
             }
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer3 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer3 && spawner.waterTile)
             {
                 return Main.remixWorld ? 13.5f : SpawnCondition.CaveJellyfish.Chance * 1.5f;
             }

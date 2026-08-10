@@ -43,7 +43,7 @@ namespace CalamityMod.Items.Weapons.Melee
             target.AddBuff(BuffID.OnFire3, 360);
             SoundEngine.PlaySound(SoundID.Item14, target.Center);
             int onHitDamage = player.CalcIntDamage<MeleeDamageClass>(Item.damage);
-            Projectile blast = Projectile.NewProjectileDirect(Item.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<DirectStrike>(), onHitDamage, 0f, player.whoAmI, target.whoAmI);
+            Projectile blast = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), target.Center, Vector2.Zero, ModContent.ProjectileType<DirectStrike>(), onHitDamage, 0f, player.whoAmI, target.whoAmI);
             blast.DamageType = Item.DamageType;
 
             Vector2 dustRotation = (target.rotation - MathHelper.PiOver2).ToRotationVector2();

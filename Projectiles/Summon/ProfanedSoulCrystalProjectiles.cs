@@ -30,7 +30,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
             ProjectileID.Sets.TrailingMode[Type] = 0;
         }
@@ -87,6 +87,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = 180;
             Projectile.height = 180;
             Projectile.friendly = true;
@@ -138,7 +139,7 @@ namespace CalamityMod.Projectiles.Summon
             return ProvUtils.GetColorBasedOnEnrage(!Main.dayTime, Projectile.alpha);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Main.dayTime ? Terraria.GameContent.TextureAssets.Projectile[Type].Value : ModContent.Request<Texture2D>("CalamityMod/Projectiles/Boss/HolyBlastNight").Value;
             int num214 = texture.Height / Main.projFrames[Type];
@@ -207,7 +208,7 @@ namespace CalamityMod.Projectiles.Summon
         {
             Main.projFrames[Type] = 4;
             ProjectileID.Sets.CultistIsResistantTo[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.SummonTagDamageMultiplier[Type] = 0.3f;
         }
 
@@ -327,7 +328,7 @@ namespace CalamityMod.Projectiles.Summon
             return ProvUtils.GetColorBasedOnEnrage(!Main.dayTime, Projectile.alpha);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Main.dayTime ? Terraria.GameContent.TextureAssets.Projectile[Type].Value : ModContent.Request<Texture2D>("CalamityMod/Projectiles/Boss/HolyFire2Night").Value;
             int num214 = texture.Height / Main.projFrames[Type];
@@ -496,7 +497,7 @@ namespace CalamityMod.Projectiles.Summon
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Projectile.DrawBackglow(ProvUtils.GetColorBasedOnEnrage(!Main.dayTime, Projectile.alpha, true), 4f, Terraria.GameContent.TextureAssets.Projectile[Type].Value);
             CalamityUtils.DrawAfterimagesCentered(Projectile, ProjectileID.Sets.TrailingMode[Type], ProvUtils.GetColorBasedOnEnrage(!Main.dayTime, Projectile.alpha), 1);
@@ -737,7 +738,7 @@ namespace CalamityMod.Projectiles.Summon
             return ProvUtils.GetColorBasedOnEnrage(!Main.dayTime, Projectile.alpha);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Main.dayTime ? Terraria.GameContent.TextureAssets.Projectile[Type].Value : ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/ProfanedCrystalRangedHugesNight").Value;
             int num214 = texture.Height / Main.projFrames[Type];
@@ -940,7 +941,7 @@ namespace CalamityMod.Projectiles.Summon
         {
             return ProvUtils.GetColorBasedOnEnrage(!Main.dayTime, Projectile.alpha);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int num214 = texture.Height / Main.projFrames[Type];
@@ -1298,7 +1299,7 @@ namespace CalamityMod.Projectiles.Summon
             }
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 
-            Projectile.Center = Main.GetPlayerArmPosition(Projectile) + Projectile.velocity * Timer;
+            Projectile.Center = Main.GetPlayerArmPosition(Projectile, owner) + Projectile.velocity * Timer;
             Projectile.spriteDirection = Projectile.velocity.X >= 0f ? 1 : -1;
 
             float swingTime = owner.itemAnimationMax * Projectile.MaxUpdates;
@@ -1360,7 +1361,7 @@ namespace CalamityMod.Projectiles.Summon
                 pos += diff;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             List<Vector2> list = new List<Vector2>();
             Projectile.FillWhipControlPoints(Projectile, list);
@@ -1578,11 +1579,6 @@ namespace CalamityMod.Projectiles.Summon
             Projectile.scale = 0.1f;
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            //Ah yes, overriding drawbehind, to draw in front of the player, flawless logic
-            overPlayers.Add(index);
-        }
 
         public override void AI()
         {
@@ -1623,7 +1619,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public override bool? CanDamage() => false;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             int rockType = (int)MathHelper.Clamp(Projectile.ai[1], 1f, 6f);
             Texture2D texture = ModContent.Request<Texture2D>(Texture[..^1] + rockType.ToString()).Value;
@@ -1786,7 +1782,7 @@ namespace CalamityMod.Projectiles.Summon
             return null;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             var psc = Projectile.ai[0] > 0f;
             Projectile.DrawBackglow(ProvUtils.GetColorBasedOnEnrage(!Main.dayTime && psc, Projectile.alpha, true), 4f, Terraria.GameContent.TextureAssets.Projectile[Type].Value);
@@ -1842,7 +1838,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 4;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.TrailCacheLength[Type] = 5;
             ProjectileID.Sets.TrailingMode[Type] = 0;
         }
@@ -1910,7 +1906,7 @@ namespace CalamityMod.Projectiles.Summon
             return ProvUtils.GetColorBasedOnEnrage(!Main.dayTime, Projectile.alpha);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Main.dayTime ? Terraria.GameContent.TextureAssets.Projectile[Type].Value : ModContent.Request<Texture2D>("CalamityMod/Projectiles/Boss/HolyBlastNight").Value;
             int num214 = texture.Height / Main.projFrames[Type];
@@ -1981,7 +1977,7 @@ namespace CalamityMod.Projectiles.Summon
         {
             Main.projFrames[Type] = 4;
             ProjectileID.Sets.CultistIsResistantTo[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.SummonTagDamageMultiplier[Type] = 0.3f;
         }
 
@@ -2049,7 +2045,7 @@ namespace CalamityMod.Projectiles.Summon
             return ProvUtils.GetColorBasedOnEnrage(!Main.dayTime, Projectile.alpha);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Main.dayTime ? Terraria.GameContent.TextureAssets.Projectile[Type].Value : ModContent.Request<Texture2D>("CalamityMod/Projectiles/Boss/HolyFire2Night").Value;
             int num214 = texture.Height / Main.projFrames[Type];

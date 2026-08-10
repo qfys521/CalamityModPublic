@@ -21,6 +21,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.ItemDropRules;
@@ -246,7 +247,7 @@ namespace CalamityMod.NPCs.Signus
 
                 NPC.knockBackResist = 0.05f;
                 if (expertMode)
-                    NPC.knockBackResist *= Main.RegisteredGameModes[GameModeID.Expert].KnockbackToEnemiesMultiplier;
+                    NPC.knockBackResist *= GameDifficultyData.KnockbackToEnemiesMultiplier.Sample(GameDifficultyLevel.Expert);
                 if (phase3 || revenge)
                     NPC.knockBackResist = 0f;
 
@@ -886,7 +887,7 @@ namespace CalamityMod.NPCs.Signus
             return false;
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<SupremeHealingPotion>();
         }

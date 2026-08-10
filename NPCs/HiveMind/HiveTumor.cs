@@ -90,16 +90,16 @@ namespace CalamityMod.NPCs.HiveMind
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (CalamityGlobalNPC.AnyEvents(spawnInfo.Player) || !spawnInfo.Player.ZoneCorrupt)
+            if (CalamityGlobalNPC.AnyEvents(spawner.Player) || !spawner.Player.ZoneCorrupt)
                 return 0f;
 
-            if (spawnInfo.Player.Calamity().disableHiveCystSpawns)
+            if (spawner.Player.Calamity().disableHiveCystSpawns)
                 return 0f;
 
-            bool corrupt = TileID.Sets.Corrupt[spawnInfo.SpawnTileType] || spawnInfo.SpawnTileType == TileID.Demonite;
-            if (spawnInfo.PlayerSafe || !corrupt)
+            bool corrupt = TileID.Sets.Corrupt[spawner.SpawnTileType] || spawner.SpawnTileType == TileID.Demonite;
+            if (spawner.noWorms || !corrupt)
                 return 0f;
 
             // Keep this as a separate if check, because it's a loop and we don't want to be checking it constantly.

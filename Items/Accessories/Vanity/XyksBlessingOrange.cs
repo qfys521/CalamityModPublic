@@ -74,8 +74,9 @@ namespace CalamityMod.Items.Accessories.Vanity
             Rectangle frame = texture.Frame(verticalFrames: vertialFramesNum, frameY: itemFrame);
             return frame;
         }
-        public void DrawItem(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, float scale, float rotation, bool inWorld)
+        public void DrawItem(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, float scale, float rotation, WorldItem worldItem)
         {
+            bool inWorld = worldItem is not null;
             itemFrameTimer++;
             if (itemFrameTimer % 5 == 0)
                 itemFrame++;
@@ -106,27 +107,27 @@ namespace CalamityMod.Items.Accessories.Vanity
             spriteBatch.Draw(bloom, position + extraPosition, null, effectColor with { A = 0 }, rotation, bloom.Size() / 2, new Vector2(1, 0.85f) * (scale + 0.05f * sine) * bloomScale, SpriteEffects.None, 0f);
             spriteBatch.Draw(bloom, position + extraPosition, null, effectColor with { A = 0 }, rotation, bloom.Size() / 2, squash * (scale + 0.05f * sine) * 0.9f * bloomScale, SpriteEffects.None, 0f);
             // Sprite
-            spriteBatch.Draw(texture, position + extraPosition + animPlaceAdjust, frame, (inWorld ? Lighting.GetColor((Item.Center + extraPosition + animPlaceAdjust).ToTileCoordinates()) : Color.White), 0f, frame.Size() / 2, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, position + extraPosition + animPlaceAdjust, frame, inWorld ? Lighting.GetColor((worldItem.Center + extraPosition + animPlaceAdjust).ToTileCoordinates()) : Color.White, 0f, frame.Size() / 2, scale, SpriteEffects.None, 0f);
             pulseTimer++;
         }
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
             frame = GetFrame();
-            DrawItem(spriteBatch, position, frame, scale * 1.5f, 0, false);
+            DrawItem(spriteBatch, position, frame, scale * 1.5f, 0, null);
             return false;
         }
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Rectangle itemFrame = GetFrame();
-            Vector2 drawPosition = Item.Bottom - Main.screenPosition - new Vector2(0, (itemFrame.Size() / 2).Y);
-            DrawItem(spriteBatch, drawPosition, itemFrame, scale * 0.5f, rotation, true);
+            Vector2 drawPosition = item.Bottom - Main.screenPosition - new Vector2(0, (itemFrame.Size() / 2).Y);
+            DrawItem(spriteBatch, drawPosition, itemFrame, scale * 0.5f, rotation, item);
             return false;
         }
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float sine = MathF.Sin(Main.GlobalTimeWrappedHourly * 3);
             Color clr = Color.Lerp(baseEffectColor, baseMainColor, Utils.GetLerpValue(-1, 1, sine));
-            Lighting.AddLight(Item.Center + extraPosition, clr.ToVector3() * 0.55f);
+            Lighting.AddLight(item.Center + extraPosition, clr.ToVector3() * 0.55f);
         }
         public override void SetDefaults()
         {
@@ -190,7 +191,7 @@ namespace CalamityMod.Items.Accessories.Vanity
                 }
                 else
                 {
-                    NetPacket packet = NetCreativeUnlocksPlayerReportModule.SerializeSacrificeRequest(ModContent.ItemType<XyksBlessingBlue>(), 1);
+                    NetPacket packet = NetCreativeUnlocksPlayerReportModule.SerializeSacrificeRequest(Main.myPlayer, ModContent.ItemType<XyksBlessingBlue>(), 1);
                     NetManager.Instance.SendToServerOrLoopback(packet);
                 }
             }

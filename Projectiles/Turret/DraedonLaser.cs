@@ -1,6 +1,7 @@
 ﻿using System;
 using CalamityMod.Sounds;
 using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.Audio;
 using Terraria.ModLoader;
 
@@ -61,6 +62,6 @@ namespace CalamityMod.Projectiles.Turret
 
         public override Color? GetAlpha(Color lightColor) => new Color(255, 190, 255, 0);
 
-        public override bool PreDraw(ref Color lightColor) => Projectile.DrawBeam(MaxTrailPoints, 1.5f, lightColor);
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => Projectile.DrawBeam(MaxTrailPoints, 1.5f, lightColor);
     }
 }

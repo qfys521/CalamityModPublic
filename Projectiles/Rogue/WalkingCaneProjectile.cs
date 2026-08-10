@@ -58,7 +58,7 @@ namespace CalamityMod.Projectiles.Rogue
             return true;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 drawPosition = Projectile.position + new Vector2(Projectile.width, Projectile.height) / 2f + Vector2.UnitY * Projectile.gfxOffY - Main.screenPosition;
             Texture2D alternateHookTexture = Projectile.spriteDirection == -1 ? AltTexture.Value : Terraria.GameContent.TextureAssets.Projectile[Type].Value;

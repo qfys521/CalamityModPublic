@@ -105,7 +105,7 @@ namespace CalamityMod.CalPlayer.DrawLayers
             if (glowMask == default)
                 return;
 
-            if (drawPlayer.heldProj >= 0 && drawInfo.shadow == 0f && !drawInfo.heldProjOverHand)
+            if (drawPlayer.heldProj >= 0 && drawInfo.shadow == 0f)
                 drawInfo.projectileDrawPosition = existingDrawData.Count;
 
             float adjustedItemScale = drawPlayer.GetAdjustedItemScale(heldItem);

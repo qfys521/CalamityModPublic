@@ -13,7 +13,7 @@ namespace CalamityMod.Tiles.Furniture
         {
             Main.tileFrameImportant[Type] = true;
             Main.tileLavaDeath[Type] = true;
-            TileID.Sets.InteractibleByNPCs[Type] = true; // Emulating Fish Bowl. NPCs do not interact with Jelly jars (probably because they're deadly or something)
+            TileID.Sets.InteractableByNPCs[Type] = true; // Emulating Fish Bowl. NPCs do not interact with Jelly jars (probably because they're deadly or something)
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.addTile(Type);
             AnimationFrameHeight = 36;

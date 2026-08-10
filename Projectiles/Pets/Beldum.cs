@@ -61,7 +61,7 @@ namespace CalamityMod.Projectiles.Pets
                 Projectile.timeLeft = 2;
             }
 
-            if (player.InInteractionRange((int)Projectile.Center.X / 16, (int)Projectile.Center.Y / 16, TileReachCheckSettings.Simple))
+            if (player.IsInTileInteractionRange((int)Projectile.Center.X / 16, (int)Projectile.Center.Y / 16, TileReachCheckSettings.Simple))
             {
                 if (Projectile.Hitbox.Contains(player.ClampedMouseWorld().ToPoint()))
                 {
@@ -160,7 +160,7 @@ namespace CalamityMod.Projectiles.Pets
             player.SetCompositeArmBack(enabled: true, stretch, player.DirectionTo(Projectile.Center).ToRotation() - MathHelper.PiOver2);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = TextureAssets.Projectile[Type].Value;
             SpriteEffects fx = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;

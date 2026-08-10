@@ -108,7 +108,7 @@ namespace CalamityMod.Projectiles.Summon.SmallAresArms
             return color;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Projectile orbToAttachTo = GetOrbToAttachTo();
             if (orbToAttachTo != null)

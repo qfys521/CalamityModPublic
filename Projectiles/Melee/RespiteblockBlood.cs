@@ -50,7 +50,7 @@ namespace CalamityMod.Projectiles.Melee
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, mainColor == Color.Green ? 89 : 86, -Projectile.velocity * Main.rand.NextFloat(0.1f, 0.8f), 0, default, Main.rand.NextFloat(0.8f, 1.1f));
                 dust.noGravity = true;
                 dust.noLight = true;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.alpha = 90;
             }
 

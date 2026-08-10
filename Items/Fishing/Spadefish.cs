@@ -270,7 +270,7 @@ namespace CalamityMod.Items.Fishing
             Projectile.netUpdate = true;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             var tex = TextureAssets.Projectile[Type];
             Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, null, lightColor * Projectile.Opacity, Projectile.rotation, tex.Size() * 0.5f, Projectile.scale, 0);
@@ -340,7 +340,7 @@ namespace CalamityMod.Items.Fishing
 
             using (Main.spriteBatch.Scope())
             {
-                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Matrix.identity);
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Matrix.Identity);
                 Main.spriteBatch.Draw(lease.Target, position - Main.screenPosition, null, Color.White, 0, position - Main.screenPosition, new Vector2(MathF.Abs(width), 1), width < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
                 Main.spriteBatch.End();
             }
@@ -389,7 +389,7 @@ namespace CalamityMod.Items.Fishing
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             return false;
         }

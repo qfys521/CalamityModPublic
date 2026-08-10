@@ -57,7 +57,7 @@ namespace CalamityMod.Projectiles.Rogue
             if (Projectile.timeLeft % 5 == 0)
                 Dust.NewDustPerfect(Projectile.Center + Main.rand.NextVector2CircularEdge(32,32), ModContent.DustType<LemonNadeExplodeDust>(),newColor: RandomColor, Scale: 0.75f).customData = Projectile.Opacity;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             lightColor = color;
             Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center-Main.screenPosition, null, lightColor * Projectile.Opacity, Projectile.rotation, TextureAssets.Projectile[Type].Size() * 0.5f, 0.08f * Projectile.scale, 0);

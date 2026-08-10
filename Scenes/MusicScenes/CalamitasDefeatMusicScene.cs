@@ -12,7 +12,7 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<SupremeCalamitas>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("CalamitasDefeat");
         public override int VanillaMusic => MusicID.Eerie;
-        public override int OtherworldMusic => MusicID.OtherworldlyEerie;
+        public override int OtherworldMusic => MusicID.OtherworldEerie;
 
         public override bool AdditionalCheck() => CalamityGlobalNPC.SCalAcceptance != -1;
     }

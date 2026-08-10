@@ -118,7 +118,7 @@ namespace CalamityMod.Projectiles.Magic
                     Dust laserDust2 = Dust.NewDustPerfect(randomLineEffectPosition, ModContent.DustType<LightDust>(), Projectile.velocity * Main.rand.NextFloat(5f, 40f), Scale: Main.rand.NextFloat(0.8f, 1.1f) * (isBigLaser ? 2 : 1));
                     laserDust2.noGravity = true;
                     laserDust2.color = Main.rand.NextBool(3) ? color2 : color1;
-                    laserDust2.noLightEmittence = true;
+                    laserDust2.noLightEmittance = true;
                 }
                 else
                 {

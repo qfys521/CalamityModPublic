@@ -39,6 +39,7 @@ namespace CalamityMod.Projectiles.Melee
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindProjectiles;
             Projectile.width = Projectile.height = 36;
             Projectile.friendly = true;
             Projectile.DamageType = MeleeRangedHybridDamageClass.Instance;
@@ -104,7 +105,7 @@ namespace CalamityMod.Projectiles.Melee
 
         public float LaserWidthFunction(float _, Vector2 vertexPos) => Projectile.scale * Projectile.width;
         public Color LaserColorFunction(float completionRatio, Vector2 vertexPos) => Main.DiscoColor;
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // This should never happen, but just in case...
             if (Projectile.velocity == Vector2.Zero)
@@ -126,9 +127,5 @@ namespace CalamityMod.Projectiles.Melee
             return false;
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindProjectiles.Add(index);
-        }
     }
 }

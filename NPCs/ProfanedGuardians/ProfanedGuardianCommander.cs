@@ -1197,7 +1197,7 @@ namespace CalamityMod.NPCs.ProfanedGuardians
             return false;
         }
 
-        public override void BossLoot(ref int potionType) => potionType = ItemID.SuperHealingPotion;
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack) => potionType = ItemID.SuperHealingPotion;
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)
         {
@@ -1247,7 +1247,7 @@ namespace CalamityMod.NPCs.ProfanedGuardians
         // Can only hit the target if within certain distance
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
 
             Rectangle targetHitbox = target.Hitbox;
 

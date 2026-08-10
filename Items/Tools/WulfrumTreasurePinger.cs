@@ -78,11 +78,10 @@ namespace CalamityMod.Items.Tools
 
             if (timeBeforeBlast <= 0)
             {
+                var source = player.GetSource_ItemUse(Item);
                 int scrapRefund = Main.rand.Next(0, 4);
                 if (scrapRefund > 0)
-                    player.QuickSpawnItem(Item.GetSource_FromThis(), ModContent.ItemType<WulfrumMetalScrap>(), scrapRefund);
-
-                Item.TurnToAir();
+                    player.QuickSpawnItem(source, ModContent.ItemType<WulfrumMetalScrap>(), scrapRefund);
 
                 int smokeCount = Main.rand.Next(5, 10);
                 int shrapnelCount = Main.rand.Next(3, 5);
@@ -110,7 +109,7 @@ namespace CalamityMod.Items.Tools
                         Vector2 shrapnelVelocity = Main.rand.NextVector2Circular(9f, 9f);
                         float shrapnelScale = Main.rand.NextFloat(0.8f, 1f);
 
-                        Gore.NewGore(Item.GetSource_FromThis(), centerPosition, shrapnelVelocity, Mod.Find<ModGore>("WulfrumPinger" + Main.rand.Next(1, 5).ToString()).Type, shrapnelScale);
+                        Gore.NewGore(source, centerPosition, shrapnelVelocity, Mod.Find<ModGore>("WulfrumPinger" + Main.rand.Next(1, 5).ToString()).Type, shrapnelScale);
                     }
                 }
 
@@ -118,6 +117,8 @@ namespace CalamityMod.Items.Tools
                 {
                     Dust.NewDustPerfect(centerPosition, DustID.Electric, Main.rand.NextVector2Circular(18f, 18f), Scale: Main.rand.NextFloat(0.4f, 1f));
                 }
+
+                Item.TurnToAir();
             }
         }
 

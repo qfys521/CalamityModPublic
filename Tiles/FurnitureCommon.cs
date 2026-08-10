@@ -249,7 +249,6 @@ namespace CalamityMod.Tiles
                 if (left == player.chestX && top == player.chestY && player.chest >= 0)
                 {
                     player.chest = -1;
-                    Recipe.FindRecipes();
                     SoundEngine.PlaySound(SoundID.MenuClose);
                 }
                 else
@@ -273,12 +272,11 @@ namespace CalamityMod.Tiles
                     {
                         player.chest = chest;
                         Main.playerInventory = true;
-                        Main.recBigList = false;
+                        Main.PipsUseGrid = false;
                         player.chestX = left;
                         player.chestY = top;
                         SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
                     }
-                    Recipe.FindRecipes();
                 }
             }
             return true;
@@ -452,7 +450,6 @@ namespace CalamityMod.Tiles
                     if (left == player.chestX && top == player.chestY && player.chest != -1)
                     {
                         player.chest = -1;
-                        Recipe.FindRecipes();
                         SoundEngine.PlaySound(SoundID.MenuClose);
                     }
                     else
@@ -473,14 +470,13 @@ namespace CalamityMod.Tiles
                         if (dresserChestID == player.chest)
                         {
                             player.chest = -1;
-                            Recipe.FindRecipes();
                             SoundEngine.PlaySound(SoundID.MenuClose);
                         }
                         else if (dresserChestID != player.chest && player.chest == -1)
                         {
                             player.chest = dresserChestID;
                             Main.playerInventory = true;
-                            Main.recBigList = false;
+                            Main.PipsUseGrid = false;
                             SoundEngine.PlaySound(SoundID.MenuOpen);
                             player.chestX = left;
                             player.chestY = top;
@@ -489,12 +485,11 @@ namespace CalamityMod.Tiles
                         {
                             player.chest = dresserChestID;
                             Main.playerInventory = true;
-                            Main.recBigList = false;
+                            Main.PipsUseGrid = false;
                             SoundEngine.PlaySound(SoundID.MenuTick);
                             player.chestX = left;
                             player.chestY = top;
                         }
-                        Recipe.FindRecipes();
                         return true;
                     }
                 }
@@ -503,7 +498,6 @@ namespace CalamityMod.Tiles
             {
                 Main.playerInventory = false;
                 player.chest = -1;
-                Recipe.FindRecipes();
                 Main.interactedDresserTopLeftX = Player.tileTargetX;
                 Main.interactedDresserTopLeftY = Player.tileTargetY;
                 Main.OpenClothesWindow();
@@ -655,7 +649,6 @@ namespace CalamityMod.Tiles
                 if (left == player.chestX && top == player.chestY && player.chest >= 0)
                 {
                     player.chest = -1;
-                    Recipe.FindRecipes();
                     SoundEngine.PlaySound(SoundID.MenuClose);
                 }
 
@@ -701,13 +694,12 @@ namespace CalamityMod.Tiles
                         {
                             player.chest = chest;
                             Main.playerInventory = true;
-                            Main.recBigList = false;
+                            Main.PipsUseGrid = false;
                             player.chestX = left;
                             player.chestY = top;
                             SoundEngine.PlaySound(player.chest < 0 ? SoundID.MenuOpen : SoundID.MenuTick);
                         }
 
-                        Recipe.FindRecipes();
                         return true;
                     }
                 }
@@ -816,7 +808,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All bathtubs count as tables.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+            TileID.Sets.RoomNeeds.CountsAsTable[mt.Type] = true;
             mt.AddMapEntry(new Color(144, 148, 144), Language.GetText("ItemName.Bathtub"));
         }
 
@@ -835,7 +827,7 @@ namespace CalamityMod.Tiles
             Main.tileWaterDeath[mt.Type] = false;
             TileID.Sets.HasOutlines[mt.Type] = true;
             TileID.Sets.CanBeSleptIn[mt.Type] = true;
-            TileID.Sets.InteractibleByNPCs[mt.Type] = true;
+            TileID.Sets.InteractableByNPCs[mt.Type] = true;
             TileID.Sets.IsValidSpawnPoint[mt.Type] = true;
             TileID.Sets.DisableSmartCursor[mt.Type] = true;
             TileObjectData.newTile.Width = 4;
@@ -857,7 +849,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All beds count as chairs.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            TileID.Sets.RoomNeeds.CountsAsChair[mt.Type] = true;
             mt.AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Bed"));
             mt.AdjTiles = new int[] { TileID.Beds };
         }
@@ -889,7 +881,7 @@ namespace CalamityMod.Tiles
             // Skip this for special bookcases such as Monolith Amalgam
             if (autoBookcase)
             {
-                mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+                TileID.Sets.RoomNeeds.CountsAsTable[mt.Type] = true;
                 mt.AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Bookcase"));
                 mt.AdjTiles = new int[] { TileID.Bookcases };
             }
@@ -918,7 +910,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All candelabras count as light sources.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[mt.Type] = true;
             mt.AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Candelabra"));
             mt.AdjTiles = new int[] { TileID.Candelabras };
         }
@@ -950,7 +942,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All candles count as light sources.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[mt.Type] = true;
             if (autoMapEntry)
                 mt.AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Candle"));
 
@@ -989,7 +981,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // As you could probably guess, all chairs count as chairs.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            TileID.Sets.RoomNeeds.CountsAsChair[mt.Type] = true;
             mt.AddMapEntry(new Color(191, 142, 111), Language.GetText("MapObject.Chair"));
             mt.AdjTiles = new int[] { TileID.Chairs };
         }
@@ -1010,7 +1002,7 @@ namespace CalamityMod.Tiles
             Main.tileLavaDeath[mt.Type] = !lavaImmune;
             Main.tileWaterDeath[mt.Type] = false;
             TileID.Sets.MultiTileSway[mt.Type] = true;
-            TileID.Sets.IsAMechanism[mt.Type] = true;
+            TileID.Sets.Wiring.IsAMechanism[mt.Type] = true;
             TileObjectData.newTile.Width = 3;
             TileObjectData.newTile.Height = 3;
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16, 16 };
@@ -1026,7 +1018,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All chandeliers count as light sources.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[mt.Type] = true;
             mt.AddMapEntry(new Color(235, 166, 135), Language.GetText("MapObject.Chandelier"));
             mt.AdjTiles = new int[] { TileID.Chandeliers };
         }
@@ -1057,8 +1049,8 @@ namespace CalamityMod.Tiles
                 TileObjectData.newTile.DrawYOffset = offsetAmt;
             TileObjectData.newTile.Origin = new Point16(0, 1);
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 18 };
-            TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(new Func<int, int, int, int, int, int, int>(Chest.FindEmptyChest), -1, 0, true);
-            TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(new Func<int, int, int, int, int, int, int>(Chest.AfterPlacement_Hook), -1, 0, false);
+            TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(Chest.FindEmptyChest, -1, 0, true);
+            TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(Chest.AfterPlacement_Hook, -1, 0, false);
             TileObjectData.newTile.AnchorInvalidTiles = new int[] { TileID.MagicalIceBlock };
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.LavaDeath = false;
@@ -1144,7 +1136,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // As you could probably guess, all closed doors count as doors.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
+            TileID.Sets.RoomNeeds.CountsAsDoor[mt.Type] = true;
             mt.AddMapEntry(new Color(119, 105, 79), Language.GetText("MapObject.Door"));
             mt.AdjTiles = new int[] { TileID.ClosedDoor };
         }
@@ -1210,7 +1202,7 @@ namespace CalamityMod.Tiles
             TileID.Sets.DisableSmartCursor[mt.Type] = true;
 
             // As you could probably guess, all open doors count as doors.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
+            TileID.Sets.RoomNeeds.CountsAsDoor[mt.Type] = true;
             mt.AddMapEntry(new Color(119, 105, 79), Language.GetText("MapObject.Door"));
             mt.AdjTiles = new int[] { TileID.OpenDoor };
         }
@@ -1237,8 +1229,8 @@ namespace CalamityMod.Tiles
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
             TileObjectData.newTile.Origin = new Point16(1, 1);
             TileObjectData.newTile.CoordinateHeights = new int[] { 16, 16 };
-            TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(new Func<int, int, int, int, int, int, int>(Chest.FindEmptyChest), -1, 0, true);
-            TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(new Func<int, int, int, int, int, int, int>(Chest.AfterPlacement_Hook), -1, 0, false);
+            TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(Chest.FindEmptyChest, -1, 0, true);
+            TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(Chest.AfterPlacement_Hook, -1, 0, false);
             TileObjectData.newTile.AnchorInvalidTiles = new int[] { 127 };
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.LavaDeath = false;
@@ -1246,7 +1238,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All dressers count as tables.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+            TileID.Sets.RoomNeeds.CountsAsTable[mt.Type] = true;
             mt.AdjTiles = new int[] { TileID.Dressers };
         }
 
@@ -1307,7 +1299,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All floor lamps count as light sources.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[mt.Type] = true;
             mt.AddMapEntry(new Color(253, 221, 3), Language.GetText("MapObject.FloorLamp"));
             mt.AdjTiles = new int[] { TileID.Lamps };
         }
@@ -1341,7 +1333,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All hanging lanterns count as light sources.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[mt.Type] = true;
             if (autoMapEntry)
                 mt.AddMapEntry(new Color(251, 235, 127), Language.GetText("MapObject.Lantern"));
 
@@ -1372,7 +1364,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All pianos count as tables.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+            TileID.Sets.RoomNeeds.CountsAsTable[mt.Type] = true;
             mt.AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Piano"));
         }
 
@@ -1407,7 +1399,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All platforms count as doors (so that you may have top-or-bottom entry/exit rooms)
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
+            TileID.Sets.RoomNeeds.CountsAsDoor[mt.Type] = true;
             mt.AddMapEntry(new Color(191, 142, 111));
             mt.AdjTiles = new int[] { TileID.Platforms };
         }
@@ -1460,9 +1452,9 @@ namespace CalamityMod.Tiles
             Main.tileFrameImportant[mt.Type] = true;
             Main.tileLavaDeath[mt.Type] = !lavaImmune;
             Main.tileWaterDeath[mt.Type] = false;
-            TileID.Sets.CountsAsWaterSource[mt.Type] = water;
-            TileID.Sets.CountsAsLavaSource[mt.Type] = lava;
-            TileID.Sets.CountsAsHoneySource[mt.Type] = honey;
+            TileID.Sets.CountsAsWaterForCrafting[mt.Type] = water;
+            TileID.Sets.CountsAsLavaForCrafting[mt.Type] = lava;
+            TileID.Sets.CountsAsHoneyForCrafting[mt.Type] = honey;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
             TileObjectData.newTile.LavaDeath = !lavaImmune;
             TileObjectData.newTile.LavaPlacement = lavaImmune ? LiquidPlacement.Allowed : LiquidPlacement.NotAllowed;
@@ -1496,7 +1488,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All sofas count as chairs.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
+            TileID.Sets.RoomNeeds.CountsAsChair[mt.Type] = true;
             mt.AddMapEntry(new Color(191, 142, 111), bench ? Language.GetText("ItemName.Bench") : Language.GetText("ItemName.Sofa"));
         }
 
@@ -1524,7 +1516,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // As you could probably guess, all tables count as tables.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+            TileID.Sets.RoomNeeds.CountsAsTable[mt.Type] = true;
             mt.AddMapEntry(new Color(191, 142, 111), Language.GetText("MapObject.Table"));
             mt.AdjTiles = new int[] { TileID.Tables };
         }
@@ -1548,7 +1540,7 @@ namespace CalamityMod.Tiles
             Main.tileWaterDeath[mt.Type] = !waterImmune;
             Main.tileLavaDeath[mt.Type] = !lavaImmune;
             TileID.Sets.DisableSmartCursor[mt.Type] = true;
-            TileID.Sets.Torch[mt.Type] = true;
+            TileID.Sets.Torches[mt.Type] = true;
             TileID.Sets.FramesOnKillWall[mt.Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.StyleTorch);
             TileObjectData.newTile.WaterDeath = !waterImmune;
@@ -1582,7 +1574,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All torches count as light sources.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[mt.Type] = true;
             mt.AddMapEntry(new Color(253, 221, 3), Language.GetText("ItemName.Torch"));
             mt.AdjTiles = new int[] { TileID.Torches };
         }
@@ -1631,7 +1623,7 @@ namespace CalamityMod.Tiles
             TileObjectData.addTile(mt.Type);
 
             // All work benches count as tables.
-            mt.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+            TileID.Sets.RoomNeeds.CountsAsTable[mt.Type] = true;
             mt.AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.WorkBench"));
             mt.AdjTiles = new int[] { TileID.WorkBenches };
         }

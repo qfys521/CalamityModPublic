@@ -112,7 +112,7 @@ namespace CalamityMod.Projectiles.Boss
             Lighting.AddLight(Projectile.Center, 0f, 0.35f * Projectile.Opacity, 0.35f * Projectile.Opacity);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             lightColor.R = (byte)(255 * Projectile.Opacity);
             lightColor.G = (byte)(255 * Projectile.Opacity);
@@ -126,7 +126,7 @@ namespace CalamityMod.Projectiles.Boss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<WindChilled>(), 120, true);
+                target.AddBuff(ModContent.BuffType<WindChilled>(), 120);
         }
     }
 }

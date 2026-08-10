@@ -84,9 +84,9 @@ namespace CalamityMod.NPCs.SulphurousSea
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !spawnInfo.Player.Calamity().ZoneSulphur || !DownedBossSystem.downedAquaticScourge)
+            if (spawner.noWorms || !spawner.Player.Calamity().ZoneSulphur || !DownedBossSystem.downedAquaticScourge)
             {
                 return 0f;
             }

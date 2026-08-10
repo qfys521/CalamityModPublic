@@ -25,7 +25,7 @@ namespace CalamityMod.Projectiles.Summon
             Main.projFrames[Type] = 4;
             ProjectileID.Sets.TrailCacheLength[Type] = 4;
             ProjectileID.Sets.TrailingMode[Type] = 0;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -105,7 +105,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public override bool? CanDamage() => Projectile.ai[0] >= 1f ? null : false;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             var dye = Owner?.cMinion ?? 0;
             bool psc = Owner.Calamity().profanedCrystalBuffs;

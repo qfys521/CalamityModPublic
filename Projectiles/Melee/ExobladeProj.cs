@@ -451,7 +451,7 @@ namespace CalamityMod.Projectiles.Melee
             return result;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.Opacity <= 0f || InPostBonkStasis)
                 return false;

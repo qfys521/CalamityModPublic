@@ -1337,7 +1337,7 @@ namespace CalamityMod.NPCs.Providence
                             if (!player2.dead && player2.active && Vector2.Distance(player2.Center, NPC.Center) < 2800f && !inLiquid)
                             {
                                 SoundEngine.PlaySound(SoundID.DD2_BetsyFireballImpact, player2.Center);
-                                player2.AddBuff(ModContent.BuffType<IcarusFolly>(), 3000, true);
+                                player2.AddBuff(ModContent.BuffType<IcarusFolly>(), 3000);
 
                                 for (int i = 0; i < 40; i++)
                                 {
@@ -2048,7 +2048,7 @@ namespace CalamityMod.NPCs.Providence
             npcLoot.AddConditionalPerPlayer(() => !DownedBossSystem.downedProvidence, ModContent.ItemType<LoreProvidence>(), desc: DropHelper.FirstKillText);
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<SupremeHealingPotion>();
         }
@@ -2727,7 +2727,7 @@ namespace CalamityMod.NPCs.Providence
         public float FlameTimer = 0f;
         public bool ProviWasEnraged = false;
 
-        public override void OnSpawn(Item item, IEntitySource source)
+        public override void OnSpawn(WorldItem item, IEntitySource source)
         {
             if (!BossRushEvent.BossRushActive && source is EntitySource_Loot loot && loot.Entity is NPC npc && npc.ModNPC is Providence provi)
             {
@@ -2748,7 +2748,7 @@ namespace CalamityMod.NPCs.Providence
             ProviWasEnraged = reader.ReadBoolean();
         }
 
-        public override void Update(Item item, ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float clp = MathHelper.Clamp(HolyFlame, 0f, 1f);
 
@@ -2773,7 +2773,7 @@ namespace CalamityMod.NPCs.Providence
             HolyFlame = 0f;
         }
 
-        public override bool PreDrawInWorld(Item item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             FlameTimer++;
 

@@ -28,7 +28,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.MaxUpdates = 3;
             Projectile.timeLeft = Lifetime;
             Projectile.tileCollide = false;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void AI()
@@ -106,6 +106,6 @@ namespace CalamityMod.Projectiles.Boss
             }
         }
 
-        public override bool PreDraw(ref Color lightColor) => false;
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => false;
     }
 }

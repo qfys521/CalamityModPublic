@@ -58,9 +58,9 @@ namespace CalamityMod.NPCs.Crags
             });
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            return spawnInfo.Player.Calamity().ZoneCalamity ? 0.125f : 0f;
+            return spawner.Player.Calamity().ZoneCalamity ? 0.125f : 0f;
         }
 
         public override void FindFrame(int frameHeight)
@@ -101,7 +101,7 @@ namespace CalamityMod.NPCs.Crags
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<BrimstoneFlames>(), 60, true);
+                target.AddBuff(ModContent.BuffType<BrimstoneFlames>(), 60);
         }
 
         public override void HitEffect(NPC.HitInfo hit)

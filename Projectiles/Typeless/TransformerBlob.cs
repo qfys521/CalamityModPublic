@@ -185,7 +185,7 @@ namespace CalamityMod.Projectiles.Typeless
                             dust.noGravity = true;
                             dust.scale = Main.rand.NextFloat(0.4f, 0.6f);
                             dust.color = new Color(30, 30, 30);
-                            dust.noLightEmittence = true;
+                            dust.noLightEmittance = true;
                         }
                     }
 
@@ -259,10 +259,10 @@ namespace CalamityMod.Projectiles.Typeless
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.8f, 1.1f);
                 dust.color = new Color(30, 30, 30);
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D orbTexture = ModContent.Request<Texture2D>("CalamityMod/Items/Accessories/TheTransformer").Value;
             Texture2D bTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;

@@ -97,11 +97,11 @@ namespace CalamityMod.Projectiles.Melee
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 mountedCenter = Main.player[Projectile.owner].MountedCenter;
             Color colorArea = Lighting.GetColor((int)(Projectile.position.X + Projectile.width * 0.5f) / 16, (int)((Projectile.position.Y + Projectile.height * 0.5f) / 16));
-            if (Projectile.hide && !ProjectileID.Sets.DontAttachHideToAlpha[Type])
+            if (Projectile.usesOwnerLight)
             {
                 colorArea = Lighting.GetColor((int)mountedCenter.X / 16, (int)(mountedCenter.Y / 16f));
             }

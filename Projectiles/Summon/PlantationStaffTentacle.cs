@@ -185,7 +185,7 @@ namespace CalamityMod.Projectiles.Summon
                 Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.JunglePlants);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (MainMinionIndex < 0 || MainMinionIndex >= Main.maxProjectiles)
                 return false;
@@ -236,7 +236,7 @@ namespace CalamityMod.Projectiles.Summon
         }
 
         // It draws the host plant in here in order to have it draw over the tentacles.
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Only 1 tentacle needs to draw this, the last one spawned because it's latest in the projectile array.
             if (TentacleIndex < 5)

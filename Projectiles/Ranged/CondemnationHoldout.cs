@@ -167,7 +167,7 @@ namespace CalamityMod.Projectiles.Ranged
             int ArrowType = homing ? ModContent.ProjectileType<CondemnationArrowHoming>() : ModContent.ProjectileType<CondemnationArrow>();
             Projectile.NewProjectile(Projectile.GetSource_FromThis(), GunTipPosition, shootVelocity, ArrowType, (int)(Projectile.damage * 1.35f), Projectile.knockBack, Projectile.owner);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;

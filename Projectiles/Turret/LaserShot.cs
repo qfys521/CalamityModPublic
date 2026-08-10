@@ -74,7 +74,7 @@ namespace CalamityMod.Projectiles.Turret
             return DetermineLaserLength_CollideWithTiles();
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // This is the drawcode from surge driver
             // Start texture drawing.

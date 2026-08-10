@@ -75,7 +75,7 @@ namespace CalamityMod.Projectiles.Typeless
         // Add Sand Cloak cooldown after the sand veil dies
         public override void OnKill(int timeLeft) => Main.player[Projectile.owner].AddCooldown(Cooldowns.SandCloak.ID, SandCloak.SandVeilCooldown);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Sprite Circle
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

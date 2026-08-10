@@ -337,7 +337,7 @@ namespace CalamityMod.Systems
             get => true;
             set
             {
-                if (!Main.GameModeInfo.IsJourneyMode)
+                if (!Main.IsJourneyMode)
                 {
                     Main.GameMode = value == true ? GameModeID.Normal : GameModeID.Expert;
                 }
@@ -375,7 +375,7 @@ namespace CalamityMod.Systems
             get => Main.expertMode;
             set
             {
-                if (!Main.GameModeInfo.IsJourneyMode)
+                if (!Main.IsJourneyMode)
                 {
                     Main.GameMode = value == true ? GameModeID.Expert : GameModeID.Normal;
                 }
@@ -412,7 +412,7 @@ namespace CalamityMod.Systems
             get => Main.masterMode;
             set
             {
-                if (!Main.GameModeInfo.IsJourneyMode)
+                if (!Main.IsJourneyMode)
                 {
                     Main.GameMode = value == true ? GameModeID.Master : GameModeID.Expert;
                 }
@@ -451,7 +451,7 @@ namespace CalamityMod.Systems
             get => CalamityWorld.LegendaryMode;
             set
             {
-                if (!Main.GameModeInfo.IsJourneyMode)
+                if (!Main.IsJourneyMode)
                 {
                     Main.GameMode = value == true ? GameModeID.Master : GameModeID.Expert;
                 }
@@ -492,7 +492,7 @@ namespace CalamityMod.Systems
             set
             {
                 CalamityWorld.revenge = value;
-                if (value && !Main.GameModeInfo.IsJourneyMode)
+                if (value && !Main.IsJourneyMode)
                     Main.GameMode = BackBoneGameModeID;
             }
         }
@@ -534,7 +534,7 @@ namespace CalamityMod.Systems
             {
                 if (Main.getGoodWorld)
                 {
-                    if (!Main.GameModeInfo.IsJourneyMode)
+                    if (!Main.IsJourneyMode)
                     {
                         Main.GameMode = value == true ? GameModeID.Expert : GameModeID.Normal;
                     }
@@ -547,7 +547,7 @@ namespace CalamityMod.Systems
                 else
                 {
                     CalamityWorld.death = value;
-                    if (value && !Main.GameModeInfo.IsJourneyMode)
+                    if (value && !Main.IsJourneyMode)
                         Main.GameMode = BackBoneGameModeID;
                 }
             }
@@ -600,7 +600,7 @@ namespace CalamityMod.Systems
             {
                 if (Main.getGoodWorld)
                 {
-                    if (!Main.GameModeInfo.IsJourneyMode)
+                    if (!Main.IsJourneyMode)
                     {
                         Main.GameMode = value == true ? GameModeID.Master : GameModeID.Expert;
                     }

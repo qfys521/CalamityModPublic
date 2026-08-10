@@ -103,7 +103,7 @@ namespace CalamityMod.Projectiles.Magic
         internal float TrailWidthFunction(float completionRatio, Vector2 vertexPos) => Projectile.scale * (Projectile.ai[0] > 0f ? 2f : 4f);
         internal Color TrailColorFunction(float completionRatio, Vector2 vertexPos) => Color.Lerp(Color.Chartreuse, Color.SlateGray, Utils.Remap(Projectile.Opacity, 0.5f, 1f, 0f, 0.8f)) * Projectile.Opacity * 0.3f;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (TrailPos == null)
                 return false;

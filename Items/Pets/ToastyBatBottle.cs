@@ -23,7 +23,7 @@ namespace CalamityMod.Items.Pets
         {
             if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
             {
-                player.AddBuff(Item.buffType, 3600, true);
+                player.AddBuff(Item.buffType, 3600);
             }
         }
         public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)

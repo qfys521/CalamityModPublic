@@ -53,13 +53,14 @@ namespace CalamityMod.Particles
         {
             if (WasSpawnedWithAnchor)
             {
-                StoredPosition = AnchorEntity.Top;
-                HeightToNeverGoBelow = AnchorEntity.Top.Y + 8f;
-                if (!AnchorEntity.active || AnchorEntity == null)
+                if (AnchorEntity.IsNullOrInactive())
                 {
                     Kill();
                     return;
                 }
+
+                StoredPosition = AnchorEntity.Top;
+                HeightToNeverGoBelow = AnchorEntity.Top.Y + 8f;
             }
 
             Velocity += new Vector2(MathF.Sign(StoredPosition.X - Position.X) * 0.02f, MathF.Sign(StoredPosition.Y - Position.Y) * 0.02f);

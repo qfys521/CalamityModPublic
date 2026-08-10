@@ -96,7 +96,7 @@ namespace CalamityMod.Projectiles.Typeless
             SoundEngine.PlaySound(new SoundStyle("CalamityMod/Sounds/Custom/ChainLightning", 4) { Volume = 0.15f }, Projectile.Center);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D lightTexture = ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/SmallGreyscaleCircle").Value;
             for (int i = 0; i < Projectile.oldPos.Length; i++)

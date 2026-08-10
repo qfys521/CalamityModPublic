@@ -22,7 +22,7 @@ namespace CalamityMod.Items.Placeables.Furniture
             player.Calamity().tranquilityCandle = true;
 
             // Do not make light if wet
-            if (Collision.DrownCollision(player.position, player.width, player.height, player.gravDir) || Item.wet)
+            if (Collision.DrownCollision(player.position, player.width, player.height, player.gravDir))
                 return;
 
             if (Main.rand.NextBool(player.itemAnimation > 0 ? 10 : 20))
@@ -34,10 +34,10 @@ namespace CalamityMod.Items.Placeables.Furniture
             Lighting.AddLight(position, 0.55f, 0.85f, 1f);
         }
 
-        public override void PostUpdate()
+        public override void PostUpdate(WorldItem item)
         {
-            if (!Item.wet)
-                Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1f, 0.55f, 1f);
+            if (!item.wet)
+                Lighting.AddLight((int)((item.position.X + Item.width / 2) / 16f), (int)((item.position.Y + Item.height / 2) / 16f), 1f, 0.55f, 1f);
         }
 
         public override void AddRecipes()

@@ -25,6 +25,7 @@ namespace CalamityMod.Projectiles.Typeless
         public int maxTime = 5;
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = Projectile.height = 30;
             Projectile.scale = 1f;
             Projectile.friendly = true;
@@ -93,7 +94,7 @@ namespace CalamityMod.Projectiles.Typeless
                     if (Projectile.timeLeft % 4 == 0)
                     {
                         Dust pollenDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, ModContent.DustType<LightDust>(), newColor: mistColor, Scale: 0.6f * Projectile.scale);
-                        pollenDust.noLightEmittence = true;
+                        pollenDust.noLightEmittance = true;
                         pollenDust.noGravity = true;
                     }
                     if (Projectile.scale > 0.7f)
@@ -115,7 +116,7 @@ namespace CalamityMod.Projectiles.Typeless
             timer++;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (FlowerPart == 0f)
             {
@@ -141,10 +142,6 @@ namespace CalamityMod.Projectiles.Typeless
                 return false;
             }
             else return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
         }
     }
 }

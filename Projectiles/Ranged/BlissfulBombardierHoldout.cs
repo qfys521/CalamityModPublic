@@ -123,7 +123,7 @@ namespace CalamityMod.Projectiles.Ranged
                         Dust dust = Dust.NewDustPerfect(GunTipPosition, ModContent.DustType<LightDust>(), (Projectile.velocity * 12).RotatedByRandom(0.6f) * Main.rand.NextFloat(0.4f, 1.7f), 0, default, Main.rand.NextFloat(1.8f, 2.3f));
                         dust.noGravity = true;
                         dust.color = Main.rand.NextBool(3) ? Color.Orange : effectsColor;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                     }
                     else
                     {
@@ -227,7 +227,7 @@ namespace CalamityMod.Projectiles.Ranged
             ExtraBackArmRotation = MathHelper.ToRadians(15f);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (shootingTimer <= 1)
                 return false;

@@ -94,23 +94,23 @@ namespace CalamityMod.Items.SummonItems
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             if (Main.zenithWorld)
             {
                 Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Items/SummonItems/Terminus_GFB").Value;
-                spriteBatch.Draw(texture, Item.position - Main.screenPosition, null, lightColor, rotation, Vector2.Zero, scale, 0, 0);
+                spriteBatch.Draw(texture, item.position - Main.screenPosition, null, lightColor, rotation, Vector2.Zero, scale, 0, 0);
                 return false;
             }
             else
                 return true;
         }
 
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
             if (!Main.zenithWorld)
             {
-                DrawGlowInWorld(spriteBatch, Item.Center - Main.screenPosition, rotation, scale);
+                DrawGlowInWorld(spriteBatch, item.Center - Main.screenPosition, rotation, scale);
             }
         }
         #endregion

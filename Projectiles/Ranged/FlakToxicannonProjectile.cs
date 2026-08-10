@@ -218,7 +218,7 @@ namespace CalamityMod.Projectiles.Ranged
                         newColor: EffectsColor,
                         Scale: Main.rand.NextFloat(.8f, 1.2f));
                     boomDust.noLight = true;
-                    boomDust.noLightEmittence = true;
+                    boomDust.noLightEmittance = true;
                 }
 
                 Particle boomRing = new DirectionalPulseRing(Projectile.Center,
@@ -250,7 +250,7 @@ namespace CalamityMod.Projectiles.Ranged
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = IsShrapnel ? Request<Texture2D>("CalamityMod/Projectiles/Environment/AcidDrop").Value : Terraria.GameContent.TextureAssets.Projectile[Type].Value;
 

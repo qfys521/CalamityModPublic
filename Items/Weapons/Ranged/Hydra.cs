@@ -61,7 +61,7 @@ namespace CalamityMod.Items.Weapons.Ranged
                 {
                     HeadSpawnTimer = 0;
                     SoundEngine.PlaySound(SpawnSound, player.Center);
-                    Projectile head = Projectile.NewProjectileDirect(Item.GetSource_FromThis(), player.Top + Vector2.UnitY * 8f, Vector2.Zero, HeadID, 0, 0, player.whoAmI);
+            Projectile head = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), player.Top + Vector2.UnitY * 8f, Vector2.Zero, HeadID, 0, 0, player.whoAmI);
                     head.OriginalCritChance = Item.crit;
                 }
             }

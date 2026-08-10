@@ -56,7 +56,7 @@ namespace CalamityMod.Projectiles.Summon
 
         #endregion
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = (RandomTexture == 0f) ? Terraria.GameContent.TextureAssets.Projectile[ProjectileID.PoisonSeedPlantera].Value : TextureAssets.Projectile[Type].Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;

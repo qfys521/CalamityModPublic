@@ -69,9 +69,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || spawnInfo.Player.Calamity().ZoneAbyss)
+            if (spawner.noWorms || spawner.Player.Calamity().ZoneAbyss)
             {
                 return 0f;
             }
@@ -81,7 +81,7 @@ namespace CalamityMod.NPCs.NormalNPCs
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.Weak, 240, true);
+                target.AddBuff(BuffID.Weak, 240);
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

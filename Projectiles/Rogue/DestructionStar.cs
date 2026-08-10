@@ -218,7 +218,7 @@ namespace CalamityMod.Projectiles.Rogue
             Owner.SetScreenshake(6f * (big ? 2.5f : 1f));
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
             Asset<Texture2D> tex2 = ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Rogue/StarofDestructionGhost");

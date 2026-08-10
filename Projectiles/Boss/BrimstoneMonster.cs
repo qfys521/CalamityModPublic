@@ -53,6 +53,7 @@ namespace CalamityMod.Projectiles.Boss
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindNPCs;
             Projectile.Calamity().DealsDefenseDamage = true;
             Projectile.width = 320;
             Projectile.height = 320;
@@ -63,7 +64,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.penetrate = -1;
             Projectile.timeLeft = 36000;
             Projectile.Opacity = 0f;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void SendExtraAI(BinaryWriter writer)
@@ -339,7 +340,7 @@ namespace CalamityMod.Projectiles.Boss
 
         private static void OnHitPlayer_Internal(Player target)
         {
-            target.AddBuff(ModContent.BuffType<VulnerabilityHex>(), 360, true);
+            target.AddBuff(ModContent.BuffType<VulnerabilityHex>(), 360);
 
             // Remove all positive buffs from the player if they're hit by HAGE while Permafrost is alive.
             if (CalamityGlobalNPC.SCal != -1)
@@ -370,7 +371,7 @@ namespace CalamityMod.Projectiles.Boss
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             lightColor.R = (byte)(255 * Projectile.Opacity);
@@ -434,9 +435,5 @@ namespace CalamityMod.Projectiles.Boss
             return false;
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindNPCs.Add(index);
-        }
     }
 }

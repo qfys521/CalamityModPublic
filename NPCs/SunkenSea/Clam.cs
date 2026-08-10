@@ -202,9 +202,9 @@ namespace CalamityMod.NPCs.SunkenSea
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneSunkenSea && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneSunkenSea && spawner.waterTile)
             {
                 return SpawnCondition.CaveJellyfish.Chance * 1.2f;
             }

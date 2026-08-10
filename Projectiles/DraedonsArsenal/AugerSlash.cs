@@ -142,7 +142,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             bool hit = Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), start, start + Projectile.velocity.SafeNormalize(Vector2.UnitX) * length * Projectile.scale, size * Projectile.scale, ref _);
             return (hit);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D proj = ModContent.Request<Texture2D>("CalamityMod/Projectiles/DraedonsArsenal/AugerSlash").Value;
 

@@ -14,7 +14,7 @@ namespace CalamityMod.Items.SummonItems
         public override void SetStaticDefaults()
         {
             NPCID.Sets.MPAllowedEnemies[NPCID.Plantera] = true;
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 11; // Pirate Map (1 above Mechanical Skull)
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 11; // Pirate Map (1 above Mechanical Skull)
         }
 
         public override void SetDefaults()

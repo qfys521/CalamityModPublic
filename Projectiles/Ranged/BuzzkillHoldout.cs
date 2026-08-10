@@ -211,7 +211,7 @@ namespace CalamityMod.Projectiles.Ranged
                 hitbox.Inflate(28, 28);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Holdout ??= ModContent.Request<Texture2D>("CalamityMod/Projectiles/Ranged/BuzzkillHoldout");
             Texture2D holdoutTexture = Holdout.Value;

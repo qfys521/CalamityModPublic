@@ -320,7 +320,7 @@ namespace CalamityMod.Projectiles.Ranged
 
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Player Owner = Main.player[Projectile.owner];
             Texture2D gun = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Ranged/SevensStrikerHoldout").Value;

@@ -43,7 +43,7 @@ namespace CalamityMod.Projectiles.Ranged
                         Dust shootDust = Dust.NewDustPerfect(GunTipPosition, DustID.Torch, randomDirectionToMouse, Scale: Main.rand.NextFloat(1.5f, 2.5f));
                         shootDust.noGravity = true;
                         shootDust.noLight = true;
-                        shootDust.noLightEmittence = true;
+                        shootDust.noLightEmittance = true;
                     }
 
                     for (int i = 0; i < 8; i++)
@@ -69,7 +69,7 @@ namespace CalamityMod.Projectiles.Ranged
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 position = Projectile.Center - Main.screenPosition;

@@ -78,7 +78,7 @@ namespace CalamityMod.Items.Accessories
                         if (summon)
                         {
                             player.GetKnockback<SummonDamageClass>() += 0.1f;
-                            player.AddBuff(BuffID.Bewitched, 60, true);
+                            player.AddBuff(BuffID.Bewitched, 60);
                         }
                         else if (rogue)
                         {
@@ -87,15 +87,15 @@ namespace CalamityMod.Items.Accessories
                         else if (melee)
                         {
                             player.GetAttackSpeed<MeleeDamageClass>() += 0.1f;
-                            player.AddBuff(BuffID.Sharpened, 60, true);
+                            player.AddBuff(BuffID.Sharpened, 60);
                         }
                         else if (ranged)
                         {
-                            player.AddBuff(BuffID.AmmoBox, 60, true);
+                            player.AddBuff(BuffID.AmmoBox, 60);
                         }
                         else if (magic)
                         {
-                            player.AddBuff(BuffID.Clairvoyance, 60, true);
+                            player.AddBuff(BuffID.Clairvoyance, 60);
                         }
                     }
                 }

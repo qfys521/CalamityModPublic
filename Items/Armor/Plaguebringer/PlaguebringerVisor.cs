@@ -57,7 +57,7 @@ namespace CalamityMod.Items.Armor.Plaguebringer
                 var source = player.GetSource_ItemUse(Item);
                 if (player.FindBuffIndex(ModContent.BuffType<LilPlaguebringerBuff>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<LilPlaguebringerBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<LilPlaguebringerBuff>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<PlaguebringerSummon>()] < 1)
                 {

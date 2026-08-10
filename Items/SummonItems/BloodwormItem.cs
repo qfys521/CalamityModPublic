@@ -17,7 +17,7 @@ namespace CalamityMod.Items.SummonItems
         public override void SetStaticDefaults()
         {
             Item.ResearchUnlockCount = 3;
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 19; // Celestial Sigil
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 19; // Celestial Sigil
         }
 
         public override void SetDefaults()

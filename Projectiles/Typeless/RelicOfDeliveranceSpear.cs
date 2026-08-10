@@ -65,6 +65,7 @@ namespace CalamityMod.Projectiles.Typeless
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverWiresUI;
             Projectile.width = 68;
             Projectile.height = 32;
             Projectile.penetrate = -1;
@@ -488,7 +489,7 @@ namespace CalamityMod.Projectiles.Typeless
         }
         public override bool? CanDamage() => (Projectile.velocity == Vector2.Zero || drifting) ? false : null;
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.UnitX) * 30 * driftPowerScaling, 60 * driftPowerScaling, targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 drawPos = Owner.MountedCenter + (drifting ? idealVel : Projectile.velocity).SafeNormalize(Vector2.UnitX) * (55 - 35 * Utils.GetLerpValue(0, 25, driftTimer, true));
             Projectile.DrawProjectileWithBackglow(Color.Goldenrod with { A = 0 }, Color.White, 3f * driftPowerScaling, effects: Math.Sign((drifting ? idealVel.X : Projectile.velocity.X)) == -1 ? SpriteEffects.FlipVertically : SpriteEffects.None, xPos: drawPos.X, yPos: drawPos.Y);
@@ -540,9 +541,5 @@ namespace CalamityMod.Projectiles.Typeless
         }
 
         // Force the spear to have "priority" when drawing so that it draws over the player.
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overWiresUI.Add(index);
-        }
     }
 }

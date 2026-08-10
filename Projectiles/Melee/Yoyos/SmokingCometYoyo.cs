@@ -77,7 +77,7 @@ namespace CalamityMod.Projectiles.Melee.Yoyos
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 28f, targetHitbox);
 
         // Draw the new string
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2 vector = Main.player[Projectile.owner].MountedCenter;
             vector.Y += Main.player[Projectile.owner].gfxOffY;

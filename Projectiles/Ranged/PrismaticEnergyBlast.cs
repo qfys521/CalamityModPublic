@@ -94,7 +94,7 @@ namespace CalamityMod.Projectiles.Ranged
             CreateExplosion(laserEnd);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Start texture drawing.
             Rectangle beginFrame = LaserBeginTexture.Frame(1, Main.projFrames[Type], 0, Projectile.frame);

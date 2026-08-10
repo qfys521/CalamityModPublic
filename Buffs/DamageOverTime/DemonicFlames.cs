@@ -29,7 +29,7 @@ namespace CalamityMod.Buffs.DamageOverTime
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
-            BuffID.Sets.LongerExpertDebuff[Type] = true;
+            BuffID.Sets.BuffTimeIsExtendedWithGameDifficulty[Type] = true;
             CalamityBuffSets.DebuffDataset[Type] = debuffData;
         }
 
@@ -54,7 +54,7 @@ namespace CalamityMod.Buffs.DamageOverTime
                 dust.velocity = new Vector2(0, Main.rand.NextFloat(-4f, -8f)).RotatedByRandom(0.3f) + Player.velocity;
                 dust.scale = Main.rand.NextFloat(0.8f, 1.2f);
                 dust.color = Main.rand.NextBool() ? Color.MediumOrchid : Color.BlueViolet;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 for (int i = 0; i < 2; i++)
                 {
                     Vector2 sparkVel = new Vector2(Main.rand.NextFloat(-6f, 6f), Main.rand.NextFloat(-1f, -3f));
@@ -74,7 +74,7 @@ namespace CalamityMod.Buffs.DamageOverTime
                 dust.velocity = new Vector2(0, Main.rand.NextFloat(-4f, -8f)).RotatedByRandom(0.3f) + npc.velocity;
                 dust.scale = Main.rand.NextFloat(0.8f, 1.2f);
                 dust.color = Main.rand.NextBool() ? Color.MediumOrchid : Color.BlueViolet;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 for (int i = 0; i < 2; i++)
                 {
                     Vector2 sparkVel = new Vector2(Main.rand.NextFloat(-npc.width / 6, npc.width / 6), Main.rand.NextFloat(-npc.height / 20, -npc.height / 17));

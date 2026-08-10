@@ -82,7 +82,7 @@ namespace CalamityMod.Projectiles.Magic
                 dust.noGravity = false;
                 dust.scale = Main.rand.NextFloat(0.45f, 1.1f);
                 dust.color = Color.Lime;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
 
             Player owner = Main.player[Projectile.owner];
@@ -132,7 +132,7 @@ namespace CalamityMod.Projectiles.Magic
 
         public override Color? GetAlpha(Color lightColor) => new Color(96, 255, 96, 0);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (bounceTimer == 0)
                 Projectile.DrawBeam(LaserLength, 2f, lightColor);
@@ -149,7 +149,7 @@ namespace CalamityMod.Projectiles.Magic
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.45f, 1.1f);
                 dust.color = Color.Lime;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
     }

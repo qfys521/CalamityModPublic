@@ -190,7 +190,7 @@ namespace CalamityMod.Projectiles.Ranged
             return null;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float glowOutwardness = MathHelper.SmoothStep(3f, 0f, Utils.GetLerpValue(90f, 270f, stuckTimer, true));
             Texture2D Texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;

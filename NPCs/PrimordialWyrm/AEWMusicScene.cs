@@ -10,6 +10,6 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<PrimordialWyrmHead>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("PrimordialWyrm");
         public override int VanillaMusic => MusicID.Boss3;
-        public override int OtherworldMusic => MusicID.OtherworldlyBoss2;
+        public override int OtherworldMusic => MusicID.OtherworldBoss2;
     }
 }

@@ -507,13 +507,13 @@ namespace CalamityMod.Events
                     case 1:
                         return MusicID.Boss1;
                     case 2:
-                        return MusicID.Boss4;
+                        return MusicID.Golem;
                     case 3:
                         return MusicID.Boss2;
                     case 4:
                         return MusicID.Boss3;
                     case 5:
-                        return MusicID.LunarBoss;
+                        return MusicID.MoonLord;
                     default:
                         break;
                 }

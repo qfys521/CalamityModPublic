@@ -51,7 +51,7 @@ namespace CalamityMod.Items.Armor.Hydrothermic
                 var source = player.GetSource_ItemUse(Item);
                 if (player.FindBuffIndex(ModContent.BuffType<HydrothermicVentBuff>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<HydrothermicVentBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<HydrothermicVentBuff>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<HydrothermicVent>()] < 1)
                 {

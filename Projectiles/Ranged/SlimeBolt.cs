@@ -138,7 +138,7 @@ namespace CalamityMod.Projectiles.Ranged
                 Projectile.damage = 1;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.SetBlendState(BlendState.Additive);
 

@@ -206,6 +206,7 @@ namespace CalamityMod.Projectiles.Typeless
                 lastPos = Projectile.Center;
             if (burstTimer > 0)
                 burstTimer--;
+            Projectile.drawLayer = behind ? Terraria.ID.ProjectileDrawLayerID.BehindProjectiles : Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             time += 1f * orbitMult * attackMult;
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -220,7 +221,7 @@ namespace CalamityMod.Projectiles.Typeless
             if (isAttacking)
                 target.AddBuff(ModContent.BuffType<ProfanedWeakness>(), (int)(baseDebuffTime * debuffMult));
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = relicType switch
             {
@@ -237,13 +238,6 @@ namespace CalamityMod.Projectiles.Typeless
                 Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition + new Vector2(0, Owner.gfxOffY), null, lightColor * Projectile.Opacity, Projectile.rotation, tex.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
             
             return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            if (behind)
-                behindProjectiles.Add(index);
-            else
-                overPlayers.Add(index);
         }
         public override bool? CanDamage() => (Projectile.ai[1] == -1) ? false : null;
 

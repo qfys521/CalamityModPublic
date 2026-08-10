@@ -102,7 +102,7 @@ namespace CalamityMod.Projectiles.Summon
             target.AddBuff(ModContent.BuffType<WindChilled>(), 120);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int framing = texture2D13.Height / Main.projFrames[Type];

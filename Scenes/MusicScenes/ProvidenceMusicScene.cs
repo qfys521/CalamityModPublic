@@ -11,15 +11,15 @@ namespace CalamityMod.Systems
         public override SceneEffectPriority Priority => SceneEffectPriority.BossHigh;
 
         public override int NPCType => ModContent.NPCType<Providence>();
-        public static int ProvidenceTrack => (int)CalamityMod.Instance.GetMusicFromMusicMod("Providence");
+        public static int? ProvidenceTrack => CalamityMod.Instance.GetMusicFromMusicMod("Providence");
         public static int SilenceTrack => MusicLoader.GetMusicSlot(CalamityMod.Instance, "Sounds/Music/Silence");
-        public override int? MusicModMusic => ProvidenceSpawnState() < 180f ? SilenceTrack : ProvidenceTrack;
-        public override int VanillaMusic => MusicID.LunarBoss;
-        public override int OtherworldMusic => MusicID.OtherworldlyLunarBoss;
+        public override int? MusicModMusic => ProvidenceTrack is not null && ProvidenceSpawnState() < 180f ? SilenceTrack : ProvidenceTrack;
+        public override int VanillaMusic => MusicID.MoonLord;
+        public override int OtherworldMusic => MusicID.OtherworldMoonLord;
         public override void SpecialVisuals(Player player, bool isActive)
         {
-            if (ProvidenceSpawnState() == 180f)
-                Main.musicFade[ProvidenceTrack] = 1f;
+            if (ProvidenceSpawnState() == 180f && ProvidenceTrack is int track)
+                Main.musicFade[track] = 1f;
         }
 
         public static float ProvidenceSpawnState()

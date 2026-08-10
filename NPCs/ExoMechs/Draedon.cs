@@ -100,7 +100,7 @@ namespace CalamityMod.NPCs.ExoMechs
             };
             value.Position.Y += 45f;
             NPCID.Sets.NPCBestiaryDrawOffset[Type] = value;
-            NPCID.Sets.ShouldBeCountedAsBoss[Type] = true;
+            NPCID.Sets.ShouldBeCountedAsBossForBestiary[Type] = true;
             NPCID.Sets.MustAlwaysDraw[Type] = true;
             if (!Main.dedServ)
             {

@@ -128,9 +128,9 @@ namespace CalamityMod.NPCs.AcidRain
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !spawnInfo.Player.Calamity().ZoneSulphur)
+            if (spawner.noWorms || !spawner.Player.Calamity().ZoneSulphur)
             {
                 return 0f;
             }

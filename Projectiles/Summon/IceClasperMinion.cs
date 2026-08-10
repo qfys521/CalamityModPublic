@@ -35,7 +35,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             base.SetStaticDefaults();
             Main.projFrames[Type] = 6;
         }
@@ -68,7 +68,7 @@ namespace CalamityMod.Projectiles.Summon
                     Dust ghostDust = Dust.NewDustPerfect(Projectile.Center, DustID.BlueFairy, -Projectile.rotation.ToRotationVector2().RotatedByRandom(MathHelper.PiOver2) * Main.rand.NextFloat(2f, 3f));
                     ghostDust.customData = false;
                     ghostDust.noLight = true;
-                    ghostDust.noLightEmittence = true;
+                    ghostDust.noLightEmittance = true;
                 }
 
                 Lighting.AddLight(Projectile.Center, Color.Cyan.ToVector3());
@@ -183,7 +183,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public override bool MinionContactDamage() => State == AIState.Ram;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;

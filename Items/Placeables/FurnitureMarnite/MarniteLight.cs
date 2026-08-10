@@ -32,9 +32,9 @@ namespace CalamityMod.Items.Placeables.FurnitureMarnite
             Lighting.AddLight(position, (57f / 255f), (246f / 255f), (255f / 255f));
         }
 
-        public override void PostUpdate()
+        public override void PostUpdate(WorldItem item)
         {
-            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), (57f / 255f), (246f / 255f), (255f / 255f));
+            Lighting.AddLight((int)((item.position.X + Item.width / 2) / 16f), (int)((item.position.Y + Item.height / 2) / 16f), (57f / 255f), (246f / 255f), (255f / 255f));
         }
 
         public override void AddRecipes()

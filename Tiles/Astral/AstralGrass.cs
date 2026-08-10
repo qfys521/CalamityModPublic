@@ -42,7 +42,7 @@ namespace CalamityMod.Tiles.Astral
         {
             Type = fail ? 1 : 3;
         }
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Tile tile = Main.tile[i, j];
             Tile up = Main.tile[i, j - 1];

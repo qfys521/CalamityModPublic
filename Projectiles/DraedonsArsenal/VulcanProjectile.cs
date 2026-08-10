@@ -51,7 +51,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                     dust.scale = Main.rand.NextFloat(0.7f, 0.85f);
                     dust.noGravity = true;
                     dust.color = Effects.ArsenalEffects.ArsenalGaussColor;
-                    dust.noLightEmittence = time % 9 != 0;
+                    dust.noLightEmittance = time % 9 != 0;
                     dust.fadeIn = 0.3f;
                 }
             }
@@ -81,10 +81,10 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                 dust.scale = Main.rand.NextFloat(0.6f, 0.85f);
                 dust.noGravity = true;
                 dust.color = Effects.ArsenalEffects.ArsenalGaussColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D proj = ModContent.Request<Texture2D>("CalamityMod/Projectiles/DraedonsArsenal/VulcanProjectile").Value;
             proj = ModContent.Request<Texture2D>("CalamityMod/Particles/SquareRotated").Value;

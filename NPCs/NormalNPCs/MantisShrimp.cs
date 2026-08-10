@@ -103,7 +103,7 @@ namespace CalamityMod.NPCs.NormalNPCs
 
             // Ouch, don't get hit twice in a row :)
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.BrokenArmor, 600, true);
+                target.AddBuff(BuffID.BrokenArmor, 600);
         }
 
         public override void FindFrame(int frameHeight)
@@ -114,9 +114,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPC.frame.Y = frame * frameHeight;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !Main.hardMode || spawnInfo.Player.Calamity().ZoneSulphur)
+            if (spawner.noWorms || !Main.hardMode || spawner.Player.Calamity().ZoneSulphur)
                 return 0f;
 
             return SpawnCondition.OceanMonster.Chance * 0.2f;

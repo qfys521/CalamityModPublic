@@ -193,7 +193,7 @@ namespace CalamityMod.Projectiles.Melee
             Owner.AddBuff(ModContent.BuffType<SmashedEvil>(), (int)MathHelper.Lerp(60, 1200, CurrentChargeMult));
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (!inCooldown)
             {
@@ -219,7 +219,7 @@ namespace CalamityMod.Projectiles.Melee
                 }
             }
             if (inSwing)
-                return base.PreDraw(ref lightColor);
+                return base.PreDraw(player, ref lightColor);
             return true;
         }
     }

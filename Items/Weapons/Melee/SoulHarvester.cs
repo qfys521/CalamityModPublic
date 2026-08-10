@@ -52,7 +52,7 @@ namespace CalamityMod.Items.Weapons.Melee
             {
                 SoundEngine.PlaySound(SoundID.Item14, target.Center);
                 int onHitDamage = player.CalcIntDamage<MeleeDamageClass>(Item.damage);
-                Projectile blast = Projectile.NewProjectileDirect(Item.GetSource_FromThis(), target.Center, Vector2.Zero, ModContent.ProjectileType<DirectStrike>(), onHitDamage, 0f, player.whoAmI, target.whoAmI);
+            Projectile blast = Projectile.NewProjectileDirect(player.GetSource_ItemUse(Item), target.Center, Vector2.Zero, ModContent.ProjectileType<DirectStrike>(), onHitDamage, 0f, player.whoAmI, target.whoAmI);
                 blast.DamageType = Item.DamageType;
                 for (int i = 0; i < 10; i++)
                 {

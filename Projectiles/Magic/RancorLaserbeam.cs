@@ -40,6 +40,7 @@ namespace CalamityMod.Projectiles.Magic
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverWiresUI;
             Projectile.width = Projectile.height = 32;
             Projectile.friendly = true;
             Projectile.DamageType = DamageClass.Magic;
@@ -161,7 +162,7 @@ namespace CalamityMod.Projectiles.Magic
             return Color.Lerp(vibrantColor, Color.White, 0.5f) * opacity * 2f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             GameShaders.Misc["CalamityMod:Flame"].UseImage1("Images/Misc/Perlin");
 
@@ -178,10 +179,6 @@ namespace CalamityMod.Projectiles.Magic
             return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, Projectile.Center + Projectile.velocity * LaserLength);
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overWiresUI.Add(index);
-        }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) => target.Calamity().ashesOnDeath = 10;
 

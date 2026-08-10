@@ -40,13 +40,13 @@ namespace CalamityMod.Items.Materials
             itemGroup = ContentSamples.CreativeHelper.ItemGroup.Material;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             if (textureVariant == 0)
                 return true;
             else
             {
-                spriteBatch.Draw(altTexture.Value, Item.Center - Main.screenPosition, null, lightColor, rotation, altTexture.Size() / 2, scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(altTexture.Value, item.Center - Main.screenPosition, null, lightColor, rotation, altTexture.Size() / 2, scale, SpriteEffects.None, 0);
                 return false;
             }    
         }
@@ -62,7 +62,7 @@ namespace CalamityMod.Items.Materials
             }
         }
 
-        public override void OnSpawn(IEntitySource source)
+        public override void OnSpawn(WorldItem item, IEntitySource source)
         {
             if (source is EntitySource_Loot)
             {
@@ -75,7 +75,7 @@ namespace CalamityMod.Items.Materials
 
                 foreach (Player player in Main.ActivePlayers)
                 {
-                    if ((player.Center - Item.Center).Length() < 1200 && player.GetModPlayer<WulfrumBatteryPlayer>().battery)
+                    if ((player.Center - item.Center).Length() < 1200 && player.GetModPlayer<WulfrumBatteryPlayer>().battery)
                     {
                         closePlayer = true;
                         break;
@@ -85,12 +85,12 @@ namespace CalamityMod.Items.Materials
                 if (closePlayer)
                 {
                     Item.stack++;
-                    SoundEngine.PlaySound(WulfrumBattery.ExtraDropSound, Item.Center);
+                    SoundEngine.PlaySound(WulfrumBattery.ExtraDropSound, item.Center);
 
                     int numDust = Main.rand.Next(3, 7);
                     for (int i = 0; i < numDust; i++)
                     {
-                        Dust.NewDustDirect(Item.position, Item.width, Item.height, Main.rand.NextBool() ? 246 : 247, 0, -3f, Scale: Main.rand.NextFloat(0.9f, 1f));
+                        Dust.NewDustDirect(item.position, Item.width, Item.height, Main.rand.NextBool() ? 246 : 247, 0, -3f, Scale: Main.rand.NextFloat(0.9f, 1f));
                     }
                 }
             }

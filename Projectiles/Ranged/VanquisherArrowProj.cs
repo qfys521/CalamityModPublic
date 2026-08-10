@@ -77,7 +77,7 @@ namespace CalamityMod.Projectiles.Ranged
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, Main.rand.NextBool(3) ? 226 : 272, -Projectile.velocity * Main.rand.NextFloat(0.3f, 0.8f));
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.15f, 0.35f);
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
 
             if (Time > 45)
@@ -138,7 +138,7 @@ namespace CalamityMod.Projectiles.Ranged
                         dust.noGravity = true;
                         dust.scale = Main.rand.NextFloat(1.2f, 1.7f);
                         dust.color = Main.rand.NextBool() ? Color.Magenta : Color.Cyan;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                         dust.fadeIn = 1;
                     }
                 }
@@ -148,7 +148,7 @@ namespace CalamityMod.Projectiles.Ranged
                 SoundEngine.PlaySound(SoundID.DD2_FlameburstTowerShot with { Volume = 0.4f, Pitch = -0.4f, PitchVariance = 0.3f }, Projectile.Center);
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Time == 0)
                 return false;

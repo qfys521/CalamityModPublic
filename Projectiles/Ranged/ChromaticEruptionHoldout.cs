@@ -99,7 +99,7 @@ namespace CalamityMod.Projectiles.Ranged
         public override void SendExtraAIHoldout(BinaryWriter writer) => writer.Write(FireBlobs);
 
         public override void ReceiveExtraAIHoldout(BinaryReader reader) => FireBlobs = reader.ReadInt32();
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             Vector2 origin = texture.Size() * 0.5f;

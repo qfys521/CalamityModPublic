@@ -105,7 +105,7 @@ namespace CalamityMod.Projectiles.Summon
         {
             Projectile.velocity = Projectile.SuperhomeTowardsTarget(npc, 50f / (Projectile.extraUpdates + 1), 60f / (Projectile.extraUpdates + 1), 1f / (Projectile.extraUpdates + 1)); //predictionStrength is lessened to account for extra updates, otherwise the projectile tends to copy fast NPC movement 1:1. Not Cool.
         }
-        public override bool PreDraw(ref Color lightColor) //photoviscerator ball drawcode, slightly edited
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ //photoviscerator ball drawcode, slightly edited
         {
             Texture2D lightTexture = ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/SmallGreyscaleCircle").Value;
             for (int i = 0; i < Projectile.oldPos.Length; i++)

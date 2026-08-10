@@ -146,7 +146,7 @@ namespace CalamityMod.Projectiles.Ranged
         // Gently adjusts the aim vector of the cannon to point towards the mouse.
         private float UpdateAimPostShotRecoil(Vector2 target) => Vector2.Lerp(target * Owner.direction, Owner.itemRotation.ToRotationVector2(), 0.825f).ToRotation();
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // If the projectile has already fired, don't draw sights
             if (Charge == -1)

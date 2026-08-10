@@ -163,7 +163,7 @@ namespace CalamityMod.Projectiles.Magic
             SoundEngine.PlaySound(CommonCalamitySounds.LargeWeaponFireSound, target.Center);
             Projectile.Kill();
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D myTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frame = myTexture.Frame(1, Main.projFrames[Type], 0, Projectile.frame);

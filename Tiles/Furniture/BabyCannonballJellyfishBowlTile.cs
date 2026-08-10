@@ -18,7 +18,7 @@ namespace CalamityMod.Tiles.Furniture
             TileObjectData.addTile(Type);
             AnimationFrameHeight = 36;
             AddMapEntry(new Color(64, 224, 208), CalamityUtils.GetItemName<BabyCannonballJellyfishBowl>());
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
         }
 
         public override bool CreateDust(int i, int j, ref int type)

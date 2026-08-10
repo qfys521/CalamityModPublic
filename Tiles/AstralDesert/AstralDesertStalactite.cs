@@ -24,7 +24,7 @@ namespace CalamityMod.Tiles.AstralDesert
 
         public override bool TileFrame(int i, int j, ref bool resetFrame, ref bool noBreak)
         {
-            WorldGen.CheckTight(i, j);
+            WorldGen.CheckStalactite(i, j);
             return false;
         }
 

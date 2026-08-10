@@ -90,7 +90,7 @@ namespace CalamityMod.Projectiles.Magic
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.75f, 1.1f);
                     dust.color = Color.OrangeRed;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
             Lighting.AddLight(Projectile.Center, Color.Orange.ToVector3() * 2 * Projectile.scale);
@@ -147,13 +147,13 @@ namespace CalamityMod.Projectiles.Magic
                     dust.noGravity = true;
                     dust.scale = 1.75f;
                     dust.color = Color.OrangeRed;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
 
                     Dust dust2 = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<LightDust>(), velocity * 1.5f);
                     dust2.noGravity = true;
                     dust2.scale = 1.4f;
                     dust2.color = Color.DeepSkyBlue;
-                    dust2.noLightEmittence = true;
+                    dust2.noLightEmittance = true;
                 }
                 for (int i = 0; i < 5; i++)
                 {
@@ -168,7 +168,7 @@ namespace CalamityMod.Projectiles.Magic
         {
             return CalamityUtils.CircularHitboxCollision(Projectile.Center, (110 * Projectile.scale) + 15, targetHitbox);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (boomTime < 1)
                 return false;

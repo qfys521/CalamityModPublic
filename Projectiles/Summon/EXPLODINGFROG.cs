@@ -18,7 +18,7 @@ namespace CalamityMod.Projectiles.Summon
         {
             Main.projFrames[Type] = 5;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -152,7 +152,7 @@ namespace CalamityMod.Projectiles.Summon
             Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition + new Vector2(-2, 0) * borderPixels, frame, color * opacity, Projectile.rotation - rotationOffset, new Vector2(frame.Value.Width, frame.Value.Height) * 0.5f, Projectile.scale, (Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None), 0);
             Main.EntitySpriteDraw(tex, Projectile.Center - Main.screenPosition + new Vector2(0, -2) * borderPixels, frame, color * opacity, Projectile.rotation - rotationOffset, new Vector2(frame.Value.Width, frame.Value.Height) * 0.5f, Projectile.scale, (Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None), 0);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             var tex = GetGlowOutline();
             var frame = tex.Frame(1, 5, 0, Projectile.frame);

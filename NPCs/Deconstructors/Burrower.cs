@@ -547,9 +547,9 @@ namespace CalamityMod.NPCs.Deconstructors
             condition.Add(ModContent.ItemType<Items.Placeables.Ores.PerennialOre>(), 5, 6, 32);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().InAnyCalamityBiome || Main.npc.Any(x => x.active && x.type == Type))
+            if (spawner.Player.Calamity().InAnyCalamityBiome || Main.npc.Any(x => x.active && x.type == Type))
             {
                 return 0f;
             }

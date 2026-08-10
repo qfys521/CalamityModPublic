@@ -40,6 +40,7 @@ namespace CalamityMod.Projectiles.Magic
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindProjectiles;
             Projectile.width = 2;
             Projectile.height = 2;
             Projectile.friendly = true;
@@ -206,12 +207,8 @@ namespace CalamityMod.Projectiles.Magic
         }
 
         // Draw these vortices behind other projectiles to ensure that they do not obstruct SCal's projectiles.
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindProjectiles.Add(index);
-        }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.EnterShaderRegion(BlendState.Additive);
             Texture2D worleyNoise = ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/GreyscaleGradients/BlobbyNoise").Value;

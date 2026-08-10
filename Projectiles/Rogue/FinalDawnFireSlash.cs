@@ -101,7 +101,7 @@ namespace CalamityMod.Projectiles.Rogue
             }
             target.AddBuff(ModContent.BuffType<Dragonfire>(), 300);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             int width = 918 / 3;
             int height = 1990 / 5;

@@ -247,7 +247,7 @@ namespace CalamityMod.Projectiles.Magic
             PrimitiveRenderer.RenderTrail(ribbonPositions, primitiveSettings, 33);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;

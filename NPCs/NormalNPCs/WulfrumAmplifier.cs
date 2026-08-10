@@ -208,13 +208,14 @@ namespace CalamityMod.NPCs.NormalNPCs
             NPC.frame.Y = frame * frameHeight;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || spawnInfo.Player.Calamity().ZoneSulphur || (!spawnInfo.Player.ZoneOverworldHeight && !Main.remixWorld) || (!spawnInfo.Player.ZoneNormalCaverns && spawnInfo.Player.ZoneGlowshroom && Main.remixWorld))
+            if (spawner.noWorms || spawner.Player.Calamity().ZoneSulphur || (!spawner.Player.ZoneOverworldHeight && !Main.remixWorld) || (!spawner.Player.ZoneNormalCaverns && spawner.Player.ZoneGlowshroom && Main.remixWorld))
                 return 0f;
 
             // Spawn less frequently in the inner third of the world.
-            if (spawnInfo.PlayerFloorX > Main.maxTilesX * 0.333f && spawnInfo.PlayerFloorX < Main.maxTilesX - Main.maxTilesX * 0.333f)
+            float playerTileX = spawner.Player.Center.X / 16f;
+            if (playerTileX > Main.maxTilesX * 0.333f && playerTileX < Main.maxTilesX - Main.maxTilesX * 0.333f)
                 return (Main.remixWorld ? SpawnCondition.Cavern.Chance : SpawnCondition.OverworldDaySlime.Chance) * (Main.hardMode ? 0.015f : 0.06f) * (!NPC.AnyNPCs(NPC.type) ? 1.3f : 1f);
 
             return (Main.remixWorld ? SpawnCondition.Cavern.Chance : SpawnCondition.OverworldDaySlime.Chance) * (Main.hardMode ? 0.0375f : 0.15f) * (!NPC.AnyNPCs(NPC.type) ? 1.3f : 1f);

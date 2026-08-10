@@ -32,7 +32,7 @@ namespace CalamityMod.Tiles.Plates
             return false;
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             int dust = Dust.NewDust(new Vector2(i, j) * 16f, 16, 16, DustID.GemEmerald, 0f, 0f, 100, default, 2f);
             Main.dust[dust].noGravity = true;

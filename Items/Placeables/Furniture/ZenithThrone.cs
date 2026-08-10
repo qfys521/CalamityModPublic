@@ -19,7 +19,7 @@ namespace CalamityMod.Items.Placeables.Furniture
         {
             CreateRecipe().
                 AddIngredient(ItemID.Zenith).
-                AddRecipeGroup(RecipeGroupID.IronBar, 10).
+                AddRecipeGroup(RecipeGroups.IronBar, 10).
                 AddTile(TileID.Anvils).
                 Register();
         }

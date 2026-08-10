@@ -44,7 +44,7 @@ namespace CalamityMod.NPCs.Other
         {
             NPCID.Sets.MPAllowedEnemies[Type] = true;
             NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
-            NPCID.Sets.ShouldBeCountedAsBoss[Type] = true;
+            NPCID.Sets.ShouldBeCountedAsBossForBestiary[Type] = true;
             this.HideFromBestiary();
             Main.npcFrameCount[Type] = 7;
             if (!Main.dedServ)
@@ -66,7 +66,7 @@ namespace CalamityMod.NPCs.Other
             NPC.HitSound = SoundID.NPCHit13;
             NPC.DeathSound = null;
             NPC.boss = true;
-            Music = MusicID.LunarBoss;
+            Music = MusicID.MoonLord;
             NPC.Calamity().canBreakPlayerDefense = true;
         }
 
@@ -541,7 +541,7 @@ namespace CalamityMod.NPCs.Other
 
         public override void OnHitPlayer(Player player, Player.HurtInfo hitinfo)
         {
-            player.AddBuff(ModContent.BuffType<NOU>(), 1337, true);
+            player.AddBuff(ModContent.BuffType<NOU>(), 1337);
         }
 
         public override bool CheckActive()

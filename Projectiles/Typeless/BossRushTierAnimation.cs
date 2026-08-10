@@ -68,7 +68,7 @@ namespace CalamityMod.Projectiles.Typeless
 
         public override Color? GetAlpha(Color lightColor) => Color.White * Projectile.Opacity;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>($"CalamityMod/Projectiles/Typeless/BossRushTier{Tier}Animation").Value;
             Rectangle frame = texture.Frame(TotalFrames, 1, Projectile.frame % TotalFrames, Projectile.frame / TotalFrames);

@@ -24,7 +24,6 @@ namespace CalamityMod.Systems.Graphic
 
         public override void OnModLoad()
         {
-            On_Main.CheckMonoliths += CheckMonoliths;
             On_Main.DrawBackgroundBlackFill += GeneralDrawLayer_DrawToLayer_BeforeAllTiles;
             On_Main.DoDraw_Tiles_Solid += GeneralDrawLayer_DrawToLayer_BeforeSolidTiles;
             On_Main.DoDraw_DrawNPCsOverTiles += GeneralDrawLayer_DrawToLayer_NPCs;
@@ -49,12 +48,6 @@ namespace CalamityMod.Systems.Graphic
             OnAfterPlayers = null;
             OnAfterDusts = null;
             OnAfterEverything = null;
-        }
-
-        private static void CheckMonoliths(On_Main.orig_CheckMonoliths orig)
-        {
-            orig();
-            OnPrepareDraw?.Invoke();
         }
 
         #region GeneralDrawLayer Systems Drawing
@@ -82,6 +75,7 @@ namespace CalamityMod.Systems.Graphic
         private static void GeneralDrawLayer_DrawToLayer_BeforeAllTiles(On_Main.orig_DrawBackgroundBlackFill orig, Main self)
         {
             Main.spriteBatch.End(out var ss);
+            OnPrepareDraw?.Invoke();
             GeneralDrawLayer_DrawForLayer(GeneralDrawLayer.BeforeAllTiles);
             Main.spriteBatch.Begin(ss);
             orig(self);

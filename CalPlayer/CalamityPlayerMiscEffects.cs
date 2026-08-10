@@ -1086,7 +1086,7 @@ namespace CalamityMod.CalPlayer
                     fire.scale = 1f + fire.velocity.Length() / 6f;
                     fire.color = Color.Lerp(Color.Orange, Color.Red, Main.rand.NextFloat(0.85f));
                     fire.noGravity = true;
-                    fire.noLightEmittence = true;
+                    fire.noLightEmittance = true;
                 }
             }
         }
@@ -1386,7 +1386,7 @@ namespace CalamityMod.CalPlayer
                     if (Player.IsUnderwater())
                     {
                         if (Main.myPlayer == Player.whoAmI)
-                            Player.AddBuff(ModContent.BuffType<FrozenLungs>(), 2, false);
+                            Player.AddBuff(ModContent.BuffType<FrozenLungs>(), 2);
                     }
                 }
                 if (frozenLungs)
@@ -1406,7 +1406,7 @@ namespace CalamityMod.CalPlayer
             }
             // Extra DoT in the lava of the crags. Negated by Flame-licked Shell.
             else if (ZoneCalamity && !flameLickedShell)
-                    Player.AddBuff(ModContent.BuffType<SearingLava>(), 2, false);
+                    Player.AddBuff(ModContent.BuffType<SearingLava>(), 2);
 
             // Release irradiated slimes from the sky during the Acid Rain event.
             if (Player.whoAmI == Main.myPlayer)
@@ -1472,14 +1472,14 @@ namespace CalamityMod.CalPlayer
                     switch (collidedTile.type)
                     {
                         case 10:
-                            Player.AddBuff(BuffID.Weak, 300, false);
-                            Player.AddBuff(BuffID.Bleeding, 300, false);
+                            Player.AddBuff(BuffID.Weak, 300);
+                            Player.AddBuff(BuffID.Bleeding, 300);
                             break;
                         case 17:
-                            Player.AddBuff(BuffID.Poisoned, 300, false);
+                            Player.AddBuff(BuffID.Poisoned, 300);
                             break;
                         case 80:
-                            Player.AddBuff(BuffID.Venom, 300, false);
+                            Player.AddBuff(BuffID.Venom, 300);
                             break;
                         default:
                             break;
@@ -2004,7 +2004,7 @@ namespace CalamityMod.CalPlayer
                                 dust2.alpha = 180;
                                 dust2.color = Main.rand.NextBool() ? Color.Turquoise : Color.Aquamarine;
                                 dust2.noLight = true;
-                                dust2.noLightEmittence = true;
+                                dust2.noLightEmittance = true;
                             }
                         }
                     }
@@ -2118,7 +2118,7 @@ namespace CalamityMod.CalPlayer
                                 dust2.alpha = 180;
                                 dust2.color = Main.rand.NextBool() ? Color.Turquoise : Color.Aquamarine;
                                 dust2.noLight = true;
-                                dust2.noLightEmittence = true;
+                                dust2.noLightEmittance = true;
                             }
                         }
                     }
@@ -2151,7 +2151,7 @@ namespace CalamityMod.CalPlayer
                     if (Main.rand.NextBool())
                     {
                         Dust pollenDust = Dust.NewDustPerfect(Player.Center + Main.rand.NextVector2Circular(20f, 20f), ModContent.DustType<SquashDust>());
-                        pollenDust.noLightEmittence = true;
+                        pollenDust.noLightEmittance = true;
                         pollenDust.noGravity = true;
                         pollenDust.scale = Main.rand.NextFloat(0.9f, 1.4f);
                         pollenDust.color = Color.Lerp(Color.Gold, Color.HotPink, Utils.GetLerpValue(60, 30, hookPullVisuals, true));
@@ -2275,7 +2275,7 @@ namespace CalamityMod.CalPlayer
                     c.noGravity = true;
                     c.alpha = 150;
                     c.color = Color.SkyBlue;
-                    c.noLightEmittence = true;
+                    c.noLightEmittance = true;
                 }
             }
 
@@ -2756,7 +2756,7 @@ namespace CalamityMod.CalPlayer
                 {
                     tarraThrowingCrits = 0;
                     if (Player.whoAmI == Main.myPlayer && !disableAllDodges)
-                        Player.AddBuff(ModContent.BuffType<Buffs.StatBuffs.TarragonImmunity>(), TarragonHeadRogue.ImmunityDuration, false);
+                        Player.AddBuff(ModContent.BuffType<Buffs.StatBuffs.TarragonImmunity>(), TarragonHeadRogue.ImmunityDuration);
                 }
 
                 for (int l = 0; l < Player.MaxBuffs; l++)
@@ -2782,7 +2782,7 @@ namespace CalamityMod.CalPlayer
                 {
                     bloodflareMeleeHits = 0;
                     if (Player.whoAmI == Main.myPlayer)
-                        Player.AddBuff(ModContent.BuffType<BloodflareBloodFrenzy>(), BloodflareHeadMelee.FrenzyDuration, false);
+                        Player.AddBuff(ModContent.BuffType<BloodflareBloodFrenzy>(), BloodflareHeadMelee.FrenzyDuration);
                 }
 
                 if (bloodflareFrenzy)
@@ -2993,7 +2993,7 @@ namespace CalamityMod.CalPlayer
             // Ceaseless Hunger Potion buff
             if (ceaselessHunger)
             {
-                foreach (Item item in Main.ActiveItems)
+                foreach (WorldItem item in Main.ActiveItems)
                 {
                     if (item.noGrabDelay == 0 && item.playerIndexTheItemIsReservedFor == Player.whoAmI)
                     {
@@ -3995,7 +3995,7 @@ namespace CalamityMod.CalPlayer
                 var source = Player.GetSource_FromThis(SilvaHeadSummon.SilvaCrystalEntitySourceContext);
                 if (Player.FindBuffIndex(ModContent.BuffType<SilvaCrystalBuff>()) == -1)
                 {
-                    Player.AddBuff(ModContent.BuffType<SilvaCrystalBuff>(), 3600, true);
+                    Player.AddBuff(ModContent.BuffType<SilvaCrystalBuff>(), 3600);
                 }
                 if (Player.ownedProjectileCounts[ModContent.ProjectileType<SilvaCrystal>()] < 1)
                 {
@@ -4115,7 +4115,7 @@ namespace CalamityMod.CalPlayer
                     if (Player.HasBuff(ModContent.BuffType<ProfanedSoulGuardians>()))
                         Player.buffTime[Player.FindBuffIndex(ModContent.BuffType<ProfanedSoulGuardians>())] = 3600;
                     else
-                        Player.AddBuff(ModContent.BuffType<ProfanedSoulGuardians>(), 3600, true);
+                        Player.AddBuff(ModContent.BuffType<ProfanedSoulGuardians>(), 3600);
 
                     pSoulGuardians = true;
 

@@ -607,6 +607,8 @@ TownPiggy: {
 		1: Squeal...
 		2: Snort!
 	}
+
+	TownNPCMood.NoHome: I hate not having a home.
 }
 
 HorribleHog.DisplayName: Horrible Hog

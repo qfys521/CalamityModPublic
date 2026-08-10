@@ -73,7 +73,7 @@ namespace CalamityMod.Projectiles.Ranged
 
         private Color ColorFunction(float completionRatio, Vector2 vertexPos) => Color.Lerp(turquoiseColor, Color.Transparent, completionRatio) * Utils.GetLerpValue(0f, 30f, Projectile.timeLeft, true);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             GameShaders.Misc["CalamityMod:TrailStreak"].SetShaderTexture(ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/Trails/ZapTrail"));
             PrimitiveRenderer.RenderTrail(Projectile.oldPos, new(WidthFunction, ColorFunction, (_,_) => Projectile.Size * 0.5f, shader: GameShaders.Misc["CalamityMod:TrailStreak"]));

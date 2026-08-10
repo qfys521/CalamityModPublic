@@ -91,9 +91,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             CalamityRegularEnemyAI.GemCrawlerAI(NPC, Mod, 6f, 0.06f);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || spawnInfo.Player.Calamity().InAnyCalamityBiome)
+            if (spawner.noWorms || spawner.Player.Calamity().InAnyCalamityBiome)
             {
                 return 0f;
             }

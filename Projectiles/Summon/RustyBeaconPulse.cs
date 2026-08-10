@@ -54,7 +54,7 @@ namespace CalamityMod.Projectiles.Summon
             return Color.Lerp(c1, c2, 1f - Projectile.Opacity) * Projectile.Opacity * 0.67f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Color drawColor = Projectile.GetAlpha(lightColor) * 0.33f;

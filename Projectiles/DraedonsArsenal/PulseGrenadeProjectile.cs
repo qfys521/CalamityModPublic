@@ -39,6 +39,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
         public NPC lastHitTarget;
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindNPCs;
             Projectile.width = 5;
             Projectile.height = 5;
             Projectile.friendly = true;
@@ -249,7 +250,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             Dust dust = Dust.NewDustPerfect(Projectile.Center, squash ? ModContent.DustType<SquashDust>() : ModContent.DustType<SquashDustHollow>(), -Projectile.velocity.SafeNormalize(Vector2.UnitX) * Main.rand.NextFloat(0.1f, 1f), 0, default, Main.rand.NextFloat(0.6f, 1.05f));
             dust.noGravity = true;
             dust.color = col;
-            dust.noLightEmittence = true;
+            dust.noLightEmittance = true;
             if (squash)
             {
                 dust.fadeIn = 1f;
@@ -294,7 +295,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                 c.scale = (i % 2 == 0 ? 2.2f : 1.9f);
                 c.noGravity = true;
                 c.color = col;
-                c.noLightEmittence = true;
+                c.noLightEmittance = true;
                 c.fadeIn = 0.3f;
 
                 
@@ -331,7 +332,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 15, targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float fade = 1;
             float reformMult = Utils.GetLerpValue(1, 0, Projectile.Opacity) * 3.5f;
@@ -348,10 +349,6 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
 
             Main.EntitySpriteDraw(ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/DraedonsArsenal/PulseGrenadeGlow").Value, baseDrawPos, null, Color.White * fade * Projectile.Opacity, Projectile.rotation, tex.Size() * 0.5f, 1f, (!flung ? Owner.direction : Projectile.direction) != 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
             return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindNPCs.Add(index);
         }
     }
 }

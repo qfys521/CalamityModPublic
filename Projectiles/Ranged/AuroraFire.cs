@@ -124,7 +124,7 @@ namespace CalamityMod.Projectiles.Ranged
         // Circular hitbox adjusted for the size of the smoke particles (rough estimate minimally accounting for fog)
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, Projectile.width * Projectile.scale * 0.5f, targetHitbox);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.SetBlendState(BlendState.Additive);
             Texture2D fog = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

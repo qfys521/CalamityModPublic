@@ -13,7 +13,7 @@ namespace CalamityMod.Systems
 
         public override void SpecialVisuals(Player player, bool isActive)
         {
-            player.ManageSpecialBiomeVisuals("CalamityMod:SupremeCalamitas", isActive);
+            Main.SceneState.ManageSpecialBiomeVisuals("CalamityMod:SupremeCalamitas", isActive);
         }
     }
 }

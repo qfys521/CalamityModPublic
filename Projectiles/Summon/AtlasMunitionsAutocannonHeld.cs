@@ -304,7 +304,7 @@ namespace CalamityMod.Projectiles.Summon
             Owner.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Projectile.spriteDirection * -0.4f);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Draw smoke.
             SmokeDrawer.DrawSet(Projectile.Center - Projectile.velocity * 24f);

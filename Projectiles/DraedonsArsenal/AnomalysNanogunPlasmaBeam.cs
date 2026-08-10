@@ -114,7 +114,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
         }
 
         // Animated laser
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             int frame = Projectile.frameCounter / 2;
             DrawPlasmaBeam(Color.White, 1f, frame + 12, frame + 6, frame);

@@ -43,7 +43,7 @@ namespace CalamityMod.Items.Accessories
                 var source = player.GetSource_Accessory(Item);
                 if (player.FindBuffIndex(BuffType<HowlTrio>()) == -1)
                 {
-                    player.AddBuff(BuffType<HowlTrio>(), 3600, true);
+                    player.AddBuff(BuffType<HowlTrio>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ProjectileType<HowlsHeartHowl>()] < 1)
                 {
@@ -70,7 +70,7 @@ namespace CalamityMod.Items.Accessories
             {
                 var source = player.GetSource_Accessory(Item);
                 if (player.FindBuffIndex(BuffType<HowlTrio>()) == -1)
-                    player.AddBuff(BuffType<HowlTrio>(), 3600, true);
+                    player.AddBuff(BuffType<HowlTrio>(), 3600);
 
                 if (player.ownedProjectileCounts[ProjectileType<HowlsHeartHowl>()] < 1)
                 {

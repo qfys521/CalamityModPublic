@@ -80,15 +80,15 @@ namespace CalamityMod.NPCs.NormalNPCs
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe ||
-                spawnInfo.Player.Calamity().ZoneSunkenSea ||
-                spawnInfo.Player.PillarZone() ||
-                spawnInfo.Player.InAstral() ||
-                spawnInfo.Player.ZoneCorrupt ||
-                spawnInfo.Player.ZoneCrimson ||
-                spawnInfo.Player.ZoneOldOneArmy ||
+            if (spawner.noWorms ||
+                spawner.Player.Calamity().ZoneSunkenSea ||
+                spawner.Player.PillarZone() ||
+                spawner.Player.InAstral() ||
+                spawner.Player.ZoneCorrupt ||
+                spawner.Player.ZoneCrimson ||
+                spawner.Player.ZoneOldOneArmy ||
                 Main.eclipse ||
                 Main.snowMoon ||
                 Main.pumpkinMoon ||
@@ -96,7 +96,7 @@ namespace CalamityMod.NPCs.NormalNPCs
             {
                 return 0f;
             }
-            if (Main.IsItStorming && spawnInfo.Player.ZoneDesert)
+            if (Main.IsItStorming && spawner.Player.ZoneDesert)
             {
                 return SpawnCondition.OverworldDayDesert.Chance;
             }

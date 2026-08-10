@@ -12,7 +12,7 @@ namespace CalamityMod.Items.SummonItems
         public override void SetStaticDefaults()
         {
             NPCID.Sets.MPAllowedEnemies[NPCID.CultistBoss] = true;
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 18; // Bloody Tear (1 below Celestial Sigil fsr)
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 18; // Bloody Tear (1 below Celestial Sigil fsr)
         }
 
         public override void SetDefaults()

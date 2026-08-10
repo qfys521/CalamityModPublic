@@ -10,7 +10,7 @@ namespace CalamityMod.Systems
 
         public override int NPCType => ModContent.NPCType<Signus>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("Signus");
-        public override int VanillaMusic => MusicID.Boss4;
-        public override int OtherworldMusic => MusicID.OtherworldlyBoss2;
+        public override int VanillaMusic => MusicID.Golem;
+        public override int OtherworldMusic => MusicID.OtherworldBoss2;
     }
 }

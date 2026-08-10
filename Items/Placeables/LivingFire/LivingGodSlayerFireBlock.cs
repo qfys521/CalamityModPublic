@@ -16,9 +16,9 @@ namespace CalamityMod.Items.Placeables.LivingFire
 
         public override void SetDefaults() => Item.DefaultToPlaceableTile(ModContent.TileType<LivingGodSlayerFireBlockTile>());
 
-        public override void PostUpdate()
+        public override void PostUpdate(WorldItem item)
         {
-            Lighting.AddLight((int)((Item.position.X + Item.width / 2) / 16f), (int)((Item.position.Y + Item.height / 2) / 16f), 1f, 0f, 1f);
+            Lighting.AddLight((int)((item.position.X + Item.width / 2) / 16f), (int)((item.position.Y + Item.height / 2) / 16f), 1f, 0f, 1f);
         }
 
         public override void AddRecipes()

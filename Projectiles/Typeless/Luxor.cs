@@ -143,7 +143,7 @@ namespace CalamityMod.Projectiles.Typeless
                         dust.noGravity = !Main.rand.NextBool(3);
                         dust.scale = Main.rand.NextFloat(0.75f, 1.4f) * powerMult;
                         dust.color = usedColor;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                     }
                     if (classType == 1) // Melee shotgun
                     {
@@ -199,7 +199,7 @@ namespace CalamityMod.Projectiles.Typeless
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.5f, 0.7f);
                 dust.color = usedColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
 
             float idleFade = Utils.GetLerpValue(280, 300, idleTimer, true);
@@ -218,7 +218,7 @@ namespace CalamityMod.Projectiles.Typeless
             else if (moddedOwner.luxorsGiftVanity)
                 idleTimer = 0;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
             Texture2D bTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;

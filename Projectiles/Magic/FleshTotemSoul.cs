@@ -77,7 +77,7 @@ namespace CalamityMod.Projectiles.Magic
             // Blue light
             Lighting.AddLight(Projectile.Center, 0.2f, 0.2f, 0.7f);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D Texture = Terraria.GameContent.TextureAssets.Projectile[Projectile.type].Value;
             Rectangle frame = Texture.Frame(1, Main.projFrames[Projectile.type], 0, Projectile.frame);

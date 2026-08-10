@@ -118,7 +118,7 @@ namespace CalamityMod.Projectiles.Melee
             return default(Color);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             var tex = TextureAssets.Projectile[Type].Value;
             float jawScaleMult = 1f + (0.007f * time);

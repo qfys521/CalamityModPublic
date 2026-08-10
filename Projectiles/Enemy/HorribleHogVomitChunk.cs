@@ -120,7 +120,7 @@ namespace CalamityMod.Projectiles.Enemy
             SoundEngine.PlaySound(SoundID.NPCDeath21, Projectile.Center);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = VomitChunkTextures[(int)TextureVariant].Value;
             Vector2 origin = texture.Size() * 0.5f;

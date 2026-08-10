@@ -63,9 +63,8 @@ namespace CalamityMod.Tiles.Furniture.Paintings
                 Main.LocalPlayer.Calamity().CurrentlyViewedCanvasType = Type;
                 SoundEngine.PlaySound(SoundID.MenuOpen);
                 Main.playerInventory = true;
-                Main.recBigList = false;
+                Main.PipsUseGrid = false;
             }
-            Recipe.FindRecipes();
             return false;
         }
 

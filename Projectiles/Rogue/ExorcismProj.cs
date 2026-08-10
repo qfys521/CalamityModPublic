@@ -39,6 +39,7 @@ namespace CalamityMod.Projectiles.Rogue
         public SlotId AudSlot;
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = 25;
             Projectile.height = 80;
             Projectile.friendly = true;
@@ -349,7 +350,7 @@ namespace CalamityMod.Projectiles.Rogue
                     for (int x = 0; x < Main.maxProjectiles; x++)
                     { Projectile projectile = Main.projectile[x]; if (projectile.active && projectile.type != ModContent.ProjectileType<ExorcismShockwave>() && projectile.type != ModContent.ProjectileType<ExorcismProj>()) { projectile.active = false; } }
                     for (int x = 0; x < Main.maxItems; x++)
-                    { Item item = Main.item[x]; if (item.active) { item.active = false; } }
+                    { WorldItem item = Main.item[x]; if (item.active) { item.TurnToAir(); } }
                     for (int x = 0; x < Main.maxDust; x++)
                     { Dust dust = Main.dust[x]; if (dust.active) { dust.active = false; } }
                     for (int x = 0; x < Main.maxGore; x++)
@@ -429,7 +430,7 @@ namespace CalamityMod.Projectiles.Rogue
             else
                 return base.Colliding(projHitbox, targetHitbox);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float glowUp = (1 + Utils.GetLerpValue(250, 0, Projectile.timeLeft, true));
             float throwCompletion = flung ? 1 : (float)Math.Pow(Math.Min(time / (Owner.HeldItem.useAnimation * 0.7f), 1), 5);
@@ -475,10 +476,6 @@ namespace CalamityMod.Projectiles.Rogue
             Main.EntitySpriteDraw(tex, Projectile.Center + drawAdjust, null, Color.Lerp(Color.White with { A = 0 }, lightColor, (2 - glowUp)) * (inSky ? 0 : 1), Projectile.rotation, tex.Size() / 2f, Projectile.scale, SpriteEffects.None, 0);
 
             return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
         }
     }
 }

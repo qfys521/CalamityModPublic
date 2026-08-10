@@ -31,7 +31,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.timeLeft = 250;
             Projectile.penetrate = -1;
             Projectile.tileCollide = false;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
             Projectile.scale = 0;
         }
 
@@ -100,7 +100,7 @@ namespace CalamityMod.Projectiles.Boss
             return ProvUtils.GetProjectileColor(lightColor);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float squish = CalamityUtils.SineBumpEasing(SquishAnimation, 1) * 0.25f;
 

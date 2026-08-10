@@ -46,6 +46,9 @@ namespace CalamityMod.Systems
 
         public override void OnModLoad()
         {
+            if (!ExternalMods.MusicAvailable)
+                return;
+
             static void AddEntry(string eventId, string songName, TimeSpan length, Func<bool> shouldPlay, Func<bool> enabled, TimeSpan? introSilence = null, TimeSpan? outroSilence = null)
             {
                 MusicEventEntry entry = new(eventId, CalamityMod.Instance.GetMusicFromMusicMod(songName).Value, length, introSilence ?? TimeSpan.Zero, outroSilence ?? TimeSpan.Zero, shouldPlay, enabled);
@@ -127,7 +130,7 @@ namespace CalamityMod.Systems
                 if (postTrack < silence)
                 {
                     int silenceSlot = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Silence");
-                    Main.musicBox2 = silenceSlot;
+                    Main.LocalPlayer.musicBox = silenceSlot;
                 }
 
                 else
@@ -180,13 +183,13 @@ namespace CalamityMod.Systems
                 if (TrackStart > DateTime.Now)
                 {
                     int silenceSlot = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Silence");
-                    Main.musicBox2 = silenceSlot;
+                    Main.LocalPlayer.musicBox = silenceSlot;
                     NoFade = true;
                 }
 
                 else
                 {
-                    Main.musicBox2 = CurrentEvent.Song;
+                    Main.LocalPlayer.musicBox = CurrentEvent.Song;
 
                     if (NoFade)
                     {
@@ -198,7 +201,7 @@ namespace CalamityMod.Systems
                     if (DateTime.Now - TrackStart >= CurrentEvent.Length)
                     {
                         int silenceSlot = MusicLoader.GetMusicSlot(Mod, "Sounds/Music/Silence");
-                        Main.musicBox2 = silenceSlot;
+                        Main.LocalPlayer.musicBox = silenceSlot;
                         Main.musicFade[CurrentEvent.Song] = 0f;
 
                         TrackEnd = DateTime.Now;

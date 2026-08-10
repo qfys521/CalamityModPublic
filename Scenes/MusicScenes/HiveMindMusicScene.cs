@@ -11,6 +11,6 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<HiveMind>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("HiveMind");
         public override int VanillaMusic => MusicID.Boss2;
-        public override int OtherworldMusic => MusicID.OtherworldlyWoF;
+        public override int OtherworldMusic => MusicID.OtherworldWallOfFlesh;
     }
 }

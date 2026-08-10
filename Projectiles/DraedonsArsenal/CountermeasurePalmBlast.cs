@@ -79,7 +79,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             float launchPower = 40;
             target.MoveNPC(launchVel, launchPower, true, Owner);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
             Texture2D beam = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomLineFade").Value;

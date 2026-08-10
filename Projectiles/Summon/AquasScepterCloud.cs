@@ -20,6 +20,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public sealed override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindNPCs;
             Projectile.width = 238;
             Projectile.height = 98;
             Projectile.hide = true;
@@ -31,11 +32,6 @@ namespace CalamityMod.Projectiles.Summon
             Projectile.penetrate = -1;
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            behindProjectiles.Add(index);
-            behindNPCs.Add(index);
-        }
 
         public override bool? CanDamage() => false;
         public override Color? GetAlpha(Color lightColor) => Color.White;
@@ -86,7 +82,7 @@ namespace CalamityMod.Projectiles.Summon
                 }
             }
         }
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);

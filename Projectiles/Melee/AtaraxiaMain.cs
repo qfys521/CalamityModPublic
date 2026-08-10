@@ -102,7 +102,7 @@ namespace CalamityMod.Projectiles.Melee
                 dust.scale = Main.rand.NextFloat(0.3f, 0.65f);
                 dust.color = Color.Lerp(Color.DarkOrchid, Color.IndianRed, colorRando);
                 dust.noLight = true;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
             for (int k = 0; k < 10; k++)
             {

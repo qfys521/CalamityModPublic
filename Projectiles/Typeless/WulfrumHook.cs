@@ -272,7 +272,7 @@ namespace CalamityMod.Projectiles.Typeless
             return Color.Lerp(Color.DeepSkyBlue, EndColor, (float)Math.Pow(completionRatio, 1.5D));
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Vector2[] segmentPositions = new Vector2[] { Projectile.Center, Owner.Center };
 
@@ -286,6 +286,6 @@ namespace CalamityMod.Projectiles.Typeless
             return false;
         }
 
-        public override bool PreDrawExtras() => false; //Prevents vanilla chain drawing from taking place
+        public override bool PreDrawExtras(Player player)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => false; //Prevents vanilla chain drawing from taking place
     }
 }

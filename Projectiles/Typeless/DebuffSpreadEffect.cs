@@ -236,7 +236,7 @@ namespace CalamityMod.Projectiles.Typeless
                         dustLinger.color = !Main.rand.NextBool(4) ? subColor : (extraColor != Color.White ? extraColor : mainColor);
                     if (!wildDust)
                     {
-                        dustLinger.noLightEmittence = true;
+                        dustLinger.noLightEmittance = true;
                         dustLinger.customData = new Vector2(0.8f, 3);
                     }
                     else

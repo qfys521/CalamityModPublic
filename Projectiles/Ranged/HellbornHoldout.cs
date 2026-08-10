@@ -223,7 +223,7 @@ namespace CalamityMod.Projectiles.Ranged
                 modifiers.SourceDamage *= 0.02f;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 2)
                 return false;

@@ -26,6 +26,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
         public float fade => (float)Math.Pow(Utils.GetLerpValue(0, lifetime, Projectile.timeLeft), 3);
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = 2;
             Projectile.height = 2;
             Projectile.friendly = true;
@@ -88,11 +89,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             modifiers.HideCombatText();
             
         }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
-        }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player renderingPlayer, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // So unless placed here the position of projectile updates is inconsistent and will cause offsets
             if (disk != null && disk.active && disk.type == ModContent.ProjectileType<AerialTrackerProjectile>())

@@ -139,14 +139,14 @@ namespace CalamityMod.Projectiles.Ranged
                     dust.noGravity = false;
                     dust.scale = 0.8f;
                     dust.color = Color.AliceBlue;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
         }
         public override bool? CanDamage() => (attacking ? null : false); // Can't hit if not attacking
 
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (beginStretchAnim)
             {

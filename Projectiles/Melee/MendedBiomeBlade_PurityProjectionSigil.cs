@@ -50,7 +50,7 @@ namespace CalamityMod.Projectiles.Melee
                 Projectile.active = false;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Main.myPlayer != Projectile.owner) // don't show for other players
                 return false;

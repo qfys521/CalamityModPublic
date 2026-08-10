@@ -253,7 +253,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
                 Projectile.timeLeft = 1; // Stagger the kill to allow band accessories to work. There's a separate check that prevents AI from running while timesItCanHit is 0
             
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (isBeam)
                 return false;

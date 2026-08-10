@@ -37,7 +37,7 @@ namespace CalamityMod.Projectiles.Rogue
                 Projectile.Kill();
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D glow = ModContent.Request<Texture2D>(Texture + "Glow").Value;
             Rectangle frame = glow.Frame(1, Main.projFrames[Type], 0, Projectile.frame);

@@ -240,7 +240,7 @@ namespace CalamityMod.Projectiles.Rogue
             set;
         }
         private static Asset<Texture2D> VoidTex => field ??= ModContent.Request<Texture2D>("CalamityMod/Projectiles/Rogue/SealedSingularityBlackhole");
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (AIState == 1)
             {

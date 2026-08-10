@@ -21,7 +21,7 @@ namespace CalamityMod.Projectiles.Summon
             Main.projFrames[Type] = 6;
             Main.projPet[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -48,8 +48,8 @@ namespace CalamityMod.Projectiles.Summon
             int BHRID = ModContent.ItemType<BlackHawkRemote>();
             FalseGun = new Item();
             BlackHawk = new Item();
-            FalseGun.SetDefaults(p90ID, true);
-            BlackHawk.SetDefaults(BHRID, true);
+            FalseGun.SetDefaults(p90ID);
+            BlackHawk.SetDefaults(BHRID);
             FalseGun.damage = baseDamage;
             FalseGun.knockBack = BlackHawk.knockBack;
             FalseGun.shootSpeed = BlackHawk.shootSpeed;
@@ -300,7 +300,7 @@ namespace CalamityMod.Projectiles.Summon
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frame = texture.Frame(1, Main.projFrames[Type], 0, Projectile.frame);
@@ -311,7 +311,7 @@ namespace CalamityMod.Projectiles.Summon
         }
 
         //Pretty glowmask
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/BlackHawkGlow").Value;
             Rectangle frame = texture.Frame(1, Main.projFrames[Type], 0, Projectile.frame);

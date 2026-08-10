@@ -135,13 +135,13 @@ namespace CalamityMod.NPCs.SulphurousSea
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneSulphur && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneSulphur && spawner.waterTile)
             {
                 return 0.2f;
             }
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer1 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer1 && spawner.waterTile)
             {
                 return SpawnCondition.OceanMonster.Chance * 2f;
             }

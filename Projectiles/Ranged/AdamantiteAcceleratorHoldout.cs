@@ -125,7 +125,7 @@ namespace CalamityMod.Projectiles.Ranged
             BounceBackPower = 1f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D gun = Request<Texture2D>("CalamityMod/Items/Weapons/Ranged/AdamantiteParticleAccelerator").Value;
 

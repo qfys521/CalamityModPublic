@@ -73,9 +73,9 @@ namespace CalamityMod.NPCs.NormalNPCs
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !NPC.downedMoonlord || spawnInfo.Player.Calamity().ZoneCalamity || (!spawnInfo.Player.ZoneUnderworldHeight && !spawnInfo.Player.ZoneHallow) || Main.pumpkinMoon || Main.snowMoon || Main.eclipse)
+            if (spawner.noWorms || !NPC.downedMoonlord || spawner.Player.Calamity().ZoneCalamity || (!spawner.Player.ZoneUnderworldHeight && !spawner.Player.ZoneHallow) || Main.pumpkinMoon || Main.snowMoon || Main.eclipse)
                 return 0f;
 
             // Keep this as a separate if check, because it's a loop and we don't want to be checking it constantly.

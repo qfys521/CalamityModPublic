@@ -53,7 +53,7 @@ namespace CalamityMod.Tiles.AstralSnow
             return Color.White * MathHelper.Lerp(0.35f, 1.0f, brightness);
         }
 
-        public override void SetTreeFoliageSettings(Tile tile, ref int xoffset, ref int treeFrame, ref int floorY, ref int topTextureFrameWidth, ref int topTextureFrameHeight)
+        public override void SetTreeFoliageSettings(int i, int j, Tile tile, int xoffset, ref int treeFrame, int floorY, ref int topTextureFrameWidth, ref int topTextureFrameHeight)
         {
             //What does this code do?
             //treeFrame = (i + j * j) % 6;

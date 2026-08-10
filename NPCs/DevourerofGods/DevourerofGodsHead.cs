@@ -2462,7 +2462,7 @@ namespace CalamityMod.NPCs.DevourerofGods
 
             if (shouldUseShader)
             {
-                if (noiseOffset == Vector2.zeroVector)
+                if (noiseOffset == Vector2.Zero)
                     noiseOffset = NPC.Center;
 
                 Main.spriteBatch.End(out snap);
@@ -2541,7 +2541,7 @@ namespace CalamityMod.NPCs.DevourerofGods
             return false;
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<CosmiliteBrick>();
         }
@@ -2685,7 +2685,7 @@ namespace CalamityMod.NPCs.DevourerofGods
         {
             if (Phase2Started && NPC.localAI[2] > 60f)
                 return false;
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
 
             Rectangle targetHitbox = target.Hitbox;
 

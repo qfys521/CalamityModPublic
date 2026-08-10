@@ -67,7 +67,7 @@ namespace CalamityMod.Packets
             packet.ReadFlags(out bool progressDialogue, out bool hasEntity);
 
             int entity = -1;
-            Vector2 pos = Vector2.zeroVector;
+            Vector2 pos = Vector2.Zero;
             EntityType type = EntityType.NPC;
             if (hasEntity)
             {

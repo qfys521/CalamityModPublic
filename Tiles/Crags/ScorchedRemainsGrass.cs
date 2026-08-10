@@ -67,7 +67,7 @@ namespace CalamityMod.Tiles.Crags
             }
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             Tile up = Main.tile[i, j - 1];
             Tile up2 = Main.tile[i, j - 2];

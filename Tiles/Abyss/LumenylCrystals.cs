@@ -14,7 +14,7 @@ namespace CalamityMod.Tiles.Abyss
             Main.tileNoFail[Type] = true;
             Main.tileFrameImportant[Type] = true;
             Main.tileObsidianKill[Type] = true;
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
             AddMapEntry(new Color(0, 150, 200), CalamityUtils.GetItemName<Lumenyl>());
             HitSound = SoundID.Item27;
             DustType = DustID.IceRod;

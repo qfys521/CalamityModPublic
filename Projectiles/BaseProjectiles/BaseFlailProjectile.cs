@@ -150,7 +150,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
         #endregion
 
         #region Draw Helpers
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // If the velocity is zero, don't draw anything.
             // Doing so would lead to various divison by 0 errors during the normalization process.

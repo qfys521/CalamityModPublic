@@ -187,7 +187,7 @@ namespace CalamityMod.Projectiles.Melee
 
         internal float WidthFunction(float completionRatio, Vector2 vertexPos) => 12f;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Textures and general use stuff
             Texture2D mainTex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

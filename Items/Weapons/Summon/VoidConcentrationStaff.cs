@@ -385,11 +385,11 @@ namespace CalamityMod.Projectiles.Summon
                 Dust dust = Dust.NewDustDirect(Projectile.Center, 1, 1, DustID.TintableDustLighted, dustVelocity.X, dustVelocity.Y, 0, dustColor, dustScale);
                 dust.noGravity = true;
                 dust.noLight = false;
-                dust.noLightEmittence = false;
+                dust.noLightEmittance = false;
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.End(out var ss);
 
@@ -555,7 +555,7 @@ namespace CalamityMod.Projectiles.Summon
                 return null;
             return false;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             for (float i = 0; i < MathHelper.TwoPi; i += MathHelper.TwoPi / 3f)
             {

@@ -23,7 +23,7 @@ namespace CalamityMod.Items.Pets
         public override void UseStyle(Player player, Rectangle heldItemFrame)
         {
             if (player.whoAmI == Main.myPlayer && player.itemTime == 0)
-                player.AddBuff(Item.buffType, 3600, true);
+                player.AddBuff(Item.buffType, 3600);
         }
     }
 }

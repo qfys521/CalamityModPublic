@@ -140,7 +140,7 @@ namespace CalamityMod.Projectiles.Magic
 
         public float MiniTrailWidth(float completionRatio, Vector2 vertexPos) => TrailWidth(completionRatio, vertexPos) * 5.5f;
         public Color MiniTrailColor(float completionRatio, Vector2 vertexPos) => Color.Lerp(Color.LightGoldenrodYellow, Color.Orange, completionRatio);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Color mainColor = Color.Lerp(Color.LightGoldenrodYellow, Color.Orange, ((float)Main.timeForVisualEffects * 0.5f + Projectile.whoAmI * 0.12f) % 1);
             Color secondaryColor = Color.Lerp(Color.LightGoldenrodYellow, Color.Orange, ((float)Main.timeForVisualEffects * 0.5f + Projectile.whoAmI * 0.12f + 0.2f) % 1);

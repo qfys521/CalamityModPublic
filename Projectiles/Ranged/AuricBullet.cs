@@ -34,7 +34,7 @@ namespace CalamityMod.Projectiles.Ranged
             Projectile.alpha = 255;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             CalamityUtils.DrawAfterimagesFromEdge(Projectile, 0, lightColor);
             return false;

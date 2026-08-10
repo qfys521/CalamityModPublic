@@ -20,7 +20,7 @@ namespace CalamityMod.Tiles.FurnitureProfaned
             TileObjectData.newTile.LavaDeath = false;
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(191, 142, 111), Language.GetText("ItemName.Piano"));
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
+            TileID.Sets.RoomNeeds.CountsAsTable[Type] = true;
         }
 
         public override bool CreateDust(int i, int j, ref int type)

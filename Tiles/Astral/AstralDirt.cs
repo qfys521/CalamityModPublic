@@ -37,7 +37,7 @@ namespace CalamityMod.Tiles.Astral
             this.RegisterBlendMergeWith(TileID.Stone);
         }
 
-        public override void RandomUpdate(int i, int j)
+        public override void RandomUpdate(int i, int j, bool underground)
         {
             //Make sure that astral grass only spreads to adjacent tiles, as opposed to appearing out of thin air
             Tile up = Main.tile[i, j - 1];

@@ -104,7 +104,7 @@ namespace CalamityMod.Projectiles.Melee
                         dust.noGravity = true;
                         dust.scale = Main.rand.NextFloat(1.85f, 2.45f) * scale;
                         dust.color = Main.rand.NextBool() ? Color.OrangeRed : Color.Goldenrod;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                         dust.fadeIn = scale - 1;
                     }
                     if (Main.rand.NextBool())
@@ -128,7 +128,7 @@ namespace CalamityMod.Projectiles.Melee
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.85f, 1.45f) * Projectile.scale;
                     dust.color = Color.Goldenrod;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                     dust.fadeIn = scale - 1;
                 }
                 
@@ -190,7 +190,7 @@ namespace CalamityMod.Projectiles.Melee
                 blast.scale = scale;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D bloomTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;
 

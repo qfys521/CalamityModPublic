@@ -99,7 +99,7 @@ namespace CalamityMod.Projectiles.Typeless
                         dust2.alpha = 180;
                         dust2.color = Main.rand.NextBool(4) ? Color.Lerp(Color.Yellow, bColor, 0.5f) : bColor;
                         dust2.noLight = true;
-                        dust2.noLightEmittence = true;
+                        dust2.noLightEmittance = true;
                     }
                 }
                 if (time > 80) // Track the player in a natural motion simular to swimming
@@ -221,12 +221,12 @@ namespace CalamityMod.Projectiles.Typeless
                     dust2.alpha = 180;
                     dust2.color = Main.rand.NextBool(4) ? Color.Lerp(Color.Yellow, bColor, 0.5f) : bColor;
                     dust2.noLight = true;
-                    dust2.noLightEmittence = true;
+                    dust2.noLightEmittance = true;
                 }
             }
             Projectile.netUpdate = true;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> orb = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle");
             float sine = (float)Math.Sin((Main.GlobalTimeWrappedHourly * 10) / MathHelper.Pi);

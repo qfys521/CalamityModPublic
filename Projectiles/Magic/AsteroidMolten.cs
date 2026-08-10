@@ -116,7 +116,7 @@ namespace CalamityMod.Projectiles.Magic
 
         public override void OnHitPlayer(Player target, Player.HurtInfo info) => target.AddBuff(BuffID.OnFire3, 180);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             //Changes the texture of the projectile
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
@@ -146,7 +146,7 @@ namespace CalamityMod.Projectiles.Magic
             return false;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Magic/AsteroidMoltenGlow").Value;
             switch ((int)Projectile.ai[0])

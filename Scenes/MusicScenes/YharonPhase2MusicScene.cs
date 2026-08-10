@@ -11,8 +11,8 @@ namespace CalamityMod.Systems
 
         public override int NPCType => ModContent.NPCType<Yharon>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("YharonPhase2");
-        public override int VanillaMusic => MusicID.LunarBoss;
-        public override int OtherworldMusic => MusicID.OtherworldlyLunarBoss;
+        public override int VanillaMusic => MusicID.MoonLord;
+        public override int OtherworldMusic => MusicID.OtherworldMoonLord;
 
         public override bool AdditionalCheck() => CalamityGlobalNPC.yharonP2 != -1;
     }

@@ -106,7 +106,7 @@ namespace CalamityMod.Projectiles.Magic
             modifiers.HitDirectionOverride = Owner.direction;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Owner.ChangeDir((int)Projectile.ai[2]);
 

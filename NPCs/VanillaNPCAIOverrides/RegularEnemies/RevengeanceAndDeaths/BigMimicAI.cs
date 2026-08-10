@@ -2,6 +2,7 @@
 using CalamityMod.World;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -16,7 +17,7 @@ public static partial class RevengeanceAndDeathAI
             // Set damage
             NPC.damage = NPC.defDamage;
 
-            NPC.knockBackResist = 0.2f * Main.GameModeInfo.KnockbackToEnemiesMultiplier;
+            NPC.knockBackResist = 0.2f * GameDifficultyData.KnockbackToEnemiesMultiplier.Sample(Main.Difficulty);
             NPC.dontTakeDamage = false;
             NPC.noTileCollide = false;
             NPC.noGravity = false;

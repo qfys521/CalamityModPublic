@@ -128,12 +128,12 @@ namespace CalamityMod.ILEditing
         #endregion Reforge Requirement Relaxation
 
         #region Prevention of Slime Rain Spawns When Near Bosses
-        private static void PreventBossSlimeRainSpawns(On_NPC.orig_SlimeRainSpawns orig, int plr)
+        private static void PreventBossSlimeRainSpawns(On_NPC.Spawner.orig_SlimeRainSpawns orig, Player player)
         {
-            if (CalamityServerConfig.Instance.BossZen && Main.player[plr].Calamity().isNearbyBoss)
+            if (CalamityServerConfig.Instance.BossZen && player.Calamity().isNearbyBoss)
                 return;
 
-            orig(plr);
+            orig(player);
         }
         #endregion Prevention of Slime Rain Spawns When Near Bosses
 
@@ -356,7 +356,7 @@ namespace CalamityMod.ILEditing
         {
             orig(npc, itemIndex);
 
-            Item item = Main.item[itemIndex];
+            WorldItem item = Main.item[itemIndex];
             int itemID = item.type;
             bool colorWasChanged = false;
 
@@ -378,7 +378,7 @@ namespace CalamityMod.ILEditing
         #endregion Color Blighted Gel
 
         #region Improve Angler Quest Rewards
-        private static void AddMoreGuaranteedAnglerRewards(On_Player.orig_GetAnglerReward_MainReward orig, Player self, List<Item> rewardItems, IEntitySource source, int questsDone, float rarityReduction, int questItemType, ref GetItemSettings anglerRewardSettings)
+        private static void AddMoreGuaranteedAnglerRewards(On_Player.orig_GetAnglerReward_MainReward orig, Player self, List<Item> rewardItems, IEntitySource source, int questsDone, float rarityReduction, int questItemType)
         {
             // Adds several new guaranteed rewards for specific quests.
             // These will replace the item that would have dropped via vanilla logic.
@@ -438,10 +438,10 @@ namespace CalamityMod.ILEditing
             if (item.type > ItemID.None)
                 rewardItems.Add(item);
             else
-                orig(self, rewardItems, source, questsDone, rarityReduction, questItemType, ref anglerRewardSettings);
+                orig(self, rewardItems, source, questsDone, rarityReduction, questItemType);
         }
 
-        private static void ImproveAnglerBaitReward(On_Player.orig_GetAnglerReward_Bait orig, Player self, List<Item> rewardItems, IEntitySource source, int questsDone, float rarityReduction, ref GetItemSettings anglerRewardSettings)
+        private static void ImproveAnglerBaitReward(On_Player.orig_GetAnglerReward_Bait orig, Player self, List<Item> rewardItems, IEntitySource source, int questsDone, float rarityReduction)
         {
             // Improves the bait reward given for Angler quests in three ways:
             // 1. Makes bait reward be guaranteed.
@@ -474,7 +474,7 @@ namespace CalamityMod.ILEditing
             rewardItems.Add(bait);
         }
 
-        private static void ImproveAnglerMoneyReward(On_Player.orig_GetAnglerReward_Money orig, Player self, List<Item> rewardItems, IEntitySource source, int questsDone, float rarityReduction, ref GetItemSettings anglerRewardSettings)
+        private static void ImproveAnglerMoneyReward(On_Player.orig_GetAnglerReward_Money orig, Player self, List<Item> rewardItems, IEntitySource source, int questsDone, float rarityReduction)
         {
             // Improves the logic for giving money to the player from Angler quests.
             // This is accomplished via a higher starting amount, reduced variance, and not truncating off Silver Coins if giving Gold Coins.
@@ -623,14 +623,14 @@ namespace CalamityMod.ILEditing
             cursor.Emit(OpCodes.Ldc_I4_1);
         }
 
-        private static bool RemoveUseLocks(On_Player.orig_ItemCheck_CheckCanUse orig, Player self, Item sItem)
+        private static bool RemoveUseLocks(On_Player.orig_ItemCheck_CanUse orig, Player self, Item sItem, bool ignoreCursed)
         {
             if (sItem.type == ItemID.CelestialSigil)
                 return !NPC.AnyNPCs(NPCID.MoonLordCore) && !BossRushEvent.BossRushActive;
             if (sItem.type == ItemID.SolarTablet)
                 return Main.dayTime && !Main.eclipse && (Main.hardMode || NPC.downedMechBossAny || NPC.downedPlantBoss);
 
-            return orig(self, sItem);
+            return orig(self, sItem, ignoreCursed);
         }
 
         private static void ApplyCelestialSigilChanges(On_Player.orig_ItemCheck_UseEventItems orig, Player self, Item sItem)

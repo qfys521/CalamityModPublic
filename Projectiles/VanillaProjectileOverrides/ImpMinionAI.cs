@@ -61,7 +61,7 @@ namespace CalamityMod.Projectiles.VanillaProjectileOverrides
                             Dust shootDust = Dust.NewDustPerfect(proj.Center + toTargetDirection.SafeNormalize(Vector2.Zero) * proj.Size / 2f, DustID.Torch, toTargetDirection.SafeNormalize(Vector2.Zero).RotatedByRandom(MathHelper.PiOver4) * Main.rand.NextFloat(3f, 5f), Scale: 2f);
                             shootDust.noGravity = true;
                             shootDust.noLight = true;
-                            shootDust.noLightEmittence = true;
+                            shootDust.noLightEmittance = true;
                         }
                     }
 
@@ -85,7 +85,7 @@ namespace CalamityMod.Projectiles.VanillaProjectileOverrides
                 Dust dustEffect = Dust.NewDustDirect(proj.position, proj.width, proj.height, DustID.Torch);
                 dustEffect.noGravity = true;
                 dustEffect.noLight = true;
-                dustEffect.noLightEmittence = true;
+                dustEffect.noLightEmittance = true;
             }
 
             return false;

@@ -119,9 +119,9 @@ namespace CalamityMod.NPCs.PlagueEnemies
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.PlayerSafe || !NPC.downedGolemBoss || spawnInfo.Player.Calamity().ZoneSunkenSea)
+            if (spawner.noWorms || !NPC.downedGolemBoss || spawner.Player.Calamity().ZoneSunkenSea)
             {
                 return 0f;
             }

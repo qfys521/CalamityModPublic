@@ -49,7 +49,7 @@ namespace CalamityMod.Projectiles.Melee
                         dust.noGravity = true;
                         dust.scale = Main.rand.NextFloat(1.2f, 1.7f);
                         dust.color = Main.rand.NextBool() ? Color.SteelBlue : Color.BlueViolet;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                         dust.fadeIn = 1;
                     }
                 }
@@ -80,7 +80,7 @@ namespace CalamityMod.Projectiles.Melee
 
         public override Color? GetAlpha(Color lightColor) => Color.Lerp(Projectile.ai[2] == 0f ? Color.Blue : Color.White, Projectile.ai[2] == 0f ? Color.DarkBlue : Color.White, Projectile.identity / 7f % 1f) * Projectile.Opacity;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             return false;
         }

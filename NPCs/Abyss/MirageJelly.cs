@@ -210,9 +210,9 @@ Block:
             NPC.frame.Y = frame * frameHeight;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer3 && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneAbyssLayer3 && spawner.waterTile)
             {
                 return Main.remixWorld ? 5.4f : SpawnCondition.CaveJellyfish.Chance * 0.6f;
             }
@@ -248,8 +248,8 @@ Block:
         {
             if (hurtInfo.Damage > 0)
             {
-                target.AddBuff(BuffID.Venom, 240, true);
-                target.AddBuff(BuffID.Electrified, 120, true);
+                target.AddBuff(BuffID.Venom, 240);
+                target.AddBuff(BuffID.Electrified, 120);
             }
         }
 

@@ -35,6 +35,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
         public override bool? CanDamage() => false;
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = Projectile.height = 100;
             Projectile.friendly = true;
             Projectile.DamageType = TrueMeleeDamageClass.Instance;
@@ -225,7 +226,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             time++;
             attackTimer++;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 3)
                 return false;
@@ -270,10 +271,6 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             Main.EntitySpriteDraw(glow, drawPosition + placeAdjust, null, Color.White, drawRotation, rotationPoint, 1, flipSprite); // The glow
 
             return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
         }
     }
 }

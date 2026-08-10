@@ -45,7 +45,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(ModContent.BuffType<SandElemental>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<SandElemental>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<SandElemental>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<SandElementalMinion>()] < 1)
                 {

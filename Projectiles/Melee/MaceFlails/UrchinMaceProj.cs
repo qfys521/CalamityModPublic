@@ -128,7 +128,7 @@ namespace CalamityMod.Projectiles.Melee.MaceFlails
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D maceTexture = TextureAssets.Projectile[Type].Value;
             Texture2D whirlpoolTexture = TextureAssets.Projectile[ModContent.ProjectileType<RedtideWhirlpool>()].Value;

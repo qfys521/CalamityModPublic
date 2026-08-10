@@ -508,7 +508,7 @@ namespace CalamityMod.Items
 
             public AttackSpeedExactRule(float f) => ratio = f;
             public bool AppliesTo(Item it) => IsUsable(it);
-            public void ApplyTweak(Item it) => ItemID.Sets.BonusAttackSpeedMultiplier[it.type] = CapAttackSpeed(ratio);
+            public void ApplyTweak(Item it) => ItemID.Sets.BonusMeleeSpeedMultiplier[it.type] = CapAttackSpeed(ratio);
         }
         internal static IItemTweak AttackSpeedExact(float f) => new AttackSpeedExactRule(f);
 
@@ -520,8 +520,8 @@ namespace CalamityMod.Items
             public bool AppliesTo(Item it) => IsUsable(it);
             public void ApplyTweak(Item it)
             {
-                float currentAttackSpeedRatio = ItemID.Sets.BonusAttackSpeedMultiplier[it.type];
-                ItemID.Sets.BonusAttackSpeedMultiplier[it.type] = CapAttackSpeed(ratio * currentAttackSpeedRatio);
+                float currentAttackSpeedRatio = ItemID.Sets.BonusMeleeSpeedMultiplier[it.type];
+                ItemID.Sets.BonusMeleeSpeedMultiplier[it.type] = CapAttackSpeed(ratio * currentAttackSpeedRatio);
             }
         }
         internal static IItemTweak AttackSpeedRatio(float f) => new AttackSpeedRatioRule(f);

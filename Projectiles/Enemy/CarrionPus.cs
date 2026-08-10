@@ -28,7 +28,7 @@ namespace CalamityMod.Projectiles.Enemy
             for (int i = 0; i < 2; i++)
             {
                 Dust dust = Dust.NewDustPerfect(Projectile.Center, ModContent.DustType<LightDust>(), Main.rand.NextVector2Circular(4f, 4f), 0, Main.rand.NextBool(3) ? Color.Red : Color.Yellow);
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
 

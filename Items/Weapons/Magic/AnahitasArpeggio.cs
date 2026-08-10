@@ -99,9 +99,9 @@ namespace CalamityMod.Items.Weapons.Magic
             var line = tooltips.FirstOrDefault(x => x.Text.Contains("[GFB]") && x.Mod == "Terraria");
             if (line != null)
             {
-                line.Text = Lang.SupportGlyphs(this.GetLocalizedValue(Main.zenithWorld ? "TooltipGFB" : "TooltipNormal"));
+                line.Text = this.GetLocalizedValue(Main.zenithWorld ? "TooltipGFB" : "TooltipNormal");
                 if (Main.zenithWorld)
-                    line.OverrideColor = Main.DiscoColor;
+                    line.Color = Main.DiscoColor;
             }
         }
     }

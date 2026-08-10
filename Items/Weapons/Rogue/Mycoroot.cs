@@ -50,7 +50,7 @@ namespace CalamityMod.Items.Weapons.Rogue
                     if ((other.team == player.team && player.team != 0) || player.whoAmI == other.whoAmI)
                     {
                         if (player.Distance(other.Center) <= 800f)
-                            other.AddBuff(ModContent.BuffType<Mushy>(), 900, quiet: false);
+                            other.AddBuff(ModContent.BuffType<Mushy>(), 900);
                     }
                 }
             }

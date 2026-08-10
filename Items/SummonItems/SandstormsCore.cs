@@ -13,7 +13,7 @@ namespace CalamityMod.Items.SummonItems
         public new string LocalizationCategory => "Items.SummonItems";
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 13; // Frost Legion
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 13; // Frost Legion
         }
 
         public override void SetDefaults()

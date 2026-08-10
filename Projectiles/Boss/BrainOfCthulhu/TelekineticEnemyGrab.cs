@@ -247,7 +247,7 @@ public class TelekineticEnemyGrab : ModProjectile, ILocalizedModType
     }
 
     bool evenRed = false;
-    public override bool PreDraw(ref Color lightColor)
+    public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
     {
         //Handles getting the glow textures
         if (EnemyGlowTextures.Count == 0 || !EnemyGlowTextures.ContainsKey(enemyID))

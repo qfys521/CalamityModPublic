@@ -39,6 +39,7 @@ namespace CalamityMod.Projectiles.Rogue
         public NPC lastHitTarget;
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = 5;
             Projectile.height = 5;
             Projectile.friendly = true;
@@ -118,7 +119,7 @@ namespace CalamityMod.Projectiles.Rogue
                     dust.alpha = 180;
                     dust.scale *= (smokey ? 2.2f : 1);
                     dust.velocity += (smokey ? Vector2.UnitY * -2 : Vector2.Zero);
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
                 else
                     Projectile.timeLeft = (int)(Projectile.timeLeft * 0.98f); // Decay lifetime if it has hit a tile.
@@ -198,7 +199,7 @@ namespace CalamityMod.Projectiles.Rogue
                                     c.scale = 0.7f * (i % 2 == 0 ? 2.2f : 1.8f);
                                     c.noGravity = true;
                                     c.color = i % 2 == 0 ? c1 : c2;
-                                    c.noLightEmittence = true;
+                                    c.noLightEmittance = true;
                                 }
 
                                 hasReachedFullCharge = true;
@@ -423,7 +424,7 @@ namespace CalamityMod.Projectiles.Rogue
                 Owner.Calamity().rogueStealth = 0;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 30, targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Color glowColor = Color.Lerp(mainColor, Color.Red, Utils.GetLerpValue(60, 18, (stealthPenaltyTimer >= 18 ? stealthPenaltyTimer : 60)));
             float fade = Utils.GetLerpValue(0, 300, Projectile.timeLeft, true);
@@ -439,10 +440,6 @@ namespace CalamityMod.Projectiles.Rogue
 
             Main.EntitySpriteDraw(ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Rogue/DoomsdayDeviceGlow2").Value, baseDrawPos, null, glowColor * Projectile.Opacity * fade, Projectile.rotation, ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Rogue/DoomsdayDeviceGlow2").Value.Size() * 0.5f, 1f, (!flung ? Owner.direction : Projectile.direction) != 1 ? SpriteEffects.FlipVertically : SpriteEffects.None, 0);
             return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
         }
     }
 }

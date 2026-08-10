@@ -59,7 +59,7 @@ namespace CalamityMod.UI.DialogueDisplay
 
                 if (dialog.entity != null)
                 {
-                    if (dialog.entity.active)
+                    if (!dialog.entity.IsNullOrInactive())
                         dialog.ui.Position = dialog.entity.Center;
                     else if (ui.DisplayEffects.DespawnWithAttachedNPC)
                         dialog.ui.ClosingDialogue = true;

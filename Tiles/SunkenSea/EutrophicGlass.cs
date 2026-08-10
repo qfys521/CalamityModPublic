@@ -40,7 +40,7 @@ namespace CalamityMod.Tiles.SunkenSea
             Main.tileLighted[Type] = true;
             Main.tileShine2[Type] = false;
             TileID.Sets.ChecksForMerge[Type] = true;
-            TileID.Sets.WallsMergeWith[Type] = true;
+            TileID.Sets.TruncatesWalls[Type] = true;
             DustType = DustID.RainCloud;
             AddMapEntry(new Color(197, 220, 220));
             HitSound = SoundID.Shatter;

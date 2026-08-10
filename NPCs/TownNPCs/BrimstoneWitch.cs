@@ -9,11 +9,13 @@ using CalamityMod.Systems.Collections;
 using CalamityMod.UI.CalamitasEnchants;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Events;
 using Terraria.GameContent.Personalities;
 using Terraria.GameContent.UI;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
 using static Terraria.ModLoader.ModContent;
@@ -685,29 +687,40 @@ namespace CalamityMod.NPCs.TownNPCs
             return dialogue;
         }
 
-        public override void SetChatButtons(ref string button, ref string button2)
+        public override void RegisterChatButtons(NPCInteractionList interactions)
         {
-            button = this.GetLocalizedValue("EnchantButton");
-            button2 = this.GetLocalizedValue("DonorButton");
+            NPCInteractionList.Entry enchant = interactions.InsertBefore(new EnchantInteraction(), NPCInteractionDatabase.CloseButton);
+            interactions.InsertAfter(new DonorInteraction(), enchant);
         }
 
-        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
+        private sealed class EnchantInteraction : NPCInteraction
         {
-            if (firstButton)
+            public override bool Condition() => true;
+            public override string GetText() => Language.GetTextValue("Mods.CalamityMod.NPCs.BrimstoneWitch.EnchantButton");
+
+            public override void Interact()
             {
                 Main.playerInventory = true;
-                CalamitasEnchantUI.NPCIndex = NPC.whoAmI;
+                CalamitasEnchantUI.NPCIndex = TalkNPC.whoAmI;
                 CalamitasEnchantUI.CurrentlyViewing = true;
 
-                if (!Main.LocalPlayer.Calamity().GivenBrimstoneLocus)
+                if (!LocalPlayer.Calamity().GivenBrimstoneLocus)
                 {
-                    Item.NewItem(NPC.GetSource_Loot(), NPC.Hitbox, ItemType<BrimstoneLocus>());
-                    Main.LocalPlayer.Calamity().GivenBrimstoneLocus = true;
+                    Item.NewItem(TalkNPC.GetSource_Loot(), TalkNPC.Hitbox, ItemType<BrimstoneLocus>());
+                    LocalPlayer.Calamity().GivenBrimstoneLocus = true;
                 }
             }
-            else
+        }
+
+        private sealed class DonorInteraction : NPCInteraction
+        {
+            public override bool Condition() => true;
+            public override string GetText() => Language.GetTextValue("Mods.CalamityMod.NPCs.BrimstoneWitch.DonorButton");
+
+            public override void Interact()
             {
-                Main.npcChatText = GetRandomDonors(25);
+                if (TalkNPC.ModNPC is BrimstoneWitch brimstoneWitch)
+                    Main.npcChatText = brimstoneWitch.GetRandomDonors(25);
             }
         }
 

@@ -42,7 +42,7 @@ namespace CalamityMod.Tiles.FurnitureSacrilegious
             TileObjectData.newTile.StyleWrapLimit = 2;
             TileObjectData.addTile(Type);
 
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
             AddMapEntry(new Color(43, 19, 42), CalamityUtils.GetItemName<LargeRitualCandle>());
 
             TileID.Sets.DisableSmartCursor[Type] = true;

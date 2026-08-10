@@ -129,6 +129,7 @@ namespace CalamityMod.Projectiles.Summon.SmallAresArms
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverWiresUI;
             Projectile.width = 40;
             Projectile.height = 40;
             Projectile.penetrate = -1;
@@ -229,7 +230,7 @@ namespace CalamityMod.Projectiles.Summon.SmallAresArms
             ArmIndex = -1;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // This UI only renders for the player that created it.
             if (Main.myPlayer != Projectile.owner)
@@ -358,10 +359,6 @@ namespace CalamityMod.Projectiles.Summon.SmallAresArms
             return false;
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overWiresUI.Add(index);
-        }
 
         // This is a UI. It should not do damage.
         public override bool? CanDamage() => false;

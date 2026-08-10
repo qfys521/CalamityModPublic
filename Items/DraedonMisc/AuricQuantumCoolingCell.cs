@@ -31,10 +31,10 @@ namespace CalamityMod.Items.DraedonMisc
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) => CalamityGlobalItem.InsertKnowledgeTooltip(tooltips, 5, true);
 
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             float brightness = Main.essScale * Main.rand.NextFloat(0.9f, 1.1f);
-            Lighting.AddLight(Item.Center, 1.2f * brightness, 0.4f * brightness, 0.8f);
+            Lighting.AddLight(item.Center, 1.2f * brightness, 0.4f * brightness, 0.8f);
         }
 
         public override bool? UseItem(Player player) => true;

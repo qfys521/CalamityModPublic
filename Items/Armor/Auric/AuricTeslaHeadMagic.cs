@@ -73,7 +73,7 @@ namespace CalamityMod.Items.Armor.Auric
                         line.Text = (setBonusTooltipNumber == 3 ? LocalizedText.Format(SetBonusRegenBoost.ToRegenPerSecond(), AccelerationBoost.ToPercent(), ReviveDuration.FramesToSeconds(), (ReviveCooldown / 60).FramesToSeconds())
                         : setBonusTooltipNumber == 2 ? LocalizedText.Format(GhostBoltCooldown.FramesToSeconds(), BloodsplosionCooldown.FramesToSeconds())
                         : LocalizedText.Format());
-                        line.OverrideColor = armorColors[setBonusTooltipNumber - 1];
+                        line.Color = armorColors[setBonusTooltipNumber - 1];
                     }
                 }
             }

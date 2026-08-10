@@ -31,7 +31,7 @@ namespace CalamityMod.Projectiles.Summon
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.MinionSacrificable[Type] = false; // To prevent blade type desync
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -110,7 +110,7 @@ namespace CalamityMod.Projectiles.Summon
                             dust.noGravity = true;
                             dust.scale = Main.rand.NextFloat(1.25f, 1.75f);
                             dust.color = Color.Orchid;
-                            dust.noLightEmittence = true;
+                            dust.noLightEmittance = true;
                         }
                         for (int i = 0; i < 4; i++)
                         {
@@ -161,7 +161,7 @@ namespace CalamityMod.Projectiles.Summon
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.65f, 1f);
                     dust.color = Color.Goldenrod;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
 
                     Particle spark2 = new CustomSpark(Projectile.Center, Projectile.velocity.SafeNormalize(Vector2.UnitX).RotatedByRandom(0.5f) * Main.rand.NextFloat(1f, 5f), "CalamityMod/Particles/ProvidenceMarkParticle", false, 14, Main.rand.NextFloat(0.9f, 1.2f), Color.Gold, new Vector2(0.5f, 1.5f), true, false, 0, false, false, -0.25f);
                     GeneralParticleHandler.SpawnParticle(spark2);
@@ -206,7 +206,7 @@ namespace CalamityMod.Projectiles.Summon
                             dust.noGravity = true;
                             dust.scale = Main.rand.NextFloat(0.65f, 1.15f);
                             dust.color = Color.Orchid;
-                            dust.noLightEmittence = true;
+                            dust.noLightEmittance = true;
                         }
                     }
                 }
@@ -326,7 +326,7 @@ namespace CalamityMod.Projectiles.Summon
 
         public override bool? CanDamage() => (attackCooldown == 0 ? base.CanDamage() : false);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             if (KnifeType == 1)

@@ -53,7 +53,7 @@ namespace CalamityMod.Projectiles.Ranged
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.35f, 0.55f);
                 dust.color = Main.rand.NextBool(3) ? Color.Orange : Color.Goldenrod;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
         }
 
@@ -95,7 +95,7 @@ namespace CalamityMod.Projectiles.Ranged
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(1.85f, 2.45f) * blastRadius * 0.08f;
                 dust.color = Color.Goldenrod;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
             for (int i = 0; i < 4; i++)
             {
@@ -103,7 +103,7 @@ namespace CalamityMod.Projectiles.Ranged
                 GeneralParticleHandler.SpawnParticle(spark);
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Ranged/BlissfulBombardierSplitProjectile").Value;
 

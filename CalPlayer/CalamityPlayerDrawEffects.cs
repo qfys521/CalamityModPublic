@@ -616,7 +616,7 @@ namespace CalamityMod.CalPlayer
                 if (Main.rand.NextBool(4))
                 {
                     Dust pollenDust = Dust.NewDustDirect(Player.position, Player.width, Player.height, ModContent.DustType<LightDust>(), newColor: Color.Gold, Scale: 0.4f);
-                    pollenDust.noLightEmittence = true;
+                    pollenDust.noLightEmittance = true;
                     pollenDust.noGravity = true;
                 }
             }

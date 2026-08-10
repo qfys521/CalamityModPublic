@@ -351,7 +351,7 @@ namespace CalamityMod.Projectiles.Pets
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             SpriteEffects spriteEffects = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             Texture2D texture2D13 = Terraria.GameContent.TextureAssets.Projectile[Type].Value;

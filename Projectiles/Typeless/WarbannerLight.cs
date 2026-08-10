@@ -65,11 +65,11 @@ namespace CalamityMod.Projectiles.Typeless
                 dust.noGravity = true;
                 dust.scale = Main.rand.NextFloat(0.5f, 0.7f);
                 dust.color = bColor;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
             }
             time++;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D rTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/ShatteredExplosion").Value;
             Texture2D bTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;

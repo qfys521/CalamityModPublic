@@ -11,6 +11,6 @@ namespace CalamityMod.Systems
         public override int NPCType => ModContent.NPCType<PlaguebringerGoliath>();
         public override int? MusicModMusic => CalamityMod.Instance.GetMusicFromMusicMod("PlaguebringerGoliath");
         public override int VanillaMusic => MusicID.Boss3;
-        public override int OtherworldMusic => MusicID.OtherworldlyPlantera;
+        public override int OtherworldMusic => MusicID.OtherworldPlantera;
     }
 }

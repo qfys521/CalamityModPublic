@@ -250,7 +250,7 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<HadopelagicPressure>(), 300, true);
+                target.AddBuff(ModContent.BuffType<HadopelagicPressure>(), 300);
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

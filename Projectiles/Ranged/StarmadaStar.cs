@@ -83,7 +83,7 @@ namespace CalamityMod.Projectiles.Ranged
             };
             return useColor;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex2 = Request<Texture2D>("CalamityMod/Particles/FadeStreak").Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition;

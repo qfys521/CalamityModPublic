@@ -30,7 +30,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(ModContent.BuffType<FungalClumpBuff>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<FungalClumpBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<FungalClumpBuff>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<FungalClumpMinion>()] < 1)
                 {
@@ -52,7 +52,7 @@ namespace CalamityMod.Items.Accessories
             {
                 if (player.FindBuffIndex(ModContent.BuffType<FungalClumpBuff>()) == -1)
                 {
-                    player.AddBuff(ModContent.BuffType<FungalClumpBuff>(), 3600, true);
+                    player.AddBuff(ModContent.BuffType<FungalClumpBuff>(), 3600);
                 }
                 if (player.ownedProjectileCounts[ModContent.ProjectileType<FungalClumpMinion>()] < 1)
                 {

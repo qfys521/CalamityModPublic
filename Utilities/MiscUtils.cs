@@ -156,7 +156,7 @@ namespace CalamityMod
 
             if (soundPos.X == -1f || soundPos.Y == -1f)
                 volume = 1f;
-            else if (WorldGen.gen || Main.dedServ)
+            else if (WorldGen.isGeneratingOrLoadingWorld || Main.dedServ)
                 volume = 0f;
             else
             {
@@ -179,7 +179,7 @@ namespace CalamityMod
             pan = MathHelper.Clamp(pan, -1f, 1f);
             volume = MathHelper.Clamp(volume, 0f, 1f);
             if (ambient)
-                volume = Main.gameInactive ? 0f : volume * Main.ambientVolume;
+                volume = !FocusHelper.GameplayActive ? 0f : volume * Main.ambientVolume;
             else
                 volume *= Main.soundVolume;
 

@@ -18,7 +18,7 @@ namespace CalamityMod.Items.SummonItems
         public static readonly SoundStyle HornSound = new("CalamityMod/Sounds/Item/LeviathanHornSound") { Volume = 0.55f };
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 12; // Truffle Worm
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 12; // Truffle Worm
         }
 
         public override void SetDefaults()
@@ -54,10 +54,10 @@ namespace CalamityMod.Items.SummonItems
         }
 
         // Makes it draw lower in the world so that it doesn't look weird with the cloth at the bottom
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-            spriteBatch.Draw(tex, Item.Center - Main.screenPosition + Vector2.UnitY * 20f, null, lightColor, rotation, tex.Size() / 2f, scale, 0, 0);
+            spriteBatch.Draw(tex, item.Center - Main.screenPosition + Vector2.UnitY * 20f, null, lightColor, rotation, tex.Size() / 2f, scale, 0, 0);
             return false;
         }
 

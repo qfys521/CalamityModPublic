@@ -77,7 +77,7 @@ namespace CalamityMod.Tiles.SunkenSea.Ambient
                                     dust.velocity *= 0.2f;
                                     dust.noGravity = true;
                                     dust.noLight = true;
-                                    dust.noLightEmittence = true;
+                                    dust.noLightEmittance = true;
                                 }
                                 Dust dust2 = Dust.NewDustDirect(new Vector2(i, j + 0.5f) * 16, 16, 16, DustID.MagicMirror, 0, 0, 1, Color.LightSkyBlue, 0.5f);
                                 dust2.velocity *= 0.2f;

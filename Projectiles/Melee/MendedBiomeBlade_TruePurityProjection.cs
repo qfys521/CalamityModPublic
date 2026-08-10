@@ -68,7 +68,7 @@ namespace CalamityMod.Projectiles.Melee
             Main.dust[dustParticle].velocity += Projectile.velocity * 0.1f;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.timeLeft > TrueBiomeBlade.DefaultAttunement_BeamTime - 5f)
                 return false;

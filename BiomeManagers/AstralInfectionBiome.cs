@@ -90,9 +90,9 @@ namespace CalamityMod.BiomeManagers
             {
                 if (Main.LocalPlayer.ZoneDirtLayerHeight || Main.LocalPlayer.ZoneRockLayerHeight || Main.LocalPlayer.ZoneUnderworldHeight)
                 {
-                    return CalamityMod.Instance.GetMusicFromMusicMod("AstralInfectionUnderground") ?? MusicID.Space;
+                    return CalamityMod.Instance.GetMusicFromMusicMod("AstralInfectionUnderground") ?? MusicID.SpaceNight;
                 }
-                return CalamityMod.Instance.GetMusicFromMusicMod("AstralInfection") ?? MusicID.Space;
+                return CalamityMod.Instance.GetMusicFromMusicMod("AstralInfection") ?? MusicID.SpaceNight;
             }
         }
 
@@ -103,10 +103,10 @@ namespace CalamityMod.BiomeManagers
 
         public override void SpecialVisuals(Player player, bool isActive)
         {
-            player.ManageSpecialBiomeVisuals("CalamityMod:Astral", isActive);
+            Main.SceneState.ManageSpecialBiomeVisuals("CalamityMod:Astral", isActive);
             if (Main.LocalPlayer.ZoneDirtLayerHeight || Main.LocalPlayer.ZoneRockLayerHeight || Main.LocalPlayer.ZoneUnderworldHeight)
             {
-                player.ManageSpecialBiomeVisuals("CalamityMod:Astral", isActive); //underground
+                Main.SceneState.ManageSpecialBiomeVisuals("CalamityMod:Astral", isActive); //underground
             }
         }
     }

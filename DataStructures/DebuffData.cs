@@ -3,6 +3,7 @@ using CalamityMod.Buffs.DamageOverTime;
 using CalamityMod.Systems.Collections;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -329,7 +330,7 @@ namespace CalamityMod.DataStructures
                 (DownedBossSystem.downedExoMechs ? 0.6f : 0f) +
                 (DownedBossSystem.downedCalamitas ? 0.6f : 0f);
             if (Main.expertMode)
-                buffedDryadsBaneMult *= Main.GameModeInfo.TownNPCDamageMultiplier;
+                buffedDryadsBaneMult *= GameDifficultyData.TownNPCDamageMultiplier.Sample(Main.Difficulty);
             int buffedDryadsBaneDoTValue = 2 * (int)(4 * buffedDryadsBaneMult);
             npc.lifeRegen -= buffedDryadsBaneDoTValue;
 
@@ -347,7 +348,7 @@ namespace CalamityMod.DataStructures
                 (NPC.downedGolemBoss ? 0.15f : 0f) +
                 (NPC.downedAncientCultist ? 0.15f : 0f);
             if (Main.expertMode)
-                vanillaDryadsBaneMult *= Main.GameModeInfo.TownNPCDamageMultiplier;
+                vanillaDryadsBaneMult *= GameDifficultyData.TownNPCDamageMultiplier.Sample(Main.Difficulty);
             int totalDryadsBaneDoTValue = 2 * (int)(4 * vanillaDryadsBaneMult) + buffedDryadsBaneDoTValue;
             if (damage < totalDryadsBaneDoTValue / 6)
                 damage = totalDryadsBaneDoTValue / 6;

@@ -53,7 +53,7 @@ namespace CalamityMod.Buffs.StatDebuffs
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
             BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;
-            BuffID.Sets.LongerExpertDebuff[Type] = true;
+            BuffID.Sets.BuffTimeIsExtendedWithGameDifficulty[Type] = true;
             CalamityBuffSets.DebuffDataset[Type] = debuffData;
         }
 

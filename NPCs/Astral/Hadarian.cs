@@ -194,14 +194,14 @@ namespace CalamityMod.NPCs.Astral
             }
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            Tile tile = Main.tile[spawnInfo.SpawnTileX, spawnInfo.SpawnTileY];
-            if (CalamityGlobalNPC.AnyEvents(spawnInfo.Player))
+            Tile tile = Main.tile[spawner.SpawnTileX, spawner.SpawnTileY];
+            if (CalamityGlobalNPC.AnyEvents(spawner.Player))
             {
                 return 0f;
             }
-            else if (spawnInfo.Player.InAstral(3) && spawnInfo.SpawnTileType == ModContent.TileType<AstralSand>() && tile.WallType == WallID.None)
+            else if (spawner.Player.InAstral(3) && spawner.SpawnTileType == ModContent.TileType<AstralSand>() && tile.WallType == WallID.None)
             {
                 return 0.25f;
             }

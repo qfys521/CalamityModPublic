@@ -22,7 +22,7 @@ namespace CalamityMod.Projectiles.Summon.SmallAresArms
         public override void SetStaticDefaults()
         {
             Main.projFrames[Type] = 6;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true; // Item.shoot assigns this as the minion
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true; // Item.shoot assigns this as the minion
         }
 
         public override void PostAI()
@@ -83,7 +83,7 @@ namespace CalamityMod.Projectiles.Summon.SmallAresArms
             Projectile.NewProjectile(Projectile.GetSource_FromAI(), Projectile.Center, fireballVelocity, ModContent.ProjectileType<MinionPlasmaBlast>(), (int)(Projectile.damage * AresExoskeleton.PlasmaCannonBlastFactor), 0f, Projectile.owner);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             DefaultDrawCannon(ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/SmallAresArms/ExoskeletonPlasmaCannonGlowmask").Value);
             return false;

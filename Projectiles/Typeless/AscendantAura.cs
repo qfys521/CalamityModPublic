@@ -87,7 +87,7 @@ namespace CalamityMod.Projectiles.Typeless
             SoundEngine.PlaySound(s with { Volume = 0.3f, Pitch = -0.9f }, Projectile.Center);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D rTexture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Typeless/AscendantAura").Value;
             Texture2D bTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/GlowSpark").Value;

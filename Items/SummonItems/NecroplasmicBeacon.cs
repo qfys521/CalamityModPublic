@@ -16,7 +16,7 @@ namespace CalamityMod.Items.SummonItems
 
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 19; // Celestial Sigil
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 19; // Celestial Sigil
         }
 
         public override void SetDefaults()
@@ -35,9 +35,9 @@ namespace CalamityMod.Items.SummonItems
             itemGroup = ContentSamples.CreativeHelper.ItemGroup.BossItem;
         }
 
-        public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+        public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, ModContent.Request<Texture2D>("CalamityMod/Items/SummonItems/NecroplasmicBeaconGlow").Value);
+            item.DrawItemGlowmaskSingleFrame(spriteBatch, rotation, ModContent.Request<Texture2D>("CalamityMod/Items/SummonItems/NecroplasmicBeaconGlow").Value);
         }
 
         public override bool CanUseItem(Player player)

@@ -620,15 +620,15 @@ namespace CalamityMod.NPCs.AquaticScourge
             return null;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().disableNaturalScourgeSpawns)
+            if (spawner.Player.Calamity().disableNaturalScourgeSpawns)
                 return 0f;
 
-            if (spawnInfo.PlayerSafe)
+            if (spawner.noWorms)
                 return 0f;
 
-            if (spawnInfo.Player.Calamity().ZoneSulphur && spawnInfo.Water)
+            if (spawner.Player.Calamity().ZoneSulphur && spawner.waterTile)
             {
                 if (!NPC.AnyNPCs(ModContent.NPCType<AquaticScourgeHead>()))
                     return Main.zenithWorld ? 0.1f : 0.01f;
@@ -637,7 +637,7 @@ namespace CalamityMod.NPCs.AquaticScourge
             return 0f;
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<SulphurousSand>();
         }
@@ -757,7 +757,7 @@ namespace CalamityMod.NPCs.AquaticScourge
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<Irradiated>(), 480, true);
+                target.AddBuff(ModContent.BuffType<Irradiated>(), 480);
         }
     }
 }

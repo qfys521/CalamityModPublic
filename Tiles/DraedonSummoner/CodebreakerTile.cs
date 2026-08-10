@@ -167,10 +167,9 @@ namespace CalamityMod.Tiles.DraedonSummoner
                 SoundEngine.PlaySound(CodebreakerUI.ViewedTileEntityID == -1 ? SoundID.MenuOpen : SoundID.MenuTick);
                 CodebreakerUI.ViewedTileEntityID = codebreakerTileEntity.ID;
                 Main.playerInventory = true;
-                Main.recBigList = false;
+                Main.PipsUseGrid = false;
             }
 
-            Recipe.FindRecipes();
             return true;
         }
 

@@ -12,7 +12,7 @@ namespace CalamityMod.Items.SummonItems
         public new string LocalizationCategory => "Items.SummonItems";
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 5; // Abeemination / Deer Thing
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 5; // Abeemination / Deer Thing
         }
 
         public override void SetDefaults()

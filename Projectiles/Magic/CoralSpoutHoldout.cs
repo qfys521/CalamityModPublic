@@ -79,7 +79,7 @@ namespace CalamityMod.Projectiles.Magic
                 Charge++;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float angle = (Owner.Calamity().mouseWorld - Owner.MountedCenter).ToRotation();
             float blinkage = 0;

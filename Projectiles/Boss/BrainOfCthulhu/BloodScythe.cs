@@ -89,7 +89,7 @@ public class BloodScythe : ModProjectile, ILocalizedModType
         AcceleratingVelocity = reader.ReadPackedVector2();
     }
 
-    public override bool PreDraw(ref Color lightColor)
+    public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
     {
         Texture2D tex = TextureAssets.Projectile[Type].Value;
         Vector2 drawPos = Projectile.Center - Main.screenPosition;
@@ -200,7 +200,7 @@ public class CirclingBloodScythe : ModProjectile, ILocalizedModType
         Projectile.rotation += RotationSpeed;
     }
 
-    public override bool PreDraw(ref Color lightColor)
+    public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
     {
         Main.spriteBatch.SetBlendState(BlendState.Additive);
         Texture2D tex = TextureAssets.Projectile[Type].Value;

@@ -67,11 +67,11 @@ namespace CalamityMod.Rarities
             {
                 textColor = color.Invoke();
             }
-            TextSnippet[] snippets = ChatManager.ParseMessage(text, textColor).ToArray();
+            List<TextSnippet> snippets = ChatManager.ParseMessage(text, textColor);
 
             if (CustomRarities.ContainsKey(Item.type)) // For items in the custom rarity table, give them custom rarity effects.
             {
-                for (int i = 0; i < snippets.Length; i++)
+                for (int i = 0; i < snippets.Count; i++)
                 {
                     TextSnippet textSnippet = snippets[i];
                     if (snippets[i].GetType() == typeof(TextSnippet))

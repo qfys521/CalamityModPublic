@@ -44,7 +44,7 @@ namespace CalamityMod.Systems
                 {
                     bool foundSound = SoundEngine.TryGetActiveSound(SoundSlot, out var activeSound);
                     // If an attached entity stops existing, so does the sound.
-                    if (!foundSound || AttachedEntity == null || !AttachedEntity.active)
+                    if (!foundSound || AttachedEntity.IsNullOrInactive())
                     {
                         currentlyPlaying = false;
                         maxPlaytime = 0;
@@ -54,7 +54,7 @@ namespace CalamityMod.Systems
                         return;
                     }
                     // Otherwise, attach to the entity.
-                    else if (AttachedEntity != null && AttachedEntity.active)
+                    else
                         activeSound.Position = AttachedEntity.Center;
 
                     float newVolume = MathHelper.Clamp(remainingPlaytime / (float)maxPlaytime, 0f, 1f);

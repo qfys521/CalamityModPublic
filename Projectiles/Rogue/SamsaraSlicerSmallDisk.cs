@@ -106,7 +106,7 @@ namespace CalamityMod.Projectiles.Rogue
             Parent = Main.projectile[(int)Projectile.ai[0]];
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             for (int i = 1; i < Projectile.oldPos.Length; i++)
             {

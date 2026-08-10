@@ -24,7 +24,7 @@ namespace CalamityMod.Tiles.Furniture
             TileObjectData.addTile(Type);
             AddMapEntry(new Color(99, 99, 99), CalamityUtils.GetItemName<LanternCenter>());
             TileID.Sets.HasOutlines[Type] = true;
-            TileID.Sets.InteractibleByNPCs[Type] = true;
+            TileID.Sets.InteractableByNPCs[Type] = true;
             TileID.Sets.DisableSmartInteract[Type] = true;
 
             AnimationFrameHeight = 54;

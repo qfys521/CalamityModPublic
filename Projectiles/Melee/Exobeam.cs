@@ -137,7 +137,7 @@ namespace CalamityMod.Projectiles.Melee
         public Color MiniTrailColor(float completionRatio, Vector2 vertexPos) => Color.White;
 
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.timeLeft > 595)
                 return false;

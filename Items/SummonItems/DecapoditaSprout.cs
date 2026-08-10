@@ -11,7 +11,7 @@ namespace CalamityMod.Items.SummonItems
         public new string LocalizationCategory => "Items.SummonItems";
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 3; // Worm Food / Bloody Spine
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 3; // Worm Food / Bloody Spine
         }
 
         public override void SetDefaults()

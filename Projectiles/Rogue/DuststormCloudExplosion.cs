@@ -48,7 +48,7 @@ namespace CalamityMod.Projectiles.Rogue
             modifiers.SourceDamage /= Main.masterMode ? 2f : Main.expertMode ? 1.5f : 1;
             modifiers.SourceDamage *= 0.1f;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.EntitySpriteDraw(TextureAssets.Projectile[Type].Value, Projectile.Center - Main.screenPosition, null, color * Projectile.Opacity, Projectile.rotation, TextureAssets.Projectile[Type].Size() * 0.5f, 0.08f * Projectile.scale, 0);
             return false;

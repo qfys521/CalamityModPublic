@@ -168,7 +168,7 @@ namespace CalamityMod.Projectiles.Ranged
             };
             return useColor;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D star = Request<Texture2D>("CalamityMod/ExtraTextures/SimpleStar").Value;
             Texture2D tex = Request<Texture2D>("CalamityMod/Particles/CircularSmear").Value;

@@ -138,7 +138,7 @@ namespace CalamityMod.Projectiles.Typeless
 
         public static float TrailWidth(float completionRatio, Vector2 vertexPos) => MathHelper.SmoothStep(12f, 4.25f, completionRatio);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Prepare the flame trail shader with its map texture.
             GameShaders.Misc["CalamityMod:ImpFlameTrail"].SetShaderTexture(ModContent.Request<Texture2D>("CalamityMod/ExtraTextures/Trails/ScarletDevilStreak"));

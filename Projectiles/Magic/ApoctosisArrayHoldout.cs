@@ -317,7 +317,7 @@ namespace CalamityMod.Projectiles.Magic
                 shotNum++;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float manaPercent = ((float)Owner.statMana / (float)Owner.statManaMax2);
             if (time < 2)

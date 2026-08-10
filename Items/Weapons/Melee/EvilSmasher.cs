@@ -39,7 +39,7 @@ namespace CalamityMod.Items.Weapons.Melee
             base.UpdateInventory(player);
         }
 
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             if (!IsAnimating)
             {
@@ -48,25 +48,25 @@ namespace CalamityMod.Items.Weapons.Melee
                 return;
             }
             float completion = AnimationTime / 240f;
-            Item.noGrabDelay = 120;
-            Item.velocity = new Vector2(0, -1f);
+            item.noGrabDelay = 120;
+            item.velocity = new Vector2(0, -1f);
             int dotAmount = 0;
             for (var i = 0; i < dotAmount; i++)
             {
                 var ringDir = getRingOffset(i / (float)dotAmount * -MathHelper.TwoPi + MathHelper.TwoPi * completion * 3, ySquish: 3f);
-                Dust.NewDustPerfect(Item.Center + (ringDir * (completion - MathF.Pow(completion, 2)) * 256), i % 2 == 0 ? DustID.Crimson : DustID.Corruption, ringDir);
+                Dust.NewDustPerfect(item.Center + (ringDir * (completion - MathF.Pow(completion, 2)) * 256), i % 2 == 0 ? DustID.Crimson : DustID.Corruption, ringDir);
             }
             if (Main.rand.NextFloat() < completion)
-            Dust.NewDustPerfect(Item.Center, Main.rand.NextBool() ? DustID.CursedTorch : DustID.IchorTorch,Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) * 5);
+            Dust.NewDustPerfect(item.Center, Main.rand.NextBool() ? DustID.CursedTorch : DustID.IchorTorch,Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) * 5);
             if (completion >= 1)
             {
                 for (var i = 0; i < 50; i++)
                 {
-                    Dust.NewDustPerfect(Item.Center, Main.rand.NextBool() ? DustID.CursedTorch : DustID.IchorTorch, Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) * 5);
-                    Dust.NewDustPerfect(Item.Center, Main.rand.NextBool() ? DustID.Crimson : DustID.Corruption, Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) * 5);
+                    Dust.NewDustPerfect(item.Center, Main.rand.NextBool() ? DustID.CursedTorch : DustID.IchorTorch, Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) * 5);
+                    Dust.NewDustPerfect(item.Center, Main.rand.NextBool() ? DustID.Crimson : DustID.Corruption, Vector2.UnitX.RotatedByRandom(MathHelper.TwoPi) * 5);
                 }
                 IsAnimating = false;
-                Item.velocity = new Vector2(0, -5);
+                item.velocity = new Vector2(0, -5);
             }
             AnimationTime++;
         }
@@ -101,7 +101,7 @@ namespace CalamityMod.Items.Weapons.Melee
             return GlowBeamCapTex.Value;
         }
         #endregion
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             if (IsAnimating)
             {
@@ -118,11 +118,11 @@ namespace CalamityMod.Items.Weapons.Melee
                         Main.GameViewMatrix.TransformationMatrix
                     );
 
-                    Main.spriteBatch.Draw(GetGlowTex(), Item.Center - Main.screenPosition, null, color, 0, GetGlowTex().Size() * 0.5f, 0.1f + 0.7f * (AnimationTime / 240f), SpriteEffects.None, 0);
+                    Main.spriteBatch.Draw(GetGlowTex(), item.Center - Main.screenPosition, null, color, 0, GetGlowTex().Size() * 0.5f, 0.1f + 0.7f * (AnimationTime / 240f), SpriteEffects.None, 0);
                     int rep = 0;
                     for (float i = 0; i <= MathHelper.TwoPi; i += MathHelper.TwoPi * 0.166f)
                     {
-                        Main.spriteBatch.Draw(GetGlowBeamTex(), Item.Center - Main.screenPosition, null, color, MathHelper.WrapAngle(Main.GlobalTimeWrappedHourly) + i, new(GetGlowBeamTex().Size().X * 0.5f, 0), 0f + 0.06f * (AnimationTime / 240f) * (rep == 0 ? 1 : 0.75f), SpriteEffects.None, 0);
+                        Main.spriteBatch.Draw(GetGlowBeamTex(), item.Center - Main.screenPosition, null, color, MathHelper.WrapAngle(Main.GlobalTimeWrappedHourly) + i, new(GetGlowBeamTex().Size().X * 0.5f, 0), 0f + 0.06f * (AnimationTime / 240f) * (rep == 0 ? 1 : 0.75f), SpriteEffects.None, 0);
                         rep = (rep + 1) % 2;
                     }
                     
@@ -130,7 +130,7 @@ namespace CalamityMod.Items.Weapons.Melee
                 }
 
                 var tex = TextureAssets.Item[ItemID.Pwnhammer].Value;
-                Main.spriteBatch.Draw(tex, Item.Center - Main.screenPosition, null, Color.Lerp(lightColor, Color.Black, AnimationTime / 240f), 0, tex.Size() * 0.5f, MathHelper.Lerp(1, 1.75f, AnimationTime / 240f), SpriteEffects.None, 0);
+                Main.spriteBatch.Draw(tex, item.Center - Main.screenPosition, null, Color.Lerp(lightColor, Color.Black, AnimationTime / 240f), 0, tex.Size() * 0.5f, MathHelper.Lerp(1, 1.75f, AnimationTime / 240f), SpriteEffects.None, 0);
                 return false;
 
             }
@@ -150,18 +150,18 @@ namespace CalamityMod.Items.Weapons.Melee
                         Main.GameViewMatrix.TransformationMatrix
                     );
 
-                    Main.spriteBatch.Draw(GetGlowTex(), Item.Center - Main.screenPosition, null, color, 0, GetGlowTex().Size() * 0.5f, 0.1f + 0.7f * completion, SpriteEffects.None, 0);
+                    Main.spriteBatch.Draw(GetGlowTex(), item.Center - Main.screenPosition, null, color, 0, GetGlowTex().Size() * 0.5f, 0.1f + 0.7f * completion, SpriteEffects.None, 0);
                     int rep = 0;
                     for (float i = 0; i <= MathHelper.TwoPi; i += MathHelper.TwoPi * 0.166f)
                     {
-                        Main.spriteBatch.Draw(GetGlowBeamTex(), Item.Center - Main.screenPosition, null, color, MathHelper.WrapAngle(Main.GlobalTimeWrappedHourly) + i, new(GetGlowBeamTex().Size().X * 0.5f, 0), 0f + 0.06f * completion * (rep == 0 ? 1 : 0.75f), SpriteEffects.None, 0);
+                        Main.spriteBatch.Draw(GetGlowBeamTex(), item.Center - Main.screenPosition, null, color, MathHelper.WrapAngle(Main.GlobalTimeWrappedHourly) + i, new(GetGlowBeamTex().Size().X * 0.5f, 0), 0f + 0.06f * completion * (rep == 0 ? 1 : 0.75f), SpriteEffects.None, 0);
                         rep = (rep + 1) % 2;
                     }
                     
                     Main.spriteBatch.End();
                 }
             }
-            return base.PreDrawInWorld(spriteBatch, lightColor, alphaColor, ref rotation, ref scale, whoAmI);
+            return base.PreDrawInWorld(item, spriteBatch, lightColor, alphaColor, ref rotation, ref scale, whoAmI);
         }
 
         private Vector2 getRingOffset(float rad, float xSquish = 1, float ySquish = 1)
@@ -177,7 +177,7 @@ namespace CalamityMod.Items.Weapons.Melee
             return entity.type == ItemID.Pwnhammer;
         }
 
-        public override void Update(Item item, ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             if (item.noGrabDelay > 0) return; //Only run once the item is fully settled
             for (var i = 0; i < 5; i++) //Loop a couple times to check different vertical positions for the altar, improving accuracy.
@@ -189,12 +189,12 @@ namespace CalamityMod.Items.Weapons.Melee
                     {
                         var newItem = Main.item[Item.NewItem(item.GetSource_FromThis(), item.Hitbox, ModContent.ItemType<EvilSmasher>())];
                         newItem.noGrabDelay = 120;
-                        newItem.prefix = item.prefix;
+                        newItem.Prefix(item.inner.prefix);
                         (newItem.ModItem as EvilSmasher).IsAnimating = true;
                     }
                     item.stack -= 1;
                     if (item.stack <= 0)
-                        item.active = false;
+                        item.TurnToAir();
                     return;
                 }
             }

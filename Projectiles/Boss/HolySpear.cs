@@ -32,7 +32,7 @@ namespace CalamityMod.Projectiles.Boss
             Projectile.tileCollide = false;
             Projectile.penetrate = -1;
             Projectile.timeLeft = 200;
-            CooldownSlot = ImmunityCooldownID.Bosses;
+            CooldownSlot = ImmunityCooldownID.BossNoCheese;
         }
 
         public override void SendExtraAI(BinaryWriter writer)
@@ -147,7 +147,7 @@ namespace CalamityMod.Projectiles.Boss
             GeneralParticleHandler.SpawnParticle(new SparkParticle(Projectile.Center + new Vector2(Main.rand.NextFloat(20), 0).RotatedByRandom(MathHelper.TwoPi), Projectile.velocity, false, 15, Main.rand.NextFloat(0.5f, 1.5f) * MathHelper.Clamp(Projectile.velocity.Length() / 15, 0f, 2f), aimedSpear ? baseColor : ProvUtils.GetProjectileColor(255, false)));
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D drawTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             bool aimedSpear = Projectile.ai[0] > 0f;

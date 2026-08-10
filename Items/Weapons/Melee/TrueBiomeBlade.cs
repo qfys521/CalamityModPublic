@@ -93,7 +93,7 @@ namespace CalamityMod.Items.Weapons.Melee
             {
                 //Default stuff
                 effectDescTooltip.Text = this.GetLocalizedValue("DefaultFunction");
-                effectDescTooltip.OverrideColor = new Color(163, 163, 163);
+                effectDescTooltip.Color = new Color(163, 163, 163);
             }
 
             //If theres a main attunement
@@ -101,32 +101,32 @@ namespace CalamityMod.Items.Weapons.Melee
             {
                 if (effectDescTooltip != null)
                 {
-                    effectDescTooltip.Text = Lang.SupportGlyphs(mainAttunement.FunctionText.ToString());
-                    effectDescTooltip.OverrideColor = mainAttunement.tooltipColor;
+                    effectDescTooltip.Text = mainAttunement.FunctionText.ToString();
+                    effectDescTooltip.Color = mainAttunement.tooltipColor;
                 }
 
                 if (mainAttunementTooltip != null)
                 {
                     mainAttunementTooltip.Text = mainAttunementTooltip.Text.Replace("ATT1", mainAttunement.AttunementName.ToString());
-                    mainAttunementTooltip.OverrideColor = mainAttunement.tooltipColor;
+                    mainAttunementTooltip.Color = mainAttunement.tooltipColor;
                 }
             }
             else if (mainAttunementTooltip != null)
             {
                 mainAttunementTooltip.Text = mainAttunementTooltip.Text.Replace("ATT1", Language.GetTextValue("LegacyInterface.23"));
-                mainAttunementTooltip.OverrideColor = new Color(163, 163, 163);
+                mainAttunementTooltip.Color = new Color(163, 163, 163);
             }
 
             //If theres a secondary attunement
             if (secondaryAttunement != null && secondaryAttunementTooltip != null)
             {
                 secondaryAttunementTooltip.Text = secondaryAttunementTooltip.Text.Replace("ATT2", secondaryAttunement.AttunementName.ToString());
-                secondaryAttunementTooltip.OverrideColor = Color.Lerp(secondaryAttunement.tooltipColor, Color.Gray, 0.5f);
+                secondaryAttunementTooltip.Color = Color.Lerp(secondaryAttunement.tooltipColor, Color.Gray, 0.5f);
             }
             else if (secondaryAttunementTooltip != null)
             {
                 secondaryAttunementTooltip.Text = secondaryAttunementTooltip.Text.Replace("ATT2", Language.GetTextValue("LegacyInterface.23"));
-                secondaryAttunementTooltip.OverrideColor = new Color(163, 163, 163);
+                secondaryAttunementTooltip.Color = new Color(163, 163, 163);
             }
         }
         #endregion
@@ -351,10 +351,10 @@ namespace CalamityMod.Items.Weapons.Melee
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D itemTexture = Request<Texture2D>("CalamityMod/Projectiles/Melee/MendedBiomeBlade").Value; //Use the "projectile" sprite which is flipped so its consistent in lighting with the rest of the line, since its actual sprite is flipped so the swings may look normal
-            spriteBatch.Draw(itemTexture, Item.Center - Main.screenPosition, null, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(itemTexture, item.Center - Main.screenPosition, null, lightColor, rotation, Item.Size * 0.5f, scale, SpriteEffects.None, 0f);
             return false;
         }
 

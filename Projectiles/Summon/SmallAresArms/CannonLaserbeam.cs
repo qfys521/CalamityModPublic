@@ -37,6 +37,7 @@ namespace CalamityMod.Projectiles.Summon.SmallAresArms
         }
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = Projectile.height = 38;
             Projectile.friendly = true;
             Projectile.penetrate = -1;
@@ -86,12 +87,8 @@ namespace CalamityMod.Projectiles.Summon.SmallAresArms
 
         public override bool ShouldUpdatePosition() => false;
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
-        }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // This should never happen, but just in case.
             if (Projectile.velocity == Vector2.Zero || Projectile.localAI[0] < 2f)

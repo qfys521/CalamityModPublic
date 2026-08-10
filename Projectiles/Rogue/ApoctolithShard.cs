@@ -65,7 +65,7 @@ namespace CalamityMod.Projectiles.Rogue
                 Projectile.velocity.Y = -Projectile.velocity.Y;
             return false;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
             Rectangle fr = tex.Frame(1, 3, 0, Projectile.frame, 0, 0);
@@ -74,7 +74,7 @@ namespace CalamityMod.Projectiles.Rogue
             float a = Math.Clamp(MathHelper.Lerp(255f, 0f, Projectile.ai[1] / (float)TimeBeforeHoming), 0, 1);
             Main.EntitySpriteDraw(tex.Value, Projectile.Center - Main.screenPosition, fr, ApoctolithProj.HighBlueColor.MultiplyRGBA(new Color(a, a, a, 0)), Projectile.rotation, new(fr.Width / 2, fr.Height / 2), 1.35f, SpriteEffects.None);
             
-            return base.PreDraw(ref lightColor);
+            return base.PreDraw(player, ref lightColor);
         }
         public override void OnKill(int timeLeft)
         {

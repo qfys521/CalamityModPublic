@@ -94,10 +94,10 @@ namespace CalamityMod.Items.Accessories
         public override bool CanUseItem(Player player) => false;
 
         // Produces purple light while in the world.
-        public override void PostUpdate()
+        public override void PostUpdate(WorldItem item)
         {
             float brightness = Main.essScale;
-            Lighting.AddLight(Item.Center, 0.92f * brightness, 0.42f * brightness, 0.92f * brightness);
+            Lighting.AddLight(item.Center, 0.92f * brightness, 0.42f * brightness, 0.92f * brightness);
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips)

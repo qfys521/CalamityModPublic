@@ -13,6 +13,10 @@ namespace CalamityMod.Graphics.Metaballs
     public class MetaballManager : ModSystem
     {
         internal static readonly List<Metaball> metaballs = new();
+        internal static Vector2 CameraOffsetSinceLastFrame { get; private set; }
+
+        private static Vector2 previousScreenPosition;
+        private static bool hasPreviousScreenPosition;
 
         public override void Load()
         {
@@ -35,6 +39,10 @@ namespace CalamityMod.Graphics.Metaballs
         {
             foreach (Metaball metaball in metaballs)
                 metaball.ClearInstances();
+
+            CameraOffsetSinceLastFrame = Vector2.Zero;
+            previousScreenPosition = Vector2.Zero;
+            hasPreviousScreenPosition = false;
         }
 
         public override void PostUpdateEverything()
@@ -50,6 +58,11 @@ namespace CalamityMod.Graphics.Metaballs
 
         private void PrepareMetaballTargets()
         {
+            Vector2 currentScreenPosition = Main.screenPosition;
+            CameraOffsetSinceLastFrame = hasPreviousScreenPosition ? previousScreenPosition - currentScreenPosition : Vector2.Zero;
+            previousScreenPosition = currentScreenPosition;
+            hasPreviousScreenPosition = true;
+
             // Get a list of all metaballs currently in use.
             var activeMetaballs = metaballs.Where(m => m.AnythingToDraw);
 

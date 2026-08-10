@@ -50,7 +50,7 @@ namespace CalamityMod.Projectiles.Magic
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.4f, 0.5f);
                     dust.color = Color.Gold;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace CalamityMod.Projectiles.Magic
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(1.2f, 1.5f);
                     dust.color = Color.Gold;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace CalamityMod.Projectiles.Magic
             return false;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => CalamityUtils.CircularHitboxCollision(Projectile.Center, 10 + 65 * velLerp, targetHitbox);
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> tex = ModContent.Request<Texture2D>(Texture);
             Color drawColor = Color.Gold;

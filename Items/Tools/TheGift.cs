@@ -48,7 +48,7 @@ namespace CalamityMod.Items.Tools
             }
         }
 
-        public static bool TryApplyGift(Item item, NPC npc, bool? forcedOutcome = null)
+        public static bool TryApplyGift(WorldItem item, NPC npc, bool? forcedOutcome = null)
         {
             if (!item.active || item.type != ModContent.ItemType<TheGift>() || Main.remixWorld || !CanApplyToNPC(npc))
                 return false;
@@ -62,14 +62,13 @@ namespace CalamityMod.Items.Tools
             item.stack--;
             if (item.stack <= 0)
             {
-                item.active = false;
-                item.type = ItemID.None;
+                item.TurnToAir();
             }
 
             if (Main.netMode == NetmodeID.Server)
             {
                 npc.netUpdate = true;
-                NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item.whoAmI);
+                NetMessage.SendData(MessageID.SyncItem, -1, -1, null, item.whoAmI/* tModPorter Note: Removed. Moved to WorldItem */);
                 TheGiftEffectsPacket.Send(npc, positive);
             }
 
@@ -96,24 +95,24 @@ namespace CalamityMod.Items.Tools
             On_ShopHelper.ProcessMood += TheGiftHappiness;
         }
 
-        public override void Update(ref float gravity, ref float maxFallSpeed)
+        public override void Update(WorldItem item, ref float gravity, ref float maxFallSpeed)
         {
             // Controls actually applying the effect to an NPC
             // None of this should work in Remix because Remix disables happiness
-            bool localGiftCollisionCheck = Main.netMode == NetmodeID.SinglePlayer || Item.playerIndexTheItemIsReservedFor == Main.myPlayer;
-            if (Item.noGrabDelay <= 0 && !Main.remixWorld && localGiftCollisionCheck)
+            bool localGiftCollisionCheck = Main.netMode == NetmodeID.SinglePlayer || item.playerIndexTheItemIsReservedFor == Main.myPlayer;
+            if (item.noGrabDelay <= 0 && !Main.remixWorld && localGiftCollisionCheck)
             {
                 foreach (NPC n in Main.ActiveNPCs)
                 {
                     if (!CanApplyToNPC(n))
                         continue;
 
-                    if (Item.Hitbox.Intersects(n.Hitbox))
+                    if (item.Hitbox.Intersects(n.Hitbox))
                     {
                         if (Main.netMode == NetmodeID.SinglePlayer)
-                            TryApplyGift(Item, n);
+                TryApplyGift(item, n);
                         else if (Main.netMode == NetmodeID.MultiplayerClient)
-                            RequestApplyTheGiftPacket.Send(Item, n);
+                RequestApplyTheGiftPacket.Send(item, n);
 
                         // Make sure it can't apply to multiple NPCs at once
                         break;
@@ -143,7 +142,7 @@ namespace CalamityMod.Items.Tools
                 {
                     dialogueKey = $"Mods.CalamityMod.Vanilla.TownNPCMood.{NPCID.Search.GetName(npc.type)}.Monument";
                     // Zoologist has separate dialogue when transformed
-                    if (npc.type == NPCID.BestiaryGirl && npc.ShouldBestiaryGirlBeLycantrope())
+                    if (npc.type == NPCID.BestiaryGirl && NPC.ShouldBestiaryGirlBeLycantrope())
                         dialogueKey += "Transformed";
                 }
                 else
@@ -174,7 +173,7 @@ namespace CalamityMod.Items.Tools
                 {
                     dialogueKey = $"Mods.CalamityMod.Vanilla.TownNPCMood.{NPCID.Search.GetName(npc.type)}.{locKey}";
                     // Zoologist has separate dialogue when transformed
-                    if (npc.type == NPCID.BestiaryGirl && npc.ShouldBestiaryGirlBeLycantrope())
+                    if (npc.type == NPCID.BestiaryGirl && NPC.ShouldBestiaryGirlBeLycantrope())
                         dialogueKey += "Transformed";
                 }
                 else

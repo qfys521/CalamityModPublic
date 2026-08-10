@@ -130,7 +130,7 @@ namespace CalamityMod.Projectiles.Typeless
                     c.scale = Main.rand.NextFloat(1f, 1.3f) * velLerp;
                     c.noGravity = true;
                     c.color = Main.rand.NextBool() ? Color.Aquamarine : bColor;
-                    c.noLightEmittence = true;
+                    c.noLightEmittance = true;
                     c.fadeIn = 1;
                     c.alpha = 100;
                 }
@@ -144,7 +144,7 @@ namespace CalamityMod.Projectiles.Typeless
                     c.scale = Main.rand.NextFloat(1.2f, 1.5f) * velLerp;
                     c.noGravity = true;
                     c.color = bColor;
-                    c.noLightEmittence = true;
+                    c.noLightEmittance = true;
                     c.noGravity = !Main.rand.NextBool(3);
                 }
             }
@@ -157,7 +157,7 @@ namespace CalamityMod.Projectiles.Typeless
                     c.scale = Main.rand.NextFloat(1.8f, 2.3f) * velLerp;
                     c.noGravity = true;
                     c.color = bColor;
-                    c.noLightEmittence = true;
+                    c.noLightEmittance = true;
                     c.fadeIn = 2.3f;
                 }
             }
@@ -177,7 +177,7 @@ namespace CalamityMod.Projectiles.Typeless
                         dust2.scale = scale * 3;
                         dust2.noGravity = true;
                         dust2.color = bColor;
-                        dust2.noLightEmittence = true;
+                        dust2.noLightEmittance = true;
                     }
                 }
                 if (time > 80) // Track the player in a natural motion simular to swimming
@@ -337,7 +337,7 @@ namespace CalamityMod.Projectiles.Typeless
                                     dust2.scale = scale * 4;
                                     dust2.noGravity = true;
                                     dust2.color = bColor;
-                                    dust2.noLightEmittence = true;
+                                    dust2.noLightEmittance = true;
                                 }
                             }
                         }
@@ -419,7 +419,7 @@ namespace CalamityMod.Projectiles.Typeless
                         c.scale = Main.rand.NextFloat(1.3f, 1.6f) * 0.9f * (i % 3 == 0 ? 2.2f : 1.8f);
                         c.noGravity = true;
                         c.color = bColor;
-                        c.noLightEmittence = true;
+                        c.noLightEmittance = true;
                         c.fadeIn = 0.9f;
                     }
                     Particle blastRing = new CustomPulse(target.Center, Vector2.Zero, bColor * 0.7f, "CalamityMod/Particles/BloomRing", Vector2.One, Main.rand.NextFloat(-10, 10), 0.5f, 1.8f, 13, true);
@@ -460,7 +460,7 @@ namespace CalamityMod.Projectiles.Typeless
                         dust2.scale = scale * 5;
                         dust2.noGravity = true;
                         dust2.color = bColor;
-                        dust2.noLightEmittence = true;
+                        dust2.noLightEmittance = true;
                         dust2.fadeIn = 1.5f;
                     }
                 }
@@ -513,11 +513,11 @@ namespace CalamityMod.Projectiles.Typeless
                     dust2.noGravity = false;
                     dust2.color = bColor;
                     dust2.noLight = true;
-                    dust2.noLightEmittence = true;
+                    dust2.noLightEmittance = true;
                 }
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Asset<Texture2D> orb = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle");
             float sine = (float)Math.Sin((Main.GlobalTimeWrappedHourly * 10) / MathHelper.Pi);

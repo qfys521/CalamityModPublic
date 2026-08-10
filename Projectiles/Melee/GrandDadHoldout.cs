@@ -55,6 +55,7 @@ namespace CalamityMod.Projectiles.Melee
         }
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = Projectile.height = 124;
             Projectile.friendly = true;
             Projectile.DamageType = TrueMeleeDamageClass.Instance;
@@ -94,7 +95,7 @@ namespace CalamityMod.Projectiles.Melee
             Owner.heldProj = Projectile.whoAmI;
             Owner.itemRotation = (Projectile.velocity * Owner.direction).ToRotation();
 
-            angleArmHold = MathHelper.Lerp(angleArmHold, angledHold * MathF.Pow(Utils.GetLerpValue(cooldown, cooldown * 0.35f, attackTimer, true), 5), 0.12f / Projectile.MaxUpdates * Owner.meleeSpeed);
+            angleArmHold = MathHelper.Lerp(angleArmHold, angledHold * MathF.Pow(Utils.GetLerpValue(cooldown, cooldown * 0.35f, attackTimer, true), 5), 0.12f / Projectile.MaxUpdates * Owner.GetAttackSpeed(DamageClass.Melee));
             float angleVariation = (float)Math.Sin(time * 0.04f / Projectile.MaxUpdates) * 0.05f;
 
             float outwardDistance = 5;
@@ -127,9 +128,9 @@ namespace CalamityMod.Projectiles.Melee
                     enabledHitbox--;
             }
             if (fadeInFX)
-                bladefx = MathHelper.Lerp(bladefx, 1, 0.25f / Projectile.MaxUpdates * Owner.meleeSpeed);
+                bladefx = MathHelper.Lerp(bladefx, 1, 0.25f / Projectile.MaxUpdates * Owner.GetAttackSpeed(DamageClass.Melee));
             else
-                bladefx = MathHelper.Lerp(bladefx, 0, 0.15f / Projectile.MaxUpdates * Owner.meleeSpeed);
+                bladefx = MathHelper.Lerp(bladefx, 0, 0.15f / Projectile.MaxUpdates * Owner.GetAttackSpeed(DamageClass.Melee));
 
             if (canReleaseHoldout || time < 25)
             {
@@ -143,7 +144,7 @@ namespace CalamityMod.Projectiles.Melee
                 Owner.itemTime = Owner.itemAnimation = 5;
 
             
-            float lerpSpeed = 0.1f / Projectile.MaxUpdates * Owner.meleeSpeed;
+            float lerpSpeed = 0.1f / Projectile.MaxUpdates * Owner.GetAttackSpeed(DamageClass.Melee);
             float maxAngle = MathHelper.PiOver4 * 0.8f;
             if (swingCount % 2 == 0)
                 angledHold = MathHelper.Lerp(angledHold, maxAngle, lerpSpeed);
@@ -358,7 +359,7 @@ namespace CalamityMod.Projectiles.Melee
                 modifiers.SourceDamage *= damageMult;
             }
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 3)
                 return false;
@@ -409,10 +410,6 @@ namespace CalamityMod.Projectiles.Melee
             Main.EntitySpriteDraw(texture, drawPosition + placeAdjust, null, drawColor, drawRotation, rotationPoint, Projectile.scale, flipSprite); // The holdout
 
             return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
         }
     }
 }

@@ -45,7 +45,7 @@ namespace CalamityMod.Projectiles.Rogue
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             string texString = Projectile.ai[2] == 1f ? "CalamityMod/Projectiles/Rogue/Valaricicle2" : Texture;
             Texture2D tex = ModContent.Request<Texture2D>(texString).Value;

@@ -135,7 +135,7 @@ namespace CalamityMod.Projectiles.Melee.Yoyos
                     dust.noGravity = true;
                     dust.scale = Main.rand.NextFloat(0.85f, 1.15f);
                     dust.color = Main.rand.NextBool(5) ? Color.Khaki : Color.Goldenrod;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
                 yoyoPower++;
             }
@@ -182,7 +182,7 @@ namespace CalamityMod.Projectiles.Melee.Yoyos
                             if (isSpark)
                                 dust.noGravity = false;
                             else
-                                dust.noLightEmittence = true;
+                                dust.noLightEmittance = true;
                         }
                     }
 
@@ -204,7 +204,7 @@ namespace CalamityMod.Projectiles.Melee.Yoyos
 
         public override bool? CanDamage() => canDamage ? null : false;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D bloomTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/BloomCircle").Value;
             Texture2D shineTexture = ModContent.Request<Texture2D>("CalamityMod/Particles/HalfStar").Value;

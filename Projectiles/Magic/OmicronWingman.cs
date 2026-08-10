@@ -46,6 +46,7 @@ namespace CalamityMod.Projectiles.Magic
 
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.BehindNPCs;
             Projectile.width = Projectile.height = 142;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
@@ -238,7 +239,7 @@ namespace CalamityMod.Projectiles.Magic
 
         public override bool? CanDamage() => false;
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time <= 0)
                 return false;
@@ -264,7 +265,6 @@ namespace CalamityMod.Projectiles.Magic
             return false;
         }
 
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI) => behindNPCs.Add(index);
 
         public override void SendExtraAI(BinaryWriter writer)
         {

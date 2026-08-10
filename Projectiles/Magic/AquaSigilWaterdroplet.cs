@@ -54,7 +54,7 @@ namespace CalamityMod.Projectiles.Magic
             // Gravity!
             Projectile.velocity.Y = Projectile.velocity.Y + 0.35f;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = TextureAssets.Projectile[Type].Value;
             int frameHeight = texture.Height / Main.projFrames[Type];

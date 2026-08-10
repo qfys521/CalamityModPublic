@@ -320,7 +320,7 @@ namespace CalamityMod.NPCs.Abyss
                         NPC.Center = ((latchedTarget.gravDir == 1f) ? latchedTarget.Top : latchedTarget.Bottom) + new Vector2((float)(latchedTarget.direction * 4), 0f);
                         NPC.gfxOffY = latchedTarget.gfxOffY;
                         NPC.velocity = Vector2.Zero;
-                        latchedTarget.AddBuff(BuffID.Obstructed, 59, true);
+                        latchedTarget.AddBuff(BuffID.Obstructed, 59);
                     }
                 }
                 NPC.rotation = NPC.velocity.X * 0.05f;
@@ -608,9 +608,9 @@ namespace CalamityMod.NPCs.Abyss
             NPC.frame.Y = frame * frameHeight;
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if ((spawnInfo.Player.Calamity().ZoneAbyssLayer3 || spawnInfo.Player.Calamity().ZoneAbyssLayer4) && spawnInfo.Water && !NPC.AnyNPCs(ModContent.NPCType<ColossalSquid>()))
+            if ((spawner.Player.Calamity().ZoneAbyssLayer3 || spawner.Player.Calamity().ZoneAbyssLayer4) && spawner.waterTile && !NPC.AnyNPCs(ModContent.NPCType<ColossalSquid>()))
                 return Main.remixWorld ? 5.4f : SpawnCondition.CaveJellyfish.Chance * 0.6f;
 
             return 0f;
@@ -619,7 +619,7 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<HadopelagicPressure>(), 300, true);
+                target.AddBuff(ModContent.BuffType<HadopelagicPressure>(), 300);
         }
 
         public override void ModifyNPCLoot(NPCLoot npcLoot)

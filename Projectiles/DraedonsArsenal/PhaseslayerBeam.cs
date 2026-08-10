@@ -43,7 +43,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             Projectile.frameCounter++;
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D bladeTexture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
 
@@ -58,7 +58,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
 
             return false;
         }
-        public override void PostDraw(Color drawColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);

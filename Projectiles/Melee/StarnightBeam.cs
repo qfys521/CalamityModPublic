@@ -39,7 +39,7 @@ namespace CalamityMod.Projectiles.Melee
             return new Color(byte.MaxValue, 50, 128, Projectile.alpha);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Projectile.timeLeft > 115)
                 return false;

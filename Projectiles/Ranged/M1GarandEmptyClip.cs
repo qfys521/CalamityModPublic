@@ -109,7 +109,7 @@ namespace CalamityMod.Projectiles.Ranged
             return base.OnTileCollide(oldVelocity);
         }
         // Pretty much all from ricoshot coins from here.
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Rectangle frame = tex.Frame(1, 1);

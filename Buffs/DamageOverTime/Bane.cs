@@ -25,7 +25,7 @@ namespace CalamityMod.Buffs.DamageOverTime
             Main.debuff[Type] = true;
             Main.pvpBuff[Type] = true;
             Main.buffNoSave[Type] = true;
-            BuffID.Sets.LongerExpertDebuff[Type] = true;
+            BuffID.Sets.BuffTimeIsExtendedWithGameDifficulty[Type] = true;
             CalamityBuffSets.DebuffDataset[Type] = debuffData;
         }
         public static void BaneNPCLifeRegen(NPC npc, int buffType, ref int buffIndex, ref int damage)

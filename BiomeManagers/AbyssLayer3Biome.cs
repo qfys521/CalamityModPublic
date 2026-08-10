@@ -22,7 +22,7 @@ namespace CalamityMod.BiomeManagers
                     CalamityMod.Instance.GetMusicFromMusicMod("AbyssLayer3Alt") : 
                     CalamityMod.Instance.GetMusicFromMusicMod("AbyssLayer3");
                     
-                return musicSlot ?? MusicID.Hell;
+                return musicSlot ?? MusicID.Underworld;
             }
         }
 

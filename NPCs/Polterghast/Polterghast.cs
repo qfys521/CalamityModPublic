@@ -930,7 +930,7 @@ namespace CalamityMod.NPCs.Polterghast
             }
         }
 
-        public override void BossLoot(ref int potionType)
+        public override void BossLoot(ref int potionType, ref int potionStack, ref int heartStack)
         {
             potionType = ModContent.ItemType<SupremeHealingPotion>();
         }
@@ -1196,12 +1196,12 @@ namespace CalamityMod.NPCs.Polterghast
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(BuffID.MoonLeech, 900, true);
+                target.AddBuff(BuffID.MoonLeech, 900);
         }
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
             return true;
         }
 

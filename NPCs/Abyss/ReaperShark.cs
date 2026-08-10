@@ -712,12 +712,12 @@ namespace CalamityMod.NPCs.Abyss
         public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             if (hurtInfo.Damage > 0)
-                target.AddBuff(ModContent.BuffType<HadopelagicPressure>(), 300, true);
+                target.AddBuff(ModContent.BuffType<HadopelagicPressure>(), 300);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (spawnInfo.Player.Calamity().ZoneAbyssLayer4 && spawnInfo.Water && !NPC.AnyNPCs(ModContent.NPCType<ReaperShark>()))
+            if (spawner.Player.Calamity().ZoneAbyssLayer4 && spawner.waterTile && !NPC.AnyNPCs(ModContent.NPCType<ReaperShark>()))
                 return Main.remixWorld ? 10.8f : SpawnCondition.CaveJellyfish.Chance * 1.2f;
 
             return 0f;

@@ -62,7 +62,7 @@ namespace CalamityMod.Projectiles.Magic
                         dust.noGravity = false;
                         dust.scale = Main.rand.NextFloat(0.85f, 1.4f);
                         dust.color = bColor;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                         if (i % 3 == 0)
                         {
                             float variance = Main.rand.NextFloat(-0.6f, 0.6f);
@@ -87,7 +87,7 @@ namespace CalamityMod.Projectiles.Magic
                     dust.noGravity = false;
                     dust.scale = Main.rand.NextFloat(0.85f, 1.4f);
                     dust.color = bColor;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
 
                 Particle trail = new CustomSpark(Projectile.Center, -Projectile.velocity * 0.3f, "CalamityMod/Particles/BloomCircle", false, 11, 0.3f, bColor * 0.9f, new Vector2(1, 1f), true, false, shrinkSpeed: 0.7f * velFade);
@@ -117,7 +117,7 @@ namespace CalamityMod.Projectiles.Magic
         {
             Projectile.NewProjectileDirect(Projectile.GetSource_FromThis(), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<FireImplosion>(), (int)(Projectile.damage * 0.75f), Projectile.knockBack, Projectile.owner);
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Projectile.DrawProjectileWithBackglow(bColor with { A = 0 }, Color.White, 2f * fadeIn);
             return false;

@@ -307,7 +307,7 @@ namespace CalamityMod.Projectiles.Ranged
                 Dust chargeDust = Dust.NewDustPerfect(GunTipPosition, DustID.RainbowMk2, velocity, Scale: Utils.Remap(dustAmount, 10f, 30f, 1.5f, 2.2f));
                 chargeDust.noGravity = true;
                 chargeDust.noLight = true;
-                chargeDust.noLightEmittence = true;
+                chargeDust.noLightEmittance = true;
                 chargeDust.color = Main.rand.NextBool(3) ? color2 : color1;
             }
 
@@ -333,7 +333,7 @@ namespace CalamityMod.Projectiles.Ranged
             SoundEngine.PlaySound(chargeSound, GunTipPosition);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Timer < 2)
                 return false;

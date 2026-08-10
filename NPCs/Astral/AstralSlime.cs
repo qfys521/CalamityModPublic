@@ -75,13 +75,13 @@ namespace CalamityMod.NPCs.Astral
             CalamityGlobalNPC.DoHitDust(NPC, hit.HitDirection, ModContent.DustType<AstralOrange>(), 1f, 4, 24);
         }
 
-        public override float SpawnChance(NPCSpawnInfo spawnInfo)
+        public override float SpawnChance(NPC.Spawner spawner)
         {
-            if (CalamityGlobalNPC.AnyEvents(spawnInfo.Player))
+            if (CalamityGlobalNPC.AnyEvents(spawner.Player))
             {
                 return 0f;
             }
-            else if (spawnInfo.Player.InAstral(1))
+            else if (spawner.Player.InAstral(1))
             {
                 return 0.21f;
             }

@@ -58,7 +58,7 @@ namespace CalamityMod.Projectiles.Ranged
             }
         }
 
-        public override bool PreDraw(ref Color lightColor) => Projectile.DrawBeam(100f, 2f, lightColor);
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */ => Projectile.DrawBeam(100f, 2f, lightColor);
 
         public override Color? GetAlpha(Color lightColor) => new Color(0, 250, 75, Projectile.alpha);
 

@@ -253,7 +253,7 @@ namespace CalamityMod.Projectiles.Melee
                         dust.noGravity = true;
                         dust.color = Main.rand.NextBool() ? Color.Red : Color.Crimson;
                         dust.noLight = true;
-                        dust.noLightEmittence = true;
+                        dust.noLightEmittance = true;
                         dust.alpha = 100;
                         dust.fadeIn = Projectile.scale - 1;
                     }
@@ -304,7 +304,7 @@ namespace CalamityMod.Projectiles.Melee
                 dust.noGravity = true;
                 dust.color = Main.rand.NextBool() ? Color.Red : Color.Crimson;
                 dust.noLight = true;
-                dust.noLightEmittence = true;
+                dust.noLightEmittance = true;
                 dust.alpha = 100;
                 dust.velocity += Projectile.velocity;
                 dust.fadeIn = Projectile.scale - 1;
@@ -400,7 +400,7 @@ namespace CalamityMod.Projectiles.Melee
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
             => (Projectile.numHits <= 0 || (CurrentState & State.LeftTarget) != 0) && CircularHitboxCollision(Projectile.Center, Projectile.width / ((CurrentState & State.LeftTarget) != 0 ? 0.5f : 1) * Projectile.scale, targetHitbox);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D centerTexture = ModContent.Request<Texture2D>("CalamityMod/Items/Weapons/Melee/BladecrestOathsword").Value;
 

@@ -20,7 +20,7 @@ namespace CalamityMod.Projectiles.Typeless
 
         //fuck glowmasks btw
         //i second this notion -Dominic
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D glowmask = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Typeless/DevourerofCodsGlow").Value;
             float xOffset = (glowmask.Width - Projectile.width) * 0.5f + Projectile.width * 0.5f;
@@ -37,7 +37,7 @@ namespace CalamityMod.Projectiles.Typeless
             }
         }
 
-        public override bool PreDrawExtras()
+        public override bool PreDrawExtras(Player player)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Lighting.AddLight(Projectile.Center, 0.35f, 0f, 0.25f);
             return true;

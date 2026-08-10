@@ -22,7 +22,7 @@ namespace CalamityMod.Tiles.Furniture
             Main.tileLavaDeath[Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.addTile(Type);
-            AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
+            TileID.Sets.RoomNeeds.CountsAsTorch[Type] = true;
             AddMapEntry(new Color(238, 145, 105), CalamityUtils.GetItemName<SpitefulCandle>());
             TileID.Sets.HasOutlines[Type] = true;
             AnimationFrameHeight = 18;

@@ -309,7 +309,7 @@ namespace CalamityMod.NPCs.DevourerofGods
 
             if (shouldUseShader)
             {
-                if (noiseOffset == Vector2.zeroVector)
+                if (noiseOffset == Vector2.Zero)
                     noiseOffset = NPC.Center;
 
                 Main.spriteBatch.End(out snap);
@@ -369,7 +369,7 @@ namespace CalamityMod.NPCs.DevourerofGods
 
         public override bool CanHitPlayer(Player target, ref int cooldownSlot)
         {
-            cooldownSlot = ImmunityCooldownID.Bosses;
+            cooldownSlot = ImmunityCooldownID.BossNoCheese;
 
             Rectangle targetHitbox = target.Hitbox;
 

@@ -40,7 +40,7 @@ namespace CalamityMod.Projectiles.Summon
                     dust.scale = 0.85f;
                     dust.velocity = Projectile.velocity * 0.4f;
                     dust.noLight = true;
-                    dust.noLightEmittence = true;
+                    dust.noLightEmittance = true;
                 }
             }
         }

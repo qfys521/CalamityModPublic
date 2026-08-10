@@ -28,7 +28,7 @@ namespace CalamityMod.Projectiles.Summon
             Main.projFrames[Type] = 18;
             Main.projPet[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -256,7 +256,7 @@ namespace CalamityMod.Projectiles.Summon
             return true;
         }
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             int startingWalkFrame = 6;
             int endingWalkFrame = 10;

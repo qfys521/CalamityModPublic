@@ -38,7 +38,7 @@ namespace CalamityMod.Items.Materials
             return false;
         }
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
         {
             Texture2D tex = TextureAssets.Item[Type].Value;
             Rectangle variant = new Rectangle(
@@ -48,7 +48,7 @@ namespace CalamityMod.Items.Materials
             );
             Vector2 positionDisplace = new Vector2(16, 16) * scale;
 
-            spriteBatch.Draw(tex, Item.position + positionDisplace - Main.screenPosition, variant, lightColor, rotation, variant.Size() / 2f, scale, 0f, 0f);
+            spriteBatch.Draw(tex, item.position + positionDisplace - Main.screenPosition, variant, lightColor, rotation, variant.Size() / 2f, scale, 0f, 0f);
             return false;
         }
     }

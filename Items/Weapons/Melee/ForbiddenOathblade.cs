@@ -67,7 +67,7 @@ namespace CalamityMod.Items.Weapons.Melee
                     c.scale = 1.7f;
                     c.noGravity = true;
                     c.color = (i % 2 != 0 ? Color.MediumOrchid : Color.BlueViolet);
-                    c.noLightEmittence = true;
+                    c.noLightEmittance = true;
                 }
 
                 player.Calamity().demonSwordKillMode = true;

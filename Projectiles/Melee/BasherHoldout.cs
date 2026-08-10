@@ -45,6 +45,7 @@ namespace CalamityMod.Projectiles.Melee
         }
         public override void SetDefaults()
         {
+            Projectile.drawLayer = Terraria.ID.ProjectileDrawLayerID.OverPlayers;
             Projectile.width = Projectile.height = 100;
             Projectile.friendly = true;
             Projectile.DamageType = TrueMeleeDamageClass.Instance;
@@ -109,12 +110,12 @@ namespace CalamityMod.Projectiles.Melee
 
             if (enabledHitbox > 0)
             {
-                bladefx = MathHelper.Lerp(bladefx, 1, 0.5f / Projectile.MaxUpdates * Owner.meleeSpeed);
+                bladefx = MathHelper.Lerp(bladefx, 1, 0.5f / Projectile.MaxUpdates * Owner.GetAttackSpeed(DamageClass.Melee));
                 if (Projectile.FinalExtraUpdate())
                     enabledHitbox--;
             }
             else
-                bladefx = MathHelper.Lerp(bladefx, 0, 0.55f / Projectile.MaxUpdates * Owner.meleeSpeed);
+                bladefx = MathHelper.Lerp(bladefx, 0, 0.55f / Projectile.MaxUpdates * Owner.GetAttackSpeed(DamageClass.Melee));
 
             if (attackTimer == -1 || time < 25)
             {
@@ -134,7 +135,7 @@ namespace CalamityMod.Projectiles.Melee
 
                 float lerp = Utils.GetLerpValue(cooldown, -1, attackTimer, true);
 
-                float lerpSpeed = 0.2f / Projectile.MaxUpdates * Owner.meleeSpeed;
+                float lerpSpeed = 0.2f / Projectile.MaxUpdates * Owner.GetAttackSpeed(DamageClass.Melee);
                 float maxAngle = MathHelper.PiOver4;
                 if (swingCount % 2 == 0)
                     angledHold = MathHelper.Lerp(angledHold, maxAngle, lerpSpeed);
@@ -256,7 +257,7 @@ namespace CalamityMod.Projectiles.Melee
             float damageMult = Utils.Remap(Projectile.numHits, 0, hitsToMinMult, 1, minMult, true);
             modifiers.SourceDamage *= damageMult;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (time < 3)
                 return false;
@@ -284,10 +285,6 @@ namespace CalamityMod.Projectiles.Melee
             Main.EntitySpriteDraw(texture, drawPosition + placeAdjust + Main.rand.NextVector2Circular(rumble, rumble), null, drawColor, drawRotation, rotationPoint, Projectile.scale, flipSprite); // The holdout
             
             return false;
-        }
-        public override void DrawBehind(int index, List<int> behindNPCsAndTiles, List<int> behindNPCs, List<int> behindProjectiles, List<int> overPlayers, List<int> overWiresUI)
-        {
-            overPlayers.Add(index);
         }
     }
 }

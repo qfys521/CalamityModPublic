@@ -401,7 +401,7 @@ namespace CalamityMod.Projectiles.Melee
             float damageMult = Utils.Remap(pierceReduction, 0, hitsToMinMult, 1, minMult, true);
             modifiers.SourceDamage *= (chargedSwing ? 2.5f : 1) * damageMult;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             // Only draw the projectile if the projectile's owner is currently using the item this projectile is attached to.
             if ((useAnim > 0 || DrawUnconditionally) && (Owner.ItemAnimationActive || Owner.Calamity().mouseRight))

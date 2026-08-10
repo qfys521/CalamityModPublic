@@ -180,18 +180,20 @@ namespace CalamityMod
         /// <returns>The spawned clone of the item. <b>NEVER</b> equal to the input item.</returns>
         public static Item DropItemClone(IEntitySource src, Item item, Vector2 position, int stack = -1)
         {
-            int index = Item.NewItem(src, position, item.type, stack, false, -1, false, false);
-            Item theClone = Main.item[index] = item.Clone();
+            Item clonedItem = item.Clone();
+            if (stack != -1)
+                clonedItem.stack = stack;
+
+            int index = Item.NewItem(src, position, clonedItem);
+            WorldItem theClone = Main.item[index];
             theClone.whoAmI = index;
             theClone.position = position;
-            if (stack != -1)
-                theClone.stack = stack;
 
             // If in multiplayer, broadcast that this item was spawned.
             if (Main.netMode == NetmodeID.MultiplayerClient)
                 NetMessage.SendData(MessageID.SyncItem, -1, -1, null, index, 1f);
 
-            return theClone;
+            return theClone.inner;
         }
 
         /// <summary>
@@ -1436,7 +1438,7 @@ namespace CalamityMod
                         Main.timeItemSlotCannotBeReusedFor[idx] = protectionTime;
                         foreach (Player player in Main.ActivePlayers)
                             NetMessage.SendData(MessageID.InstancedItem, player.whoAmI, -1, null, idx);
-                        Main.item[idx].active = false;
+                        Main.item[idx].TurnToAir();
                     }
                 }
 

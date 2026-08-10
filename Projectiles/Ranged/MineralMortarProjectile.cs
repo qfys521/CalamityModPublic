@@ -47,7 +47,7 @@ namespace CalamityMod.Projectiles.Ranged
                 Dust trailDust = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, randomDust ? 109 : DustID.Torch, Main.rand.NextFloat(3f), Main.rand.NextFloat(3f), Scale: randomDust ? Main.rand.NextFloat(1f, 1.5f) : Main.rand.NextFloat(1.5f, 2.5f));
                 trailDust.noGravity = true;
                 trailDust.noLight = true;
-                trailDust.noLightEmittence = true;
+                trailDust.noLightEmittance = true;
 
                 Particle smoke = new MediumMistParticle(Projectile.Center, Main.rand.NextVector2Circular(5f, 5f), new Color(255, 100, 0, 100), Color.Transparent, Main.rand.NextFloat(.3f, 1f), Main.rand.NextFloat(300f, 500f));
                 GeneralParticleHandler.SpawnParticle(smoke);
@@ -137,7 +137,7 @@ namespace CalamityMod.Projectiles.Ranged
                     Dust boomDust = Dust.NewDustPerfect(Projectile.Center, randomDust ? 109 : DustID.Torch, Main.rand.NextVector2Circular(10f, 10f), Scale: randomDust ? Main.rand.NextFloat(1f, 2f) : Main.rand.NextFloat(2.5f, 3f));
                     boomDust.noGravity = true;
                     boomDust.noLight = true;
-                    boomDust.noLightEmittence = true;
+                    boomDust.noLightEmittance = true;
                 }
 
                 int debriAmount = Main.rand.Next(10, 15 + 1);
@@ -166,7 +166,7 @@ namespace CalamityMod.Projectiles.Ranged
 
         public Color ColorTrailFunction(float completionRatio, Vector2 vertexPos) => Color.Lerp(BackTrailColor, FrontTrailColor, completionRatio);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 position = Projectile.Center - Main.screenPosition;

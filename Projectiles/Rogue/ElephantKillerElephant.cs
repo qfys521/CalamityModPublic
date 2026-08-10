@@ -96,7 +96,7 @@ namespace CalamityMod.Projectiles.Rogue
         {
             return false;
         }
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D tex = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             Vector2 generalDrawPos = Projectile.Center + Main.rand.NextVector2Circular(rumble, rumble) + Vector2.UnitY * 25;

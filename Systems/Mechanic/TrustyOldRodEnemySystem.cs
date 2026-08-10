@@ -688,7 +688,7 @@ namespace CalamityMod.Systems
                 spray.velocity = -Vector2.UnitY.RotatedByRandom(0.2f * MathF.Pow(scale, 1)) * Main.rand.NextFloat(5, 14) * scale;
                 spray.color = Color.Lerp(Color.Gray, liquidColor, Main.rand.NextFloat(0.3f, 0.8f)) * 0.2f;
                 spray.noLight = true;
-                spray.noLightEmittence = true;
+                spray.noLightEmittance = true;
                 spray.fadeIn = 2 + scale;
             }
             owner.SetScreenshake(2f * scale);

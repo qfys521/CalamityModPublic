@@ -80,7 +80,7 @@ namespace CalamityMod.Projectiles.Rogue
 
         public override Color? GetAlpha(Color lightColor) => new Color(Main.DiscoR, Main.DiscoG, Main.DiscoB, Projectile.alpha);
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             if (Slash == 1f)
                 return false;
@@ -97,7 +97,7 @@ namespace CalamityMod.Projectiles.Rogue
                 Player player = Main.player[Projectile.owner];
                 player.SpawnLifeStealProjectile(target, Projectile, ProjectileID.VampireHeal, (int)Math.Round(hit.Damage * 0.025));
                 if (Main.LocalPlayer.team == player.team && player.team != 0)
-                    Main.LocalPlayer.AddBuff(ModContent.BuffType<AvertorBonus>(), CalamityUtils.SecondsToFrames(20f), true);
+                    Main.LocalPlayer.AddBuff(ModContent.BuffType<AvertorBonus>(), CalamityUtils.SecondsToFrames(20f));
             }
 
             if (Projectile.numHits > 0 && !(target.life <= 0 && target.realLife == -1))

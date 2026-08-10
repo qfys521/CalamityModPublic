@@ -4,6 +4,7 @@ using System;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using CalamityMod.Systems;
+using Terraria.GameContent.Drawing;
 using Terraria.ID;
 
 namespace CalamityMod.BiomeManagers
@@ -20,15 +21,15 @@ namespace CalamityMod.BiomeManagers
             On_Main.DrawBlack += ForceDrawBlack;
         }
 
-        private void ForceDrawBlack(On_Main.orig_DrawBlack orig, Main self, bool force)
+        private void ForceDrawBlack(On_Main.orig_DrawBlack orig, Main self, bool intoRenderTargets, bool force)
         {
             if (Main.LocalPlayer.InModBiome(ModContent.GetInstance<BiomeManagers.SunkenSeaBiome>()) && Main.BackgroundEnabled)
             {
-                orig(self, true);
+                orig(self, intoRenderTargets, true);
             }
             else
             {
-                orig(self, force);
+                orig(self, intoRenderTargets, force);
             }
         }
 
@@ -46,15 +47,35 @@ namespace CalamityMod.BiomeManagers
 
         private void ChangeBlackThreshold(ILContext il)
         {
-            if (Main.BackgroundEnabled)
+            if (!Main.BackgroundEnabled)
+                return;
+
+            var c = new ILCursor(il);
+            int brightnessLocalIndex = -1;
+            int thresholdLocalIndex = -1;
+
+            // Find the threshold through its comparison with Lighting.Brightness instead of relying on
+            // local indices, which changed when DrawBlack gained its render-target parameter.
+            bool foundThreshold = c.TryGotoNext(
+                i => i.MatchCall(typeof(Lighting), nameof(Lighting.Brightness)),
+                i => i.MatchStloc(out brightnessLocalIndex)) &&
+                c.TryGotoNext(
+                    i => i.MatchLdloc(brightnessLocalIndex),
+                    i => i.MatchLdloc(out thresholdLocalIndex));
+
+            c.Index = 0;
+            bool foundInsertionPoint = c.TryGotoNext(MoveType.After,
+                i => i.MatchCall(typeof(TileDrawing), nameof(TileDrawing.GetScreenDrawArea)));
+
+            if (!foundThreshold || thresholdLocalIndex < 0 || !foundInsertionPoint)
             {
-                var c = new ILCursor(il);
-                c.TryGotoNext(n => n.MatchLdloc(6), n => n.MatchStloc(13)); //beginning of the loop, local 11 is a looping variable
-                c.Index++; //this is kinda goofy since I dont think you could actually ever write c# to compile to the resulting IL from emitting here.
-                c.Emit(OpCodes.Ldloc, 3); //pass the original value so we can set that instead if we dont want to change the threshold
-                c.EmitDelegate<Func<float, float>>(NewThreshold); //check if were in the biome to set, else set the original value
-                c.Emit(OpCodes.Stloc, 3); //num2 in vanilla, controls minimum threshold to turn a tile black
+                CalamityMod.Instance.Logger.Warn("Could not apply the Sunken Sea DrawBlack threshold IL edit.");
+                return;
             }
+
+            c.Emit(OpCodes.Ldloc, thresholdLocalIndex);
+            c.EmitDelegate<Func<float, float>>(NewThreshold);
+            c.Emit(OpCodes.Stloc, thresholdLocalIndex);
         }
         
         public override string BestiaryIcon => "CalamityMod/BiomeManagers/SunkenSeaIcon";

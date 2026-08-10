@@ -21,7 +21,7 @@ namespace CalamityMod.Projectiles.Summon
             Main.projFrames[Type] = 3;
             Main.projPet[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
 
         public override void SetDefaults()
@@ -48,8 +48,8 @@ namespace CalamityMod.Projectiles.Summon
             int CVEID = ModContent.ItemType<CosmicViperEngine>();
             FalseGun = new Item();
             CosmicViper = new Item();
-            FalseGun.SetDefaults(p90ID, true);
-            CosmicViper.SetDefaults(CVEID, true);
+            FalseGun.SetDefaults(p90ID);
+            CosmicViper.SetDefaults(CVEID);
             FalseGun.damage = baseDamage;
             FalseGun.knockBack = CosmicViper.knockBack;
             FalseGun.shootSpeed = CosmicViper.shootSpeed;
@@ -307,7 +307,7 @@ namespace CalamityMod.Projectiles.Summon
             }
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = Terraria.GameContent.TextureAssets.Projectile[Type].Value;
             int frameHeight = texture.Height / Main.projFrames[Type];
@@ -321,7 +321,7 @@ namespace CalamityMod.Projectiles.Summon
         }
 
 
-        public override void PostDraw(Color lightColor)
+        public override void PostDraw(Player player, Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D texture = ModContent.Request<Texture2D>("CalamityMod/Projectiles/Summon/CosmicViperGlow").Value;
             int frameHeight = texture.Height / Main.projFrames[Type];

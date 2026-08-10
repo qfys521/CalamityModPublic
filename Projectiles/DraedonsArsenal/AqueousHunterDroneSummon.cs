@@ -46,7 +46,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             Main.projPet[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
             ProjectileID.Sets.SummonTagDamageMultiplier[Type] = 0f;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
         }
         public override void SetDefaults()
         {
@@ -391,7 +391,7 @@ namespace CalamityMod.Projectiles.DraedonsArsenal
             }
         }
         public override bool MinionContactDamage() => false;
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             Texture2D head = ModContent.Request<Texture2D>("CalamityMod/Projectiles/DraedonsArsenal/ShrimpBody").Value;
             Texture2D glow = ModContent.Request<Texture2D>("CalamityMod/Projectiles/DraedonsArsenal/ShrimpBodyGlow").Value;

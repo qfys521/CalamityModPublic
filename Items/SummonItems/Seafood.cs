@@ -13,7 +13,7 @@ namespace CalamityMod.Items.SummonItems
         public new string LocalizationCategory => "Items.SummonItems";
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.SortingPriorityBossSpawns[Type] = 9; // Mechanical Worm
+            ItemID.Sets.SortingPriorityMiscImportants[Type] = 9; // Mechanical Worm
         }
 
         public override void SetDefaults()

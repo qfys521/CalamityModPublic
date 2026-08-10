@@ -161,7 +161,7 @@ namespace CalamityMod.Projectiles.Melee
             target.AddBuff(ModContent.BuffType<WindChilled>(), 180);
         }
 
-        public override bool PreDraw(ref Color lightColor)
+        public override bool PreDraw(Player player, ref Color lightColor)/* tModPorter Replace 'Main.player[Projectile.owner]' with 'player'. */
         {
             float aiTracker = Projectile.ai[0];
             float trackerClamp = MathHelper.Clamp(aiTracker / 30f, 0f, 1f);

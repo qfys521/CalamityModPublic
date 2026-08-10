@@ -17,7 +17,7 @@ namespace CalamityMod.Projectiles.Summon
         {
             Main.projFrames[Type] = 5;
             Main.projPet[Type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[Type] = true;
+            ProjectileID.Sets.MinionTargetingFeature[Type] = true;
             ProjectileID.Sets.MinionSacrificable[Type] = true;
         }
 

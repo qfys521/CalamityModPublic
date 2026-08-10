@@ -13,16 +13,16 @@ namespace CalamityMod.Items.BaseItems
     {
         public virtual bool VisibleInUI => false;
 
-        public override void PostUpdate()
+        public override void PostUpdate(WorldItem item)
         {
             //Die if in the world
             Item.type = ItemID.None;
             Item.stack = 0;
         }
 
-        public override bool CanPickup(Player player) => false;
+        public override bool CanPickup(WorldItem item, Player player) => false;
 
-        public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI) => false;
+        public override bool PreDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI) => false;
 
         #region Hooks
         private sealed class HeldOnlyItemHooks : ModSystem
@@ -30,7 +30,7 @@ namespace CalamityMod.Items.BaseItems
             public override void Load()
             {
                 Terraria.On_Player.dropItemCheck += DontDropCoolStuff;
-                Terraria.UI.On_ItemSlot.LeftClick_ItemArray_int_int += LockMouseToSpecialItem;
+                Terraria.UI.On_ItemSlot.LeftClick += LockMouseToSpecialItem;
                 Terraria.UI.On_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += DrawSpecial;
             }
 
@@ -43,7 +43,7 @@ namespace CalamityMod.Items.BaseItems
                     orig(sb, inv, context, slot, position, color);
             }
 
-            private static void LockMouseToSpecialItem(Terraria.UI.On_ItemSlot.orig_LeftClick_ItemArray_int_int orig, Item[] inv, int context, int slot)
+            private static void LockMouseToSpecialItem(Terraria.UI.On_ItemSlot.orig_LeftClick orig, Item[] inv, int context, int slot)
             {
                 if (Main.mouseItem.ModItem is not HeldOnlyItem)
                     orig(inv, context, slot);
