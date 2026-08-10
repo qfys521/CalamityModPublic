@@ -30,7 +30,7 @@ namespace CalamityMod.World
         {
             //set StartX here so it can properly scale with worldsize (just to be safe)
             //the 25's are there to offset it from the exact edge of the world so that no "out of bounds" crashing occurs
-            StartX = GenVars.dungeonX < Main.maxTilesX / 2 ? 25 : (Main.maxTilesX - (Main.maxTilesX / 5)) - 25;
+            StartX = GenVars.CurrentDungeonGenVars.dungeonLocation < Main.maxTilesX / 2 ? 25 : (Main.maxTilesX - (Main.maxTilesX / 5)) - 25;
 
             //set these to be able to easily place things in certain locations, like structures
             int biomeStart = StartX;
@@ -268,7 +268,7 @@ namespace CalamityMod.World
             new Point(biomeEdge - 150 + house4Offset, Main.maxTilesY - 125), SchematicAnchor.BottomCenter, ref place);
 
             //place the broken Crags Pylon
-            Point pylonPlace = new Point(GenVars.dungeonSide == 1 ? (biomeStart + biomeMiddle) / 2 : (biomeMiddle + biomeEdge) / 2, Main.maxTilesY - 150);
+            Point pylonPlace = new Point(GenVars.CurrentDungeonGenVars.dungeonSide == 1 ? (biomeStart + biomeMiddle) / 2 : (biomeMiddle + biomeEdge) / 2, Main.maxTilesY - 150);
             while (!Main.tile[pylonPlace].HasTile && pylonPlace.Y < Main.maxTilesY - 75)
                 pylonPlace.Y++;
             if (!Main.tile[pylonPlace].HasTile)

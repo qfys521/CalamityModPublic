@@ -52,7 +52,7 @@ namespace CalamityMod.World
                 if (!condition)
                     return;
 
-                c.item[itemIndex].SetDefaults(id, false);
+                c.item[itemIndex].SetDefaults(id);
                 c.item[itemIndex].Prefix(-1);
 
                 // Don't set quantity unless quantity is specified

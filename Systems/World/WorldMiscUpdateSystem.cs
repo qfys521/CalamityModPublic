@@ -296,7 +296,7 @@ namespace CalamityMod.Systems
 
                                             if (placeBulb)
                                             {
-                                                WorldGen.PlaceJunglePlant(x, y2, TileID.PlanteraBulb, 0, 0);
+                                                WorldGen.PlaceJunglePlant(x, y2, TileID.PlanteraBulb, 0, 0, inheritPaint: true);
                                                 WorldGen.SquareTileFrame(x, y2);
                                                 WorldGen.SquareTileFrame(x + 2, y2);
                                                 WorldGen.SquareTileFrame(x - 1, y2);
@@ -330,7 +330,7 @@ namespace CalamityMod.Systems
 
                                             if (placeFruit)
                                             {
-                                                WorldGen.PlaceJunglePlant(x, y2, TileID.LifeFruit, WorldGen.genRand.Next(3), 0);
+                                                WorldGen.PlaceJunglePlant(x, y2, TileID.LifeFruit, WorldGen.genRand.Next(3), 0, inheritPaint: true);
                                                 WorldGen.SquareTileFrame(x, y2);
                                                 WorldGen.SquareTileFrame(x + 1, y2 + 1);
                                                 if (Main.tile[x, y2].TileType == TileID.LifeFruit && Main.dedServ)

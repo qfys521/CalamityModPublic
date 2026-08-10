@@ -96,7 +96,7 @@ namespace CalamityMod.World
 
             UnifiedRandom rand = WorldGen.genRand;
             float solidTileRequirement = 600f;
-            bool localAbyssSide = GenVars.dungeonX < Main.maxTilesX / 2;
+            bool localAbyssSide = GenVars.CurrentDungeonGenVars.dungeonLocation < Main.maxTilesX / 2;
 
             // Pre-cache a list of Ancients Awakened tiles to avoid, for performance reasons
             IList<ushort> aaTilesToAvoid = new List<ushort>(16);
@@ -218,7 +218,7 @@ namespace CalamityMod.World
 
         public static bool GenerateAstralMeteor(int i, int j)
         {
-            WorldGen.gen = true;
+            WorldGen.isGeneratingOrLoadingWorld = true;
 
             // Pre-cache a list of Magic Storage tiles to avoid, for performance reasons
             // It is plausible that only StorageComponent and StorageConnector are needed, but I aint gonna risk corrupting worlds
@@ -265,7 +265,7 @@ namespace CalamityMod.World
                 return false;
             }
             // Avoid the dungeon so that the beacon doesn't eat it.
-            if (Math.Abs(i - GenVars.dungeonX) < 65)
+            if (Math.Abs(i - GenVars.CurrentDungeonGenVars.dungeonLocation) < 65)
             {
                 return false;
             }
@@ -437,7 +437,7 @@ namespace CalamityMod.World
                 }
             }
 
-            WorldGen.gen = false;
+            WorldGen.isGeneratingOrLoadingWorld = false;
 
             if (Main.netMode != NetmodeID.MultiplayerClient)
             {
@@ -476,7 +476,7 @@ namespace CalamityMod.World
                         AstralTilesToCheckFor.Add((ushort)modTile);
 
                     bool altarPlaced = false;
-                    int altarX = i + (GenVars.dungeonX < Main.maxTilesX / 2 ? -50 : 50);
+                    int altarX = i + (GenVars.CurrentDungeonGenVars.dungeonLocation < Main.maxTilesX / 2 ? -50 : 50);
                     int altarY = j - 5;
 
                     // Variables used for checking both the bottom and top of the potential altar location
@@ -504,7 +504,7 @@ namespace CalamityMod.World
                     int maxAttempts = 100000;
                     while (!altarPlaced)
                     {
-                        WorldGen.gen = true;
+                        WorldGen.isGeneratingOrLoadingWorld = true;
 
                         // Check if there are enough Astral tiles on the bottom of the altar's gen location
                         // 400 tiles checked in total
@@ -599,7 +599,7 @@ namespace CalamityMod.World
                                         {
                                             if (TileID.Sets.Clock[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
                                                 TileID.Sets.Paintings[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
-                                                TileID.Sets.InteractibleByNPCs[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
+                                                TileID.Sets.InteractableByNPCs[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
                                                 TileID.Sets.CanBeSleptIn[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
                                                 TileID.Sets.AvoidedByNPCs[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
                                                 TileID.Sets.IsAContainer[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
@@ -613,7 +613,7 @@ namespace CalamityMod.World
                                         {
                                             if (TileID.Sets.Clock[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
                                                 TileID.Sets.Paintings[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
-                                                TileID.Sets.InteractibleByNPCs[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
+                                                TileID.Sets.InteractableByNPCs[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
                                                 TileID.Sets.CanBeSleptIn[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
                                                 TileID.Sets.AvoidedByNPCs[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType] ||
                                                 TileID.Sets.IsAContainer[Main.tile[criticalTileCheckIndexX, criticalTileCheckIndexY].TileType])
@@ -633,7 +633,7 @@ namespace CalamityMod.World
                         {
                             SchematicManager.PlaceSchematic<Action<Chest>>(SchematicManager.AstralBeaconKey, new Point(altarX, altarY), SchematicAnchor.Center, ref canPlaceAltar);
 
-                            WorldGen.gen = false;
+                            WorldGen.isGeneratingOrLoadingWorld = false;
 
                             altarPlaced = true;
                         }
@@ -672,7 +672,7 @@ namespace CalamityMod.World
                                     {
                                         canPlaceAltar2 = !TileID.Sets.Clock[Main.tile[altarX2, altarY2].TileType] &&
                                             !TileID.Sets.Paintings[Main.tile[altarX2, altarY2].TileType] &&
-                                            !TileID.Sets.InteractibleByNPCs[Main.tile[altarX2, altarY2].TileType] &&
+                                            !TileID.Sets.InteractableByNPCs[Main.tile[altarX2, altarY2].TileType] &&
                                             !TileID.Sets.CanBeSleptIn[Main.tile[altarX2, altarY2].TileType] &&
                                             !TileID.Sets.AvoidedByNPCs[Main.tile[altarX2, altarY2].TileType] &&
                                             !TileID.Sets.IsAContainer[Main.tile[altarX2, altarY2].TileType] &&
@@ -682,7 +682,7 @@ namespace CalamityMod.World
                                     {
                                         canPlaceAltar2 = !TileID.Sets.Clock[Main.tile[altarX2, altarY2].TileType] &&
                                             !TileID.Sets.Paintings[Main.tile[altarX2, altarY2].TileType] &&
-                                            !TileID.Sets.InteractibleByNPCs[Main.tile[altarX2, altarY2].TileType] &&
+                                            !TileID.Sets.InteractableByNPCs[Main.tile[altarX2, altarY2].TileType] &&
                                             !TileID.Sets.CanBeSleptIn[Main.tile[altarX2, altarY2].TileType] &&
                                             !TileID.Sets.AvoidedByNPCs[Main.tile[altarX2, altarY2].TileType] &&
                                             !TileID.Sets.IsAContainer[Main.tile[altarX2, altarY2].TileType];
@@ -692,7 +692,7 @@ namespace CalamityMod.World
                                     {
                                         SchematicManager.PlaceSchematic<Action<Chest>>(SchematicManager.AstralBeaconKey, new Point(altarX2, altarY2), SchematicAnchor.Center, ref canPlaceAltar2);
 
-                                        WorldGen.gen = false;
+                                        WorldGen.isGeneratingOrLoadingWorld = false;
 
                                         forcedPlacedAltar = true;
                                         altarPlaced = true;

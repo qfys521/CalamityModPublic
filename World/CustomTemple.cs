@@ -19,7 +19,7 @@ namespace CalamityMod.World
             while (!success)
             {
                 int x;
-                if (GenVars.dungeonX < Main.maxTilesX / 2)
+                if (GenVars.CurrentDungeonGenVars.dungeonLocation < Main.maxTilesX / 2)
                     x = WorldGen.genRand.Next((int)(Main.maxTilesX * 0.6), (int)(Main.maxTilesX * 0.85));
                 else
                     x = WorldGen.genRand.Next((int)(Main.maxTilesX * 0.15), (int)(Main.maxTilesX * 0.4));
