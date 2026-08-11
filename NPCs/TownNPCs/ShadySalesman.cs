@@ -465,7 +465,7 @@ namespace CalamityMod.NPCs.TownNPCs
                     }
                 }
             }
-            int myIndex = NPC.NewNPC(NPC.GetSpawnSourceForTownSpawn(), num7 * 16, num8 * 16, ModContent.NPCType<ShadySalesman>(), 1);
+            int myIndex = NPC.NewNPC(NPC.GetSource_TownSpawn(), num7 * 16, num8 * 16, ModContent.NPCType<ShadySalesman>(), 1);
             Main.npc[myIndex].homeTileX = bestX;
             Main.npc[myIndex].homeTileY = bestY;
             Main.npc[myIndex].homeless = true;

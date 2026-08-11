@@ -144,7 +144,7 @@ namespace CalamityMod.Projectiles.Enemy
                 }
 
                 int zombieType = Utils.SelectRandom(Main.rand, [.. Zombies]);
-                int zombie = NPC.NewNPC(Projectile.GetItemSource_FromThis(), (int)Projectile.Center.X, (int)Projectile.Center.Y, zombieType);
+                int zombie = NPC.NewNPC(Projectile.GetSource_FromThis(), (int)Projectile.Center.X, (int)Projectile.Center.Y, zombieType);
                 Main.npc[zombie].velocity = Vector2.UnitY * -4f;
             }
 

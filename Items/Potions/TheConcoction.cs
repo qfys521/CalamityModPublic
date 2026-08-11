@@ -89,7 +89,7 @@ namespace CalamityMod.Items.Potions
                 Particle chug = new CustomSpark(Player.Center + vel * 35, vel * Main.rand.NextFloat(2, 3), "CalamityMod/Items/Potions/TheConcoction", false, 22, 0.6f, Color.White, Vector2.One, false, false, 0, false, false, noShrink: true, spin: 0.01f * Math.Sign(vel.X));
                 GeneralParticleHandler.SpawnParticle(chug);
                 SoundStyle tryChug = new("CalamityMod/Sounds/Custom/AbilitySounds/PotionSicknessOver");
-                SoundEngine.PlaySound(tryChug with { pitch = Main.rand.NextFloat(0.6f, 0.8f), MaxInstances = -1 }, Player.Center);
+                SoundEngine.PlaySound(tryChug with { Pitch = Main.rand.NextFloat(0.6f, 0.8f), MaxInstances = -1 }, Player.Center);
                 spamTimer += 80;
                 if (spamTimer > 230)
                     spamTimer = 230;

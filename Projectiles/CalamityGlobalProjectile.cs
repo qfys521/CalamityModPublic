@@ -3037,7 +3037,7 @@ namespace CalamityMod.Projectiles
         {
             var owner = Main.player[projectile.owner];
             var cplayer = owner.Calamity();
-            owner.Fishing_GetBait(out Item baitItem);
+            TerrariaInternals.GetFishingBait(owner, out Item baitItem);
             bool reelingIn = projectile.ai[0] == 1;
             bool lineSnapped = projectile.ai[0] == 2;
 

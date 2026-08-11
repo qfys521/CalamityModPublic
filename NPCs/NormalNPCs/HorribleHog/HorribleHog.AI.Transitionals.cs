@@ -267,7 +267,7 @@ namespace CalamityMod.NPCs.NormalNPCs.HorribleHog
                     for (int i = 0; i < 17; i++)
                     {
                         int goreType = Main.rand.Next(GoreID.Smoke1, GoreID.Smoke3 + 1);
-                        Gore.NewGorePerfect(NPC.position, Main.rand.NextVector2Circular(2f, 2f), goreType);
+                        Gore.NewGorePerfect(NPC.GetSource_Death(), NPC.position, Main.rand.NextVector2Circular(2f, 2f), goreType);
                     }
 
                     CombatText.NewText(NPC.Hitbox, Color.LawnGreen, 5000);

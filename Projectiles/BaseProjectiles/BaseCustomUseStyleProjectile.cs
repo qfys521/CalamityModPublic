@@ -26,7 +26,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
 
         public override void OnSpawn(IEntitySource source)
         {
-            Projectile.timeLeft = (int)(Owner.HeldItem.useAnimation * (Owner.HeldItem.CountsAsClass<MeleeDamageClass>() ? Owner.inverseMeleeSpeed : 1)) + 1;
+            Projectile.timeLeft = (int)(Owner.HeldItem.useAnimation * (Owner.HeldItem.CountsAsClass<MeleeDamageClass>() ? TerrariaInternals.MeleeUseTimeMultiplier(Owner) : 1)) + 1;
         }
 
         #region Fields
@@ -185,7 +185,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
             {
                 WhenSpawned();
                 whenSpawned = false;
-                Projectile.timeLeft = (int)(Owner.HeldItem.useAnimation * (Owner.HeldItem.CountsAsClass<MeleeDamageClass>() ? Owner.inverseMeleeSpeed : 1)) + 1;
+                Projectile.timeLeft = (int)(Owner.HeldItem.useAnimation * (Owner.HeldItem.CountsAsClass<MeleeDamageClass>() ? TerrariaInternals.MeleeUseTimeMultiplier(Owner) : 1)) + 1;
                 Projectile.netUpdate = true;
             }
 
@@ -247,7 +247,7 @@ namespace CalamityMod.Projectiles.BaseProjectiles
 
             if (Owner.itemAnimation == Owner.itemAnimationMax - 1)
             {
-                Projectile.timeLeft = (int)(Owner.HeldItem.useAnimation * (Owner.HeldItem.CountsAsClass<MeleeDamageClass>() ? Owner.inverseMeleeSpeed : 1)) + 1;
+                Projectile.timeLeft = (int)(Owner.HeldItem.useAnimation * (Owner.HeldItem.CountsAsClass<MeleeDamageClass>() ? TerrariaInternals.MeleeUseTimeMultiplier(Owner) : 1)) + 1;
                 OnBeginUse();
             }
 

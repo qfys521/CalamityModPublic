@@ -18,7 +18,7 @@ namespace CalamityMod.Items.Weapons.Summon
     public class SarosPossession : ModItem, ILocalizedModType
     {
         public new string LocalizationCategory => "Items.Weapons.Summon";
-        public static SoundStyle FiringSound => new SoundStyle("CalamityMod/Sounds/Item/Summon/SarosFiring") with { MaxInstances = 1 ,Volume = 0.3f, pitchVariance = 0.05f, pitch = 0.5f };
+        public static SoundStyle FiringSound => new SoundStyle("CalamityMod/Sounds/Item/Summon/SarosFiring") with { MaxInstances = 1 ,Volume = 0.3f, PitchVariance = 0.05f, Pitch = 0.5f };
         public static SoundStyle SpawnSound => new SoundStyle("CalamityMod/Sounds/Item/Summon/SarosSpawn");
         public static SoundStyle LoopSound => SoundID.DD2_BetsyFlameBreath with { Volume = 0.2f };
         public override void SetDefaults()
@@ -54,7 +54,7 @@ namespace CalamityMod.Items.Weapons.Summon
                 p.ai[0]++;
                 p.netUpdate = true;
 
-                SoundEngine.PlaySound(SpawnSound with { MaxInstances = 10, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, pitchVariance = 0.05f, }, player.Center);
+                SoundEngine.PlaySound(SpawnSound with { MaxInstances = 10, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, PitchVariance = 0.05f, }, player.Center);
                 return false;
             } else
             {
@@ -62,7 +62,7 @@ namespace CalamityMod.Items.Weapons.Summon
             }
             player.AddBuff(Item.buffType, 2);
 
-            SoundEngine.PlaySound(SpawnSound with { MaxInstances = 10, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, pitchVariance = 0.05f, }, player.Center);
+            SoundEngine.PlaySound(SpawnSound with { MaxInstances = 10, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew, PitchVariance = 0.05f, }, player.Center);
             return true;
         }
 

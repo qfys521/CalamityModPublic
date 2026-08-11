@@ -166,7 +166,7 @@ public sealed class DrawWithEffectsScope : IDisposable
         ArgumentOutOfRangeException.ThrowIfLessThan(targetSize.Y, 1);
 
         this.spriteBatch = spriteBatch;
-        graphicsDevice = spriteBatch.graphicsDevice;
+        graphicsDevice = spriteBatch.GraphicsDevice;
         this.pool = pool;
         this.effects = effects;
 

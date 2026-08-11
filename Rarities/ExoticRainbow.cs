@@ -62,7 +62,7 @@ namespace CalamityMod.Rarities
 
                     var pos = position;
                     using var lease = ScreenspaceTargetPool.Shared.Rent(Main.instance.GraphicsDevice);
-                    var matrix = spriteBatch.transformMatrix;
+                    var matrix = FnaAccessors.GetTransformMatrix(spriteBatch);
                     using (spriteBatch.Scope())
                     {
                         using (lease.Scope(clearColor: Color.Transparent))

@@ -114,7 +114,7 @@ namespace CalamityMod.Items.Accessories
                     Player.portableStoolInfo.MapYOffset = boost;
 
                     // Forces the player into the stool-standing frame
-                    Player.UpdatePortableStoolUsage();
+                    TerrariaInternals.UpdatePortableStoolUsage(Player);
                 }
 
                 else

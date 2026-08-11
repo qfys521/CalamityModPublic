@@ -4163,8 +4163,9 @@ namespace CalamityMod.NPCs
             if (Main.netMode == NetmodeID.MultiplayerClient)
                 return;
 
+            const int DefaultMaxSpawns = 5;
             int spawnRate = 400;
-            int maxSpawnCount = NPC.defaultMaxSpawns;
+            int maxSpawnCount = DefaultMaxSpawns;
             NPCLoader.EditSpawnRate(player, ref spawnRate, ref maxSpawnCount);
 
             // Enforce a limit on the amount of enemies that can appear.

@@ -20,7 +20,7 @@ namespace CalamityMod.Systems
             // Clear all other skies, including the vanilla ones.
             if (isActive)
             {
-                Dictionary<string, CustomSky> skies = SkyManager.Instance._effects;
+                Dictionary<string, CustomSky> skies = TerrariaInternals.SkyEffects(SkyManager.Instance);
                 bool updateRequired = false;
                 foreach (string skyName in skies.Keys)
                 {

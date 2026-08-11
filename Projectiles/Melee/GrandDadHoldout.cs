@@ -26,10 +26,10 @@ namespace CalamityMod.Projectiles.Melee
 
         public ref float attackTimer => ref Projectile.ai[0];
         public Player Owner => Main.player[Projectile.owner];
-        public int fireRate => (int)((Owner.HeldItem.useAnimation * Owner.inverseMeleeSpeed * Projectile.MaxUpdates) / 2.75f);
+        public int fireRate => (int)((Owner.HeldItem.useAnimation * TerrariaInternals.MeleeUseTimeMultiplier(Owner) * Projectile.MaxUpdates) / 2.75f);
         public int time = 0;
         public Vector2 toMouse = Vector2.Zero;
-        public int cooldown => (int)(-Owner.HeldItem.useAnimation * Owner.inverseMeleeSpeed * Projectile.MaxUpdates);
+        public int cooldown => (int)(-Owner.HeldItem.useAnimation * TerrariaInternals.MeleeUseTimeMultiplier(Owner) * Projectile.MaxUpdates);
         public float bladeRot = 0; // Rotation of the blade
         public int swingCount = 0; // Increases at the start of a swing
         public float bladefx = 0; // Visual effects of the blade

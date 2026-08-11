@@ -50,7 +50,7 @@ namespace CalamityMod.Systems.Graphic.LiquidSystem
             Textures[0] = LiquidRenderer.Instance._liquidTextures[1];
             SlopeTextures[0] = TextureAssets.LiquidSlope[1];
             BlockTextures[0] = TextureAssets.Liquid[1];
-            WaterfallTextures[0] = Main.instance.waterfallManager.waterfallTexture[1];
+            WaterfallTextures[0] = TerrariaInternals.WaterfallTextures(Main.instance.waterfallManager)[1];
 
             TextureArrayReady = true;
         }

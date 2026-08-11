@@ -42,7 +42,7 @@ namespace CalamityMod.Backgrounds
         public override bool PreDrawCloseBackground(SpriteBatch spriteBatch)
         {
             //Please see AstralSurfaceBGStyle for comments, code is pretty much identical here
-            float scAdj = Main.instance.scAdj;
+            float scAdj = TerrariaInternals.MainScreenAdjustment;
             Color COSBMAplha = Main.ColorOfSurfaceBackgroundsModified;
             Color ColorOfSurfaceBackgroundsModified = new Color(63, 51, 90, COSBMAplha.A);
             bool canBGDraw = false;

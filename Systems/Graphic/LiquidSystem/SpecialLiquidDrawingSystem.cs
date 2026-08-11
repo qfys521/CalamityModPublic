@@ -240,7 +240,7 @@ namespace CalamityMod.Systems.Graphic.LiquidSystem
             if (GetModWaterfallStyle(waterfallType) is IWaterfallStyleModifyColor style)
             {
                 Tile tile = Main.tile[x, y];
-                Texture2D texture = self.waterfallTexture[waterfallType].Value;
+                Texture2D texture = TerrariaInternals.WaterfallTextures(self)[waterfallType].Value;
                 Lighting.GetCornerColors(x, y, out var vertices, 1f);
                 style.ModifyColor(in tile, x, y, ref vertices);
                 Main.tileBatch.Draw(texture, position, sourceRect, vertices, Vector2.Zero, 1f, effects);

@@ -125,6 +125,8 @@ namespace CalamityMod.Items.Tools
         private static void TheGiftHappiness(On_ShopHelper.orig_ProcessMood orig, ShopHelper self, Player player, NPC npc)
         {
             orig(self, player, npc);
+            ref float priceAdjustment = ref TerrariaInternals.ShopPriceAdjustment(self);
+            ref string happiness = ref TerrariaInternals.ShopHappiness(self);
 
             // Immediately exit early if it's Remix world, or if it's an NPC that should not be affected by happiness
             if (Main.remixWorld || !npc.isLikeATownNPC || NPCID.Sets.NoTownNPCHappiness[npc.type] || NPCID.Sets.IsTownPet[npc.type])
@@ -134,9 +136,9 @@ namespace CalamityMod.Items.Tools
             // The Monument lowers happiness by a fixed amount. This is not applied to the Tax Collector.
             if (npc.type != NPCID.TaxCollector && gtnpc.AffectedByTheMonument)
             {
-                float oldHappiness = self._currentPriceAdjustment;
-                self._currentPriceAdjustment += TheMonument.MonumentHappinessReduction;
-                self.LimitAndRoundMultiplier(self._currentPriceAdjustment);
+                float oldHappiness = priceAdjustment;
+                priceAdjustment += TheMonument.MonumentHappinessReduction;
+                TerrariaInternals.LimitAndRoundShopPrice(self, priceAdjustment);
                 string dialogueKey;
                 if (npc.type < NPCID.Count)
                 {
@@ -153,9 +155,9 @@ namespace CalamityMod.Items.Tools
 
                 // If the NPC is content, it should override that text because they are no longer content
                 if (oldHappiness == 1f)
-                    self._currentHappiness = Language.Exists(dialogueKey) ? Language.GetTextValue(dialogueKey) : CalamityUtils.GetTextValue("Vanilla.TownNPCMood.DefaultMonument") + " ";
+                    happiness = Language.Exists(dialogueKey) ? Language.GetTextValue(dialogueKey) : CalamityUtils.GetTextValue("Vanilla.TownNPCMood.DefaultMonument") + " ";
                 else
-                    self._currentHappiness += Language.Exists(dialogueKey) ? Language.GetTextValue(dialogueKey) : CalamityUtils.GetTextValue("Vanilla.TownNPCMood.DefaultMonument") + " ";
+                    happiness += Language.Exists(dialogueKey) ? Language.GetTextValue(dialogueKey) : CalamityUtils.GetTextValue("Vanilla.TownNPCMood.DefaultMonument") + " ";
             }
 
             // The Gift sets happiness to a fixed either extremely high or extremely low value, depending on its random state.
@@ -163,9 +165,9 @@ namespace CalamityMod.Items.Tools
             if (gift.HasValue)
             {
                 if (gift.Value)
-                    self._currentPriceAdjustment = 0.5f;
+                    priceAdjustment = 0.5f;
                 else
-                    self._currentPriceAdjustment = 1.75f;
+                    priceAdjustment = 1.75f;
 
                 string locKey = gift.Value ? "GiftPositive" : "GiftNegative";
                 string dialogueKey;
@@ -182,7 +184,7 @@ namespace CalamityMod.Items.Tools
                     dialogueKey = $"Mods.{modNPC.Mod.Name}.NPCs.{modNPC.Name}.TownNPCMood.{locKey}";
                 }
                 // Yes, it's intentional that this completely overrides all other happiness report dialogue
-                self._currentHappiness = Language.Exists(dialogueKey) ? Language.GetTextValue(dialogueKey) : CalamityUtils.GetTextValue($"Vanilla.TownNPCMood.Default{locKey}") + " ";
+                happiness = Language.Exists(dialogueKey) ? Language.GetTextValue(dialogueKey) : CalamityUtils.GetTextValue($"Vanilla.TownNPCMood.Default{locKey}") + " ";
             }
         }
     }

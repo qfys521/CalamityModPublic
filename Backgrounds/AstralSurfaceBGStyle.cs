@@ -46,7 +46,7 @@ namespace CalamityMod.Backgrounds
 
         public override bool PreDrawCloseBackground(SpriteBatch spriteBatch) //Taken from vanilla to draw the front 3 layers, edited to fit tmod and astral background needs
         {
-            float scAdj = Main.instance.scAdj;
+            float scAdj = TerrariaInternals.MainScreenAdjustment;
             Color COSBMAplha = Main.ColorOfSurfaceBackgroundsModified;
             Color ColorOfSurfaceBackgroundsModified = new Color(63, 51, 90, COSBMAplha.A); //Astral Biome Coloration with the alpha as the background fade
             bool canBGDraw = false;

@@ -58,7 +58,7 @@ namespace CalamityMod.World
             if (Main.IsJourneyMode)
             {
                 CreativePowers.DifficultySliderPower power = CreativePowerManager.Instance.GetPower<CreativePowers.DifficultySliderPower>();
-                float level = power._sliderCurrentValueCache;
+                float level = TerrariaInternals.DifficultySliderValue(power);
                 return level == 1f;
             }
 

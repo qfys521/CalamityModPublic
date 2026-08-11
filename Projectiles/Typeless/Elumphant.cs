@@ -583,7 +583,7 @@ namespace CalamityMod.Projectiles.Typeless
                             if (i == -1)
                                 i = 1;
                         }
-                        SoundEngine.PlaySound(FrozenCube.noise with { Pitch = Main.rand.NextFloat(0.4f, 0.6f), volume = 0.6f }, Projectile.Center);
+                        SoundEngine.PlaySound(FrozenCube.noise with { Pitch = Main.rand.NextFloat(0.4f, 0.6f), Volume = 0.6f }, Projectile.Center);
                         CombatText.NewText(Projectile.Hitbox, usedColor, "!");
                     }
 
@@ -707,13 +707,13 @@ namespace CalamityMod.Projectiles.Typeless
 
                 if (lastHit && vis)
                 {
-                    SoundEngine.PlaySound(FrozenCube.noise with { Pitch = -0.5f, volume = 0.8f }, Projectile.Center);
+                    SoundEngine.PlaySound(FrozenCube.noise with { Pitch = -0.5f, Volume = 0.8f }, Projectile.Center);
                 }
                 verticalSquash = lastHit ? 0.85f : 0.5f;
 
                 if (vis)
                 {
-                    SoundEngine.PlaySound(FrozenCube.hit with { Pitch = -0.2f + 0.05f * Projectile.numHits, volume = 1f, MaxInstances = -1 }, Projectile.Center);
+                    SoundEngine.PlaySound(FrozenCube.hit with { Pitch = -0.2f + 0.05f * Projectile.numHits, Volume = 1f, MaxInstances = -1 }, Projectile.Center);
                     int halfDusts = (int)((lastHit ? 12 : 8) * attackMult);
                     for (int i = -halfDusts; i <= halfDusts; i++)
                     {

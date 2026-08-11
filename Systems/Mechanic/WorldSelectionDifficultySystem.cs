@@ -50,7 +50,7 @@ namespace CalamityMod.Systems
         public static bool GetDeath(AWorldListItem item)
         {
             // Grab data from the listed world
-            WorldFileData worldData = item._data;
+            WorldFileData worldData = item.Data;
 
             if (item.Data.TryGetHeaderData<WorldSelectionDifficultySystem>(out TagCompound tag))
             {
@@ -69,7 +69,7 @@ namespace CalamityMod.Systems
         public static bool GetMalice(AWorldListItem item)
         {
             // Grab data from the listed world
-            WorldFileData worldData = item._data;
+            WorldFileData worldData = item.Data;
 
             int trueGameMode = worldData.GameMode;
             if (worldData.ForTheWorthy)

@@ -33,7 +33,7 @@ internal partial class DialogueLoader : ModSystem
     {
         _DialogueLookup.Clear();
 
-        var method = typeof(LocalizationLoader).GetMethod(nameof(LocalizationLoader.ExtractLocalizationFiles), BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
+        var method = typeof(LocalizationLoader).GetMethod("ExtractLocalizationFiles", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
         if (method != null)
         {
             MonoModHooks.Modify(method, ExtractDialogueFilesPatch);
@@ -44,7 +44,7 @@ internal partial class DialogueLoader : ModSystem
     {
         foreach (var mod in ModLoader.Mods)
         {
-            if (mod.File == null)
+            if (mod.GetFileNames() == null)
                 continue;
 
             var path = mod.SourceFolder;
@@ -95,9 +95,9 @@ internal partial class DialogueLoader : ModSystem
             i => i.MatchLdloc(out modLdloc), // Mod mod
             i => i.MatchLdloc(out pathLdloc), // string path
             i => i.MatchCallOrCallvirt(out _), // GameCulture ActiveCulture
-            i => i.MatchCallOrCallvirt(typeof(LocalizationLoader), nameof(LocalizationLoader.UpdateLocalizationFilesForMod))))
+            i => i.MatchCallOrCallvirt(typeof(LocalizationLoader), "UpdateLocalizationFilesForMod")))
         {
-            CalamityMod.Log.ILFailure("Force Extract Dialogue Files", $"Unable to locate {nameof(LocalizationLoader.UpdateLocalizationFilesForMod)} call");
+            CalamityMod.Log.ILFailure("Force Extract Dialogue Files", "Unable to locate UpdateLocalizationFilesForMod call");
         }
 
         if (modLdloc == -1)
@@ -122,7 +122,7 @@ internal partial class DialogueLoader : ModSystem
                     var destDir = Path.GetDirectoryName(destFilePath);
                     if (!Directory.Exists(destDir)) Directory.CreateDirectory(destDir);
 
-                    using var stream = mod.File.GetStream(entry.FilePath);
+                    using var stream = mod.GetFileStream(entry.FilePath);
                     using var fileStream = File.OpenWrite(destFilePath);
                     using var writer = new StreamWriter(fileStream, Encoding.UTF8);
                     using var reader = new StreamReader(stream, Encoding.UTF8);
@@ -229,7 +229,7 @@ internal partial class DialogueLoader : ModSystem
     private static IEnumerable<DialogueTextDataEntry> GetDialogueTextEntiresForAllMods(GameCulture targetCulture, bool skipDeserializeData = false)
     {
         return ModLoader.Mods
-            .Where(mod => mod.File != null)
+            .Where(mod => mod.GetFileNames() != null)
             .SelectMany(mod => GetDialogueTextEntries(mod, targetCulture, skipDeserializeData));
     }
 
@@ -238,12 +238,12 @@ internal partial class DialogueLoader : ModSystem
         if (mod == null)
             yield break;
 
-        if (mod.File == null)
+        if (mod.GetFileNames() == null)
             yield break;
 
-        foreach (var file in mod.File)
+        foreach (string fileName in mod.GetFileNames())
         {
-            if (!TryGetDialogueFileInfo(file.Name, out var culture, out var prefix, out var dialogueKey))
+            if (!TryGetDialogueFileInfo(fileName, out var culture, out var prefix, out var dialogueKey))
                 continue;
 
             if (culture != targetCulture)
@@ -254,18 +254,18 @@ internal partial class DialogueLoader : ModSystem
             {
                 try
                 {
-                    using var stream = new StreamReader(mod.File.GetStream(file), Encoding.UTF8);
+                    using var stream = new StreamReader(mod.GetFileStream(fileName), Encoding.UTF8);
                     data = JsonSerializer.Deserialize<DialogueTextData>(stream.BaseStream);
                 }
                 catch (Exception e)
                 {
-                    CalamityMod.Log.Error($"Error while reading DialogueTextData entry ({mod.Name}::{file.Name}): {e}");
+                    CalamityMod.Log.Error($"Error while reading DialogueTextData entry ({mod.Name}::{fileName}): {e}");
                 }
             }
 
             if (data != null || skipDeserializeData)
             {
-                yield return new DialogueTextDataEntry(mod, file.Name, dialogueKey, data);
+                yield return new DialogueTextDataEntry(mod, fileName, dialogueKey, data);
             }
         }
     }
@@ -297,6 +297,7 @@ EXIT_INVALID:
         return false;
     }
 
-    [GeneratedRegex(@"Dialogue\..+?\.jsonc?$", RegexOptions.IgnoreCase)]
-    private static partial Regex CalamityDialogueFileRegex();
+    private static readonly Regex CalamityDialogueFilePattern = new(@"Dialogue\..+?\.jsonc?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+    private static Regex CalamityDialogueFileRegex() => CalamityDialogueFilePattern;
 }

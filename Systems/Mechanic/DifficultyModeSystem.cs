@@ -123,7 +123,7 @@ namespace CalamityMod.Systems
                 if (power.GetIsUnlocked())
                 {
                     int effectiveVanillaDifficulty;
-                    var sliderValue = power._sliderCurrentValueCache;
+                    var sliderValue = TerrariaInternals.DifficultySliderValue(power);
                     if (sliderValue == 1)
                     {
                         effectiveVanillaDifficulty = GameModeID.Master;
@@ -213,7 +213,7 @@ namespace CalamityMod.Systems
                 throw new ArgumentException("DifficultyModeSystemAlignJourneyDifficultySlider(): must be invoked in journey mode");
             }
             CreativePowers.DifficultySliderPower power = CreativePowerManager.Instance.GetPower<CreativePowers.DifficultySliderPower>();
-            var oldValue = power._sliderCurrentValueCache;
+            var oldValue = TerrariaInternals.DifficultySliderValue(power);
             if (compatitableValueRanges.TryGetValue(_newGameModeID, out var value))
             {
                 var (low, high) = value;
@@ -226,7 +226,7 @@ namespace CalamityMod.Systems
                 {
                     valueToSet = low;
                 }
-                power._sliderCurrentValueCache = valueToSet;
+                TerrariaInternals.DifficultySliderValue(power) = valueToSet;
                 journeyDifficultyUpdateMethod.Invoke(power, null);
             }
             else

@@ -88,14 +88,14 @@ namespace CalamityMod.Systems
             if (silcedConfigEnabled && Lighting.NotRetro && !tile.IsHalfBlock && !TileID.Sets.DontDrawTileSliced[tileType])
             {
                 var tileRenderer = Main.instance.TilesRenderer;
-                if (tileLight.IsAnyChannelGreaterThan(tileRenderer._highQualityLightingRequirement))
+                if (tileLight.IsAnyChannelGreaterThan(TerrariaInternals.HighQualityLightingRequirement(tileRenderer)))
                 {
                     sliceLength = 9;
                     sliceRects = Rects9Slice;
                     colorSliceBuffer = ColorSliceBuffer.Value;
                     Lighting.GetColor9Slice(tileX, tileY, ref colorSliceBuffer);
                 }
-                else if (tileLight.IsAnyChannelGreaterThan(tileRenderer._mediumQualityLightingRequirement))
+                else if (tileLight.IsAnyChannelGreaterThan(TerrariaInternals.MediumQualityLightingRequirement(tileRenderer)))
                 {
                     sliceLength = 4;
                     sliceRects = Rects4Slice;

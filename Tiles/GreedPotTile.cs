@@ -301,7 +301,7 @@ namespace CalamityMod.Tiles
         {
             if (Main.myPlayer == Projectile.owner)
             {
-                int i = Item.NewItem(Projectile.GetItemSource_DropAsItem(), Projectile.Center, Success ? SuccessOutputItemType : ItemID.StoneBlock);
+                int i = Item.NewItem(Projectile.GetSource_DropAsItem(), Projectile.Center, Success ? SuccessOutputItemType : ItemID.StoneBlock);
                 if (i >= 0)
                 {
                     Main.item[i].inner.GetGlobalItem<GreedTransmutationGlobalItem>().FromGreedPot = true;

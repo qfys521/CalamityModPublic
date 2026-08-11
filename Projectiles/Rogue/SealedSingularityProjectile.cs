@@ -124,7 +124,7 @@ namespace CalamityMod.Projectiles.Rogue
                 }
                 if (TimerMax - Timer == 330)
                 {
-                    SoundEngine.PlaySound(CeaselessVoid.BuildupSound with { pitch = 0.75f, MaxInstances = 10, Volume = 0.2f }, Projectile.Center);
+                    SoundEngine.PlaySound(CeaselessVoid.BuildupSound with { Pitch = 0.75f, MaxInstances = 10, Volume = 0.2f }, Projectile.Center);
                 }
 
             }
@@ -165,7 +165,7 @@ namespace CalamityMod.Projectiles.Rogue
                         Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.Center.X + SpeedX, Projectile.Center.Y + SpeedY, SpeedX, SpeedY, ModContent.ProjectileType<SealedSingularityGore>(), 20, 0f, Projectile.owner, index, 0f);
                     }
                 Projectile.velocity = Vector2.Zero;
-                SoundEngine.PlaySound(CeaselessVoid.DeathSound with { pitch = 1f, Volume = Stealth ? 0.5f : 0.2f }, Projectile.Center);
+                SoundEngine.PlaySound(CeaselessVoid.DeathSound with { Pitch = 1f, Volume = Stealth ? 0.5f : 0.2f }, Projectile.Center);
             }
 
             if (Timer >= TimerMax && AIState == 2)
@@ -187,8 +187,8 @@ namespace CalamityMod.Projectiles.Rogue
                     GeneralParticleHandler.SpawnParticle(new CustomPulse(Projectile.Center, Vector2.Zero, RandomColor, "CalamityMod/Particles/BloomRing", new Vector2(0.2f, 0.7f), -MathHelper.PiOver4, -4f, 4f, ringTimer - 15));
                 }
 
-                SoundEngine.PlaySound(SoundID.Item62 with { pitch = 1f }, Projectile.Center);
-                SoundEngine.PlaySound(SoundID.Item111 with { pitch = 0.5f }, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Item62 with { Pitch = 1f }, Projectile.Center);
+                SoundEngine.PlaySound(SoundID.Item111 with { Pitch = 0.5f }, Projectile.Center);
 
                 Projectile.Kill();
             }

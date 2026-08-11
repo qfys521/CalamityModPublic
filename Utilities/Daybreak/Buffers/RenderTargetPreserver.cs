@@ -25,7 +25,7 @@ public static class RenderTargetPreserver
                 continue;
             }
 
-            rt.RenderTargetUsage = RenderTargetUsage.PreserveContents;
+            FnaAccessors.SetRenderTargetUsage(rt, RenderTargetUsage.PreserveContents);
         }
     }
 

@@ -358,7 +358,7 @@ namespace CalamityMod.ILEditing
             cursor.EmitDelegate<Action>(() =>
             {
                 if (!Main.dayTime && CalamityServerConfig.Instance.TownNPCsSpawnAtNight)
-                    Main.UpdateTime_SpawnTownNPCs(false);
+                    TerrariaInternals.UpdateTimeSpawnTownNPCs(false);
             });
         }
 
@@ -1155,8 +1155,8 @@ namespace CalamityMod.ILEditing
                             teleportPositionX = teleportStartX - Main.rand.Next(teleportRangeX);
                         teleportPositionY = teleportStartY + Main.rand.Next(teleportRangeY);
 
-                        teleportPositionX = MathHelper.Clamp(teleportPositionX, 5, Main.maxTilesX - 5);
-                        teleportPositionY = MathHelper.Clamp(teleportPositionY, 5, Main.maxTilesY - 5);
+                        teleportPositionX = Math.Clamp(teleportPositionX, 5, Main.maxTilesX - 5);
+                        teleportPositionY = Math.Clamp(teleportPositionY, 5, Main.maxTilesY - 5);
                         teleportPosition = new Vector2(teleportPositionX, teleportPositionY) * 16f - new Vector2(self.width * 0.5f + 8, self.height);
 
                         if (Collision.SolidCollision(teleportPosition, self.width, self.height))

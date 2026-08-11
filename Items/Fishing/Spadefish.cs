@@ -188,7 +188,7 @@ namespace CalamityMod.Items.Fishing
             if (tile.TileType == TileID.MysticSnakeRope)
                 return;
 
-            int pickDmg = Main.LocalPlayer.GetPickaxeDamage(x, y, pickPower, hitIndex, tile);
+            int pickDmg = TerrariaInternals.GetPickaxeDamage(Main.LocalPlayer, x, y, pickPower, hitIndex, tile);
 
 
             if (!WorldGen.CanKillTile(x, y))
@@ -197,13 +197,13 @@ namespace CalamityMod.Items.Fishing
             if (Main.getGoodWorld)
                 pickDmg *= 2;
 
-            if (Main.LocalPlayer.DoesPickTargetTransformOnKill(Main.LocalPlayer.hitTile, pickDmg, x, y, pickPower, hitIndex, tile))
+            if (TerrariaInternals.DoesPickTargetTransformOnKill(Main.LocalPlayer, Main.LocalPlayer.hitTile, pickDmg, x, y, pickPower, hitIndex, tile))
                 pickDmg = 0;
 
             if (Main.LocalPlayer.hitTile.AddDamage(hitIndex, pickDmg) >= 100)
             {
                 AchievementsHelper.CurrentlyMining = true;
-                Main.LocalPlayer.ClearMiningCacheAt(x, y, 1);
+                TerrariaInternals.ClearMiningCacheAt(Main.LocalPlayer, x, y, 1);
                 if (Main.netMode == NetmodeID.MultiplayerClient && Main.tileContainer[tile.TileType])
                 {
                     if (tile.TileType == TileID.DisplayDoll || tile.TileType == TileID.HatRack)
@@ -396,7 +396,7 @@ namespace CalamityMod.Items.Fishing
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            SoundEngine.PlaySound(SoundID.Item178 with { pitch = (spin-MathHelper.TwoPi) / (MathHelper.TwoPi * Spadefish.SpinsToThrow) - 0.5f }, Projectile.Center);
+            SoundEngine.PlaySound(SoundID.Item178 with { Pitch = (spin-MathHelper.TwoPi) / (MathHelper.TwoPi * Spadefish.SpinsToThrow) - 0.5f }, Projectile.Center);
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)

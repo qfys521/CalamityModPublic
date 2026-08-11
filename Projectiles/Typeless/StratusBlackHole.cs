@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using CalamityMod.CalPlayer;
+﻿using CalamityMod.CalPlayer;
 using CalamityMod.Systems.Graphic.PixelationSystem;
 using CalamityMod.Systems.Mechanic;
 using Microsoft.Xna.Framework;
@@ -87,11 +86,17 @@ namespace CalamityMod.Projectiles.Typeless
                     }
                     else
                     {
-                        var activeJumps = player.extraJumps.Where(x => x.Enabled).Count();
-                         if (activeJumps > 0 && !player.AnyExtraJumpUsable() && player.Calamity().AvaliableStarburst >= 5 * activeJumps && !player.gravControl2)
+                        int activeJumps = 0;
+                        foreach (var jump in player.ExtraJumps)
+                        {
+                            if (jump.Enabled)
+                                activeJumps++;
+                        }
+                        if (activeJumps > 0 && !player.AnyExtraJumpUsable() && player.Calamity().AvaliableStarburst >= 5 * activeJumps && !player.gravControl2)
                         {
                             player.Calamity().StratusStarburst -= 5 * activeJumps;
-                            player.RefreshDoubleJumps();
+                            player.isPerformingJump_DownDash = false;
+                            player.RefreshExtraJumps();
                         } 
                     }
                 }

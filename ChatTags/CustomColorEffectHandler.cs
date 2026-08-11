@@ -77,7 +77,7 @@ namespace CalamityMod.ChatTags
 
             if (!justCheckingString && (color.R != 0 || color.G != 0 || color.B != 0))
             {
-                var matrix = spriteBatch.transformMatrix;
+                var matrix = FnaAccessors.GetTransformMatrix(spriteBatch);
                 Main.spriteBatch.End(out var ss);
                 Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, null, null, null, null, matrix);
 
@@ -120,7 +120,7 @@ namespace CalamityMod.ChatTags
                 var pos = position;
                 using var lease = ScreenspaceTargetPool.Shared.Rent(Main.instance.GraphicsDevice);
                 string txt = "";
-                var matrix = spriteBatch.transformMatrix;
+                var matrix = FnaAccessors.GetTransformMatrix(spriteBatch);
                 using (spriteBatch.Scope())
                 {
                     using (lease.Scope(clearColor: Color.Transparent))

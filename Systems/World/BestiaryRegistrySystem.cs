@@ -30,17 +30,19 @@ namespace CalamityMod.Systems
 
             // Run through all entries again and remove the empty Enemy entries that are added by tMod itself.
             // Afterwards, mnually add empty Critter entries for all NPCs within the ID set.
-            HashSet<int> exclusions = BestiaryDatabaseNPCsPopulator.GetExclusions();
+            HashSet<int> exclusions = TerrariaInternals.GetBestiaryExclusions();
             foreach (KeyValuePair<int, NPC> pair in ContentSamples.NpcsByNetId)
             {
                 if (!exclusions.Contains(pair.Key))
                 {
                     if (CalamityNPCSets.ForciblyRegisterAsCritterInBestiary.Contains(pair.Value.type))
                     {
-                        if (BestiaryDatabaseNPCsPopulator._currentDatabase._byNpcId.TryGetValue(pair.Value.netID, out BestiaryEntry enemyEntry) && enemyEntry.UIInfoProvider is not CritterUICollectionInfoProvider)
+                        BestiaryDatabase database = TerrariaInternals.CurrentBestiaryDatabase;
+                        BestiaryEntry enemyEntry = database.FindEntryByNPCID(pair.Value.netID);
+                        if (enemyEntry.Info.Count > 0 && enemyEntry.UIInfoProvider is not CritterUICollectionInfoProvider)
                         {
-                            BestiaryDatabaseNPCsPopulator._currentDatabase.Entries.Remove(enemyEntry);
-                            NPCLoader.SetBestiary(pair.Value, BestiaryDatabaseNPCsPopulator._currentDatabase, self.Register(BestiaryEntry.Critter(pair.Key)));
+                            database.Entries.Remove(enemyEntry);
+                            NPCLoader.SetBestiary(pair.Value, database, TerrariaInternals.RegisterBestiaryEntry(self, BestiaryEntry.Critter(pair.Key)));
                         }
                     }
                 }
@@ -52,16 +54,18 @@ namespace CalamityMod.Systems
             orig(self);
 
             // Allow NPCs with manully added empty critter entries to be registered by player proximity.
+            List<int> seenNearPlayer = TerrariaInternals.SeenNearbyNpcNetIds(self);
+            List<Microsoft.Xna.Framework.Rectangle> playerHitboxes = TerrariaInternals.BestiaryPlayerHitboxes(self);
             foreach (NPC npc in Main.ActiveNPCs)
             {
-                if (!CalamityNPCSets.ForciblyRegisterAsCritterInBestiary.Contains(npc.type) || self._wasSeenNearPlayerByNetId.Contains(npc.netID))
+                if (!CalamityNPCSets.ForciblyRegisterAsCritterInBestiary.Contains(npc.type) || seenNearPlayer.Contains(npc.netID))
                     continue;
 
-                for (int i = 0; i < self._playerHitboxesForBestiary.Count; i++)
+                for (int i = 0; i < playerHitboxes.Count; i++)
                 {
-                    if (npc.Hitbox.Intersects(self._playerHitboxesForBestiary[i]))
+                    if (npc.Hitbox.Intersects(playerHitboxes[i]))
                     {
-                        self._wasSeenNearPlayerByNetId.Add(npc.netID);
+                        seenNearPlayer.Add(npc.netID);
                         self.RegisterWasNearby(npc);
                     }
                 }

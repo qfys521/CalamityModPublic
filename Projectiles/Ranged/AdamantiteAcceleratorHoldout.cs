@@ -114,9 +114,9 @@ namespace CalamityMod.Projectiles.Ranged
         private void FiringEffects(Color color)
         {
             bool redBeam = (color == new Color(235, 40, 121));
-            SoundEngine.PlaySound(SoundID.Item92 with { pitch = 0.7f, volume = 0.7f }, GunTipPosition);
+            SoundEngine.PlaySound(SoundID.Item92 with { Pitch = 0.7f, Volume = 0.7f }, GunTipPosition);
             SoundStyle fire = new("CalamityMod/Sounds/Item/APAShoot");
-            SoundEngine.PlaySound(fire with { pitch = (redBeam ? 0.3f : -0.2f)}, GunTipPosition);
+            SoundEngine.PlaySound(fire with { Pitch = (redBeam ? 0.3f : -0.2f)}, GunTipPosition);
 
             Particle pulse = new DirectionalPulseRing(GunTipPosition + Projectile.rotation.ToRotationVector2() * 5f, Vector2.Zero, color, new Vector2(0.5f, 1f), Projectile.rotation, 0.05f, 0.34f + Main.rand.NextFloat(0.3f), 30);
             GeneralParticleHandler.SpawnParticle(pulse);

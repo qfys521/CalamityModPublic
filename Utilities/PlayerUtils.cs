@@ -608,7 +608,7 @@ namespace CalamityMod
         /// <param name="hurtInfo">The HurtInfo instance to nullify.</param>
         public static void NullifyHit(ref this HurtInfo hurtInfo)
         {
-            hurtInfo._damage = 0;
+            TerrariaInternals.HurtInfoDamage(ref hurtInfo) = 0;
             hurtInfo.Knockback = 0;
         }
         #endregion

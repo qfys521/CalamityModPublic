@@ -665,10 +665,10 @@ namespace CalamityMod
             switch (index)
             {
                 case 0:
-                    shader._uImage0 = texture;
+                    shader.UseImage0(texture);
                     break;
                 case 1:
-                    shader._uImage1 = texture;
+                    shader.UseImage1(texture);
                     break;
             }
             return shader;
@@ -681,7 +681,7 @@ namespace CalamityMod
         /// <param name="texture">The texture to bind.</param>
         public static ArmorShaderData SetShaderTextureArmor(this ArmorShaderData shader, Asset<Texture2D> texture)
         {
-            shader._uImage = texture;
+            shader.UseImage(texture);
             return shader;
         }
 

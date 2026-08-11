@@ -98,7 +98,7 @@ namespace CalamityMod.Graphics
             orig(self);
 
             var mp = Main.LocalPlayer.Calamity();
-            LightMap map = self._workingLightMap;
+            LightMap map = TerrariaInternals.WorkingLightMap(self);
             if (mp.ZoneAbyss)
             {
                 //This converts the light decay amount from the amount it normally is in water into the amount it normally is in air, depending on the intensity of the abyss darkness.

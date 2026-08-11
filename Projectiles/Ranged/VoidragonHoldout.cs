@@ -168,7 +168,7 @@ namespace CalamityMod.Projectiles.Ranged
             {
                 SoundStyle charge = new("CalamityMod/Sounds/Item/VoidragonCharge");
                 if (playChargeSound)
-                    soundSlot = SoundEngine.PlaySound(charge with { Volume = 0.7f, IsLooped = true, pitch = -0.5f }, Projectile.Center);
+                    soundSlot = SoundEngine.PlaySound(charge with { Volume = 0.7f, IsLooped = true, Pitch = -0.5f }, Projectile.Center);
                 playChargeSound = false;
                 float chargeCompletion = Utils.GetLerpValue(150, 0, framesBetweenShots, true);
                 chargeVisTimer = MathHelper.Lerp(0, maxChargeSpeed, chargeCompletion);
@@ -194,9 +194,9 @@ namespace CalamityMod.Projectiles.Ranged
                     SoundStyle start = new("CalamityMod/Sounds/Item/VoidragonStrongStart");
                     SoundStyle start2 = new("CalamityMod/Sounds/Item/MagnaCannonShot");
                     for (int i = 0; i < 3; i++)
-                        SoundEngine.PlaySound((i > 0 ? start2 : start) with { Volume = 1f, pitch = 0f - 0.5f * i, MaxInstances = 3 }, Projectile.Center);
+                        SoundEngine.PlaySound((i > 0 ? start2 : start) with { Volume = 1f, Pitch = 0f - 0.5f * i, MaxInstances = 3 }, Projectile.Center);
                     SoundStyle fire = new("CalamityMod/Sounds/Item/VoidragonLaser");
-                    soundSlot = SoundEngine.PlaySound(fire with { Volume = 1f, IsLooped = true, pitch = 0f }, Projectile.Center);
+                    soundSlot = SoundEngine.PlaySound(fire with { Volume = 1f, IsLooped = true, Pitch = 0f }, Projectile.Center);
                 }
                 if (SoundEngine.TryGetActiveSound(soundSlot, out var sSound) && sSound.IsPlaying)
                 {

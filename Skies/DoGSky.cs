@@ -423,7 +423,7 @@ namespace CalamityMod.Skies
                 Texture2D distortionRiftContents = DoGVisualsManager.DistortionRiftBackgroundContentsTarget.Target;
                 Texture2D distortionRift = DoGVisualsManager.DistortionRiftPrimitivesTarget.Target;
 
-                Vector2 screenSize = new(Main.graphics.graphicsDevice.Viewport.Width, Main.graphics.graphicsDevice.Viewport.Height);
+                Vector2 screenSize = new(Main.graphics.GraphicsDevice.Viewport.Width, Main.graphics.GraphicsDevice.Viewport.Height);
 
                 metaballShader.Value.Parameters["layerSize"]?.SetValue(distortionRiftContents.Size());
                 metaballShader.Value.Parameters["screenSize"]?.SetValue(screenSize);

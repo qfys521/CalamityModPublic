@@ -43,7 +43,7 @@ namespace CalamityMod.Projectiles.Summon
         Vector2 SarosPos => Owner.Center + Vector2.UnitY * (Owner.gfxOffY + Owner.gravDir * -24f);
         public override void OnSpawn(IEntitySource source)
         {
-            SoundEngine.PlaySound(SarosPossession.SpawnSound with {pitch = -0.5f, MaxInstances = 5, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew}, Owner.Center);
+            SoundEngine.PlaySound(SarosPossession.SpawnSound with {Pitch = -0.5f, MaxInstances = 5, SoundLimitBehavior = SoundLimitBehavior.IgnoreNew}, Owner.Center);
             Projectile.rotation = SarosPos.DirectionTo(Owner.Calamity().mouseWorld).ToRotation();
         }
         public override void AI()

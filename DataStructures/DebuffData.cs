@@ -208,11 +208,12 @@ namespace CalamityMod.DataStructures
                  // Bane doesn't scale with debuff multipliers. This should be implemented as a default feature you can apply to debuffs at some point.
                  buffType == ModContent.BuffType<Bane>() ? StatModifier.Default : cnpc.ActiveTypelessDebuffMultiplier;
 
-            //Ensure at least 25% effectiveness
-            if (totalScaling.Multiplicative <= 0.25f)
-                totalScaling.Multiplicative = 0.25f;
-            if (totalScaling.Additive < 0.25f)
-                totalScaling.Additive = 0.25f;
+            // Ensure at least 25% effectiveness.
+            totalScaling = new StatModifier(
+                Math.Max(totalScaling.Additive, 0.25f),
+                Math.Max(totalScaling.Multiplicative, 0.25f),
+                totalScaling.Flat,
+                totalScaling.Base);
 
             totalDPS = totalScaling.ApplyTo(totalDPS);
             var totalDPSAdjusted = totalDPS - EnemyVanillaRegenToCancelOut;
@@ -242,11 +243,12 @@ namespace CalamityMod.DataStructures
                  // Bane doesn't scale with debuff multipliers. This should be implemented as a default feature you can apply to debuffs at some point.
                  buffType == ModContent.BuffType<Bane>() ? cnpc.ActiveTypelessDebuffMultiplier : StatModifier.Default;
 
-            //Ensure at least 25% effectiveness
-            if (totalScaling.Multiplicative <= 0.25f)
-                totalScaling.Multiplicative = 0.25f;
-            if (totalScaling.Additive < 0.25f)
-                totalScaling.Additive = 0.25f;
+            // Ensure at least 25% effectiveness.
+            totalScaling = new StatModifier(
+                Math.Max(totalScaling.Additive, 0.25f),
+                Math.Max(totalScaling.Multiplicative, 0.25f),
+                totalScaling.Flat,
+                totalScaling.Base);
 
             totalDPS = totalScaling.ApplyTo(totalDPS);
             totalDPS *= (npc.velocity.X == 0 ? 1 : 4);

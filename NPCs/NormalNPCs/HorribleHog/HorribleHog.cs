@@ -707,7 +707,7 @@ namespace CalamityMod.NPCs.NormalNPCs.HorribleHog
                     Vector2 spawnPosition = NPC.Bottom + Main.rand.NextVector2Circular(32f, 0f);
                     Vector2 velocity = Main.rand.NextVector2Circular(2f, 2f);
                     int goreType = Main.rand.Next(GoreID.FartCloud1, GoreID.FartCloud3 + 1);
-                    Gore.NewGore(spawnPosition, velocity, goreType);
+                    Gore.NewGore(NPC.GetSource_FromThis(), spawnPosition, velocity, goreType);
                 }
 
                 int fartDustAmt = Main.rand.Next(dirtDustMin, dirtDustMax + 1);

@@ -754,7 +754,7 @@ namespace CalamityMod.ILEditing
             if (AmountToHeal <= 0)
                 return;
             owner.lifeSteal -= AmountToHeal * LifestealCooldownMult;
-            Projectile.NewProjectile(self.GetSource_OnHit(victim, ProjectileSourceID.ToContextString(ProjectileSourceID.SetBonus_GhostHeal)), Position.X, Position.Y, 0f, 0f, ProjectileID.SpiritHeal, 0, 0f, self.owner, targetPlayer, AmountToHeal);
+            Projectile.NewProjectile(self.GetSource_OnHit(victim, "SetBonus_GhostHeal"), Position.X, Position.Y, 0f, 0f, ProjectileID.SpiritHeal, 0, 0f, self.owner, targetPlayer, AmountToHeal);
         }
         /// <summary>
         /// Adjust Vampire Knives implementation, stopping them from trying to heal when at full HP
@@ -771,7 +771,7 @@ namespace CalamityMod.ILEditing
             if ((int)healAmount != 0 && !(Main.player[Main.myPlayer].lifeSteal <= 0f) && Main.player[Main.myPlayer].statLifeMax2 > Main.player[Main.myPlayer].statLife)
             {
                 Main.player[Main.myPlayer].lifeSteal -= healAmount * LifestealCooldownMult;
-                Projectile.NewProjectile(self.GetSource_OnHit(victim, ProjectileSourceID.ToContextString(ProjectileSourceID.VampireKnives)), Position.X, Position.Y, 0f, 0f, ProjectileID.VampireHeal, 0, 0f, self.owner, self.owner, healAmount);
+                Projectile.NewProjectile(self.GetSource_OnHit(victim, "VampireKnives"), Position.X, Position.Y, 0f, 0f, ProjectileID.VampireHeal, 0, 0f, self.owner, self.owner, healAmount);
             }
         }
         #endregion

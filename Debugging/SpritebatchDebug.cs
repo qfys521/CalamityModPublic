@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Emit;
+using CalamityMod.Utilities.Daybreak;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoMod.RuntimeDetour;
@@ -60,7 +61,7 @@ namespace CalamityMod.Debugging
             Effect effect,
             Matrix transformMatrix)
         {
-            if (self.beginCalled) ModLoader.GetMod(nameof(CalamityMod)).Logger.Debug("[SPRITEBATCH DEBUG] Begin was last called here: " + SpritebatchDebug.Trace); 
+            if (FnaAccessors.IsBegun(self)) ModLoader.GetMod(nameof(CalamityMod)).Logger.Debug("[SPRITEBATCH DEBUG] Begin was last called here: " + SpritebatchDebug.Trace);
             SpritebatchDebug.Trace = Environment.StackTrace;
             
             orig(self, sortMode,
@@ -74,7 +75,7 @@ namespace CalamityMod.Debugging
 
         private static void End_Impl(Action<SpriteBatch> orig, SpriteBatch self)
         {
-            if (!self.beginCalled) ModLoader.GetMod(nameof(CalamityMod)).Logger.Debug("[SPRITEBATCH DEBUG] Doesn't seem like Begin was called. Here's the last end call: " + SpritebatchDebug.Trace); 
+            if (!FnaAccessors.IsBegun(self)) ModLoader.GetMod(nameof(CalamityMod)).Logger.Debug("[SPRITEBATCH DEBUG] Doesn't seem like Begin was called. Here's the last end call: " + SpritebatchDebug.Trace);
             SpritebatchDebug.Trace = Environment.StackTrace;
             
             orig(self);

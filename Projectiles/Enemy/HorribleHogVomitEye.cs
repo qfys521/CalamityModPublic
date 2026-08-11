@@ -113,8 +113,8 @@ namespace CalamityMod.Projectiles.Enemy
 
             if (!Main.dedServ)
             {
-                Gore.NewGore(Projectile.Center, Projectile.oldVelocity * -0.8f, 1, 0.75f);
-                Gore.NewGore(Projectile.Center, Projectile.oldVelocity * -0.8f, 2, 0.75f);
+                Gore.NewGore(Projectile.GetSource_Death(), Projectile.Center, Projectile.oldVelocity * -0.8f, 1, 0.75f);
+                Gore.NewGore(Projectile.GetSource_Death(), Projectile.Center, Projectile.oldVelocity * -0.8f, 2, 0.75f);
             }
         }
 

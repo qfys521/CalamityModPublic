@@ -29,7 +29,7 @@ namespace CalamityMod
         /// <param name="spriteBatch">The sprite batch to check.</param>
         public static bool HasBeginBeenCalled(this SpriteBatch spriteBatch)
         {
-            return spriteBatch.beginCalled;
+            return FnaAccessors.IsBegun(spriteBatch);
         }
 
 

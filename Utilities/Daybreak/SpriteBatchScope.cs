@@ -25,7 +25,7 @@ internal readonly struct SpriteBatchScope : IDisposable
     {
         this.spriteBatch = spriteBatch;
 
-        if (!spriteBatch.beginCalled)
+        if (!FnaAccessors.IsBegun(spriteBatch))
         {
             return;
         }
