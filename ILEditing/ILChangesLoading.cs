@@ -109,7 +109,7 @@ namespace CalamityMod.ILEditing
             IL_NPC.ScaleStats_ByDifficulty_Tweaks += RemoveExpertHardmodeScaling;
             PreventVanillaWhipTagCrits();
             IL_Projectile.Damage += VanillaBossResistChanges;
-            IL_Projectile.AI_026 += PygmyAggroOnClosestPointInHitbox;
+            // The legacy pygmy targeting edit relies on compiler local indexes and produces invalid IL in 1.4.5 Release builds.
             IL_Projectile.AI_099_2_Yoyos += LimitTerrarianProjectiles;
             On_Projectile.AI_015_Flails += FlailsNoLongerAffectedByPlayerVelocity;
             IL_Projectile.AI_015_Flails += IncreaseFlowerPowRetSpeed;
